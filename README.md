@@ -1,7 +1,7 @@
 Docker入门教程
 ---
 
-![](./img/logo.svg)
+![](img/logo.png)
 
 Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
@@ -104,10 +104,30 @@ chkconfig docker on        # 设置为开机启动
 
 ```bash
 docker pull centos:latest  # 从docker.io中下载centos镜像到本地
-docker images                       # 查看已下载的镜像
-docker rm image_id                 # 删除镜像，指定镜像id
-docker rmi $(docker images | grep none | awk '{print $3}' | sort -r)  # 删除所有镜像
+docker images              # 查看已下载的镜像
+docker rm image_id         # 删除镜像，指定镜像id
+
+# 删除所有镜像
+# none 默认为 docker.io
+docker rmi $(docker images | grep none | awk '{print $3}' | sort -r)
+
+# 连接进行进入命令行模式，exit命令退出。
+docker run -t -i nginx:latest /bin/bash
 ```
+
+**创建镜像**：我们可以通过以下两种方式对镜像进行更改。
+
+1. 从已经创建的容器中更新镜像，并且提交这个镜像
+2. 使用 Dockerfile 指令来创建一个新的镜像
+
+```bash
+docker commit -m="First Docker" -a="wcjiang" a6b0a6cfdacf wcjiang/nginx:v1.2.1
+```
+
+上面命令参数说明：
+
+- `a6b0a6cfdacf` 记住这个是容器id，不是镜像id
+- `runoob/ubuntu:v1.2.1` 创建的目标镜像名
 
 ## 容器管理
 
@@ -130,7 +150,7 @@ docker rm new-nginx                 # 【删除】容器
 docker run -i -t centos /bin/bash   # 启动一个容器
 docker inspect centos     # 检查运行中的镜像
 docker commit 8bd centos  # 保存对容器的修改
-docker commit -m "nothing changed" my-nginx my-nginx-image # 使用已经存在的容器创建一个镜像
+docker commit -m "n changed" my-nginx my-nginx-image # 使用已经存在的容器创建一个镜像
 ```
 
 ## 使用Docker实战
