@@ -26,6 +26,9 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署MySQL](#部署mysql)
 - [Docker私有仓库搭建](#docker私有仓库搭建)
 - [参考资料](#参考资料)
+  - [官方英文资源](#官方英文资源)
+  - [中文资源](#中文资源)
+  - [其它资源](#其它资源)
 
 <!-- /TOC -->
 
@@ -139,12 +142,12 @@ docker commit -m="First Docker" -a="wcjiang" a6b0a6cfdacf wcjiang/nginx:v1.2.1
 
 - `-m` 提交的描述信息
 - `-a` 指定镜像作者
-- `a6b0a6cfdacf` 记住这个是容器id，不是镜像id
+- `a6b0a6cfdacf` 记住这个是容器id，不是镜像id
 - `wcjiang/nginx:v1.2.1` 创建的目标镜像名
 
 ### 发布自己的镜像
 
-1. 在[Docker](https://www.docker.com/)注册账户，发布的镜像都在[这个页面里](https://cloud.docker.com/repository/list)展示
+1. 在[Docker](https://www.docker.com/) 注册账户，发布的镜像都在[这个页面里](https://cloud.docker.com/repository/list)展示
 2. 将上面做的镜像`nginx`，起个新的名字`nginx-test`
 
 ```bash
@@ -220,7 +223,7 @@ docker rm new-nginx                 # 【删除】容器
 
 ### 进入容器
 
-1. 创建一个守护状态的Docker容器
+1. 创建一个守护状态的Docker容器
 
 ```bash
 docker run -itd my-nginx /bin/bash
@@ -354,5 +357,31 @@ docker run --name my-mysql \
 
 ## 参考资料
 
+
+### 官方英文资源
+
+- Docker官网：http://www.docker.com
+- Docker windows入门：https://docs.docker.com/windows/
+- Docker Linux 入门：https://docs.docker.com/linux/
+- Docker mac 入门：https://docs.docker.com/mac/
+- Docker 用户指引：https://docs.docker.com/engine/userguide/
+- Docker 官方博客：http://blog.docker.com/
+- Docker Hub: https://hub.docker.com/
+- Docker开源： https://www.docker.com/open-source
+
+### 中文资源
+
+- Docker中文网站：http://www.docker.org.cn
+- Docker安装手册：http://www.docker.org.cn/book/install.html
+- 一小时Docker教程 ：https://blog.csphere.cn/archives/22
+- Docker 从入门到实践：http://dockerpool.com/static/books/docker_practice/index.html
+- Docker中文指南：http://www.widuu.com/chinese_docker/index.html
+
+### 其它资源
+
 - [Docker 快速手册！](https://github.com/eon01/DockerCheatSheet)
 - [MySQL Docker 单一机器上如何配置自动备份](http://blog.csdn.net/zhangchao19890805/article/details/52756865)
+- https://segmentfault.com/t/docker
+- https://github.com/docker/docker
+- https://wiki.openstack.org/wiki/Docker
+- https://wiki.archlinux.org/index.php/Docker
