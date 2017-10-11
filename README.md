@@ -1,9 +1,11 @@
 Docker入门教程
 ---
 
+![](logo.png)
+
 Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
-- Docker 的局限性之一是，它只能用在 64 位的操作系统上。
+- Docker 的局限性之一，它只能用在 64 位的操作系统上。
 
 目录
 ===
@@ -14,7 +16,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 - [服务管理](#服务管理)
 - [镜像管理](#镜像管理)
 - [容器管理](#容器管理)
-- [使用实战](#使用实战)
+- [使用Docker实战](#使用docker实战)
   - [部署一个Nginx服务](#部署一个nginx服务)
 - [Docker私有仓库搭建](#docker私有仓库搭建)
 - [参考资料](#参考资料)
@@ -131,7 +133,7 @@ docker commit 8bd centos  # 保存对容器的修改
 docker commit -m "nothing changed" my-nginx my-nginx-image # 使用已经存在的容器创建一个镜像
 ```
 
-## 使用实战
+## 使用Docker实战
 
 ### 部署一个Nginx服务
 
