@@ -15,9 +15,14 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 - [命令介绍](#命令介绍)
 - [服务管理](#服务管理)
 - [镜像管理](#镜像管理)
+  - [通过容器创建镜像](#通过容器创建镜像)
+  - [发布自己的镜像](#发布自己的镜像)
+- [镜像中安装软件](#镜像中安装软件)
 - [容器管理](#容器管理)
+- [进入Docker容器](#进入docker容器)
 - [使用Docker实战](#使用docker实战)
-  - [部署一个Nginx服务](#部署一个nginx服务)
+  - [部署Nginx](#部署nginx)
+  - [部署MySQL](#部署mysql)
 - [Docker私有仓库搭建](#docker私有仓库搭建)
 - [参考资料](#参考资料)
 
@@ -115,10 +120,15 @@ docker rmi $(docker images | grep none | awk '{print $3}' | sort -r)
 docker run -t -i nginx:latest /bin/bash
 ```
 
-**创建镜像**：我们可以通过以下两种方式对镜像进行更改。
+
+### 通过容器创建镜像
+
+我们可以通过以下两种方式对镜像进行更改。
 
 1. 从已经创建的容器中更新镜像，并且提交这个镜像
 2. 使用 Dockerfile 指令来创建一个新的镜像
+
+下面通过已存在的容器创建一个新的镜像。
 
 ```bash
 docker commit -m="First Docker" -a="wcjiang" a6b0a6cfdacf wcjiang/nginx:v1.2.1
@@ -126,8 +136,56 @@ docker commit -m="First Docker" -a="wcjiang" a6b0a6cfdacf wcjiang/nginx:v1.2.1
 
 上面命令参数说明：
 
+- `-m` 提交的描述信息
+- `-a` 指定镜像作者
 - `a6b0a6cfdacf` 记住这个是容器id，不是镜像id
-- `runoob/ubuntu:v1.2.1` 创建的目标镜像名
+- `wcjiang/nginx:v1.2.1` 创建的目标镜像名
+
+### 发布自己的镜像
+
+1. 在[Docker](https://www.docker.com/)注册账户，发布的镜像都在[这个页面里](https://cloud.docker.com/repository/list)展示
+2. 将上面做的镜像`nginx`，起个新的名字`nginx-test`
+
+```bash
+docker tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
+```
+
+3. 登录docker
+
+```
+docker login
+```
+
+4. 上传`nginx-test`镜像
+
+```bash
+docker push wcjiang/nginx-test:lastest
+# The push refers to a repository [docker.io/wcjiang/nginx-test]
+# 2f5c6a3c22e3: Mounted from wcjiang/nginx
+# cf516324493c: Mounted from wcjiang/nginx
+# lastest: digest: sha256:73ae804b2c60327d1269aa387cf782f664bc91da3180d10dbd49027d7adaa789 size: 736
+```
+
+## 镜像中安装软件
+
+通常情况下，使用docker官方镜像，如 mysql镜像，默认情况下镜像中啥软件也没有，通过下面命令安装你所需要的软件：
+
+```bash
+# 第一次需要运行这个命令，确保源的索引是最新的
+# 同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引
+apt-get update
+# 做过上面更新同步之后，可以运行下面的命令了
+apt-get install vim
+```
+
+如果你安装了CentOS或者Ubuntu系统可以进入系统安装相关软件
+
+```bash
+# 进入到centos7镜像系统
+docker run -i -t centos:7 /bin/bash
+yum update
+yum install vim
+```
 
 ## 容器管理
 
@@ -140,6 +198,7 @@ docker ps                           # 列出包括未运行的容器
 docker ps -a                        # 查看所有容器(包括正在运行和已停止的)
 docker logs my-nginx                # 查看 my-nginx 容器日志
 
+docker run  -itd --name my-nginx /bin/bash
 docker restart my-nginx             # 【重启】容器
 docker stop my-nginx                # 【停止运行】一个容器
 docker start my-nginx               # 【启动】一个已经存在的容器
@@ -151,11 +210,41 @@ docker run -i -t centos /bin/bash   # 启动一个容器
 docker inspect centos     # 检查运行中的镜像
 docker commit 8bd centos  # 保存对容器的修改
 docker commit -m "n changed" my-nginx my-nginx-image # 使用已经存在的容器创建一个镜像
+docker inspect -f {{.State.Pid}} 44fc0f0582d9 # 获取id为 44fc0f0582d9 的PID进程编号
 ```
+
+## 进入Docker容器
+
+1. 创建一个守护状态的Docker容器
+
+```bash
+docker run -itd my-nginx /bin/bash
+```
+
+2. 使用`docker ps`查看到该容器信息
+
+```bash
+docker ps
+# CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+# 6bd0496da64f        nginx               "/bin/bash"         20 seconds ago      Up 18 seconds       80/tcp              high_shirley
+```
+
+3. 使用`docker exec`命令进入一个已经在运行的容器
+
+```bash
+docker exec -it 6bd0496da64f /bin/bash
+```
+
+通常有下面几种方式进入Docker的容器，推荐使用`exec`，使用`attach`一直进入失败。
+
+- 使用`docker attach`
+- 使用`SSH` [为什么不需要在 Docker 容器中运行 sshd](http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp)
+- 使用`nsenter`进入Docker容器，[nsenter官方仓库](https://github.com/jpetazzo/nsenter)
+- 使用`docker exec`，在`1.3.*`之后提供了一个新的命令`exec`用于进入容器
 
 ## 使用Docker实战
 
-### 部署一个Nginx服务
+### 部署Nginx
 
 1.在 docker hub 中查找 nginx 相关镜像。
 
@@ -214,8 +303,51 @@ docker run --name my-nginx \
 - -p 参数语法为 `-p host port:container port`; -p 8080:80 将主机上的8080端口绑定到容器上的80端口，因此在主机中访问8080端口时其实就是访问 nginx 容器的80端口
 - -d 后台运行容器
 
+### 部署MySQL
+
+拉取官方的镜像，标签为`5.7`
+
+```bash
+docker pull mysql:5.7
+# Trying to pull repository docker.io/library/mysql ...
+# 5.7: Pulling from docker.io/library/mysql
+# 85b1f47fba49: Already exists
+# f34057997f40: Pull complete
+# ....
+# Digest: sha256:bfb22e93ee87c6aab6c1c9a4e70f28fa289f9ffae9fe8e173
+```
+
+创建目录
+
+- data目录将映射为mysql容器配置的数据文件存放路径
+- logs目录将映射为mysql容器的日志目录
+- conf目录里的配置文件将映射为mysql容器的配置文件
+
+```bash
+mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf
+```
+
+运行容器
+
+```bash
+docker run --name my-mysql \ 
+-p 3306:3306 \ 
+-v $PWD/conf/my.cnf:/etc/mysql/my.cnf \ 
+-v $PWD/logs:/logs \ 
+-v $PWD/data:/mysql_data \ 
+-e MYSQL_ROOT_PASSWORD=123456 \ 
+-d mysql:5.7
+```
+
+- `-p 3306:3306`：将容器的3306端口映射到主机的3306端口
+- `-v $PWD/conf/my.cnf:/etc/mysql/my.cnf`：将主机当前目录下的conf/my.cnf挂载到容器的/etc/mysql/my.cnf
+- `-v $PWD/logs:/logs`：将主机当前目录下的logs目录挂载到容器的/logs
+- `-v $PWD/data:/mysql_data`：将主机当前目录下的data目录挂载到容器的/mysql_data
+- `-e MYSQL_ROOT_PASSWORD=123456`：初始化root用户的密码
+
 ## Docker私有仓库搭建
 
 ## 参考资料
 
 - [Docker 快速手册！](https://github.com/eon01/DockerCheatSheet)
+- [MySQL Docker 单一机器上如何配置自动备份](http://blog.csdn.net/zhangchao19890805/article/details/52756865)
