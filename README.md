@@ -1,7 +1,10 @@
+
+<p align="center">
+<img width="130" align="center" src="img/logo.svg"/>
 Docker入门教程
 ---
+</p>
 
-![](img/logo.png)
 
 Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
@@ -357,7 +360,6 @@ docker run --name my-mysql \
 
 ## 参考资料
 
-
 ### 官方英文资源
 
 - Docker官网：http://www.docker.com
@@ -372,9 +374,9 @@ docker run --name my-mysql \
 ### 中文资源
 
 - Docker中文网站：http://www.docker.org.cn
+- Docker中文文档：http://www.dockerinfo.net/document
 - Docker安装手册：http://www.docker.org.cn/book/install.html
 - 一小时Docker教程 ：https://blog.csphere.cn/archives/22
-- Docker 从入门到实践：http://dockerpool.com/static/books/docker_practice/index.html
 - Docker中文指南：http://www.widuu.com/chinese_docker/index.html
 
 ### 其它资源
