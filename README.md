@@ -28,6 +28,8 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署Nginx](#部署nginx)
   - [部署MySQL](#部署mysql)
 - [Docker私有仓库搭建](#docker私有仓库搭建)
+  - [部署registry](#部署registry)
+  - [部署Humpback](#部署humpback)
 - [参考资料](#参考资料)
   - [官方英文资源](#官方英文资源)
   - [中文资源](#中文资源)
@@ -215,9 +217,13 @@ docker inspect -f {{.State.Pid}} 44fc0f0582d9 # 获取id为 44fc0f0582d9 的PID�
 
 ```bash
 docker run -itd --name my-nginx2 nginx # 通过nginx镜像，【创建】容器名为 my-nginx2 的容器
+docker start my-nginx --restart=always    # 【启动策略】一个已经存在的容器启动添加策略
+                               # no - 容器不重启
+                               # on-failure - 容器推出状态非0时重启
+                               # always - 始终重启
+docker start my-nginx               # 【启动】一个已经存在的容器
 docker restart my-nginx             # 【重启】容器
 docker stop my-nginx                # 【停止运行】一个容器
-docker start my-nginx               # 【启动】一个已经存在的容器
 docker kill my-nginx                # 【杀死】一个运行中的容器
 docker rename my-nginx new-nginx    # 【重命名】容器
 docker rm new-nginx                 # 【删除】容器
@@ -315,7 +321,7 @@ docker run --name my-nginx \
 
 ### 部署MySQL
 
-拉取官方的镜像，标签为`5.7`
+拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)
 
 ```bash
 docker pull mysql:5.7
@@ -357,7 +363,9 @@ docker run --name my-mysql \
 
 ## Docker私有仓库搭建
 
-通过官方提供的私有仓库镜像`registry`来搭建私有仓库。通过 [humpback](https://humpback.github.io) 快速搭建轻量级的Docker容器云管理平台。
+通过官方提供的私有仓库镜像`registry`来搭建私有仓库。通过 [humpback](https://humpback.github.io) 快速搭建轻量级的Docker容器云管理平台。关于仓库配置说明请参见[configuration.md](https://github.com/docker/distribution/blob/master/docs/configuration.md)
+
+### 部署registry
 
 ```bash
 docker pull registry:2.6.2
@@ -419,7 +427,7 @@ docker push 192.168.99.100:7000/test-nginx:1.13
 
 我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件`vi /etc/docker/daemon.json` 添加 `insecure-registries`配置信息。
 
-```json
+```js
 {
   //... 其他配置项
   //关键配置项，将仓库将入到不安全的仓库列表中
@@ -446,6 +454,24 @@ setenforce 0
 getenforce   
 # Permissive  
 ```
+### 部署Humpback
+
+首先创建放持久化数据文件夹，`mkdir -p /opt/app/humpback-web`，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。
+
+```bash
+# 创建放持久化数据文件夹
+mkdir -p /opt/app/humpback-web
+# 下载humpback-web镜像到本地
+docker pull humpbacks/humpback-web:1.0.0
+# 启动 humpback-web 容器，将容器命名为 humpback-web
+docker run -d --net=host --restart=always \
+ -e HUMPBACK_LISTEN_PORT=7001 \
+ -v /opt/app/humpback-web/dbFiles:/humpback-web/dbFiles \
+ --name humpback-web \
+ humpbacks/humpback-web:1.0.0
+```
+
+访问站点，打开浏览器输入：http://192.168.99.100:7001 ，默认账户：`admin` 密码：`123456`
 
 ## 参考资料
 
