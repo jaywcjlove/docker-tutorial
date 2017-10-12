@@ -127,7 +127,6 @@ docker rmi $(docker images | grep none | awk '{print $3}' | sort -r)
 docker run -t -i nginx:latest /bin/bash
 ```
 
-
 ### 通过容器创建镜像
 
 我们可以通过以下两种方式对镜像进行更改。
@@ -135,7 +134,7 @@ docker run -t -i nginx:latest /bin/bash
 1. 从已经创建的容器中更新镜像，并且提交这个镜像
 2. 使用 Dockerfile 指令来创建一个新的镜像
 
-下面通过已存在的容器创建一个新的镜像。
+下面通过已存在的容器创建一个新的镜像。
 
 ```bash
 docker commit -m="First Docker" -a="wcjiang" a6b0a6cfdacf wcjiang/nginx:v1.2.1
