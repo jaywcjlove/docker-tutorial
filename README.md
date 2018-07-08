@@ -321,7 +321,7 @@ docker run --name my-nginx \
 
 ### 部署MySQL
 
-拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)
+拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)
 
 ```bash
 docker pull mysql:5.7
@@ -370,6 +370,7 @@ docker run --name my-mysql \
 ```bash
 docker pull registry:2.6.2
 ```
+
 为了定制一些配置，和在 [humpback](https://humpback.github.io) 中使用，我们还需要提供一个定制化的配置文件（使用yml来编写配置文件），文件放在`/etc/docker/registry/config.yml`，如下：
 
 ```yml
@@ -498,7 +499,9 @@ docker run -d --net=host --restart=always \
 
 - [Docker 快速手册！](https://github.com/eon01/DockerCheatSheet)
 - [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
+- [Docker 从入门到实践](https://www.gitbook.com/book/yeasy/docker_practice)
 - [MySQL Docker 单一机器上如何配置自动备份](http://blog.csdn.net/zhangchao19890805/article/details/52756865)
+- [使用Docker Compose管理多个容器](http://dockone.io/article/834)
 - https://segmentfault.com/t/docker
 - https://github.com/docker/docker
 - https://wiki.openstack.org/wiki/Docker
