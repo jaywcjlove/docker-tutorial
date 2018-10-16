@@ -44,3 +44,56 @@ MySQL Server日志可通过 Docker 的容器日志获得：
 ```bash
 $ docker logs mysql
 ```
+
+## 修改配置
+
+```conf
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
+[client]
+# 设置默认字符集 utf8mb4 让数据库支持存储 emoji 图标
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+# 此处是忽略客户端的字符集
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+# 忽略数据库表名的大小写区分
+lower_case_table_names = 1
+# 解决时区与中国时区不至问题
+default-time_zone=+8:00
+#
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+# innodb_buffer_pool_size = 128M
+#
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+#
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+# join_buffer_size = 128M
+# sort_buffer_size = 2M
+# read_rnd_buffer_size = 2M
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# 日志不要指定会报错，没有权限，查看日志通过 docker 查看
+#log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+```
+
+通过容器的名字或者容器 ID 来重启 MySQL，让配置生效。
+
+```bash
+docker restart mysql
+```
