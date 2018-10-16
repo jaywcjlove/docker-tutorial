@@ -34,8 +34,8 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署Nginx](#部署nginx)
   - [部署MySQL](#部署mysql)
   - [部署Redis](#部署redis)
-  - [部署Humpback](#部署humpback)
   - [部署Gitlab](#部署gitlab)
+  - [部署Humpback](#部署humpback)
   - [部署网盘](#部署网盘)
 - [卸载旧的版本](#卸载旧的版本)
 - [参考资料](#参考资料)
@@ -706,17 +706,19 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 
 ### 部署Nginx
 
-[部署Nginx](other/nginx.md)
+[在 docker 中部署 Nginx](other/nginx.md)
 
 ### 部署MySQL
 
-[部署MySQL](other/mysql.md)
-
+[在 docker 中部署 MySQL](other/mysql.md)
 
 ### 部署Redis
 
-[部署MySQL](other/mysql.md)
+[在 docker 中部署 Redis](other/redis.md)
 
+### 部署Gitlab
+
+[在 docker 中部署 Gitlab](other/gitlab.md)
 
 ### 部署Humpback
 
@@ -736,54 +738,6 @@ docker run -d --net=host --restart=always \
 ```
 
 访问站点，打开浏览器输入：http://192.168.99.100:7001 ，默认账户：`admin` 密码：`123456`
-
-
-### 部署Gitlab
-
-拉取镜像
-
-```bash
-docker pull gitlab/gitlab-ce
-```
-
-```bash
-sudo docker run --detach \
-    --hostname gitlab.example.com \
-    --publish 8443:443 --publish 8081:80 -p 2222:22 \
-    --name gitlab \
-    --restart always \
-    --volume $HOME/_docker/gitlab/config:/etc/gitlab \
-    --volume $HOME/_docker/gitlab/logs:/var/log/gitlab \
-    --volume $HOME/_docker/gitlab/data:/var/opt/gitlab \
-    -v /etc/localtime:/etc/localtime \
-    gitlab/gitlab-ce:latest
-```
-
-由于端口冲突，重新映射了一个端口 `2222`
-
-```bash
-# 要从之前的：
-git clone git@gitlab.example.com:myuser/awesome-project.git
-# 改为明确使用 `ssh://` 的 `URL` 方式。
-git clone ssh://git@gitlab.example.com:2222/myuser/awesome-project.git
-```
-
-为了克隆不必麻烦，保留 `gitlab` 的 `22` 端口映射，将主机的 `sshd` 的 `22` 端口映射到容器中去。将主机的 sshd 端口更改为 `2222`
-
-编辑文件 `/etc/ssh/sshd_config`，将其中的 `#Port 22` 注释去掉，将数字 `22` 更改为 `2222`，执行下面的命令重启 `sshd` 服务
-
-```bash
-systemctl restart sshd
-```
-
-防火墙的规则，添加开发 `2222` 端口
-
-```
-iptables -A INPUT -p tcp --dport 2222 -j ACCEPT
-iptables -A OUTPUT -p tcp --sport 2222 -j ACCEPT
-# 再查看下是否添加上去, 看到添加了
-iptables -L -n
-```
 
 ### 部署网盘
 
