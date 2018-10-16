@@ -1,4 +1,6 @@
 
+## 下载镜像
+
 拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)
 
 ```bash
@@ -47,7 +49,7 @@ $ docker logs mysql
 
 ## 修改配置
 
-```conf
+```ini
 # For advice on how to change settings please see
 # http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
 [client]
