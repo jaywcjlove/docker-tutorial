@@ -31,11 +31,11 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署registry](#部署registry)
   - [部署管理工具Harbor](#部署管理工具harbor)
 - [使用Docker实战](#使用docker实战)
-  - [[部署Nginx](other/nginx.md)](#部署nginxothernginxmd)
+  - [部署Nginx](#部署nginx)
   - [部署MySQL](#部署mysql)
+  - [部署Redis](#部署redis)
   - [部署Humpback](#部署humpback)
   - [部署Gitlab](#部署gitlab)
-  - [部署Redis](#部署redis)
   - [部署网盘](#部署网盘)
 - [卸载旧的版本](#卸载旧的版本)
 - [参考资料](#参考资料)
@@ -704,49 +704,19 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 --sig-proxy=true        # 设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理
 ```
 
-### [部署Nginx](other/nginx.md)
+### 部署Nginx
+
+[部署Nginx](other/nginx.md)
 
 ### 部署MySQL
 
-拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)
+[部署MySQL](other/mysql.md)
 
-```bash
-docker pull mysql:5.7
-# Trying to pull repository docker.io/library/mysql ...
-# 5.7: Pulling from docker.io/library/mysql
-# 85b1f47fba49: Already exists
-# f34057997f40: Pull complete
-# ....
-# Digest: sha256:bfb22e93ee87c6aab6c1c9a4e70f28fa289f9ffae9fe8e173
-```
 
-创建目录
+### 部署Redis
 
-- data目录将映射为mysql容器配置的数据文件存放路径
-- logs目录将映射为mysql容器的日志目录
-- conf目录里的配置文件将映射为mysql容器的配置文件
+[部署MySQL](other/mysql.md)
 
-```bash
-mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf
-```
-
-运行容器
-
-```bash
-docker run --name my-mysql \ 
-  -p 3306:3306 \ 
-  -v $PWD/conf/my.cnf:/etc/mysql/my.cnf \ 
-  -v $PWD/logs:/logs \ 
-  -v $PWD/data:/mysql_data \ 
-  -e MYSQL_ROOT_PASSWORD=123456 \ 
-  -d mysql:5.7
-```
-
-- `-p 3306:3306`：将容器的3306端口映射到主机的3306端口
-- `-v $PWD/conf/my.cnf:/etc/mysql/my.cnf`：将主机当前目录下的conf/my.cnf挂载到容器的/etc/mysql/my.cnf
-- `-v $PWD/logs:/logs`：将主机当前目录下的logs目录挂载到容器的/logs
-- `-v $PWD/data:/mysql_data`：将主机当前目录下的data目录挂载到容器的/mysql_data
-- `-e MYSQL_ROOT_PASSWORD=123456`：初始化root用户的密码
 
 ### 部署Humpback
 
@@ -813,46 +783,6 @@ iptables -A INPUT -p tcp --dport 2222 -j ACCEPT
 iptables -A OUTPUT -p tcp --sport 2222 -j ACCEPT
 # 再查看下是否添加上去, 看到添加了
 iptables -L -n
-```
-
-### 部署Redis
-
-[Redis](https://hub.docker.com/_/redis/) 加载自己的配置文件，需要重新编译一个 `images`。
-
-```bash
-FROM redis:4.0.11
-RUN mkdir -p /etc/redis
-COPY redis.conf /etc/redis/
-CMD [ "redis-server", "/etc/redis/redis.conf" ]
-EXPOSE 6379
-```
-
-创建 docker 镜像，镜像名字为 `redis`，标记 `4.0.11`
-
-```bash
-docker image build -t redis:4.0.11 .
-```
-
-如果你不需要更改配置，可以直接 `docker pull redis:4.0.11` 下载镜像。
-
-```bash
-# 先运行 redis
-docker run -d --rm -p  6389:6379 --name redis2 redis:4.0.11 redis-server --appendonly yes
-# docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件
-docker container cp redis2:/etc/redis/redis.conf $HOME/_docker/redis/redis.conf
-# 完成拷贝文件，停止 redis 容器
-docker stop redis2
-docker rm redis2
-# 这个时候，container 中已经存在的配置文件
-docker run -d \
-  -p 6389:6379 \
-  --name redis2 \
-  --restart always \
-  -v $HOME/_docker/redis/data:/data \
-  -v $HOME/_docker/redis/redis.conf:/etc/redis/redis.conf \
-  --rm \
-  redis:4.0.11 redis-server --appendonly yes
-# redis-server --appendonly yes 数据持久化
 ```
 
 ### 部署网盘
