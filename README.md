@@ -20,6 +20,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 - [服务管理](#服务管理)
 - [镜像管理](#镜像管理)
   - [通过容器创建镜像](#通过容器创建镜像)
+  - [通过Dockerfile创建镜像](#通过dockerfile创建镜像)
   - [发布自己的镜像](#发布自己的镜像)
   - [镜像中安装软件](#镜像中安装软件)
 - [容器管理](#容器管理)
@@ -33,7 +34,8 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署Nginx](#部署nginx)
   - [部署MySQL](#部署mysql)
   - [部署Humpback](#部署humpback)
-  - [安装Gitlab](#安装gitlab)
+  - [部署Gitlab](#部署gitlab)
+  - [部署Redis](#部署redis)
   - [部署网盘](#部署网盘)
 - [卸载旧的版本](#卸载旧的版本)
 - [参考资料](#参考资料)
@@ -232,6 +234,48 @@ docker commit -m="First Docker" -a="wcjiang" a6b0a6cfdacf wcjiang/nginx:v1.2.1
 - `a6b0a6cfdacf` 记住这个是容器id，不是镜像id
 - `wcjiang/nginx:v1.2.1` 创建的目标镜像名
 
+### 通过Dockerfile创建镜像
+
+假设创建一个 node.js 镜像，首先在 node.js 项目根目录创建文件。
+
+```bash
+touch Dockerfile .dockerignore
+```
+
+`.dockerignore` 文件内容，下面代码表示，这三个路径要排除，不要打包进入 image 文件。如果你没有路径要排除，这个文件可以不新建。
+
+```bash
+.git
+node_modules
+npm-debug.log
+```
+
+Dockerfile 文件内容
+
+```Dockerfile
+FROM node:8.4
+COPY . /app
+WORKDIR /app
+RUN npm install --registry=https://registry.npm.taobao.org
+EXPOSE 3000
+```
+
+- `FROM node:8.4`：该 `image` 文件继承官方的 `node image`，冒号表示标签，这里标签是`8.4`，即`8.4`版本的 `node`。
+- `COPY . /app`：将当前目录下的所有文件（除了 `.dockerignore` 排除的路径），都拷贝进入 `image` 文件的 `/app` 目录。
+- `WORKDIR /app`：指定接下来的工作路径为`/app`。
+- `RUN npm install`：在/app目录下，运行 `npm install` 命令安装依赖。注意，安装后所有的依赖，都将打包进入 `image` 文件。
+- `EXPOSE 3000`：将容器 `3000` 端口暴露出来， 允许外部连接这个端口。
+
+有了 `Dockerfile` 文件以后，就可以使用 `docker image build` 命令创建 `image` 文件了。
+
+```bash
+$ docker image build -t koa-demo .
+# 或者
+$ docker image build -t koa-demo:0.0.1 .
+```
+
+上面命令，`-t` 参数用来指定 `image` 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是 `latest`。注意后面有个 `.`，表示 Dockerfile 文件所在的路径为当前路径
+
 ### 发布自己的镜像
 
 1. 在[Docker](https://www.docker.com/) 注册账户，发布的镜像都在[这个页面里](https://cloud.docker.com/repository/list)展示
@@ -283,6 +327,19 @@ yum install vim
 容器就像一个类的实例
 
 ```bash
+# 列出本机正在运行的容器
+docker container ls
+# 列出本机所有容器，包括终止运行的容器
+docker container ls --all
+docker start [containerID/Names] # 启动容器
+docker stop [containerID/Names]  # 停止容器
+docker rm [containerID/Names]    # 删除容器
+docker logs [containerID/Names]  # 查看日志
+docker exec -it [containerID/Names] /bin/bash  # 进入容器
+
+# 从正在运行的 Docker 容器里面，将文件拷贝到本机，注意后面有个【点】拷贝到当前目录
+docker container cp [containID]:[/path/to/file] .
+
 docker run centos echo "hello world"  # 在docker容器中运行hello world!
 docker run centos yum install -y wget # 在docker容器中，安装wget软件
 docker ps                           # 列出包括未运行的容器
@@ -353,7 +410,9 @@ docker exec -it 6bd0496da64f /bin/bash
 
 通过官方提供的私有仓库镜像`registry`来搭建私有仓库。通过 [humpback](https://humpback.github.io) 快速搭建轻量级的Docker容器云管理平台。关于仓库配置说明请参见[configuration.md](https://github.com/docker/distribution/blob/master/docs/configuration.md)
 
-> 注意：也可以通过部署管理工具 `Harbor` 来部署 `registry`
+> ⚠️ 注意：也可以通过部署管理工具 `Harbor` 来部署 `registry`
+
+除了 [Harbor](https://github.com/goharbor/harbor) 还有 [humpback](https://github.com/humpback/humpback) 和 [rancher](https://github.com/rancher/rancher)
 
 ### 部署registry
 
@@ -474,7 +533,7 @@ wget https://storage.googleapis.com/harbor-releases/release-1.6.0/harbor-offline
 tar xvf harbor-offline-installer-v1.6.0.tgz
 ```
 
-进去 `vim harbor/harbor.cfg` 修改文件相关配置。
+进去 `vim harbor/harbor.cfg` 修改文件相关配置。
 
 ```bash
 # hostname 设置访问地址，支持IP，域名，主机名，禁止设置127.0.0.1
@@ -511,7 +570,7 @@ verify_remote_cert = on
 customize_crt = on
 ```
 
-配置设置完成运行安装脚本，注意如果你事先部署了 nginx 需要停掉，避免端口冲突
+配置设置完成运行安装脚本，⚠️ 注意如果你事先部署了 nginx 需要停掉，避免端口冲突
 
 ```bash
 sudo ./install.sh
@@ -520,11 +579,11 @@ sudo ./install.sh
 要更改 Harbour 的配置，请先停止现有的 Harbor 实例并更新 `harbour.cfg`。 然后运行`prepare` 脚本来填充配置，最后重新创建并启动Harbor的实例：
 
 ```bash
-$ sudo docker-compose down -v
-# 注：其实上面是停止docker-compose.yml中定义的所有容器
+$ docker-compose down -v
+# 注：其实上面是停止 docker-compose.yml 中定义的所有容器
 $ vim harbor.cfg
-$ sudo prepare
-$ sudo docker-compose up -d
+$ prepare
+$ docker-compose up -d
 ```
 
 通过 http://192.168.188.222 就可以访问 Harbour 服务了
@@ -559,7 +618,7 @@ auth:
 service: harbor-registry
 ```
 
-使用 harbor 
+使用 harbor 
 
 ```bash
 # 镜像推送
@@ -600,6 +659,50 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 客户机docker启动时候带上--insecure-registry=docker.xxx.com 强制docker login走http的80端口，就可以正常push了
 
 ## 使用Docker实战
+
+> ⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件
+
+```bash
+-d, --detach=false      # 指定容器运行于前台还是后台，默认为false   
+-i, --interactive=false # 打开STDIN，用于控制台交互  
+-t, --tty=false         # 分配tty设备，该可以支持终端登录，默认为false  
+-u, --user=""           # 指定容器的用户  
+-a, --attach=[]         # 登录容器（必须是以docker run -d启动的容器）
+-w, --workdir=""        # 指定容器的工作目录 
+-c, --cpu-shares=0      # 设置容器CPU权重，在CPU共享场景使用  
+-e, --env=[]            # 指定环境变量，容器中可以使用该环境变量  
+-m, --memory=""         # 指定容器的内存上限  
+-P, --publish-all=false # 指定容器暴露的端口  
+-p, --publish=[]        # 指定容器暴露的端口 
+-h, --hostname=""       # 指定容器的主机名  
+-v, --volume=[]         # 给容器挂载存储卷，挂载到容器的某个目录  
+--volumes-from=[]       # 给容器挂载其他容器上的卷，挂载到容器的某个目录
+--cap-add=[]            # 添加权限，权限清单详见：http://linux.die.net/man/7/capabilities  
+--cap-drop=[]           # 删除权限，权限清单详见：http://linux.die.net/man/7/capabilities  
+--cidfile=""            # 运行容器后，在指定文件中写入容器PID值，一种典型的监控系统用法  
+--cpuset=""             # 设置容器可以使用哪些CPU，此参数可以用来容器独占CPU  
+--device=[]             # 添加主机设备给容器，相当于设备直通  
+--dns=[]                # 指定容器的dns服务器  
+--dns-search=[]         # 指定容器的dns搜索域名，写入到容器的/etc/resolv.conf文件  
+--entrypoint=""         # 覆盖image的入口点  
+--env-file=[]           # 指定环境变量文件，文件格式为每行一个环境变量  
+--expose=[]             # 指定容器暴露的端口，即修改镜像的暴露端口  
+--link=[]               # 指定容器间的关联，使用其他容器的IP、env等信息  
+--lxc-conf=[]           # 指定容器的配置文件，只有在指定--exec-driver=lxc时使用  
+--name=""               # 指定容器名字，后续可以通过名字进行容器管理，links特性需要使用名字  
+--net="bridge"          # 容器网络设置:
+                            # bridge 使用docker daemon指定的网桥     
+                            # host 	//容器使用主机的网络  
+                            # container:NAME_or_ID  >//使用其他容器的网路，共享IP和PORT等网络资源  
+                            # none 容器使用自己的网络（类似--net=bridge），但是不进行配置 
+--privileged=false      # 指定容器是否为特权容器，特权容器拥有所有的capabilities  
+--restart="no"          # 指定容器停止后的重启策略:
+                            # no：容器退出时不重启  
+                            # on-failure：容器故障退出（返回值非零）时重启 
+                            # always：容器退出时总是重启  
+--rm=false              # 指定容器停止后自动删除容器(不支持以docker run -d启动的容器)  
+--sig-proxy=true        # 设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理
+```
 
 ### 部署Nginx
 
@@ -764,7 +867,7 @@ docker run -d --net=host --restart=always \
 访问站点，打开浏览器输入：http://192.168.99.100:7001 ，默认账户：`admin` 密码：`123456`
 
 
-### 安装Gitlab
+### 部署Gitlab
 
 拉取镜像
 
@@ -784,16 +887,6 @@ sudo docker run --detach \
     -v /etc/localtime:/etc/localtime \
     gitlab/gitlab-ce:latest
 ```
-sudo docker run --detach \
-    --hostname gitlab.example.com \
-    --publish 8443:443 --publish 8081:80 -p 22:22 \
-    --name gitlab \
-    --restart always \
-    --volume $HOME/_docker/gitlab/config:/etc/gitlab \
-    --volume $HOME/_docker/gitlab/logs:/var/log/gitlab \
-    --volume $HOME/_docker/gitlab/data:/var/opt/gitlab \
-    -v /etc/localtime:/etc/localtime \
-    gitlab/gitlab-ce:latest
 
 由于端口冲突，重新映射了一个端口 `2222`
 
@@ -819,6 +912,46 @@ iptables -A INPUT -p tcp --dport 2222 -j ACCEPT
 iptables -A OUTPUT -p tcp --sport 2222 -j ACCEPT
 # 再查看下是否添加上去, 看到添加了
 iptables -L -n
+```
+
+### 部署Redis
+
+[Redis](https://hub.docker.com/_/redis/) 加载自己的配置文件，需要重新编译一个 `images`。
+
+```bash
+FROM redis:4.0.11
+RUN mkdir -p /etc/redis
+COPY redis.conf /etc/redis/
+CMD [ "redis-server", "/etc/redis/redis.conf" ]
+EXPOSE 6379
+```
+
+创建 docker 镜像，镜像名字为 `redis`，标记 `4.0.11`
+
+```bash
+docker image build -t redis:4.0.11 .
+```
+
+如果你不需要更改配置，可以直接 `docker pull redis:4.0.11` 下载镜像。
+
+```bash
+# 先运行 redis
+docker run -d --rm -p  6389:6379 --name redis2 redis:4.0.11 redis-server --appendonly yes
+# docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件
+docker container cp redis2:/etc/redis/redis.conf $HOME/_docker/redis/redis.conf
+# 完成拷贝文件，停止 redis 容器
+docker stop redis2
+docker rm redis2
+# 这个时候，container 中已经存在的配置文件
+docker run -d \
+  -p 6389:6379 \
+  --name redis2 \
+  --restart always \
+  -v $HOME/_docker/redis/data:/data \
+  -v $HOME/_docker/redis/redis.conf:/etc/redis/redis.conf \
+  --rm \
+  redis:4.0.11 redis-server --appendonly yes
+# redis-server --appendonly yes 数据持久化
 ```
 
 ### 部署网盘
