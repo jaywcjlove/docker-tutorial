@@ -22,7 +22,7 @@ sudo docker run --detach \
   gitlab/gitlab-ce:latest
 ```
 
-由于端口冲突，重新映射了一个端口 `2222`
+由于端口冲突，重新映射了一个端口 `2222`，如果不想麻烦，可以事先将 ssh 端口号更改成别的端口号，[修改ssh端口号的方法](https://github.com/jaywcjlove/handbook/blob/9adc40d9e684928ee68d3301afbd78eee7fe3816/CentOS/%E4%BF%AE%E6%94%B9ssh%E7%AB%AF%E5%8F%A3%E5%8F%B7%E7%9A%84%E6%96%B9%E6%B3%95.md)
 
 ```bash
 # 要从之前的：
