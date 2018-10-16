@@ -706,19 +706,19 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 
 ### 部署Nginx
 
-[在 docker 中部署 Nginx](other/nginx.md)
+[在 docker 中部署 Nginx](nginx.md)
 
 ### 部署MySQL
 
-[在 docker 中部署 MySQL](other/mysql.md)
+[在 docker 中部署 MySQL](mysql.md)
 
 ### 部署Redis
 
-[在 docker 中部署 Redis](other/redis.md)
+[在 docker 中部署 Redis](redis.md)
 
 ### 部署Gitlab
 
-[在 docker 中部署 Gitlab](other/gitlab.md)
+[在 docker 中部署 Gitlab](gitlab.md)
 
 ### 部署Humpback
 
