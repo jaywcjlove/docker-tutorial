@@ -1,7 +1,7 @@
 
 ## 下载镜像
 
-拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)
+拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)，[MySQL镜像](https://hub.docker.com/_/mysql/)
 
 ```bash
 docker pull mysql:5.7.23
@@ -50,14 +50,12 @@ $ docker logs mysql
 # For advice on how to change settings please see
 # http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
 [client]
-# 设置默认字符集 utf8mb4 让数据库支持存储 emoji 图标
 default-character-set = utf8mb4
 
 [mysql]
 default-character-set = utf8mb4
 
 [mysqld]
-# 此处是忽略客户端的字符集
 character-set-client-handshake = FALSE
 character-set-server = utf8mb4
 collation-server = utf8mb4_unicode_ci
@@ -65,6 +63,8 @@ collation-server = utf8mb4_unicode_ci
 lower_case_table_names = 1
 # 解决时区与中国时区不至问题
 default-time_zone=+8:00
+# 设置服务ID
+server-id=1
 #
 # Remove leading # and set to the amount of RAM for the most important data
 # cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
@@ -73,6 +73,8 @@ default-time_zone=+8:00
 # Remove leading # to turn on a very important data integrity option: logging
 # changes to the binary log between backups.
 # log_bin
+# 开启 binlog，log_bin 等于 server-id
+log_bin=1
 #
 # Remove leading # to set options mainly useful for reporting servers.
 # The server defaults are faster for transactions and fast SELECTs.
@@ -86,7 +88,6 @@ socket=/var/lib/mysql/mysql.sock
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
 
-# 日志不要指定会报错，没有权限，查看日志通过 docker 查看
 #log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
 ```
@@ -95,4 +96,17 @@ pid-file=/var/run/mysqld/mysqld.pid
 
 ```bash
 docker restart mysql
+```
+
+## 进入数据库
+
+```bash
+# 进入 mysql 容器
+docker exec -it mysql /bin/bash
+# 通过 mysql 命令登陆
+mysql -uroot -p
+
+# 查看是否开启了binlog
+show binary logs;
+show variables like '%server_id%';
 ```

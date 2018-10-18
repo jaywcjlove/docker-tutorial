@@ -100,7 +100,7 @@ networks:
     driver: bridge
 ```
 
-示例显示包含两个 Elasticsearch 节点的集群。 要打开群集，请使用 [docker-compose.yml](docker-compose.yml) 并输入：
+示例显示包含两个 `Elasticsearch` 节点的集群。 要打开群集，请使用 `docker-compose.yml` 并输入：
 
 ```bash
 docker-compose up -d 

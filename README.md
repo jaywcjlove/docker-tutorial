@@ -12,7 +12,6 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 
 目录
 ===
-<!-- TOC -->
 
 - [新版本安装](#新版本安装)
 - [旧版本安装](#旧版本安装)
@@ -34,6 +33,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署Nginx](#部署nginx)
   - [部署MySQL](#部署mysql)
   - [部署Redis](#部署redis)
+  - [部署 Elasticsearch](#部署-elasticsearch)
   - [部署Gitlab](#部署gitlab)
   - [部署Humpback](#部署humpback)
   - [部署网盘](#部署网盘)
@@ -42,8 +42,6 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [官方英文资源](#官方英文资源)
   - [中文资源](#中文资源)
   - [其它资源](#其它资源)
-
-<!-- /TOC -->
 
 Docker 从 `1.13` 版本之后采用时间线的方式作为版本号，分为社区版 `CE` 和企业版 `EE`，社区版是免费提供给个人开发者和小型团体使用的，企业版会提供额外的收费服务，比如经过官方测试认证过的基础设施、容器、插件等。
 
@@ -715,6 +713,10 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 ### 部署Redis
 
 [在 docker 中部署 Redis](redis.md)
+
+### 部署 Elasticsearch
+
+[在 docker 中部署 Elasticsearch](elasticsearch.md)
 
 ### 部署Gitlab
 
