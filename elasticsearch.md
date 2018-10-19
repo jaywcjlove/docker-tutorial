@@ -104,7 +104,7 @@ networks:
 
 ```bash
 docker-compose up -d 
-docker-compose down -d # 停止集群
+docker-compose down    # 停止集群
 docker-compose down -v # 销毁集群和数据卷
 docker logs elasticsearch1 # 查看日志
 ```

@@ -35,6 +35,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署Redis](#部署redis)
   - [部署 Elasticsearch](#部署-elasticsearch)
   - [部署Gitlab](#部署gitlab)
+  - [部署 Rocket.Chat](#部署-rocketchat)
   - [部署Humpback](#部署humpback)
   - [部署网盘](#部署网盘)
 - [卸载旧的版本](#卸载旧的版本)
@@ -719,6 +720,10 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 [在 docker 中部署 Elasticsearch](elasticsearch.md)
 
 ### 部署Gitlab
+
+[在 docker 中部署 Gitlab](gitlab.md)
+
+### 部署 Rocket.Chat
 
 [在 docker 中部署 Gitlab](gitlab.md)
 
