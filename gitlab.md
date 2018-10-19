@@ -12,7 +12,7 @@ docker pull gitlab/gitlab-ce
 ## 运行容器
 
 ```bash
-sudo docker run --detach \
+sudo docker run \
   --hostname gitlab.example.com \
   --publish 8443:443 --publish 8081:80 -p 2222:22 \
   --name gitlab \
@@ -24,6 +24,18 @@ sudo docker run --detach \
   -d \
   gitlab/gitlab-ce:latest
 ```
+
+sudo docker run \
+  --hostname g.showgold.cn \
+  --publish 8443:443 --publish 8081:80 -p 22:22 \
+  --name gitlab \
+  --restart always \
+  --volume $HOME/_docker/gitlab/config:/etc/gitlab \
+  --volume $HOME/_docker/gitlab/logs:/var/log/gitlab \
+  --volume $HOME/_docker/gitlab/data:/var/opt/gitlab \
+  -v /etc/localtime:/etc/localtime \
+  -d \
+  gitlab/gitlab-ce:latest
 
 由于端口冲突，重新映射了一个端口 `2222`，如果不想麻烦，可以事先将 ssh 端口号更改成别的端口号，[修改ssh端口号的方法](https://github.com/jaywcjlove/handbook/blob/9adc40d9e684928ee68d3301afbd78eee7fe3816/CentOS/%E4%BF%AE%E6%94%B9ssh%E7%AB%AF%E5%8F%A3%E5%8F%B7%E7%9A%84%E6%96%B9%E6%B3%95.md)
 
@@ -51,6 +63,12 @@ iptables -A OUTPUT -p tcp --sport 2222 -j ACCEPT
 iptables -L -n
 ```
 
+如果此容器由于权限问题而无法启动，请尝试通过执行以下操作来修复它：
+
+```bash
+docker exec -it gitlab update-permissions
+docker restart gitlab
+```
 ## 容器手动备份
 
 
@@ -68,10 +86,10 @@ docker exec 容器名或容器id gitlab-rake gitlab:backup:create
 
 通过在宿主机上使用 crontab 使用备份命令实现自动备份
 
-添加备份脚本 `vi ~/_docker/gitlab/gitlab.backup.sh`
+添加备份脚本 `vi ~/_docker/gitlab/gitlab.backup.sh`，将下面内容添加到脚本中，保存之后添加可执行权限 `chmod +x gitlab.backup.shs`
 
 ```shell
-#！ /bin/bash
+#!/bin/bash
 case "$1" in 
   start)
     docker exec gitlab-ce11.2.3 gitlab-rake gitlab:backup:create
@@ -127,4 +145,8 @@ docker exec 容器名或容器id gitlab-ctl reconfigure
 docker stop gitlab # 停止容器
 docker rm gitlab # 删除容器
 docker start gitlab # 启动容器
+# 编辑 gitlab 容器配置
+docker exec -it gitlab vim /etc/gitlab/gitlab.rb
+# 重启 gitlab 容器
+docker restart gitlab
 ```
