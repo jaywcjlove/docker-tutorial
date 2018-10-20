@@ -93,7 +93,9 @@ $ docker-compose up -d
 
 通过 http://192.168.188.222 就可以访问 Harbour 服务了
 
-因为harbor默认端口为80，而大多数时候是不希望使用80端口的，修改端口方法如下
+## 配置修改
+
+因为 `harbor` 默认端口为 `80`，而大多数时候是不希望使用 `80` 端口的，修改端口方法如下
 
 ```bash
 # vim docker-compose.yml
@@ -123,7 +125,7 @@ auth:
 service: harbor-registry
 ```
 
-使用 harbor 
+## 使用 harbor 
 
 ```bash
 # 镜像推送
