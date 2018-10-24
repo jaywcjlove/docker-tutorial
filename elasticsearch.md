@@ -7,6 +7,7 @@
 docker pull docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 # 运行容器
 docker run \
+  --name es
   -p 9200:9200 -p 9300:9300 \
   -e "discovery.type=single-node" \
   docker.elastic.co/elasticsearch/elasticsearch:6.4.2
@@ -20,7 +21,9 @@ ElasticSearch 5.3.3 docker 运行
 # 下载老版本
 docker pull docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 # 运行容器
-docker run -p 9200:9200 \
+docker run \
+  --name es \
+  -p 9200:9200 \
   -e "http.host=0.0.0.0" \
   -e "transport.host=127.0.0.1" \
   -d docker.elastic.co/elasticsearch/elasticsearch:5.3.3
