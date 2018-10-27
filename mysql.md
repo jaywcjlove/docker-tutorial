@@ -19,7 +19,7 @@ docker pull mysql:5.7.23
 docker run --name mysql \
   -p 3306:3306 \
   -v $HOME/_docker/mysql/conf.d:/etc/mysql/conf.d \
-  -v $HOME/_docker/mysql/data:/var/lib/mysq \
+  -v $HOME/_docker/mysql/data:/var/lib/mysql \
   -e MYSQL_ROOT_PASSWORD=123456 \
   -d mysql:5.7.23
 ```

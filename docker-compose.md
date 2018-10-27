@@ -19,6 +19,12 @@ docker-compose --version
 # docker-compose version 1.22.0, build 1719ceb
 ```
 
+## 服务运行
+
+```bash
+docker stack deploy --compose-file=docker-stack.yml my-name
+```
+
 ## 卸载
 
 ```bash
