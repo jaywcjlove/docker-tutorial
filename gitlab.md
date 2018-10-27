@@ -150,3 +150,33 @@ docker exec -it gitlab vim /etc/gitlab/gitlab.rb
 # 重启 gitlab 容器
 docker restart gitlab
 ```
+
+### 通过 Docker Compose 按照
+
+使用 Docker Compose，可以轻松配置，安装和升级基于 Docker 的 GitLab 安装，[官方教程在这里](https://docs.gitlab.com/omnibus/docker/README.html#install-gitlab-using-docker-compose)。
+
+**第一步：**Docker [官方教程安装](https://docs.docker.com/compose/install/) Docker Compose。
+
+**第二步：** 创建 `docker-compose.yml` 文件，将下面配置复制到文件中 (或者下载[官方示例](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/docker/docker-compose.yml)):
+
+
+```yaml
+web:
+  image: 'gitlab/gitlab-ce:latest'
+  restart: always
+  hostname: 'gitlab.example.com'
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'https://gitlab.example.com'
+  ports:
+    - '8081:80'
+    - '8443:443'
+    - '22:22'
+  volumes:
+    - ./gitlab-data/config:/etc/gitlab
+    - ./gitlab-data/logs:/var/log/gitlab
+    - ./gitlab-data/data:/var/opt/gitlab
+    - /etc/localtime:/etc/localtime
+```
+
+**第三步：** 确保与 `docker-compose.yml` 文件同一目录下运行 `docker-compose up -d` 启动 Gitlab
