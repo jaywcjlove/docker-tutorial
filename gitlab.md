@@ -180,3 +180,62 @@ web:
 ```
 
 **第三步：** 确保与 `docker-compose.yml` 文件同一目录下运行 `docker-compose up -d` 启动 Gitlab
+
+
+### 使用 Docker Swarm
+
+[官方教程](https://docs.gitlab.com/omnibus/docker/README.html#deploy-gitlab-in-a-docker-swarm) 创建 `docker-compose.yml` 文件
+
+
+```yaml
+version: "3.6"
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    ports:
+      - "22:22"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /srv/gitlab/data:/var/opt/gitlab
+      - /srv/gitlab/logs:/var/log/gitlab
+      - /srv/gitlab/config:/etc/gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: "from_file('/omnibus_config.rb')"
+    configs:
+      - source: gitlab
+        target: /omnibus_config.rb
+    secrets:
+      - gitlab_root_password
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    deploy:
+      mode: replicated
+      replicas: 4
+configs:
+  gitlab:
+    file: ./gitlab.rb
+secrets:
+  gitlab_root_password:
+    file: ./root_password.txt
+```
+
+创建 `gitlab.rb` 文件
+
+```rb
+external_url 'https://my.domain.com/'
+gitlab_rails['initial_root_password'] = File.read('/run/secrets/gitlab_root_password')
+gitlab_rails['backup_keep_time'] = 604800  
+```
+
+创建 `root_password.txt` 文件
+
+```
+MySuperSecretAndSecurePass0rd!
+```
+
+确保您与 `docker-compose.yml` 在同一目录中并运行：
+
+```bash
+docker stack deploy --compose-file docker-compose.yml mystack
+```
