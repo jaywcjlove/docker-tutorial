@@ -20,6 +20,7 @@ docker run --name mysql \
   -p 3306:3306 \
   -v $HOME/_docker/mysql/conf.d:/etc/mysql/conf.d \
   -v $HOME/_docker/mysql/data:/var/lib/mysql \
+  -v /etc/localtime:/etc/localtime:ro \
   -e MYSQL_ROOT_PASSWORD=123456 \
   -d mysql:5.7.23
 ```

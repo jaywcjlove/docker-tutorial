@@ -15,9 +15,13 @@ $ docker run -d --rm -p  6389:6379 --name redis2 redis:4.0.11 redis-server --app
 
 [Redis](https://hub.docker.com/_/redis/) 加载自己的配置文件，需要重新编译一个 `images`，通过复制官方[Redis 配置](https://github.com/antirez/redis/blob/3a27b3d0d85d56ecd758b56c6af477ae5ff08a76/redis.conf)。
 
-```bash
+```dockerfile
 FROM redis:4.0.11
 RUN mkdir -p /etc/redis
+# 设置时区
+ENV TimeZone=Asia/Shanghai   
+RUN ln -snf /usr/share/zoneinfo/$TimeZone /etc/localtime && echo $TimeZone > /etc/timezone
+
 COPY ./redis.conf /etc/redis/redis.conf
 CMD [ "redis-server", "/etc/redis/redis.conf" ]
 EXPOSE 6379
@@ -45,6 +49,7 @@ docker run -d \
   --restart always \
   -v $HOME/_docker/redis/data:/data \
   -v $HOME/_docker/redis/conf:/etc/redis \
+  -v /etc/localtime:/etc/localtime:ro \
   redis:4.0.11 redis-server --appendonly yes
 # redis-server --appendonly yes 数据持久化
 ```

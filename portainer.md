@@ -16,6 +16,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - agent_network
     deploy:
@@ -30,6 +31,7 @@ services:
       - "9000:9000"
     volumes:
       - portainer_data:/data
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - agent_network
     deploy:

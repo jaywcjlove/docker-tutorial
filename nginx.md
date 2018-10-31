@@ -86,6 +86,7 @@ docker run -d --name webserver  \
   -v $HOME/_docker/nginx/html:/usr/share/nginx/html \
   -v $HOME/_docker/nginx/conf.d:/etc/nginx/conf.d \
   -v /etc/letsencrypt:/etc/letsencrypt:rw \
+  -v /etc/localtime:/etc/localtime:ro \
   -v /home/www/:/home/www:rw \
   -d \
   nginx
