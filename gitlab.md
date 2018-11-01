@@ -143,7 +143,7 @@ docker restart gitlab
 
 使用 Docker Compose，可以轻松配置，安装和升级基于 Docker 的 GitLab 安装，[官方教程在这里](https://docs.gitlab.com/omnibus/docker/README.html#install-gitlab-using-docker-compose)。
 
-**第一步：**Docker [官方教程安装](https://docs.docker.com/compose/install/) Docker Compose。
+**第一步：** Docker [官方教程安装](https://docs.docker.com/compose/install/) Docker Compose。
 
 **第二步：** 创建 `docker-compose.yml` 文件，将下面配置复制到文件中 (或者下载[官方示例](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/docker/docker-compose.yml)):
 
