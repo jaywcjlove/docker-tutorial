@@ -1,3 +1,14 @@
+<p align="center">
+  <a href="http://nginx.org/">
+    <img width="210" src="https://raw.githubusercontent.com/jaywcjlove/nginx-tutorial/master/nginx.svg?sanitize=true" />
+  </a>
+</p>
+
+Nginx 是一款面向性能设计的 HTTP 服务器，能反向代理 HTTP，HTTPS 和邮件相关(SMTP，POP3，IMAP)的协议链接。并且提供了负载均衡以及 HTTP 缓存。它的设计充分使用异步事件模型，削减上下文调度的开销，提高服务器并发能力。采用了模块化设计，提供了丰富模块的第三方模块。
+
+所以关于 Nginx，有这些标签：「异步」「事件」「模块化」「高性能」「高并发」「反向代理」「负载均衡」
+
+下面是 nginx 在 Docker 中的应用，这里还有 [nginx入门教程](https://github.com/jaywcjlove/nginx-tutorial) 供你参考
 
 ## 查找镜像
 
@@ -72,19 +83,19 @@ mkdir -p ~/_docker/nginx
 docker pull nginx
 ```
 
-运行容器
+运行容器，记住先将目录中的 `/etc/nginx/conf.d/defautl.conf` 文件复制出来，不然会报错。
 
 ```bash
 # 拷贝容器中的内容
-docker container cp webserver:/etc/nginx/conf.d $HOME/_docker/nginx
-docker container cp webserver:/usr/share/nginx/html $HOME/_docker/nginx
+docker container cp webserver:/etc/nginx/conf.d $HOME/docker/nginx
+docker container cp webserver:/usr/share/nginx/html $HOME/docker/nginx
 
 # 运行容器并挂载目录
 docker run -d --name webserver  \
   --restart always \
   -p 443:443 -p 80:80 \
-  -v $HOME/_docker/nginx/html:/usr/share/nginx/html \
-  -v $HOME/_docker/nginx/conf.d:/etc/nginx/conf.d \
+  -v $HOME/docker/nginx/html:/usr/share/nginx/html \
+  -v $HOME/docker/nginx/conf.d:/etc/nginx/conf.d \
   -v /etc/letsencrypt:/etc/letsencrypt:rw \
   -v /etc/localtime:/etc/localtime:ro \
   -v /home/www/:/home/www:rw \
@@ -99,8 +110,8 @@ docker exec -it webserver /bin/bash
 - **-d**：在后台运行
 - **-p 802:80**：将容器的 `80` 端口映射到主机的 `802` 端口
 - **--name webserver**：将容器命名为 `webserver`
-- **-v $HOME/_docker/nginx/html:/usr/share/nginx/html**：将主机中当前目录下的 `html` 挂载到容器的 `/html` 
-- **-v $HOME/_docker/nginx/conf.d:/etc/nginx/conf.d**：将主机中当前目录下的 `nginx` 配置，挂载到容器的 `/etc/nginx/conf.d`
+- **-v $HOME/docker/nginx/html:/usr/share/nginx/html**：将主机中当前目录下的 `html` 挂载到容器的 `/html` 
+- **-v $HOME/docker/nginx/conf.d:/etc/nginx/conf.d**：将主机中当前目录下的 `nginx` 配置，挂载到容器的 `/etc/nginx/conf.d`
 - **-v $HOME/docker/nginx/logs:/wwwlogs**：将主机中当前目录下的logs挂载到容器的/wwwlogs
 
 默认挂载的路径权限为读写。如果指定为只读可以用：ro   
