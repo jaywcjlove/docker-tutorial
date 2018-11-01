@@ -107,5 +107,9 @@ docker exec -it webserver /bin/bash
 重载 nginx 配置
 
 ```bash
-docker exec -it webserver /etc/init.d/nginx reload
+# 测试配置是否正确
+docker exec -it webserver nginx -t
+# 重新加载配置
+docker exec -it webserver nginx -s reload
 ```
+注意：⚠️ webserver 可以是 `容器名称` 或者 `容器ID`
