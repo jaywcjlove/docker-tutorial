@@ -188,6 +188,7 @@ services:
       - /srv/gitlab/data:/var/opt/gitlab
       - /srv/gitlab/logs:/var/log/gitlab
       - /srv/gitlab/config:/etc/gitlab
+      - /etc/localtime:/etc/localtime
     environment:
       GITLAB_OMNIBUS_CONFIG: "from_file('/omnibus_config.rb')"
     configs:
@@ -213,7 +214,8 @@ secrets:
 ```rb
 external_url 'https://my.domain.com/'
 gitlab_rails['initial_root_password'] = File.read('/run/secrets/gitlab_root_password')
-gitlab_rails['backup_keep_time'] = 604800  
+gitlab_rails['backup_keep_time'] = 604800 
+gitlab_rails['time_zone'] = 'Asia/Shanghai' # 中国的东八区时间
 ```
 
 创建 `root_password.txt` 文件
