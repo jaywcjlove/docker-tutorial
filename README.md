@@ -76,10 +76,11 @@ $ sudo yum-config-manager --enable docker-ce-edge
 $ sudo yum-config-manager --enable docker-ce-test
 ```
 
-您可以通过使用 `--disable` 标志运行 `yum-config-manager` 命令来禁用边缘或测试存储库。 要重新启用它，请使用 `--enable` 标志。 以下命令禁用边缘存储库:
+您可以通过使用 `--disable` 标志运行 `yum-config-manager` 命令来禁用边缘或测试存储库。 要重新启用它，请使用 `--enable` 标志。 以下命令禁用 `edge` 存储库:
 
 ```bash
 $ sudo yum-config-manager --disable docker-ce-edge
+$ sudo yum-config-manager --disable docker-ce-test
 ```
 
 安装 Docker-ce
