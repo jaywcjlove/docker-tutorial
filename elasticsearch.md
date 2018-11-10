@@ -42,7 +42,7 @@ vm.max_map_count=262144
 
 ## 通过 docker-compose 安装使用
 
-新建 `docker-compose.yml` 文件
+新建 [docker-compose.yml](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/docker.html) 文件
 
 ```yaml
 version: '2'
