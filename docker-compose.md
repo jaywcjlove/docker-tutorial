@@ -22,7 +22,13 @@ docker-compose --version
 ## 服务运行
 
 ```bash
-docker stack deploy --compose-file=docker-stack.yml my-name
+docker stack deploy --compose-file=docker-compose.yml my-name
+docker stack services my-name # 部署成功之后查看详情
+docker stack deploy	  # 部署新的堆栈或更新现有堆栈
+docker stack ls	      # 列出现有堆栈
+docker stack ps	      # 列出堆栈中的任务
+docker stack rm	      # 删除一个或多个堆栈
+docker stack services	# 列出堆栈中的服务
 ```
 
 ## 卸载
