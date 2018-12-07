@@ -500,7 +500,7 @@ docker container stop registry && docker container rm -v registry
 
 ### 部署管理工具Harbor
 
-[部署 registry 管理工具 Harbor](harbor.md)
+[部署 registry 管理工具 Harbor](docker/harbor.md)
 
 ## 使用Docker实战
 
@@ -550,27 +550,27 @@ docker container stop registry && docker container rm -v registry
 
 ### 部署Nginx
 
-[在 docker 中部署 Nginx](nginx.md)
+[在 docker 中部署 Nginx](docker/nginx.md)
 
 ### 部署MySQL
 
-[在 docker 中部署 MySQL](mysql.md)
+[在 docker 中部署 MySQL](docker/mysql.md)
 
 ### 部署Redis
 
-[在 docker 中部署 Redis](redis.md)
+[在 docker 中部署 Redis](docker/redis.md)
 
 ### 部署 Elasticsearch
 
-[在 docker 中部署 Elasticsearch](elasticsearch.md)
+[在 docker 中部署 Elasticsearch](docker/elasticsearch.md)
 
 ### 部署Gitlab
 
-[在 docker 中部署 Gitlab](gitlab.md)
+[在 docker 中部署 Gitlab](docker/gitlab.md)
 
 ### 部署 Rocket.Chat
 
-[在 docker 中部署 Gitlab](gitlab.md)
+[在 docker 中部署 Gitlab](docker/gitlab.md)
 
 ### 部署Humpback
 
