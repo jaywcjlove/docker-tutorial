@@ -38,6 +38,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [部署 Rocket.Chat](#部署-rocketchat)
   - [部署Humpback](#部署humpback)
   - [部署网盘](#部署网盘)
+  - [更多](#更多)
 - [卸载旧的版本](#卸载旧的版本)
 - [参考资料](#参考资料)
   - [官方英文资源](#官方英文资源)
@@ -574,7 +575,7 @@ docker container stop registry && docker container rm -v registry
 
 ### 更多
 
-[更多 docker 工具部署](docker/)
+[更多 docker 工具部署，在 docker 目录中](docker/)
 
 ### 部署Humpback
 
