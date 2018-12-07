@@ -572,6 +572,10 @@ docker container stop registry && docker container rm -v registry
 
 [在 docker 中部署 Gitlab](docker/gitlab.md)
 
+### 更多
+
+[更多 docker 工具部署](docker/)
+
 ### 部署Humpback
 
 首先创建放持久化数据文件夹，`mkdir -p /opt/app/humpback-web`，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。
