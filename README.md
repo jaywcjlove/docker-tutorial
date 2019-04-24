@@ -571,7 +571,7 @@ docker container stop registry && docker container rm -v registry
 
 ### 部署 Rocket.Chat
 
-[在 docker 中部署 Gitlab](docker/gitlab.md)
+[在 docker 中部署 Gitlab](docker/rocket.chat)
 
 ### 更多
 
