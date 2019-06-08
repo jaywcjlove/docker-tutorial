@@ -158,7 +158,7 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 # vim /etc/docker/daemon.json
 
 {
- "registry-mirrors": ["http://xxx.m.daocloud.io"]
+ "registry-mirrors": ["http://xxx.m.daocloud.io"],
  "insecure-registries":["192.168.100.127:8070"]
 }    
 ```
