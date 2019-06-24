@@ -13,6 +13,8 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 目录
 ===
 
+<!-- TOC -->
+
 - [新版本安装](#新版本安装)
 - [旧版本安装](#旧版本安装)
 - [命令介绍](#命令介绍)
@@ -27,23 +29,25 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [进入容器](#进入容器)
 - [文件拷贝](#文件拷贝)
 - [Docker私有仓库搭建](#docker私有仓库搭建)
-  - [部署registry](#部署registry)
-  - [部署管理工具Harbor](#部署管理工具harbor)
+  - [`registry`](#registry)
+  - [`Harbor`](#harbor)
 - [使用Docker实战](#使用docker实战)
-  - [部署Nginx](#部署nginx)
-  - [部署MySQL](#部署mysql)
-  - [部署Redis](#部署redis)
-  - [部署 Elasticsearch](#部署-elasticsearch)
-  - [部署Gitlab](#部署gitlab)
-  - [部署 Rocket.Chat](#部署-rocketchat)
-  - [部署Humpback](#部署humpback)
-  - [部署网盘](#部署网盘)
+  - [`Nginx`](#nginx)
+  - [`MySQL`](#mysql)
+  - [`Redis`](#redis)
+  - [`Elasticsearch`](#elasticsearch)
+  - [`Gitlab`](#gitlab)
+  - [`Rocket.Chat`](#rocketchat)
+  - [`Humpback`](#humpback)
+  - [`Seafile`](#seafile)
   - [更多](#更多)
 - [卸载旧的版本](#卸载旧的版本)
 - [参考资料](#参考资料)
   - [官方英文资源](#官方英文资源)
   - [中文资源](#中文资源)
   - [其它资源](#其它资源)
+
+<!-- /TOC -->
 
 Docker 从 `1.13` 版本之后采用时间线的方式作为版本号，分为社区版 `CE` 和企业版 `EE`，社区版是免费提供给个人开发者和小型团体使用的，企业版会提供额外的收费服务，比如经过官方测试认证过的基础设施、容器、插件等。
 
@@ -415,7 +419,7 @@ docker exec -it 6bd0496da64f /bin/bash
 
 除了 [Harbor](https://github.com/goharbor/harbor) 还有 [humpback](https://github.com/humpback/humpback) 和 [rancher](https://github.com/rancher/rancher)
 
-### 部署registry
+### `registry`
 
 ```bash
 docker pull registry:2.6.2
@@ -499,7 +503,7 @@ docker container stop registry && docker container rm -v registry
 # 自定义存储位置
 ```
 
-### 部署管理工具Harbor
+### `Harbor`
 
 [部署 registry 管理工具 Harbor](docker/harbor.md)
 
@@ -549,35 +553,31 @@ docker container stop registry && docker container rm -v registry
 --sig-proxy=true        # 设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理
 ```
 
-### 部署Nginx
+### `Nginx`
 
 [在 docker 中部署 Nginx](docker/nginx.md)
 
-### 部署MySQL
+### `MySQL`
 
 [在 docker 中部署 MySQL](docker/mysql.md)
 
-### 部署Redis
+### `Redis`
 
 [在 docker 中部署 Redis](docker/redis.md)
 
-### 部署 Elasticsearch
+### `Elasticsearch`
 
 [在 docker 中部署 Elasticsearch](docker/elasticsearch.md)
 
-### 部署Gitlab
+### `Gitlab`
 
 [在 docker 中部署 Gitlab](docker/gitlab.md)
 
-### 部署 Rocket.Chat
+### `Rocket.Chat`
 
 [在 docker 中部署 Gitlab](docker/rocket.chat)
 
-### 更多
-
-[更多 docker 工具部署，在 docker 目录中](docker/)
-
-### 部署Humpback
+### `Humpback`
 
 首先创建放持久化数据文件夹，`mkdir -p /opt/app/humpback-web`，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。
 
@@ -596,7 +596,7 @@ docker run -d --net=host --restart=always \
 
 访问站点，打开浏览器输入：http://192.168.99.100:7001 ，默认账户：`admin` 密码：`123456`
 
-### 部署网盘
+### `Seafile`
 
 ```
 docker run -d --name seafile \
@@ -615,6 +615,10 @@ docker run -d --name seafile \
   -p 80:80 \
   seafileltd/seafile:latest
 ```
+
+### 更多
+
+[更多 docker 工具部署，在 docker 目录中](docker/)
 
 ## 卸载旧的版本
 
