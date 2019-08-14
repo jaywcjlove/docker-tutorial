@@ -160,7 +160,17 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 {
  "registry-mirrors": ["http://xxx.m.daocloud.io"],
  "insecure-registries":["192.168.100.127:8070"]
-}    
+}
+```
+
+```json
+{
+  "insecure-registries" : [
+    "docker.google.com"
+  ],
+  "debug" : true,
+  "experimental" : true
+}
 ```
 
 客户机docker启动时候带上 `--insecure-registry=docker.xxx.com` 强制 `docker login` 走 `http` 的 `80` 端口，就可以正常 `push` 了
