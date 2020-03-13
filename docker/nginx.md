@@ -41,7 +41,7 @@ $ docker pull nginx
 利用这个镜像启动一个新的容器
 
 ```bash
-docker run --name my-nginx -d -p 8080:80 nginx
+docker run --name my-nginx -d -p 8080:80 nginx /bin/bash
 # faaed6a2d63af248961aab59713e515c76aea447
 ```
 
