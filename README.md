@@ -42,6 +42,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [`Seafile`](#seafile)
   - [更多](#更多)
 - [卸载旧的版本](#卸载旧的版本)
+- [错误处理](#错误处理)
 - [参考资料](#参考资料)
   - [官方英文资源](#官方英文资源)
   - [中文资源](#中文资源)
@@ -626,16 +627,22 @@ docker run -d --name seafile \
 
 ```bash
 $ sudo yum remove docker \
-    docker-client \
-    docker-client-latest \
-    docker-common \
-    docker-latest \
-    docker-latest-logrotate \
-    docker-logrotate \
-    docker-selinux \
-    docker-engine-selinux \
-    docker-engine
+  docker-client \
+  docker-client-latest \
+  docker-common \
+  docker-latest \
+  docker-latest-logrotate \
+  docker-logrotate \
+  docker-selinux \
+  docker-engine-selinux \
+  docker-engine
 ```
+
+## 错误处理
+
+Create more free space in thin pool or use dm.min_free_space option to change behavior
+
+> 特别慎用，东西都没有了，注意备份哦。https://github.com/moby/moby/issues/3182#issuecomment-256532928
 
 ## 参考资料
 
