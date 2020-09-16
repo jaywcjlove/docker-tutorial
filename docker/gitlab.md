@@ -74,7 +74,7 @@ docker exec 容器名或容器id gitlab-rake gitlab:backup:create
 
 通过在宿主机上使用 crontab 使用备份命令实现自动备份
 
-添加备份脚本 `vi ~/_docker/gitlab/gitlab.backup.sh`，将下面内容添加到脚本中，保存之后添加可执行权限 `chmod +x gitlab.backup.shs`
+添加备份脚本 `vi ~/_docker/gitlab/gitlab.backup.sh`，将下面内容添加到脚本中，保存之后添加可执行权限 `chmod +x gitlab.backup.sh`
 
 ```shell
 #!/bin/bash
