@@ -121,10 +121,10 @@ systemctl reload crond.service
 gitlab_rails['backup_keep_time'] = 604800  
 ```
 
-重新加载gitlab配置文件
+重新加载 `gitlab` 配置文件
 
 ```bash
-docker exec 容器名或容器id gitlab-ctl reconfigure  
+docker exec 容器名或容器ID gitlab-ctl reconfigure  
 ```
 
 ### 容器管理
