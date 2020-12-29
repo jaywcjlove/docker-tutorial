@@ -15,38 +15,40 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 
 <!-- TOC -->
 
-- [新版本安装](#新版本安装)
-- [旧版本安装](#旧版本安装)
-- [命令介绍](#命令介绍)
-- [服务管理](#服务管理)
-- [镜像管理](#镜像管理)
-  - [通过容器创建镜像](#通过容器创建镜像)
-  - [通过Dockerfile创建镜像](#通过dockerfile创建镜像)
-  - [发布自己的镜像](#发布自己的镜像)
-  - [镜像中安装软件](#镜像中安装软件)
-- [容器管理](#容器管理)
-  - [容器服务管理](#容器服务管理)
-  - [进入容器](#进入容器)
-- [文件拷贝](#文件拷贝)
-- [Docker私有仓库搭建](#docker私有仓库搭建)
-  - [`registry`](#registry)
-  - [`Harbor`](#harbor)
-- [使用Docker实战](#使用docker实战)
-  - [`Nginx`](#nginx)
-  - [`MySQL`](#mysql)
-  - [`Redis`](#redis)
-  - [`Elasticsearch`](#elasticsearch)
-  - [`Gitlab`](#gitlab)
-  - [`Rocket.Chat`](#rocketchat)
-  - [`Humpback`](#humpback)
-  - [`Seafile`](#seafile)
-  - [更多](#更多)
-- [卸载旧的版本](#卸载旧的版本)
-- [错误处理](#错误处理)
-- [参考资料](#参考资料)
-  - [官方英文资源](#官方英文资源)
-  - [中文资源](#中文资源)
-  - [其它资源](#其它资源)
+- [目录](#目录)
+  - [新版本安装](#新版本安装)
+  - [旧版本安装](#旧版本安装)
+  - [命令介绍](#命令介绍)
+  - [服务管理](#服务管理)
+  - [镜像管理](#镜像管理)
+    - [通过容器创建镜像](#通过容器创建镜像)
+    - [通过Dockerfile创建镜像](#通过dockerfile创建镜像)
+    - [发布自己的镜像](#发布自己的镜像)
+    - [镜像中安装软件](#镜像中安装软件)
+  - [容器管理](#容器管理)
+    - [容器服务管理](#容器服务管理)
+    - [进入容器](#进入容器)
+  - [文件拷贝](#文件拷贝)
+  - [Docker私有仓库搭建](#docker私有仓库搭建)
+    - [`registry`](#registry)
+    - [`Harbor`](#harbor)
+  - [使用Docker实战](#使用docker实战)
+    - [`Nginx`](#nginx)
+    - [`MySQL`](#mysql)
+    - [`Redis`](#redis)
+    - [`Elasticsearch`](#elasticsearch)
+    - [`Gitlab`](#gitlab)
+    - [`Rocket.Chat`](#rocketchat)
+    - [`Rancher`](#rancher)
+    - [`Humpback`](#humpback)
+    - [`Seafile`](#seafile)
+    - [更多](#更多)
+  - [卸载旧的版本](#卸载旧的版本)
+  - [错误处理](#错误处理)
+  - [参考资料](#参考资料)
+    - [官方英文资源](#官方英文资源)
+    - [中文资源](#中文资源)
+    - [其它资源](#其它资源)
 
 <!-- /TOC -->
 
@@ -577,6 +579,10 @@ docker container stop registry && docker container rm -v registry
 ### `Rocket.Chat`
 
 [在 docker 中部署 Gitlab](docker/rocket.chat)
+
+### `Rancher`
+
+[在 docker 中部署 Rancher](docker/rancher)
 
 ### `Humpback`
 

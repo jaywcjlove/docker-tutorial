@@ -227,5 +227,5 @@ MySuperSecretAndSecurePass0rd!
 确保您与 `docker-compose.yml` 在同一目录中并运行：
 
 ```bash
-docker stack deploy --compose-file docker-compose.yml mystack
+docker stack deploy --compose-file docker-compose.yml gitlab
 ```
