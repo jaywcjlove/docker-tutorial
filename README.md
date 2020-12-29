@@ -212,7 +212,7 @@ chkconfig docker on        # 设置为开机启动
 ```bash
 docker pull centos:latest  # 从docker.io中下载centos镜像到本地
 docker images              # 查看已下载的镜像
-docker rm image_id         # 删除镜像，指定镜像id
+docker rmi [image_id] # 删除镜像，指定镜像id
 
 # 删除所有镜像
 # none 默认为 docker.io
