@@ -137,6 +137,16 @@ registry_external_url 'http://192.168.188.211:5008'
 
 重启 `Gitlab` 后，可以在 `Gitlab` 左侧面板看到 `Container Registry` 的菜单。
 
+修改 `vim  ~/.docker/daemon.json` 添加 `"192.168.188.211:5008"`
+
+```js
+{
+  "insecure-registries":[
+    "192.168.188.211:5008"
+  ]
+}
+```
+
 按照 gitlab 给出的提示，我们先登录上 gitlab 的 registry：
 
 ```bash
