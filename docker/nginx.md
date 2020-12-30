@@ -124,3 +124,32 @@ docker exec -it webserver nginx -t
 docker exec -it webserver nginx -s reload
 ```
 注意：⚠️ webserver 可以是 `容器名称` 或者 `容器ID`
+
+## 启用 Gitlab Registry 功能
+
+修改配置 `/etc/gitlab/gitlab.rb` 文件，将 `registry_external_url` 的值修改为 http://192.168.188.211:5008
+
+```ruby
+registry_external_url 'http://192.168.188.211:5008'
+```
+
+`registry_external_url` 这个地址是我们使用 `docker` 命令进行 `pull` 或者 `push` 镜像的仓库地址。
+
+重启 `Gitlab` 后，可以在 `Gitlab` 左侧面板看到 `Container Registry` 的菜单。
+
+按照 gitlab 给出的提示，我们先登录上 gitlab 的 registry：
+
+```bash
+docker login 192.168.188.211:5008
+Username: ****
+Password: **
+```
+
+注意：⚠️ 密码是需要通过 [Gitlab > User Settings > Access Tokens > Add a personal access token](http://gitlab.com/-/profile/personal_access_tokens) 生成一个 `personal_access_tokens` 而不是真正的密码
+
+
+```
+docker build -t 192.168.188.211:5008/docker/docker-static-service-template .
+# 提交镜像
+docker push 192.168.188.211:5008/docker/docker-static-service-template
+```
