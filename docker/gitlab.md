@@ -229,3 +229,42 @@ MySuperSecretAndSecurePass0rd!
 ```bash
 docker stack deploy --compose-file docker-compose.yml gitlab
 ```
+
+## [`注册 runner`](https://docs.gitlab.com/runner/install/docker.html)
+
+### 更新配置
+
+如果您在 `config.toml` 中更改配置，则可能需要重新启动运行程序以应用更改。 确保重新启动整个容器，而不是使用 `gitlab-runner restart`：
+
+```shell
+docker restart gitlab-runner
+```
+
+### 升级版本
+
+Pull the latest version (or a specific tag):
+
+```shell
+docker pull gitlab/gitlab-runner:latest
+```
+
+Stop and remove the existing container:
+
+```shell
+docker stop gitlab-runner && docker rm gitlab-runner
+```
+
+Start the container as you did originally:
+
+```shell
+docker run -d --name gitlab-runner --restart always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /home/docker/gitlab-runner/config:/etc/gitlab-runner \
+  gitlab/gitlab-runner:latest
+```
+
+服务 gitlab-runner 跑起来之后可以注册对应的仓库
+
+```
+docker run --rm -it -v /home/docker/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
+```
