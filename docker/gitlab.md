@@ -265,6 +265,43 @@ docker run -d --name gitlab-runner --restart always \
 
 服务 gitlab-runner 跑起来之后可以注册对应的仓库
 
-```
+```shell
 docker run --rm -it -v /home/docker/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
+
+# Runtime platform                                    arch=amd64 os=linux pid=8 revision=943fc252 version=13.7.0
+# Running in system-mode.
+
+# Enter the GitLab instance URL (for example, https://gitlab.com/):
+# https://g.xxxxx.cn/
+# Enter the registration token:
+# ze9H4**********
+# Enter a description for the runner:
+# [7d0472a5e808]: web
+# Enter tags for the runner (comma-separated):
+
+# Registering runner... succeeded                     runner=ze9H44QH
+# Enter an executor: docker-ssh+machine, docker-ssh, parallels, virtualbox, docker+machine, kubernetes, custom, docker, shell, ssh:
+# shell
+# Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+```
+
+- [gitlab-ci templates](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Nodejs.gitlab-ci.yml)
+
+```toml
+concurrent = 1
+check_interval = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = "web"
+  url = "https://g.xxxxx.cn/"
+  token = "4xXx_t9aqcWkK5DZHo-W"
+  executor = "docker"
+  [runners.custom_build_dir]
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
+    [runners.cache.azure]
 ```
