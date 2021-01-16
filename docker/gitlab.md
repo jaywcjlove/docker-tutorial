@@ -259,14 +259,14 @@ Start the container as you did originally:
 ```shell
 docker run -d --name gitlab-runner --restart always \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/docker/gitlab-runner/config:/etc/gitlab-runner \
+  -v /home/www/gitlab/gitlab-runner/config:/etc/gitlab-runner \
   gitlab/gitlab-runner:latest
 ```
 
 服务 gitlab-runner 跑起来之后可以注册对应的仓库
 
 ```shell
-docker run --rm -it -v /home/docker/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
+docker run --rm -it -v /home/www/gitlab/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
 
 # Runtime platform                                    arch=amd64 os=linux pid=8 revision=943fc252 version=13.7.0
 # Running in system-mode.
@@ -295,13 +295,26 @@ check_interval = 0
   session_timeout = 1800
 
 [[runners]]
-  name = "web"
+  name = "项目名称"
   url = "https://g.xxxxx.cn/"
-  token = "4xXx_t9aqcWkK5DZHo-W"
+  token = "xxx-y1vb"
   executor = "docker"
+
   [runners.custom_build_dir]
   [runners.cache]
     [runners.cache.s3]
     [runners.cache.gcs]
     [runners.cache.azure]
+  [runners.docker]
+    environment = ['GIT_SSL_NO_VERIFY=true']
+    tls_verify = false
+    image = "node:12"
+    privileged = false
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+    disable_cache = false
+    volumes = ["/cache"]
+    shm_size = 0
 ```
+
+> ⚠️ `token` 是生成的，必须通过 `gitlab-runner` 生成 `token`
