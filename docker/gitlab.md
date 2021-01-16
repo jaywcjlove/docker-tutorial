@@ -322,3 +322,44 @@ check_interval = 0
 ```
 ERROR: error during connect: Get http://docker:2375/v1.40/info: dial tcp: lookup docker on 8.8.8.8:53: no such host
 ```
+
+### CI 中使用编译提交镜像
+
+下面是 [官方仓库 Docker.gitlab-ci.yml](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Docker.gitlab-ci.yml) 模板
+
+```yml
+docker-build-master:
+  # Official docker image.
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - master
+```
+
+- `CI_REGISTRY_USER` Github 用户名 Example: `wangchujiang` 
+- `CI_REGISTRY_PASSWORD` 密码(personal_access_tokens)，密码是需要通过 [Gitlab > User Settings > Access Tokens > Add a personal access token](http://g.showgold.cn/-/profile/personal_access_tokens)) 生成一个 `personal_access_tokens` 而不是真正的密码
+- `CI_REGISTRY` Registry 地址 Example: `192.168.188.222:8070`
+- `CI_REGISTRY_IMAGE` Example: `192.168.188.222:5008/docker/docker-static-service-template`
+
+```yml
+docker-build:
+  # Official docker image.
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+  except:
+    - master
+```
