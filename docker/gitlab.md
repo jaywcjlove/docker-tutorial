@@ -174,7 +174,6 @@ web:
 
 [官方教程](https://docs.gitlab.com/omnibus/docker/README.html#deploy-gitlab-in-a-docker-swarm) 创建 `docker-compose.yml` 文件
 
-
 ```yaml
 version: "3.6"
 services:
@@ -313,8 +312,13 @@ check_interval = 0
     disable_entrypoint_overwrite = false
     oom_kill_disable = false
     disable_cache = false
-    volumes = ["/cache"]
+    volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]
     shm_size = 0
 ```
 
-> ⚠️ `token` 是生成的，必须通过 `gitlab-runner` 生成 `token`
+1. ⚠️ `token` 是生成的，必须通过 `gitlab-runner` 生成 `token`
+2. `volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]` 配置添加很重要，解决下面错误：
+
+```
+ERROR: error during connect: Get http://docker:2375/v1.40/info: dial tcp: lookup docker on 8.8.8.8:53: no such host
+```
