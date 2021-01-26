@@ -343,8 +343,8 @@ docker-build-master:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
     # 运行服务
-    - if [ $(docker ps -aq --filter name=web) ]; then docker rm -rf web;fi
-    - docker run -d -p 5000:5000 --name web flask-demo
+    - if [ $(docker ps -aq --filter name=docker-service-name) ]; then docker rm -rf docker-service-name;fi
+    - docker run -itd -p 5000:5000 --name docker-service-name "$CI_REGISTRY_IMAGE":latest
   only:
     - master
 ```
