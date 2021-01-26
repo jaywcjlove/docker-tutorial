@@ -369,3 +369,15 @@ docker-build:
   except:
     - master
 ```
+
+### 错误处理
+
+```bash
+gitlab ci ERROR: Uploading artifacts to coordinator... too large archive
+```
+
+使用管理员帐户登陆 `Gitlab` -> `Admin Area` -> `Settings` 修改 `Maximum artifacts size (MB)` 值，然后保存，然而并没有解决，我的问题是 nginx 代理造成的，最终通过修改 nginx 代理配置解决问题：
+
+```nginx
+client_max_body_size       10m;
+```
