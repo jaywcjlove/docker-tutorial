@@ -309,6 +309,7 @@ check_interval = 0
     tls_verify = false
     image = "node:12"
     privileged = false
+    pull_policy = "if-not-present"
     disable_entrypoint_overwrite = false
     oom_kill_disable = false
     disable_cache = false
@@ -322,6 +323,8 @@ check_interval = 0
 ```
 ERROR: error during connect: Get http://docker:2375/v1.40/info: dial tcp: lookup docker on 8.8.8.8:53: no such host
 ```
+
+3. `pull_policy = "if-not-present"` 策略改为：镜像不存在时才拉取。
 
 ### CI 中使用编译提交镜像
 
@@ -339,6 +342,9 @@ docker-build-master:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
+    # 运行服务
+    - if [ $(docker ps -aq --filter name=web) ]; then docker rm -rf web;fi
+    - docker run -d -p 5000:5000 --name web flask-demo
   only:
     - master
 ```
