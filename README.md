@@ -650,6 +650,24 @@ Create more free space in thin pool or use dm.min_free_space option to change be
 
 > 特别慎用，东西都没有了，注意备份哦。https://github.com/moby/moby/issues/3182#issuecomment-256532928
 
+**镜像拉不下来**
+
+修改 Docker `daemon.json` 配置 macOS: `/etc/docker/daemon.json`，Linux: `~/.docker/daemon.json`
+
+```js
+{
+  "registry-mirrors":[
+     "https://docker.mirrors.ustc.edu.cn",
+     "https://hub-mirror.c.163.com",
+     "https://mirror.baidubce.com",
+     "https://registry.docker-cn.com"
+  ],
+  "insecure-registries": [
+     "192.168.188.111:2021"
+  ]
+}
+```
+
 ## 参考资料
 
 ### 官方英文资源
