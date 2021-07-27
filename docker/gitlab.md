@@ -179,6 +179,7 @@ version: "3.6"
 services:
   gitlab:
     image: gitlab/gitlab-ce:latest
+    container_name: gitlab
     ports:
       - "22:22"
       - "80:80"
@@ -197,6 +198,7 @@ services:
       - gitlab_root_password
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
+    container_name: gitlab-runner
     deploy:
       mode: replicated
       replicas: 4
