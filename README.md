@@ -578,11 +578,11 @@ docker container stop registry && docker container rm -v registry
 
 ### `Rocket.Chat`
 
-[在 docker 中部署 Gitlab](docker/rocket.chat)
+[在 docker 中部署 Gitlab](docker/rocket.chat/README.md)
 
 ### `Rancher`
 
-[在 docker 中部署 Rancher](docker/rancher)
+[在 docker 中部署 Rancher](docker/rancher.md)
 
 ### `Humpback`
 

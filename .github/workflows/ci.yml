@@ -1,0 +1,31 @@
+name: build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - run: mkdir -p build
+    - run: cp -rp img build
+    - run: npm i markdown-to-html-cli -g
+    - run: markdown-to-html --output build/index.html
+    - run: markdown-to-html -s docker/sourcegraph.md --output build/sourcegraph.html
+    - run: markdown-to-html -s docker/redis.md --output build/redis.html
+    - run: markdown-to-html -s docker/rancher.md --output build/rancher.html
+    - run: markdown-to-html -s docker/portainer.md --output build/portainer.html
+    - run: markdown-to-html -s docker/nginx.md --output build/nginx.html
+    - run: markdown-to-html -s docker/mysql.md --output build/mysql.html
+    - run: markdown-to-html -s docker/mattermost.md --output build/mattermost.html
+    - run: markdown-to-html -s docker/harbor.md --output build/harbor.html
+    - run: markdown-to-html -s docker/gitlab.md --output build/gitlab.html
+    - run: markdown-to-html -s docker/elasticsearch.md --output build/elasticsearch.html
+    - run: markdown-to-html -s docker/seaweedfs/README.md --output build/seaweedfs.html
+    - run: markdown-to-html -s docker/rocket.chat/README.md --output build/rocket.chat.html
