@@ -16,6 +16,7 @@
       "docker/gitlab.md": "gitlab.html",
       "docker/rocket.chat/README.md": "rocket.chat.html",
       "docker/rancher.md": "rancher.html",
+      "docker/harbor.md": "harbor.html",
       "docker/mysql.md": "mysql.html"
     }
   }
