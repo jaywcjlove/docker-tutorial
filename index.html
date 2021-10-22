@@ -6,104 +6,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta description="Docker 是一个开源的应用容器引擎，而一个容器其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。">
     <meta keywords="docker,tutorial,containers">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐳</text></svg>" type="image/x-icon">
-    <style>.task-list-item { list-style-type: none;}.task-list-item label { font-weight: 400;}.task-list-item.enabled label { cursor: pointer;}.task-list-item+.task-list-item { margin-top: 3px;}.task-list-item .handle { display: none;}.task-list-item-checkbox { margin: 0 .2em .25em -1.6em; vertical-align: middle;}.wmde-markdown h1,.wmde-markdown h2,.wmde-markdown h3,.wmde-markdown h4,.wmde-markdown h5,.wmde-markdown h6 { font-weight: 600; line-height: 1.25; margin-bottom: 16px; margin-top: 24px;}.wmde-markdown h1 .anchor,.wmde-markdown h2 .anchor,.wmde-markdown h3 .anchor,.wmde-markdown h4 .anchor,.wmde-markdown h5 .anchor,.wmde-markdown h6 .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1;}.wmde-markdown h1 .octicon-link,.wmde-markdown h2 .octicon-link,.wmde-markdown h3 .octicon-link,.wmde-markdown h4 .octicon-link,.wmde-markdown h5 .octicon-link,.wmde-markdown h6 .octicon-link { visibility: hidden; vertical-align: middle;}.wmde-markdown h1:hover .octicon-link,.wmde-markdown h2:hover .octicon-link,.wmde-markdown h3:hover .octicon-link,.wmde-markdown h4:hover .octicon-link,.wmde-markdown h5:hover .octicon-link,.wmde-markdown h6:hover .octicon-link { visibility: visible;}.github-corner:hover .octo-arm { -webkit-animation: octocat-wave .56s ease-in-out; animation: octocat-wave .56s ease-in-out;}@-webkit-keyframes octocat-wave { 0%, to { -webkit-transform: rotate(0); transform: rotate(0); } 20%, 60% { -webkit-transform: rotate(-25deg); transform: rotate(-25deg); } 40%, 80% { -webkit-transform: rotate(10deg); transform: rotate(10deg); }}@keyframes octocat-wave { 0%, to { -webkit-transform: rotate(0); transform: rotate(0) } 20%, 60% { -webkit-transform: rotate(-25deg); transform: rotate(-25deg); } 40%, 80% { -webkit-transform: rotate(10deg); transform: rotate(10deg); }}.wmde-markdown { font-size: 16px; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji; max-width: 1024px; margin: 28px auto 60px auto;}.wmde-markdown > :first-child { margin-top: 0 !important;}.wmde-markdown > :last-child { margin-bottom: 0 !important;}.wmde-markdown code[class*="language-"],.wmde-markdown pre[class*="language-"] { color: black; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; word-wrap: normal; -webkit-hyphens: none; hyphens: none;}.wmde-markdown pre code { background: none; overflow-wrap: normal; white-space: inherit; -moz-tab-size: 2; tab-size: 2; padding: 16px; font-size: 95%; line-height: 1.5; display: block; text-shadow: 0 1px #fff;}.wmde-markdown pre { margin-bottom: 18px; font-size: 85%; line-height: 1.45; position: relative; overflow-x: auto; background-color: #f6f8fa; border-radius: 3px;}.wmde-markdown code,.wmde-markdown tt { background-color: rgba(27, 31, 35, 0.05); border-radius: 3px; font-size: 85%; margin: 0; padding: 0.2em 0.4em;}.wmde-markdown pre,.wmde-markdown code,.wmde-markdown tt { font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;}.wmde-markdown img { max-width: 100%;}.wmde-markdown input { vertical-align: middle; margin: 0 0.2em 0.25em -1.6em;}.wmde-markdown input + p { display: inline;}.wmde-markdown h1,.wmde-markdown h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em;}.wmde-markdown h1,.wmde-markdown h2,.wmde-markdown h3,.wmde-markdown h4,.wmde-markdown h5,.wmde-markdown h6 { font-weight: 600; line-height: 1.25; margin-bottom: 16px; margin-top: 24px;}.wmde-markdown h1 .anchor,.wmde-markdown h2 .anchor,.wmde-markdown h3 .anchor,.wmde-markdown h4 .anchor,.wmde-markdown h5 .anchor,.wmde-markdown h6 .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1;}.wmde-markdown h1 .octicon-link,.wmde-markdown h2 .octicon-link,.wmde-markdown h3 .octicon-link,.wmde-markdown h4 .octicon-link,.wmde-markdown h5 .octicon-link,.wmde-markdown h6 .octicon-link { visibility: hidden; vertical-align: middle;}.wmde-markdown h1:hover .octicon-link,.wmde-markdown h2:hover .octicon-link,.wmde-markdown h3:hover .octicon-link,.wmde-markdown h4:hover .octicon-link,.wmde-markdown h5:hover .octicon-link,.wmde-markdown h6:hover .octicon-link { visibility: visible;}.wmde-markdown h1 { font-size: 2em;}.wmde-markdown h2 { font-size: 1.5em;}.wmde-markdown h3 { font-size: 1.25em;}.wmde-markdown h4 { font-size: 1em;}.wmde-markdown h5 { font-size: 0.875em;}.wmde-markdown h6 { font-size: 0.85em;}.wmde-markdown ol,.wmde-markdown ul { padding-left: 2em;}.wmde-markdown ol > p,.wmde-markdown ul > p { margin-bottom: 0;}.wmde-markdown ul { margin-bottom: 16px; margin-top: 0; list-style: initial;}.wmde-markdown > blockquote,.wmde-markdown > blockquote blockquote { margin: 0; border-left: 0.25em solid #dfe2e5; color: #6a737d; padding: 0 1em;}.wmde-markdown > blockquote > :last-child,.wmde-markdown > blockquote blockquote > :last-child { margin-bottom: 0;}.wmde-markdown > blockquote > :first-child,.wmde-markdown > blockquote blockquote > :first-child { margin-top: 0;}.wmde-markdown hr { margin: 1.5em auto; border: 0; border-top: 2px dotted #eee; height: 1px;}.wmde-markdown > table,.wmde-markdown > blockquote table { display: block; overflow: auto; width: 100%; border-collapse: collapse; border-spacing: 0; font-size: 14px;}.wmde-markdown > table tr,.wmde-markdown > blockquote table tr { background-color: #fff; border-top: 1px solid #c6cbd1;}.wmde-markdown > table td,.wmde-markdown > blockquote table td,.wmde-markdown > table th,.wmde-markdown > blockquote table th { border: 1px solid #dfe2e5; padding: 6px 13px;}.wmde-markdown blockquote,.wmde-markdown details,.wmde-markdown dl,.wmde-markdown ol,.wmde-markdown p,.wmde-markdown pre,.wmde-markdown table,.wmde-markdown ul { margin-bottom: 16px; margin-top: 0;}.wmde-markdown a { color: #0366d6; text-decoration: none;}.wmde-markdown a:hover { text-decoration: underline;}.wmde-markdown .namespace { opacity: 0.7;}.wmde-markdown .token.important { font-weight: normal;}.wmde-markdown .token.bold { font-weight: bold;}.wmde-markdown .token.italic { font-style: italic;}.wmde-markdown .token.entity { cursor: help;}.wmde-markdown kbd { background-color: #fafbfc; border-bottom-color: #d1d5da; border: 1px solid #d1d5da; border-radius: 3px; box-shadow: inset 0 -1px 0 #d1d5da; color: #56595d; display: inline-block; font-size: 10px; font-family: ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace; line-height: 10px; padding: 2px 4px; vertical-align: middle;}.wmde-markdown .token.tag .attr-value { color: #032f62;}.wmde-markdown .token.property,.wmde-markdown .token.tag,.wmde-markdown .token.boolean,.wmde-markdown .token.number,.wmde-markdown .token.function-name,.wmde-markdown .token.constant,.wmde-markdown .token.symbol,.wmde-markdown .token.deleted { color: #0060c9;}.wmde-markdown .token.punctuation { color: #a0a0a0;}.wmde-markdown code[class*="language-"] { color: black;}.wmde-markdown code[class*="language-"] .token.selector,.wmde-markdown code[class*="language-"] .token.attr-name,.wmde-markdown code[class*="language-"] .token.string,.wmde-markdown code[class*="language-"] .token.char,.wmde-markdown code[class*="language-"] .token.function,.wmde-markdown code[class*="language-"] .token.builtin { color: #6f42c1;}.wmde-markdown code[class*="language-"] .token.inserted { color: #22863a; background-color: #f0fff4;}.wmde-markdown code[class*="language-"] .token.deleted { color: #b31d28; background-color: #ffeef0;}.wmde-markdown code[class*="language-"] .token.class-name { color: #6f42c1;}.wmde-markdown code[class*="language-"] .code-block { color: #032f62;}.wmde-markdown code[class*="language-"] .token.comment,.wmde-markdown code[class*="language-"] .token.block-comment,.wmde-markdown code[class*="language-"] .token.prolog,.wmde-markdown code[class*="language-"] .token.doctype,.wmde-markdown code[class*="language-"] .token.cdata { color: #7D8B99;}.wmde-markdown code[class*="language-"] .token.punctuation { color: #a0a0a0;}.wmde-markdown code[class*="language-"] .token.operator,.wmde-markdown code[class*="language-"] .token.entity,.wmde-markdown code[class*="language-"] .token.url,.wmde-markdown code[class*="language-"] .token.variable { color: #d73a49; background: rgba(255, 255, 255, 0.5);}.wmde-markdown code[class*="language-"] .token.atrule,.wmde-markdown code[class*="language-"] .token.attr-value { color: #004698;}.wmde-markdown code[class*="language-"] .token.keyword { color: #d63200;}.wmde-markdown code[class*="language-"] .token.regex,.wmde-markdown code[class*="language-"] .token.important { color: #e90;}.wmde-markdown code[class*="language-"] .token.string { color: #0a53c1;}</style>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22%3E%3Ctext%20y=%22.9em%22%20font-size=%2290%22%3E🐳%3C/text%3E%3C/svg%3E" type="image/x-icon">
+    <style>.markdown-body { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; max-width: 960px; margin: 28px auto 60px auto; color: #24292f; background-color: #ffffff; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"; font-size: 16px; line-height: 1.5; word-wrap: break-word;}.markdown-body .octicon { display: inline-block; fill: currentColor; vertical-align: text-bottom;}.markdown-body .octicon-video { border: 1px solid #d0d7de !important; border-radius: 6px !important; display: block;}.markdown-body .octicon-video summary { border-bottom: 1px solid #d0d7de !important; padding: 8px 16px !important; cursor: pointer;}.markdown-body .octicon-video > video { display: block !important; max-width: 100% !important; padding: 2px; box-sizing: border-box;}.markdown-body details.octicon-video:not([open])>*:not(summary) { display: none !important;}.markdown-body details.octicon-video:not([open]) > summary { border-bottom: 0 !important;}.markdown-body .octicon-video summary > svg + span { margin: 4px !important;}.markdown-body h1:hover .anchor .octicon-link:before,.markdown-body h2:hover .anchor .octicon-link:before,.markdown-body h3:hover .anchor .octicon-link:before,.markdown-body h4:hover .anchor .octicon-link:before,.markdown-body h5:hover .anchor .octicon-link:before,.markdown-body h6:hover .anchor .octicon-link:before { width: 16px; height: 16px; content: ' '; display: inline-block; background-color: currentColor; -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>"); mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");}.markdown-body details,.markdown-body figcaption,.markdown-body figure { display: block;}.markdown-body summary { display: list-item;}.markdown-body a { background-color: transparent; color: #0969da; text-decoration: none;}.markdown-body a:active,.markdown-body a:hover { outline-width: 0;}.markdown-body abbr[title] { border-bottom: none; -webkit-text-decoration: underline dotted; text-decoration: underline dotted;}.markdown-body b,.markdown-body strong { font-weight: 600;}.markdown-body dfn { font-style: italic;}.markdown-body h1 { margin: .67em 0; font-weight: 600; padding-bottom: .3em; font-size: 2em; border-bottom: 1px solid hsla(210,18%,87%,1);}.markdown-body mark { background-color: #ff0; color: #24292f;}.markdown-body small { font-size: 90%;}.markdown-body sub,.markdown-body sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline;}.markdown-body sub { bottom: -0.25em;}.markdown-body sup { top: -0.5em;}.markdown-body img { border-style: none; max-width: 100%; box-sizing: content-box; background-color: #ffffff;}.markdown-body code,.markdown-body kbd,.markdown-body pre,.markdown-body samp { font-family: monospace,monospace; font-size: 1em;}.markdown-body figure { margin: 1em 40px;}.markdown-body hr { box-sizing: content-box; overflow: hidden; background: transparent; border-bottom: 1px solid hsla(210,18%,87%,1); height: .25em; padding: 0; margin: 24px 0; background-color: #d0d7de; border: 0;}.markdown-body html [type=button],.markdown-body [type=reset],.markdown-body [type=submit] { -webkit-appearance: button;}.markdown-body [type=button]::-moz-focus-inner,.markdown-body [type=reset]::-moz-focus-inner,.markdown-body [type=submit]::-moz-focus-inner { border-style: none; padding: 0;}.markdown-body [type=button]:-moz-focusring,.markdown-body [type=reset]:-moz-focusring,.markdown-body [type=submit]:-moz-focusring { outline: 1px dotted ButtonText;}.markdown-body [type=checkbox],.markdown-body [type=radio] { box-sizing: border-box; padding: 0;}.markdown-body [type=number]::-webkit-inner-spin-button,.markdown-body [type=number]::-webkit-outer-spin-button { height: auto;}.markdown-body [type=search] { -webkit-appearance: textfield; outline-offset: -2px;}.markdown-body [type=search]::-webkit-search-cancel-button,.markdown-body [type=search]::-webkit-search-decoration { -webkit-appearance: none;}.markdown-body ::-webkit-input-placeholder { color: inherit; opacity: .54;}.markdown-body ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit;}.markdown-body a:hover { text-decoration: underline;}.markdown-body hr::before { display: table; content: "";}.markdown-body hr::after { display: table; clear: both; content: "";}.markdown-body table { border-spacing: 0; border-collapse: collapse; display: block; width: max-content; max-width: 100%; overflow: auto;}.markdown-body td,.markdown-body th { padding: 0;}.markdown-body details summary { cursor: pointer;}.markdown-body details:not([open])>*:not(summary) { display: none !important;}.markdown-body kbd { display: inline-block; padding: 3px 5px; font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; line-height: 10px; color: #24292f; vertical-align: middle; background-color: #f6f8fa; border: solid 1px rgba(175,184,193,0.2); border-bottom-color: rgba(175,184,193,0.2); border-radius: 6px; box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25;}.markdown-body h2 { font-weight: 600; padding-bottom: .3em; font-size: 1.5em; border-bottom: 1px solid hsla(210,18%,87%,1);}.markdown-body h3 { font-weight: 600; font-size: 1.25em;}.markdown-body h4 { font-weight: 600; font-size: 1em;}.markdown-body h5 { font-weight: 600; font-size: .875em;}.markdown-body h6 { font-weight: 600; font-size: .85em; color: #57606a;}.markdown-body p { margin-top: 0; margin-bottom: 10px;}.markdown-body blockquote { margin: 0; padding: 0 1em; color: #57606a; border-left: .25em solid #d0d7de;}.markdown-body ul,.markdown-body ol { margin-top: 0; margin-bottom: 0; padding-left: 2em;}.markdown-body ol ol,.markdown-body ul ol { list-style-type: lower-roman;}.markdown-body ul ul ol,.markdown-body ul ol ol,.markdown-body ol ul ol,.markdown-body ol ol ol { list-style-type: lower-alpha;}.markdown-body dd { margin-left: 0;}.markdown-body tt,.markdown-body code { font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px;}.markdown-body pre { margin-top: 0; margin-bottom: 0; font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; word-wrap: normal;}.markdown-body :-ms-input-placeholder { color: #6e7781; opacity: 1;}.markdown-body ::-ms-input-placeholder { color: #6e7781; opacity: 1;}.markdown-body ::placeholder { color: #6e7781; opacity: 1;}.markdown-body .pl-c { color: #6e7781;}.markdown-body .pl-c1,.markdown-body .pl-s .pl-v { color: #0550ae;}.markdown-body .pl-e,.markdown-body .pl-en { color: #8250df;}.markdown-body .pl-smi,.markdown-body .pl-s .pl-s1 { color: #24292f;}.markdown-body .pl-ent { color: #116329;}.markdown-body .pl-k { color: #cf222e;}.markdown-body .pl-s,.markdown-body .pl-pds,.markdown-body .pl-s .pl-pse .pl-s1,.markdown-body .pl-sr,.markdown-body .pl-sr .pl-cce,.markdown-body .pl-sr .pl-sre,.markdown-body .pl-sr .pl-sra { color: #0a3069;}.markdown-body .pl-v,.markdown-body .pl-smw { color: #953800;}.markdown-body .pl-bu { color: #82071e;}.markdown-body .pl-ii { color: #f6f8fa; background-color: #82071e;}.markdown-body .pl-c2 { color: #f6f8fa; background-color: #cf222e;}.markdown-body .pl-sr .pl-cce { font-weight: bold; color: #116329;}.markdown-body .pl-ml { color: #3b2300;}.markdown-body .pl-mh,.markdown-body .pl-mh .pl-en,.markdown-body .pl-ms { font-weight: bold; color: #0550ae;}.markdown-body .pl-mi { font-style: italic; color: #24292f;}.markdown-body .pl-mb { font-weight: bold; color: #24292f;}.markdown-body .pl-md { color: #82071e; background-color: #FFEBE9;}.markdown-body .pl-mi1 { color: #116329; background-color: #dafbe1;}.markdown-body .pl-mc { color: #953800; background-color: #ffd8b5;}.markdown-body .pl-mi2 { color: #eaeef2; background-color: #0550ae;}.markdown-body .pl-mdr { font-weight: bold; color: #8250df;}.markdown-body .pl-ba { color: #57606a;}.markdown-body .pl-sg { color: #8c959f;}.markdown-body .pl-corl { text-decoration: underline; color: #0a3069;}.markdown-body [data-catalyst] { display: block;}.markdown-body g-emoji { font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; font-size: 1em; font-style: normal !important; font-weight: 400; line-height: 1; vertical-align: -0.075em;}.markdown-body g-emoji img { width: 1em; height: 1em;}.markdown-body::before { display: table; content: "";}.markdown-body::after { display: table; clear: both; content: "";}.markdown-body>*:first-child { margin-top: 0 !important;}.markdown-body>*:last-child { margin-bottom: 0 !important;}.markdown-body a:not([href]) { color: inherit; text-decoration: none;}.markdown-body .absent { color: #cf222e;}.markdown-body .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1;}.markdown-body .anchor:focus { outline: none;}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre,.markdown-body details { margin-top: 0; margin-bottom: 16px;}.markdown-body blockquote>:first-child { margin-top: 0;}.markdown-body blockquote>:last-child { margin-bottom: 0;}.markdown-body sup>a::before { content: "[";}.markdown-body sup>a::after { content: "]";}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link { color: #24292f; vertical-align: middle; visibility: hidden;}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor { text-decoration: none;}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link { visibility: visible;}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code { padding: 0 .2em; font-size: inherit;}.markdown-body ul.no-list,.markdown-body ol.no-list { padding: 0; list-style-type: none;}.markdown-body ol[type="1"] { list-style-type: decimal;}.markdown-body ol[type=a] { list-style-type: lower-alpha;}.markdown-body ol[type=i] { list-style-type: lower-roman;}.markdown-body div>ol:not([type]) { list-style-type: decimal;}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul { margin-top: 0; margin-bottom: 0;}.markdown-body li>p { margin-top: 16px;}.markdown-body li+li { margin-top: .25em;}.markdown-body dl { padding: 0;}.markdown-body dl dt { padding: 0; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: 600;}.markdown-body dl dd { padding: 0 16px; margin-bottom: 16px;}.markdown-body table th { font-weight: 600;}.markdown-body table th,.markdown-body table td { padding: 6px 13px; border: 1px solid #d0d7de;}.markdown-body table tr { background-color: #ffffff; border-top: 1px solid hsla(210,18%,87%,1);}.markdown-body table tr:nth-child(2n) { background-color: #f6f8fa;}.markdown-body table img { background-color: transparent;}.markdown-body img[align=right] { padding-left: 20px;}.markdown-body img[align=left] { padding-right: 20px;}.markdown-body .emoji { max-width: none; vertical-align: text-top; background-color: transparent;}.markdown-body span.frame { display: block; overflow: hidden;}.markdown-body span.frame>span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0 0; overflow: hidden; border: 1px solid #d0d7de;}.markdown-body span.frame span img { display: block; float: left;}.markdown-body span.frame span span { display: block; padding: 5px 0 0; clear: both; color: #24292f;}.markdown-body span.align-center { display: block; overflow: hidden; clear: both;}.markdown-body span.align-center>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: center;}.markdown-body span.align-center span img { margin: 0 auto; text-align: center;}.markdown-body span.align-right { display: block; overflow: hidden; clear: both;}.markdown-body span.align-right>span { display: block; margin: 13px 0 0; overflow: hidden; text-align: right;}.markdown-body span.align-right span img { margin: 0; text-align: right;}.markdown-body span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden;}.markdown-body span.float-left span { margin: 13px 0 0;}.markdown-body span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden;}.markdown-body span.float-right>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: right;}.markdown-body code,.markdown-body tt { padding: .2em .4em; margin: 0; font-size: 85%; background-color: rgba(175,184,193,0.2); border-radius: 6px;}.markdown-body code br,.markdown-body tt br { display: none;}.markdown-body del code { text-decoration: inherit;}.markdown-body pre code { font-size: 100%;}.markdown-body pre>code { padding: 0; margin: 0; word-break: normal; white-space: pre; background: transparent; border: 0;}.markdown-body .highlight { margin-bottom: 16px;}.markdown-body .highlight pre { margin-bottom: 0; word-break: normal;}.markdown-body .highlight pre,.markdown-body pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; background-color: #f6f8fa; border-radius: 6px;}.markdown-body pre code,.markdown-body pre tt { display: inline; max-width: auto; padding: 0; margin: 0; overflow: visible; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0;}.markdown-body .csv-data td,.markdown-body .csv-data th { padding: 5px; overflow: hidden; font-size: 12px; line-height: 1; text-align: left; white-space: nowrap;}.markdown-body .csv-data .blob-num { padding: 10px 8px 9px; text-align: right; background: #ffffff; border: 0;}.markdown-body .csv-data tr { border-top: 0;}.markdown-body .csv-data th { font-weight: 600; background: #f6f8fa; border-top: 0;}.markdown-body .footnotes { font-size: 12px; color: #57606a; border-top: 1px solid #d0d7de;}.markdown-body .footnotes ol { padding-left: 16px;}.markdown-body .footnotes li { position: relative;}.markdown-body .footnotes li:target::before { position: absolute; top: -8px; right: -8px; bottom: -8px; left: -24px; pointer-events: none; content: ""; border: 2px solid #0969da; border-radius: 6px;}.markdown-body .footnotes li:target { color: #24292f;}.markdown-body .footnotes .data-footnote-backref g-emoji { font-family: monospace;}.markdown-body [hidden] { display: none !important;}.markdown-body ::-webkit-calendar-picker-indicator { filter: invert(50%);}.markdown-body .token.tag .attr-value { color: #032f62;}.markdown-body .token.property,.markdown-body .token.tag,.markdown-body .token.boolean,.markdown-body .token.number,.markdown-body .token.function-name,.markdown-body .token.constant,.markdown-body .token.symbol,.markdown-body .token.deleted { color: #0060c9;}.markdown-body .token.punctuation { color: #a0a0a0;}.markdown-body code[class*="language-"] { color: black;}.markdown-body code[class*="language-"] .token.selector,.markdown-body code[class*="language-"] .token.attr-name,.markdown-body code[class*="language-"] .token.string,.markdown-body code[class*="language-"] .token.char,.markdown-body code[class*="language-"] .token.function,.markdown-body code[class*="language-"] .token.builtin { color: #6f42c1;}.markdown-body code[class*="language-"] .token.inserted { color: #22863a; background-color: #f0fff4;}.markdown-body code[class*="language-"] .token.deleted { color: #b31d28; background-color: #ffeef0;}.markdown-body code[class*="language-"] .token.class-name { color: #6f42c1;}.markdown-body code[class*="language-"] .code-block { color: #032f62;}.markdown-body code[class*="language-"] .token.comment,.markdown-body code[class*="language-"] .token.block-comment,.markdown-body code[class*="language-"] .token.prolog,.markdown-body code[class*="language-"] .token.doctype,.markdown-body code[class*="language-"] .token.cdata { color: #7D8B99;}.markdown-body code[class*="language-"] .token.punctuation { color: #a0a0a0;}.markdown-body code[class*="language-"] .token.operator,.markdown-body code[class*="language-"] .token.entity,.markdown-body code[class*="language-"] .token.url,.markdown-body code[class*="language-"] .token.variable { color: #d73a49; background: rgba(255, 255, 255, 0.5);}.markdown-body code[class*="language-"] .token.atrule,.markdown-body code[class*="language-"] .token.attr-value { color: #004698;}.markdown-body code[class*="language-"] .token.keyword { color: #d63200;}.markdown-body code[class*="language-"] .token.regex,.markdown-body code[class*="language-"] .token.important { color: #e90;}.markdown-body code[class*="language-"] .token.string { color: #0a53c1;}</style>
     <style></style>
   </head>
-  <body><div class="wmde-markdown"><a aria-label="View source on GitHub" target="__blank" class="github-corner" href="https://github.com/jaywcjlove/docker-tutorial"><svg width="54" height="54" viewBox="0 0 250 250" aria-hidden="true" style="fill: rgb(32, 34, 37); color: rgb(255, 255, 255); position: fixed; z-index: 99999; border: 0px; top: 0px; right: 0px;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path style="transform-origin: 130px 106px;" class="octo-arm" fill="currentColor" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"></path><path class="octo-body" fill="currentColor" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"></path></svg></a>
-    <p align="center">
-      <img width="130" align="center" src="img/logo.svg">
-    </p>
-    <h1 align="center" id="docker入门教程"><a class="anchor" aria-hidden="true" tabindex="-1" href="#docker入门教程"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Docker入门教程</h1>
-    <p>Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
-    <ul>
-      <li>Docker 的局限性之一，它只能用在 64 位的操作系统上。</li>
-    </ul>
-    <h1 id="目录"><a class="anchor" aria-hidden="true" tabindex="-1" href="#目录"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>目录</h1><!-- TOC -->
-    <ul>
-      <li><a href="#%E7%9B%AE%E5%BD%95">目录</a>
-        <ul>
-          <li><a href="#%E6%96%B0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85">新版本安装</a></li>
-          <li><a href="#%E6%97%A7%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85">旧版本安装</a></li>
-          <li><a href="#%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D">命令介绍</a></li>
-          <li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">服务管理</a></li>
-          <li><a href="#%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86">镜像管理</a>
-            <ul>
-              <li><a href="#%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F">通过容器创建镜像</a></li>
-              <li><a href="#%E9%80%9A%E8%BF%87dockerfile%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F">通过Dockerfile创建镜像</a></li>
-              <li><a href="#%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E9%95%9C%E5%83%8F">发布自己的镜像</a></li>
-              <li><a href="#%E9%95%9C%E5%83%8F%E4%B8%AD%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6">镜像中安装软件</a></li>
-            </ul>
-          </li>
-          <li><a href="#%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86">容器管理</a>
-            <ul>
-              <li><a href="#%E5%AE%B9%E5%99%A8%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">容器服务管理</a></li>
-              <li><a href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8">进入容器</a></li>
-            </ul>
-          </li>
-          <li><a href="#%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D">文件拷贝</a></li>
-          <li><a href="#docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA">Docker私有仓库搭建</a>
-            <ul>
-              <li><a href="#registry"><code>registry</code></a></li>
-              <li><a href="#harbor"><code>Harbor</code></a></li>
-            </ul>
-          </li>
-          <li><a href="#%E4%BD%BF%E7%94%A8docker%E5%AE%9E%E6%88%98">使用Docker实战</a>
-            <ul>
-              <li><a href="#nginx"><code>Nginx</code></a></li>
-              <li><a href="#mysql"><code>MySQL</code></a></li>
-              <li><a href="#redis"><code>Redis</code></a></li>
-              <li><a href="#elasticsearch"><code>Elasticsearch</code></a></li>
-              <li><a href="#gitlab"><code>Gitlab</code></a></li>
-              <li><a href="#rocketchat"><code>Rocket.Chat</code></a></li>
-              <li><a href="#rancher"><code>Rancher</code></a></li>
-              <li><a href="#humpback"><code>Humpback</code></a></li>
-              <li><a href="#seafile"><code>Seafile</code></a></li>
-              <li><a href="#%E6%9B%B4%E5%A4%9A">更多</a></li>
-            </ul>
-          </li>
-          <li><a href="#%E5%8D%B8%E8%BD%BD%E6%97%A7%E7%9A%84%E7%89%88%E6%9C%AC">卸载旧的版本</a></li>
-          <li><a href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">错误处理</a></li>
-          <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
-            <ul>
-              <li><a href="#%E5%AE%98%E6%96%B9%E8%8B%B1%E6%96%87%E8%B5%84%E6%BA%90">官方英文资源</a></li>
-              <li><a href="#%E4%B8%AD%E6%96%87%E8%B5%84%E6%BA%90">中文资源</a></li>
-              <li><a href="#%E5%85%B6%E5%AE%83%E8%B5%84%E6%BA%90">其它资源</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul><!-- /TOC -->
-    <p>Docker 从 <code>1.13</code> 版本之后采用时间线的方式作为版本号，分为社区版 <code>CE</code> 和企业版 <code>EE</code>，社区版是免费提供给个人开发者和小型团体使用的，企业版会提供额外的收费服务，比如经过官方测试认证过的基础设施、容器、插件等。</p>
-    <p>社区版按照 <code>stable</code> 和 <code>edge</code> 两种方式发布，每个季度更新 <code>stable</code> 版本，如 <code>17.06</code>，<code>17.09</code>；每个月份更新 <code>edge</code> 版本，如<code>17.09</code>，<code>17.10</code>。</p>
-    <p>下面教程运行在 <code>Centos</code> 中</p>
-    <h2 id="新版本安装"><a class="anchor" aria-hidden="true" tabindex="-1" href="#新版本安装"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>新版本安装</h2>
-    <p>Docker 官方的安装教程，<a href="https://docs.docker.com/install/linux/docker-ce/centos/">在这里</a>。</p>
-    <p>安装一些必要的系统工具</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> yum <span class="token function">install</span> -y yum-utils device-mapper-persistent-data lvm2
+  <body><a aria-label="View source on GitHub" target="__blank" class="github-corner" href="https://github.com/jaywcjlove/docker-tutorial"><svg width="54" height="54" viewBox="0 0 250 250" aria-hidden="true" style="fill: rgb(32, 34, 37); color: rgb(255, 255, 255); position: fixed; z-index: 99999; border: 0px; top: 0px; right: 0px;">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path style="transform-origin: 130px 106px;" class="octo-arm" fill="currentColor" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"></path>
+        <path class="octo-body" fill="currentColor" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"></path>
+      </svg></a>
+    <div class="markdown-body">
+      <p align="center">
+        <img width="130" align="center" src="img/logo.svg">
+      </p>
+      <h1 align="center" id="docker入门教程"><a class="anchor" aria-hidden="true" tabindex="-1" href="#docker入门教程"><span class="octicon octicon-link"></span></a>Docker入门教程</h1>
+      <p>Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+      <ul>
+        <li>Docker 的局限性之一，它只能用在 64 位的操作系统上。</li>
+      </ul>
+      <h1 id="目录"><a class="anchor" aria-hidden="true" tabindex="-1" href="#目录"><span class="octicon octicon-link"></span></a>目录</h1><!-- TOC -->
+      <ul>
+        <li><a href="#%E7%9B%AE%E5%BD%95">目录</a>
+          <ul>
+            <li><a href="#%E6%96%B0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85">新版本安装</a></li>
+            <li><a href="#%E6%97%A7%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85">旧版本安装</a></li>
+            <li><a href="#%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D">命令介绍</a></li>
+            <li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">服务管理</a></li>
+            <li><a href="#%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86">镜像管理</a>
+              <ul>
+                <li><a href="#%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F">通过容器创建镜像</a></li>
+                <li><a href="#%E9%80%9A%E8%BF%87dockerfile%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F">通过Dockerfile创建镜像</a></li>
+                <li><a href="#%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E9%95%9C%E5%83%8F">发布自己的镜像</a></li>
+                <li><a href="#%E9%95%9C%E5%83%8F%E4%B8%AD%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6">镜像中安装软件</a></li>
+              </ul>
+            </li>
+            <li><a href="#%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86">容器管理</a>
+              <ul>
+                <li><a href="#%E5%AE%B9%E5%99%A8%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">容器服务管理</a></li>
+                <li><a href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8">进入容器</a></li>
+              </ul>
+            </li>
+            <li><a href="#%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D">文件拷贝</a></li>
+            <li><a href="#docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA">Docker私有仓库搭建</a>
+              <ul>
+                <li><a href="#registry"><code>registry</code></a></li>
+                <li><a href="#harbor"><code>Harbor</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#%E4%BD%BF%E7%94%A8docker%E5%AE%9E%E6%88%98">使用Docker实战</a>
+              <ul>
+                <li><a href="#nginx"><code>Nginx</code></a></li>
+                <li><a href="#mysql"><code>MySQL</code></a></li>
+                <li><a href="#redis"><code>Redis</code></a></li>
+                <li><a href="#elasticsearch"><code>Elasticsearch</code></a></li>
+                <li><a href="#gitlab"><code>Gitlab</code></a></li>
+                <li><a href="#rocketchat"><code>Rocket.Chat</code></a></li>
+                <li><a href="#rancher"><code>Rancher</code></a></li>
+                <li><a href="#humpback"><code>Humpback</code></a></li>
+                <li><a href="#seafile"><code>Seafile</code></a></li>
+                <li><a href="#%E6%9B%B4%E5%A4%9A">更多</a></li>
+              </ul>
+            </li>
+            <li><a href="#%E5%8D%B8%E8%BD%BD%E6%97%A7%E7%9A%84%E7%89%88%E6%9C%AC">卸载旧的版本</a></li>
+            <li><a href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">错误处理</a></li>
+            <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
+              <ul>
+                <li><a href="#%E5%AE%98%E6%96%B9%E8%8B%B1%E6%96%87%E8%B5%84%E6%BA%90">官方英文资源</a></li>
+                <li><a href="#%E4%B8%AD%E6%96%87%E8%B5%84%E6%BA%90">中文资源</a></li>
+                <li><a href="#%E5%85%B6%E5%AE%83%E8%B5%84%E6%BA%90">其它资源</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul><!-- /TOC -->
+      <p>Docker 从 <code>1.13</code> 版本之后采用时间线的方式作为版本号，分为社区版 <code>CE</code> 和企业版 <code>EE</code>，社区版是免费提供给个人开发者和小型团体使用的，企业版会提供额外的收费服务，比如经过官方测试认证过的基础设施、容器、插件等。</p>
+      <p>社区版按照 <code>stable</code> 和 <code>edge</code> 两种方式发布，每个季度更新 <code>stable</code> 版本，如 <code>17.06</code>，<code>17.09</code>；每个月份更新 <code>edge</code> 版本，如<code>17.09</code>，<code>17.10</code>。</p>
+      <p>下面教程运行在 <code>Centos</code> 中</p>
+      <h2 id="新版本安装"><a class="anchor" aria-hidden="true" tabindex="-1" href="#新版本安装"><span class="octicon octicon-link"></span></a>新版本安装</h2>
+      <p>Docker 官方的安装教程，<a href="https://docs.docker.com/install/linux/docker-ce/centos/">在这里</a>。</p>
+      <p>安装一些必要的系统工具</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> yum <span class="token function">install</span> -y yum-utils device-mapper-persistent-data lvm2
 </code></pre>
-    <p>添加软件源信息</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># docker 官方源</span>
+      <p>添加软件源信息</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># docker 官方源</span>
 <span class="token function">sudo</span> yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 <span class="token comment"># 阿里云源</span>
 <span class="token function">sudo</span> yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 </code></pre>
-    <p>可选：启用 <code>edge</code> 和 <code>test</code> 存储库。 这些存储库包含在上面的 <code>docker.repo</code> 文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。</p>
-    <pre><code>$ sudo yum-config-manager --enable docker-ce-edge
+      <p>可选：启用 <code>edge</code> 和 <code>test</code> 存储库。 这些存储库包含在上面的 <code>docker.repo</code> 文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。</p>
+      <pre><code>$ sudo yum-config-manager --enable docker-ce-edge
 $ sudo yum-config-manager --enable docker-ce-test
 </code></pre>
-    <p>您可以通过使用 <code>--disable</code> 标志运行 <code>yum-config-manager</code> 命令来禁用边缘或测试存储库。 要重新启用它，请使用 <code>--enable</code> 标志。 以下命令禁用 <code>edge</code> 存储库:</p>
-    <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> yum-config-manager --disable docker-ce-edge
+      <p>您可以通过使用 <code>--disable</code> 标志运行 <code>yum-config-manager</code> 命令来禁用边缘或测试存储库。 要重新启用它，请使用 <code>--enable</code> 标志。 以下命令禁用 <code>edge</code> 存储库:</p>
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> yum-config-manager --disable docker-ce-edge
 $ <span class="token function">sudo</span> yum-config-manager --disable docker-ce-test
 </code></pre>
-    <p>安装 Docker-ce</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># 安装前可以先更新 yum 缓存：</span>
+      <p>安装 Docker-ce</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 安装前可以先更新 yum 缓存：</span>
 <span class="token function">sudo</span> yum makecache fast
 <span class="token comment"># 安装 Docker-ce</span>
 <span class="token function">sudo</span> yum <span class="token function">install</span> docker-ce
 </code></pre>
-    <p>如果你想安装特定 <code>docker-ce</code> 版本，先列出 repo 中可用版本，然后选择安装</p>
-    <pre class="language-bash"><code class="language-bash">$ yum list docker-ce --showduplicates <span class="token operator">|</span> <span class="token function">sort</span> -r
+      <p>如果你想安装特定 <code>docker-ce</code> 版本，先列出 repo 中可用版本，然后选择安装</p>
+      <pre class="language-bash"><code class="language-bash">$ yum list docker-ce --showduplicates <span class="token operator">|</span> <span class="token function">sort</span> -r
 <span class="token comment"># docker-ce.x86_64            18.06.1.ce-3.el7                   docker-ce-stable</span>
 <span class="token comment"># docker-ce.x86_64            18.06.1.ce-3.el7                   @docker-ce-stable</span>
 <span class="token comment"># docker-ce.x86_64            18.06.0.ce-3.el7                   docker-ce-stable</span>
@@ -116,14 +121,14 @@ $ <span class="token function">sudo</span> yum <span class="token function">inst
 <span class="token comment"># 选择安装 docker-ce-18.06.1.ce</span>
 $ <span class="token function">sudo</span> yum <span class="token function">install</span> docker-ce-18.06.1.ce
 </code></pre>
-    <p>启动 Docker 后台服务</p>
-    <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> systemctl start docker
+      <p>启动 Docker 后台服务</p>
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> systemctl start docker
 </code></pre>
-    <p>通过运行 <code>hello-world</code> 镜像，验证是否正确安装了 <code>docker</code>。</p>
-    <pre class="language-bash"><code class="language-bash">$ docker run hello-world
+      <p>通过运行 <code>hello-world</code> 镜像，验证是否正确安装了 <code>docker</code>。</p>
+      <pre class="language-bash"><code class="language-bash">$ docker run hello-world
 </code></pre>
-    <h2 id="旧版本安装"><a class="anchor" aria-hidden="true" tabindex="-1" href="#旧版本安装"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>旧版本安装</h2>
-    <pre class="language-bash"><code class="language-bash">yum <span class="token function">install</span> docker        <span class="token comment"># CentOS 中安装</span>
+      <h2 id="旧版本安装"><a class="anchor" aria-hidden="true" tabindex="-1" href="#旧版本安装"><span class="octicon octicon-link"></span></a>旧版本安装</h2>
+      <pre class="language-bash"><code class="language-bash">yum <span class="token function">install</span> docker        <span class="token comment"># CentOS 中安装</span>
 <span class="token function">apt-get</span> <span class="token function">install</span> docker-ce <span class="token comment"># Ubuntu 中安装</span>
 pacman -S docker          <span class="token comment"># Arch 中安装</span>
 emerge --ask docker       <span class="token comment"># Gentoo 中安装</span>
@@ -149,8 +154,8 @@ docker version      <span class="token comment"># 通过查看版本，检查安
 <span class="token comment">#  Built:           Thu Sep 21 22:33:52 2017</span>
 <span class="token comment">#  OS/Arch:         linux/amd64</span>
 </code></pre>
-    <h2 id="命令介绍"><a class="anchor" aria-hidden="true" tabindex="-1" href="#命令介绍"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>命令介绍</h2>
-    <pre class="language-bash"><code class="language-bash">$ docker --help
+      <h2 id="命令介绍"><a class="anchor" aria-hidden="true" tabindex="-1" href="#命令介绍"><span class="octicon octicon-link"></span></a>命令介绍</h2>
+      <pre class="language-bash"><code class="language-bash">$ docker --help
 
 管理命令:
   container   管理容器
@@ -183,15 +188,15 @@ docker version      <span class="token comment"># 通过查看版本，检查安
   <span class="token function">top</span>         显示一个容器内的所有进程
   unpause     恢复一个或多个容器内所有被暂停的进程
 </code></pre>
-    <h2 id="服务管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#服务管理"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>服务管理</h2>
-    <pre class="language-bash"><code class="language-bash"><span class="token function">service</span> docker start       <span class="token comment"># 启动 docker 服务，守护进程</span>
+      <h2 id="服务管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#服务管理"><span class="octicon octicon-link"></span></a>服务管理</h2>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">service</span> docker start       <span class="token comment"># 启动 docker 服务，守护进程</span>
 <span class="token function">service</span> docker stop        <span class="token comment"># 停止 docker 服务</span>
 <span class="token function">service</span> docker status      <span class="token comment"># 查看 docker 服务状态</span>
 <span class="token function">chkconfig</span> docker on        <span class="token comment"># 设置为开机启动</span>
 </code></pre>
-    <h2 id="镜像管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#镜像管理"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>镜像管理</h2>
-    <p>镜像可以看做我们平时装系统的镜像，里面就是一个运行环境。</p>
-    <pre class="language-bash"><code class="language-bash">docker pull centos:latest  <span class="token comment"># 从docker.io中下载centos镜像到本地</span>
+      <h2 id="镜像管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#镜像管理"><span class="octicon octicon-link"></span></a>镜像管理</h2>
+      <p>镜像可以看做我们平时装系统的镜像，里面就是一个运行环境。</p>
+      <pre class="language-bash"><code class="language-bash">docker pull centos:latest  <span class="token comment"># 从docker.io中下载centos镜像到本地</span>
 docker images              <span class="token comment"># 查看已下载的镜像</span>
 docker rmi <span class="token punctuation">[</span>image_id<span class="token punctuation">]</span> <span class="token comment"># 删除镜像，指定镜像id</span>
 
@@ -202,89 +207,89 @@ docker rmi <span class="token variable"><span class="token variable">$(</span>do
 <span class="token comment"># 连接进行进入命令行模式，exit命令退出。</span>
 docker run -t -i nginx:latest /bin/bash
 </code></pre>
-    <h3 id="通过容器创建镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#通过容器创建镜像"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>通过容器创建镜像</h3>
-    <p>我们可以通过以下两种方式对镜像进行更改。</p>
-    <ol>
-      <li>从已经创建的容器中更新镜像，并且提交这个镜像</li>
-      <li>使用 Dockerfile 指令来创建一个新的镜像</li>
-    </ol>
-    <p>下面通过已存在的容器创建一个新的镜像。</p>
-    <pre class="language-bash"><code class="language-bash">docker commit -m<span class="token operator">=</span><span class="token string">"First Docker"</span> -a<span class="token operator">=</span><span class="token string">"wcjiang"</span> a6b0a6cfdacf wcjiang/nginx:v1.2.1
+      <h3 id="通过容器创建镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#通过容器创建镜像"><span class="octicon octicon-link"></span></a>通过容器创建镜像</h3>
+      <p>我们可以通过以下两种方式对镜像进行更改。</p>
+      <ol>
+        <li>从已经创建的容器中更新镜像，并且提交这个镜像</li>
+        <li>使用 Dockerfile 指令来创建一个新的镜像</li>
+      </ol>
+      <p>下面通过已存在的容器创建一个新的镜像。</p>
+      <pre class="language-bash"><code class="language-bash">docker commit -m<span class="token operator">=</span><span class="token string">"First Docker"</span> -a<span class="token operator">=</span><span class="token string">"wcjiang"</span> a6b0a6cfdacf wcjiang/nginx:v1.2.1
 </code></pre>
-    <p>上面命令参数说明：</p>
-    <ul>
-      <li><code>-m</code> 提交的描述信息</li>
-      <li><code>-a</code> 指定镜像作者</li>
-      <li><code>a6b0a6cfdacf</code> 记住这个是容器id，不是镜像id</li>
-      <li><code>wcjiang/nginx:v1.2.1</code> 创建的目标镜像名</li>
-    </ul>
-    <h3 id="通过dockerfile创建镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#通过dockerfile创建镜像"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>通过Dockerfile创建镜像</h3>
-    <p>假设创建一个 node.js 镜像，首先在 node.js 项目根目录创建文件。</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token function">touch</span> Dockerfile .dockerignore
+      <p>上面命令参数说明：</p>
+      <ul>
+        <li><code>-m</code> 提交的描述信息</li>
+        <li><code>-a</code> 指定镜像作者</li>
+        <li><code>a6b0a6cfdacf</code> 记住这个是容器id，不是镜像id</li>
+        <li><code>wcjiang/nginx:v1.2.1</code> 创建的目标镜像名</li>
+      </ul>
+      <h3 id="通过dockerfile创建镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#通过dockerfile创建镜像"><span class="octicon octicon-link"></span></a>通过Dockerfile创建镜像</h3>
+      <p>假设创建一个 node.js 镜像，首先在 node.js 项目根目录创建文件。</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">touch</span> Dockerfile .dockerignore
 </code></pre>
-    <p><code>.dockerignore</code> 文件内容，下面代码表示，这三个路径要排除，不要打包进入 image 文件。如果你没有路径要排除，这个文件可以不新建。</p>
-    <pre class="language-bash"><code class="language-bash">.git
+      <p><code>.dockerignore</code> 文件内容，下面代码表示，这三个路径要排除，不要打包进入 image 文件。如果你没有路径要排除，这个文件可以不新建。</p>
+      <pre class="language-bash"><code class="language-bash">.git
 node_modules
 npm-debug.log
 </code></pre>
-    <p>Dockerfile 文件内容</p>
-    <pre class="language-dockerfile"><code class="language-Dockerfile"><span class="token instruction"><span class="token keyword">FROM</span> node:8.4</span>
+      <p>Dockerfile 文件内容</p>
+      <pre class="language-dockerfile"><code class="language-Dockerfile"><span class="token instruction"><span class="token keyword">FROM</span> node:8.4</span>
 <span class="token instruction"><span class="token keyword">COPY</span> . /app</span>
 <span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
 <span class="token instruction"><span class="token keyword">RUN</span> npm install --registry=https://registry.npm.taobao.org</span>
 <span class="token instruction"><span class="token keyword">EXPOSE</span> 3000</span>
 </code></pre>
-    <ul>
-      <li><code>FROM node:8.4</code>：该 <code>image</code> 文件继承官方的 <code>node image</code>，冒号表示标签，这里标签是<code>8.4</code>，即<code>8.4</code>版本的 <code>node</code>。</li>
-      <li><code>COPY . /app</code>：将当前目录下的所有文件（除了 <code>.dockerignore</code> 排除的路径），都拷贝进入 <code>image</code> 文件的 <code>/app</code> 目录。</li>
-      <li><code>WORKDIR /app</code>：指定接下来的工作路径为<code>/app</code>。</li>
-      <li><code>RUN npm install</code>：在/app目录下，运行 <code>npm install</code> 命令安装依赖。注意，安装后所有的依赖，都将打包进入 <code>image</code> 文件。</li>
-      <li><code>EXPOSE 3000</code>：将容器 <code>3000</code> 端口暴露出来， 允许外部连接这个端口。</li>
-    </ul>
-    <p>有了 <code>Dockerfile</code> 文件以后，就可以使用 <code>docker image build</code> 命令创建 <code>image</code> 文件了。</p>
-    <pre class="language-bash"><code class="language-bash">$ docker image build -t koa-demo <span class="token builtin class-name">.</span>
+      <ul>
+        <li><code>FROM node:8.4</code>：该 <code>image</code> 文件继承官方的 <code>node image</code>，冒号表示标签，这里标签是<code>8.4</code>，即<code>8.4</code>版本的 <code>node</code>。</li>
+        <li><code>COPY . /app</code>：将当前目录下的所有文件（除了 <code>.dockerignore</code> 排除的路径），都拷贝进入 <code>image</code> 文件的 <code>/app</code> 目录。</li>
+        <li><code>WORKDIR /app</code>：指定接下来的工作路径为<code>/app</code>。</li>
+        <li><code>RUN npm install</code>：在/app目录下，运行 <code>npm install</code> 命令安装依赖。注意，安装后所有的依赖，都将打包进入 <code>image</code> 文件。</li>
+        <li><code>EXPOSE 3000</code>：将容器 <code>3000</code> 端口暴露出来， 允许外部连接这个端口。</li>
+      </ul>
+      <p>有了 <code>Dockerfile</code> 文件以后，就可以使用 <code>docker image build</code> 命令创建 <code>image</code> 文件了。</p>
+      <pre class="language-bash"><code class="language-bash">$ docker image build -t koa-demo <span class="token builtin class-name">.</span>
 <span class="token comment"># 或者</span>
 $ docker image build -t koa-demo:0.0.1 <span class="token builtin class-name">.</span>
 </code></pre>
-    <p>上面命令，<code>-t</code> 参数用来指定 <code>image</code> 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是 <code>latest</code>。注意后面有个 <code>.</code>，表示 Dockerfile 文件所在的路径为当前路径</p>
-    <h3 id="发布自己的镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#发布自己的镜像"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>发布自己的镜像</h3>
-    <ol>
-      <li>在<a href="https://www.docker.com/">Docker</a> 注册账户，发布的镜像都在<a href="https://cloud.docker.com/repository/list">这个页面里</a>展示</li>
-      <li>将上面做的镜像<code>nginx</code>，起个新的名字<code>nginx-test</code></li>
-    </ol>
-    <pre class="language-bash"><code class="language-bash">docker tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
+      <p>上面命令，<code>-t</code> 参数用来指定 <code>image</code> 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是 <code>latest</code>。注意后面有个 <code>.</code>，表示 Dockerfile 文件所在的路径为当前路径</p>
+      <h3 id="发布自己的镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#发布自己的镜像"><span class="octicon octicon-link"></span></a>发布自己的镜像</h3>
+      <ol>
+        <li>在<a href="https://www.docker.com/">Docker</a> 注册账户，发布的镜像都在<a href="https://cloud.docker.com/repository/list">这个页面里</a>展示</li>
+        <li>将上面做的镜像<code>nginx</code>，起个新的名字<code>nginx-test</code></li>
+      </ol>
+      <pre class="language-bash"><code class="language-bash">docker tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
 </code></pre>
-    <ol start="3">
-      <li>登录docker</li>
-    </ol>
-    <pre><code>docker login
+      <ol start="3">
+        <li>登录docker</li>
+      </ol>
+      <pre><code>docker login
 </code></pre>
-    <ol start="4">
-      <li>上传<code>nginx-test</code>镜像</li>
-    </ol>
-    <pre class="language-bash"><code class="language-bash">docker push wcjiang/nginx-test:lastest
+      <ol start="4">
+        <li>上传<code>nginx-test</code>镜像</li>
+      </ol>
+      <pre class="language-bash"><code class="language-bash">docker push wcjiang/nginx-test:lastest
 <span class="token comment"># The push refers to a repository [docker.io/wcjiang/nginx-test]</span>
 <span class="token comment"># 2f5c6a3c22e3: Mounted from wcjiang/nginx</span>
 <span class="token comment"># cf516324493c: Mounted from wcjiang/nginx</span>
 <span class="token comment"># lastest: digest: sha256:73ae804b2c60327d1269aa387cf782f664bc91da3180d10dbd49027d7adaa789 size: 736</span>
 </code></pre>
-    <h3 id="镜像中安装软件"><a class="anchor" aria-hidden="true" tabindex="-1" href="#镜像中安装软件"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>镜像中安装软件</h3>
-    <p>通常情况下，使用docker官方镜像，如 mysql镜像，默认情况下镜像中啥软件也没有，通过下面命令安装你所需要的软件：</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># 第一次需要运行这个命令，确保源的索引是最新的</span>
+      <h3 id="镜像中安装软件"><a class="anchor" aria-hidden="true" tabindex="-1" href="#镜像中安装软件"><span class="octicon octicon-link"></span></a>镜像中安装软件</h3>
+      <p>通常情况下，使用docker官方镜像，如 mysql镜像，默认情况下镜像中啥软件也没有，通过下面命令安装你所需要的软件：</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 第一次需要运行这个命令，确保源的索引是最新的</span>
 <span class="token comment"># 同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引</span>
 <span class="token function">apt-get</span> update
 <span class="token comment"># 做过上面更新同步之后，可以运行下面的命令了</span>
 <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">vim</span>
 </code></pre>
-    <p>如果你安装了CentOS或者Ubuntu系统可以进入系统安装相关软件</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># 进入到centos7镜像系统</span>
+      <p>如果你安装了CentOS或者Ubuntu系统可以进入系统安装相关软件</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 进入到centos7镜像系统</span>
 docker run -i -t centos:7 /bin/bash
 yum update
 yum <span class="token function">install</span> <span class="token function">vim</span>
 </code></pre>
-    <h2 id="容器管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器管理"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>容器管理</h2>
-    <p>容器就像一个类的实例</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># 列出本机正在运行的容器</span>
+      <h2 id="容器管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器管理"><span class="octicon octicon-link"></span></a>容器管理</h2>
+      <p>容器就像一个类的实例</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 列出本机正在运行的容器</span>
 docker container <span class="token function">ls</span>
 <span class="token comment"># 列出本机所有容器，包括终止运行的容器</span>
 docker container <span class="token function">ls</span> --all
@@ -311,8 +316,8 @@ docker inspect -f <span class="token punctuation">{</span><span class="token pun
 <span class="token comment"># 下载指定版本容器镜像</span>
 docker pull gitlab/gitlab-ce:11.2.3-ce.0
 </code></pre>
-    <h3 id="容器服务管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器服务管理"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>容器服务管理</h3>
-    <pre class="language-bash"><code class="language-bash">docker run -itd --name my-nginx2 nginx <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
+      <h3 id="容器服务管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器服务管理"><span class="octicon octicon-link"></span></a>容器服务管理</h3>
+      <pre class="language-bash"><code class="language-bash">docker run -itd --name my-nginx2 nginx <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
 docker start my-nginx --restart<span class="token operator">=</span>always    <span class="token comment"># 【启动策略】一个已经存在的容器启动添加策略</span>
                                <span class="token comment"># no - 容器不重启</span>
                                <span class="token comment"># on-failure - 容器推出状态非0时重启</span>
@@ -324,44 +329,44 @@ docker <span class="token function">kill</span> my-nginx                <span cl
 docker <span class="token function">rename</span> my-nginx new-nginx    <span class="token comment"># 【重命名】容器</span>
 docker <span class="token function">rm</span> new-nginx                 <span class="token comment"># 【删除】容器</span>
 </code></pre>
-    <h3 id="进入容器"><a class="anchor" aria-hidden="true" tabindex="-1" href="#进入容器"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>进入容器</h3>
-    <ol>
-      <li>创建一个守护状态的Docker容器</li>
-    </ol>
-    <pre class="language-bash"><code class="language-bash">docker run -itd my-nginx /bin/bash
+      <h3 id="进入容器"><a class="anchor" aria-hidden="true" tabindex="-1" href="#进入容器"><span class="octicon octicon-link"></span></a>进入容器</h3>
+      <ol>
+        <li>创建一个守护状态的Docker容器</li>
+      </ol>
+      <pre class="language-bash"><code class="language-bash">docker run -itd my-nginx /bin/bash
 </code></pre>
-    <ol start="2">
-      <li>使用<code>docker ps</code>查看到该容器信息</li>
-    </ol>
-    <pre class="language-bash"><code class="language-bash">docker <span class="token function">ps</span>
+      <ol start="2">
+        <li>使用<code>docker ps</code>查看到该容器信息</li>
+      </ol>
+      <pre class="language-bash"><code class="language-bash">docker <span class="token function">ps</span>
 <span class="token comment"># CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span>
 <span class="token comment"># 6bd0496da64f        nginx               "/bin/bash"         20 seconds ago      Up 18 seconds       80/tcp              high_shirley</span>
 </code></pre>
-    <ol start="3">
-      <li>使用<code>docker exec</code>命令进入一个已经在运行的容器</li>
-    </ol>
-    <pre class="language-bash"><code class="language-bash">docker <span class="token builtin class-name">exec</span> -it 6bd0496da64f /bin/bash
+      <ol start="3">
+        <li>使用<code>docker exec</code>命令进入一个已经在运行的容器</li>
+      </ol>
+      <pre class="language-bash"><code class="language-bash">docker <span class="token builtin class-name">exec</span> -it 6bd0496da64f /bin/bash
 </code></pre>
-    <p>通常有下面几种方式进入Docker的容器，推荐使用<code>exec</code>，使用<code>attach</code>一直进入失败。</p>
-    <ul>
-      <li>使用<code>docker attach</code></li>
-      <li>使用<code>SSH</code> <a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp">为什么不需要在 Docker 容器中运行 sshd</a></li>
-      <li>使用<code>nsenter</code>进入Docker容器，<a href="https://github.com/jpetazzo/nsenter">nsenter官方仓库</a></li>
-      <li>使用<code>docker exec</code>，在<code>1.3.*</code>之后提供了一个新的命令<code>exec</code>用于进入容器</li>
-    </ul>
-    <h2 id="文件拷贝"><a class="anchor" aria-hidden="true" tabindex="-1" href="#文件拷贝"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>文件拷贝</h2>
-    <p>从主机复制到容器 <code>sudo docker cp host_path containerID:container_path</code><br>从容器复制到主机 <code>sudo docker cp containerID:container_path host_path</code></p>
-    <h2 id="docker私有仓库搭建"><a class="anchor" aria-hidden="true" tabindex="-1" href="#docker私有仓库搭建"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Docker私有仓库搭建</h2>
-    <p>通过官方提供的私有仓库镜像<code>registry</code>来搭建私有仓库。通过 <a href="https://humpback.github.io/">humpback</a> 快速搭建轻量级的Docker容器云管理平台。关于仓库配置说明请参见<a href="https://github.com/docker/distribution/blob/master/docs/configuration.md">configuration.md</a></p>
-    <blockquote>
-      <p>⚠️ 注意：也可以通过部署管理工具 <code>Harbor</code> 来部署 <code>registry</code></p>
-    </blockquote>
-    <p>除了 <a href="https://github.com/goharbor/harbor">Harbor</a> 还有 <a href="https://github.com/humpback/humpback">humpback</a> 和 <a href="https://github.com/rancher/rancher">rancher</a></p>
-    <h3 id="registry"><a class="anchor" aria-hidden="true" tabindex="-1" href="#registry"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>registry</code></h3>
-    <pre class="language-bash"><code class="language-bash">docker pull registry:2.6.2
+      <p>通常有下面几种方式进入Docker的容器，推荐使用<code>exec</code>，使用<code>attach</code>一直进入失败。</p>
+      <ul>
+        <li>使用<code>docker attach</code></li>
+        <li>使用<code>SSH</code> <a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp">为什么不需要在 Docker 容器中运行 sshd</a></li>
+        <li>使用<code>nsenter</code>进入Docker容器，<a href="https://github.com/jpetazzo/nsenter">nsenter官方仓库</a></li>
+        <li>使用<code>docker exec</code>，在<code>1.3.*</code>之后提供了一个新的命令<code>exec</code>用于进入容器</li>
+      </ul>
+      <h2 id="文件拷贝"><a class="anchor" aria-hidden="true" tabindex="-1" href="#文件拷贝"><span class="octicon octicon-link"></span></a>文件拷贝</h2>
+      <p>从主机复制到容器 <code>sudo docker cp host_path containerID:container_path</code><br>从容器复制到主机 <code>sudo docker cp containerID:container_path host_path</code></p>
+      <h2 id="docker私有仓库搭建"><a class="anchor" aria-hidden="true" tabindex="-1" href="#docker私有仓库搭建"><span class="octicon octicon-link"></span></a>Docker私有仓库搭建</h2>
+      <p>通过官方提供的私有仓库镜像<code>registry</code>来搭建私有仓库。通过 <a href="https://humpback.github.io/">humpback</a> 快速搭建轻量级的Docker容器云管理平台。关于仓库配置说明请参见<a href="https://github.com/docker/distribution/blob/master/docs/configuration.md">configuration.md</a></p>
+      <blockquote>
+        <p>⚠️ 注意：也可以通过部署管理工具 <code>Harbor</code> 来部署 <code>registry</code></p>
+      </blockquote>
+      <p>除了 <a href="https://github.com/goharbor/harbor">Harbor</a> 还有 <a href="https://github.com/humpback/humpback">humpback</a> 和 <a href="https://github.com/rancher/rancher">rancher</a></p>
+      <h3 id="registry"><a class="anchor" aria-hidden="true" tabindex="-1" href="#registry"><span class="octicon octicon-link"></span></a><code>registry</code></h3>
+      <pre class="language-bash"><code class="language-bash">docker pull registry:2.6.2
 </code></pre>
-    <p>创建容器并运行，创建成功之后，可访问 <code>http://192.168.99.100:7000/v2/</code>，来检查仓库是否正常运行，当返回 <code>{}</code> 时，表示部署成功。</p>
-    <pre class="language-bash"><code class="language-bash">docker run -d <span class="token punctuation">\</span>
+      <p>创建容器并运行，创建成功之后，可访问 <code>http://192.168.99.100:7000/v2/</code>，来检查仓库是否正常运行，当返回 <code>{}</code> 时，表示部署成功。</p>
+      <pre class="language-bash"><code class="language-bash">docker run -d <span class="token punctuation">\</span>
   -p <span class="token number">5000</span>:5000 <span class="token punctuation">\</span>
   --restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
   --name registry <span class="token punctuation">\</span>
@@ -379,8 +384,8 @@ docker run -d -p <span class="token number">5000</span>:5000 --restart<span clas
     -v <span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>/config.yml:/etc/docker/registry/config.yml <span class="token punctuation">\</span>
     registry:2
 </code></pre>
-    <p>推送镜像到私有仓库</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># 从官方仓库拉取一个镜像</span>
+      <p>推送镜像到私有仓库</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 从官方仓库拉取一个镜像</span>
 docker pull nginx:1.13
 <span class="token comment"># 为镜像 `nginx:1.13` 创建一个新标签 `192.168.31.69:7000/test-nginx:1.13`</span>
 docker tag nginx:latest <span class="token number">192.168</span>.31.69:5000/test-nginx:1.13
@@ -389,46 +394,46 @@ docker push <span class="token number">192.168</span>.31.69:5000/test-nginx:1.13
 <span class="token comment"># The push refers to a repository [192.168.99.100:7000/test-nginx]</span>
 <span class="token comment"># Get https://192.168.99.100:7000/v1/_ping: http: server gave HTTP response to HTTPS client</span>
 </code></pre>
-    <p>在推送到的时候报错误，默认是使用<code>https</code>提交，这个搭建的默认使用的是 <code>http</code>，解决方法两个：</p>
-    <ol>
-      <li>创建一个https映射</li>
-      <li>将仓库地址加入到不安全的仓库列表中</li>
-    </ol>
-    <p>我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件<code>vi /etc/docker/daemon.json</code> 添加 <code>insecure-registries</code>配置信息，如果 <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。</p>
-    <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+      <p>在推送到的时候报错误，默认是使用<code>https</code>提交，这个搭建的默认使用的是 <code>http</code>，解决方法两个：</p>
+      <ol>
+        <li>创建一个https映射</li>
+        <li>将仓库地址加入到不安全的仓库列表中</li>
+      </ol>
+      <p>我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件<code>vi /etc/docker/daemon.json</code> 添加 <code>insecure-registries</code>配置信息，如果 <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。</p>
+      <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
   <span class="token string">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span> 
     <span class="token string">"192.168.31.69:5000"</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre>
-    <blockquote>
-      <p>如果是 macOS 可以通过 docker 客户端，<code>Preferences</code> => <code>Advanced</code> => <code>添加配置</code> => <code>Apply &#x26; Restart</code>，重启docker就可以了。</p>
-    </blockquote>
-    <p>重启服务 <code>service docker restart</code>，默认情况下 push 是会报如下错误的：</p>
-    <pre class="language-bash"><code class="language-bash">docker push <span class="token number">192.168</span>.99.100:7000/test-nginx:1.13
+      <blockquote>
+        <p>如果是 macOS 可以通过 docker 客户端，<code>Preferences</code> => <code>Advanced</code> => <code>添加配置</code> => <code>Apply &#x26; Restart</code>，重启docker就可以了。</p>
+      </blockquote>
+      <p>重启服务 <code>service docker restart</code>，默认情况下 push 是会报如下错误的：</p>
+      <pre class="language-bash"><code class="language-bash">docker push <span class="token number">192.168</span>.99.100:7000/test-nginx:1.13
 <span class="token comment"># The push refers to a repository [192.168.99.100:7000/test-nginx]</span>
 <span class="token comment"># a1a53f8d99b5: Retrying in 1 second</span>
 <span class="token comment"># ...</span>
 <span class="token comment"># received unexpected HTTP status: 500 Internal Server Error</span>
 </code></pre>
-    <p>上面错误是 <code>SELinux</code> 强制访问控制安全系统，阻止导致的错误，通过下面方法禁用 SELinux 之后就可以 push 了。</p>
-    <pre class="language-bash"><code class="language-bash">setenforce <span class="token number">0</span>  
+      <p>上面错误是 <code>SELinux</code> 强制访问控制安全系统，阻止导致的错误，通过下面方法禁用 SELinux 之后就可以 push 了。</p>
+      <pre class="language-bash"><code class="language-bash">setenforce <span class="token number">0</span>  
 getenforce   
 <span class="token comment"># Permissive  </span>
 </code></pre>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># 停止本地 registry</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 停止本地 registry</span>
 docker container stop registry
 <span class="token comment"># 要删除容器，请使用 docker container rm</span>
 docker container stop registry <span class="token operator">&#x26;&#x26;</span> docker container <span class="token function">rm</span> -v registry
 <span class="token comment"># 自定义存储位置</span>
 </code></pre>
-    <h3 id="harbor"><a class="anchor" aria-hidden="true" tabindex="-1" href="#harbor"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Harbor</code></h3>
-    <p><a href="harbor.html">部署 registry 管理工具 Harbor</a></p>
-    <h2 id="使用docker实战"><a class="anchor" aria-hidden="true" tabindex="-1" href="#使用docker实战"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>使用Docker实战</h2>
-    <blockquote>
-      <p>⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件</p>
-    </blockquote>
-    <pre class="language-bash"><code class="language-bash">-d, --detach<span class="token operator">=</span>false      <span class="token comment"># 指定容器运行于前台还是后台，默认为false   </span>
+      <h3 id="harbor"><a class="anchor" aria-hidden="true" tabindex="-1" href="#harbor"><span class="octicon octicon-link"></span></a><code>Harbor</code></h3>
+      <p><a href="harbor.html">部署 registry 管理工具 Harbor</a></p>
+      <h2 id="使用docker实战"><a class="anchor" aria-hidden="true" tabindex="-1" href="#使用docker实战"><span class="octicon octicon-link"></span></a>使用Docker实战</h2>
+      <blockquote>
+        <p>⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件</p>
+      </blockquote>
+      <pre class="language-bash"><code class="language-bash">-d, --detach<span class="token operator">=</span>false      <span class="token comment"># 指定容器运行于前台还是后台，默认为false   </span>
 -i, --interactive<span class="token operator">=</span>false <span class="token comment"># 打开STDIN，用于控制台交互  </span>
 -t, --tty<span class="token operator">=</span>false         <span class="token comment"># 分配tty设备，该可以支持终端登录，默认为false  </span>
 -u, --user<span class="token operator">=</span><span class="token string">""</span>           <span class="token comment"># 指定容器的用户  </span>
@@ -468,23 +473,23 @@ docker container stop registry <span class="token operator">&#x26;&#x26;</span> 
 --rm<span class="token operator">=</span>false              <span class="token comment"># 指定容器停止后自动删除容器(不支持以docker run -d启动的容器)  </span>
 --sig-proxy<span class="token operator">=</span>true        <span class="token comment"># 设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理</span>
 </code></pre>
-    <h3 id="nginx"><a class="anchor" aria-hidden="true" tabindex="-1" href="#nginx"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Nginx</code></h3>
-    <p><a href="nginx.html">在 docker 中部署 Nginx</a></p>
-    <h3 id="mysql"><a class="anchor" aria-hidden="true" tabindex="-1" href="#mysql"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>MySQL</code></h3>
-    <p><a href="mysql.html">在 docker 中部署 MySQL</a></p>
-    <h3 id="redis"><a class="anchor" aria-hidden="true" tabindex="-1" href="#redis"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Redis</code></h3>
-    <p><a href="redis.html">在 docker 中部署 Redis</a></p>
-    <h3 id="elasticsearch"><a class="anchor" aria-hidden="true" tabindex="-1" href="#elasticsearch"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Elasticsearch</code></h3>
-    <p><a href="elasticsearch.html">在 docker 中部署 Elasticsearch</a></p>
-    <h3 id="gitlab"><a class="anchor" aria-hidden="true" tabindex="-1" href="#gitlab"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Gitlab</code></h3>
-    <p><a href="gitlab.html">在 docker 中部署 Gitlab</a></p>
-    <h3 id="rocketchat"><a class="anchor" aria-hidden="true" tabindex="-1" href="#rocketchat"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Rocket.Chat</code></h3>
-    <p><a href="rocket.chat.html">在 docker 中部署 Gitlab</a></p>
-    <h3 id="rancher"><a class="anchor" aria-hidden="true" tabindex="-1" href="#rancher"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Rancher</code></h3>
-    <p><a href="rancher.html">在 docker 中部署 Rancher</a></p>
-    <h3 id="humpback"><a class="anchor" aria-hidden="true" tabindex="-1" href="#humpback"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Humpback</code></h3>
-    <p>首先创建放持久化数据文件夹，<code>mkdir -p /opt/app/humpback-web</code>，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。</p>
-    <pre class="language-bash"><code class="language-bash"><span class="token comment"># 创建放持久化数据文件夹</span>
+      <h3 id="nginx"><a class="anchor" aria-hidden="true" tabindex="-1" href="#nginx"><span class="octicon octicon-link"></span></a><code>Nginx</code></h3>
+      <p><a href="nginx.html">在 docker 中部署 Nginx</a></p>
+      <h3 id="mysql"><a class="anchor" aria-hidden="true" tabindex="-1" href="#mysql"><span class="octicon octicon-link"></span></a><code>MySQL</code></h3>
+      <p><a href="mysql.html">在 docker 中部署 MySQL</a></p>
+      <h3 id="redis"><a class="anchor" aria-hidden="true" tabindex="-1" href="#redis"><span class="octicon octicon-link"></span></a><code>Redis</code></h3>
+      <p><a href="redis.html">在 docker 中部署 Redis</a></p>
+      <h3 id="elasticsearch"><a class="anchor" aria-hidden="true" tabindex="-1" href="#elasticsearch"><span class="octicon octicon-link"></span></a><code>Elasticsearch</code></h3>
+      <p><a href="elasticsearch.html">在 docker 中部署 Elasticsearch</a></p>
+      <h3 id="gitlab"><a class="anchor" aria-hidden="true" tabindex="-1" href="#gitlab"><span class="octicon octicon-link"></span></a><code>Gitlab</code></h3>
+      <p><a href="gitlab.html">在 docker 中部署 Gitlab</a></p>
+      <h3 id="rocketchat"><a class="anchor" aria-hidden="true" tabindex="-1" href="#rocketchat"><span class="octicon octicon-link"></span></a><code>Rocket.Chat</code></h3>
+      <p><a href="rocket.chat.html">在 docker 中部署 Gitlab</a></p>
+      <h3 id="rancher"><a class="anchor" aria-hidden="true" tabindex="-1" href="#rancher"><span class="octicon octicon-link"></span></a><code>Rancher</code></h3>
+      <p><a href="rancher.html">在 docker 中部署 Rancher</a></p>
+      <h3 id="humpback"><a class="anchor" aria-hidden="true" tabindex="-1" href="#humpback"><span class="octicon octicon-link"></span></a><code>Humpback</code></h3>
+      <p>首先创建放持久化数据文件夹，<code>mkdir -p /opt/app/humpback-web</code>，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 创建放持久化数据文件夹</span>
 <span class="token function">mkdir</span> -p /opt/app/humpback-web
 <span class="token comment"># 下载humpback-web镜像到本地</span>
 docker pull humpbacks/humpback-web:1.0.0
@@ -495,15 +500,15 @@ docker run -d --net<span class="token operator">=</span>host --restart<span clas
  --name humpback-web <span class="token punctuation">\</span>
  humpbacks/humpback-web:1.0.0
 </code></pre>
-    <p>访问站点，打开浏览器输入：<a href="http://192.168.99.100:7001/">http://192.168.99.100:7001</a> ，默认账户：<code>admin</code> 密码：<code>123456</code></p>
-    <h3 id="seafile"><a class="anchor" aria-hidden="true" tabindex="-1" href="#seafile"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a><code>Seafile</code></h3>
-    <pre><code>docker run -d --name seafile \
+      <p>访问站点，打开浏览器输入：<a href="http://192.168.99.100:7001/">http://192.168.99.100:7001</a> ，默认账户：<code>admin</code> 密码：<code>123456</code></p>
+      <h3 id="seafile"><a class="anchor" aria-hidden="true" tabindex="-1" href="#seafile"><span class="octicon octicon-link"></span></a><code>Seafile</code></h3>
+      <pre><code>docker run -d --name seafile \
   -e SEAFILE_SERVER_HOSTNAME=seafile.example.com \
   -v /opt/seafile-data:/shared \
   -p 80:80 \
   seafileltd/seafile:latest
 </code></pre>
-    <pre><code>docker run -d --name seafile \
+      <pre><code>docker run -d --name seafile \
   -e SEAFILE_SERVER_HOSTNAME=pan.showgold.com \
   -e SEAFILE_ADMIN_EMAIL=wcj@nihaosi.com \
   -e SEAFILE_ADMIN_PASSWORD=wcj@nihaosi.com \
@@ -511,11 +516,11 @@ docker run -d --net<span class="token operator">=</span>host --restart<span clas
   -p 80:80 \
   seafileltd/seafile:latest
 </code></pre>
-    <h3 id="更多"><a class="anchor" aria-hidden="true" tabindex="-1" href="#更多"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>更多</h3>
-    <p><a href="docker/">更多 docker 工具部署，在 docker 目录中</a></p>
-    <h2 id="卸载旧的版本"><a class="anchor" aria-hidden="true" tabindex="-1" href="#卸载旧的版本"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>卸载旧的版本</h2>
-    <p>移除旧的版本</p>
-    <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> yum remove docker <span class="token punctuation">\</span>
+      <h3 id="更多"><a class="anchor" aria-hidden="true" tabindex="-1" href="#更多"><span class="octicon octicon-link"></span></a>更多</h3>
+      <p><a href="docker/">更多 docker 工具部署，在 docker 目录中</a></p>
+      <h2 id="卸载旧的版本"><a class="anchor" aria-hidden="true" tabindex="-1" href="#卸载旧的版本"><span class="octicon octicon-link"></span></a>卸载旧的版本</h2>
+      <p>移除旧的版本</p>
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> yum remove docker <span class="token punctuation">\</span>
   docker-client <span class="token punctuation">\</span>
   docker-client-latest <span class="token punctuation">\</span>
   docker-common <span class="token punctuation">\</span>
@@ -526,14 +531,14 @@ docker run -d --net<span class="token operator">=</span>host --restart<span clas
   docker-engine-selinux <span class="token punctuation">\</span>
   docker-engine
 </code></pre>
-    <h2 id="错误处理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#错误处理"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>错误处理</h2>
-    <p>Create more free space in thin pool or use dm.min_free_space option to change behavior</p>
-    <blockquote>
-      <p>特别慎用，东西都没有了，注意备份哦。<a href="https://github.com/moby/moby/issues/3182#issuecomment-256532928">https://github.com/moby/moby/issues/3182#issuecomment-256532928</a></p>
-    </blockquote>
-    <p><strong>镜像拉不下来</strong></p>
-    <p>修改 Docker <code>daemon.json</code> 配置 macOS: <code>/etc/docker/daemon.json</code>，Linux: <code>~/.docker/daemon.json</code></p>
-    <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+      <h2 id="错误处理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#错误处理"><span class="octicon octicon-link"></span></a>错误处理</h2>
+      <p>Create more free space in thin pool or use dm.min_free_space option to change behavior</p>
+      <blockquote>
+        <p>特别慎用，东西都没有了，注意备份哦。<a href="https://github.com/moby/moby/issues/3182#issuecomment-256532928">https://github.com/moby/moby/issues/3182#issuecomment-256532928</a></p>
+      </blockquote>
+      <p><strong>镜像拉不下来</strong></p>
+      <p>修改 Docker <code>daemon.json</code> 配置 macOS: <code>/etc/docker/daemon.json</code>，Linux: <code>~/.docker/daemon.json</code></p>
+      <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
   <span class="token string">"registry-mirrors"</span><span class="token operator">:</span><span class="token punctuation">[</span>
      <span class="token string">"https://docker.mirrors.ustc.edu.cn"</span><span class="token punctuation">,</span>
      <span class="token string">"https://hub-mirror.c.163.com"</span><span class="token punctuation">,</span>
@@ -545,37 +550,38 @@ docker run -d --net<span class="token operator">=</span>host --restart<span clas
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre>
-    <h2 id="参考资料"><a class="anchor" aria-hidden="true" tabindex="-1" href="#参考资料"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>参考资料</h2>
-    <h3 id="官方英文资源"><a class="anchor" aria-hidden="true" tabindex="-1" href="#官方英文资源"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>官方英文资源</h3>
-    <ul>
-      <li>Docker官网：<a href="http://www.docker.com/">http://www.docker.com</a></li>
-      <li>Docker windows入门：<a href="https://docs.docker.com/windows/">https://docs.docker.com/windows/</a></li>
-      <li>Docker Linux 入门：<a href="https://docs.docker.com/linux/">https://docs.docker.com/linux/</a></li>
-      <li>Docker mac 入门：<a href="https://docs.docker.com/mac/">https://docs.docker.com/mac/</a></li>
-      <li>Docker 用户指引：<a href="https://docs.docker.com/engine/userguide/">https://docs.docker.com/engine/userguide/</a></li>
-      <li>Docker 官方博客：<a href="http://blog.docker.com/">http://blog.docker.com/</a></li>
-      <li>Docker Hub: <a href="https://hub.docker.com/">https://hub.docker.com/</a></li>
-      <li>Docker开源： <a href="https://www.docker.com/open-source">https://www.docker.com/open-source</a></li>
-    </ul>
-    <h3 id="中文资源"><a class="anchor" aria-hidden="true" tabindex="-1" href="#中文资源"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>中文资源</h3>
-    <ul>
-      <li>Docker中文网站：<a href="http://www.docker.org.cn/">http://www.docker.org.cn</a></li>
-      <li>Docker中文文档：<a href="http://www.dockerinfo.net/document">http://www.dockerinfo.net/document</a></li>
-      <li>Docker安装手册：<a href="http://www.docker.org.cn/book/install.html">http://www.docker.org.cn/book/install.html</a></li>
-      <li>一小时Docker教程 ：<a href="https://blog.csphere.cn/archives/22">https://blog.csphere.cn/archives/22</a></li>
-      <li>Docker中文指南：<a href="http://www.widuu.com/chinese_docker/index.html">http://www.widuu.com/chinese_docker/index.html</a></li>
-    </ul>
-    <h3 id="其它资源"><a class="anchor" aria-hidden="true" tabindex="-1" href="#其它资源"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>其它资源</h3>
-    <ul>
-      <li><a href="https://github.com/eon01/DockerCheatSheet">Docker 快速手册！</a></li>
-      <li><a href="http://www.runoob.com/docker/docker-tutorial.html">Docker 教程</a></li>
-      <li><a href="https://www.gitbook.com/book/yeasy/docker_practice">Docker 从入门到实践</a></li>
-      <li><a href="http://blog.csdn.net/zhangchao19890805/article/details/52756865">MySQL Docker 单一机器上如何配置自动备份</a></li>
-      <li><a href="http://dockone.io/article/834">使用Docker Compose管理多个容器</a></li>
-      <li><a href="https://segmentfault.com/t/docker">https://segmentfault.com/t/docker</a></li>
-      <li><a href="https://github.com/docker/docker">https://github.com/docker/docker</a></li>
-      <li><a href="https://wiki.openstack.org/wiki/Docker">https://wiki.openstack.org/wiki/Docker</a></li>
-      <li><a href="https://wiki.archlinux.org/index.php/Docker">https://wiki.archlinux.org/index.php/Docker</a></li>
-    </ul>
-  </div></body>
+      <h2 id="参考资料"><a class="anchor" aria-hidden="true" tabindex="-1" href="#参考资料"><span class="octicon octicon-link"></span></a>参考资料</h2>
+      <h3 id="官方英文资源"><a class="anchor" aria-hidden="true" tabindex="-1" href="#官方英文资源"><span class="octicon octicon-link"></span></a>官方英文资源</h3>
+      <ul>
+        <li>Docker官网：<a href="http://www.docker.com/">http://www.docker.com</a></li>
+        <li>Docker windows入门：<a href="https://docs.docker.com/windows/">https://docs.docker.com/windows/</a></li>
+        <li>Docker Linux 入门：<a href="https://docs.docker.com/linux/">https://docs.docker.com/linux/</a></li>
+        <li>Docker mac 入门：<a href="https://docs.docker.com/mac/">https://docs.docker.com/mac/</a></li>
+        <li>Docker 用户指引：<a href="https://docs.docker.com/engine/userguide/">https://docs.docker.com/engine/userguide/</a></li>
+        <li>Docker 官方博客：<a href="http://blog.docker.com/">http://blog.docker.com/</a></li>
+        <li>Docker Hub: <a href="https://hub.docker.com/">https://hub.docker.com/</a></li>
+        <li>Docker开源： <a href="https://www.docker.com/open-source">https://www.docker.com/open-source</a></li>
+      </ul>
+      <h3 id="中文资源"><a class="anchor" aria-hidden="true" tabindex="-1" href="#中文资源"><span class="octicon octicon-link"></span></a>中文资源</h3>
+      <ul>
+        <li>Docker中文网站：<a href="http://www.docker.org.cn/">http://www.docker.org.cn</a></li>
+        <li>Docker中文文档：<a href="http://www.dockerinfo.net/document">http://www.dockerinfo.net/document</a></li>
+        <li>Docker安装手册：<a href="http://www.docker.org.cn/book/install.html">http://www.docker.org.cn/book/install.html</a></li>
+        <li>一小时Docker教程 ：<a href="https://blog.csphere.cn/archives/22">https://blog.csphere.cn/archives/22</a></li>
+        <li>Docker中文指南：<a href="http://www.widuu.com/chinese_docker/index.html">http://www.widuu.com/chinese_docker/index.html</a></li>
+      </ul>
+      <h3 id="其它资源"><a class="anchor" aria-hidden="true" tabindex="-1" href="#其它资源"><span class="octicon octicon-link"></span></a>其它资源</h3>
+      <ul>
+        <li><a href="https://github.com/eon01/DockerCheatSheet">Docker 快速手册！</a></li>
+        <li><a href="http://www.runoob.com/docker/docker-tutorial.html">Docker 教程</a></li>
+        <li><a href="https://www.gitbook.com/book/yeasy/docker_practice">Docker 从入门到实践</a></li>
+        <li><a href="http://blog.csdn.net/zhangchao19890805/article/details/52756865">MySQL Docker 单一机器上如何配置自动备份</a></li>
+        <li><a href="http://dockone.io/article/834">使用Docker Compose管理多个容器</a></li>
+        <li><a href="https://segmentfault.com/t/docker">https://segmentfault.com/t/docker</a></li>
+        <li><a href="https://github.com/docker/docker">https://github.com/docker/docker</a></li>
+        <li><a href="https://wiki.openstack.org/wiki/Docker">https://wiki.openstack.org/wiki/Docker</a></li>
+        <li><a href="https://wiki.archlinux.org/index.php/Docker">https://wiki.archlinux.org/index.php/Docker</a></li>
+      </ul>
+    </div>
+  </body>
 </html>
