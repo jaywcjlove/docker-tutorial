@@ -1,6 +1,5 @@
-
-
-## ElasticSearch 6.4.2
+ElasticSearch 6.4.2
+===
 
 ```bash
 # 最新版本
