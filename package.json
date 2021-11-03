@@ -10,14 +10,19 @@
     "github-corners": "https://github.com/jaywcjlove/docker-tutorial",
     "favicon": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐳</text></svg>",
     "reurls": {
-      "docker/nginx.md": "nginx.html",
-      "docker/redis.md": "redis.html",
-      "docker/elasticsearch.md": "elasticsearch.html",
-      "docker/gitlab.md": "gitlab.html",
       "docker/rocket.chat/README.md": "rocket.chat.html",
+      "docker/elasticsearch.md": "elasticsearch.html",
       "docker/rancher.md": "rancher.html",
+      "docker/gitlab.md": "gitlab.html",
       "docker/harbor.md": "harbor.html",
-      "docker/mysql.md": "mysql.html"
+      "docker/mattermost.md": "mattermost.html",
+      "docker/mysql.md": "mysql.html",
+      "docker/nginx.md": "nginx.html",
+      "docker/portainer.md": "portainer.html",
+      "docker/postgres.md": "postgres.html",
+      "docker/redis.md": "redis.html",
+      "docker/seaweedfs/README.md": "seaweedfs.html",
+      "docker/sourcegraph.md": "sourcegraph.html"
     }
   }
 }
