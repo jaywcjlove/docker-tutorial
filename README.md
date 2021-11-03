@@ -566,6 +566,10 @@ docker container stop registry && docker container rm -v registry
 
 [在 docker 中部署 MySQL](docker/mysql.md)
 
+### `PostgreSQL`
+
+[在 docker 中部署 PostgreSQL](docker/postgres.md)
+
 ### `Redis`
 
 [在 docker 中部署 Redis](docker/redis.md)
