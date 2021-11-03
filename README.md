@@ -34,6 +34,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 - [使用Docker实战](#使用docker实战)
   - [`Nginx`](#nginx)
   - [`MySQL`](#mysql)
+  - [`PostgreSQL`](#postgres)
   - [`Redis`](#redis)
   - [`Elasticsearch`](#elasticsearch)
   - [`Gitlab`](#gitlab)
