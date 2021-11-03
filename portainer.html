@@ -80,11 +80,11 @@ docker stack deploy -c portainer-agent-stack.yml portainer
       <pre class="language-bash"><code class="language-bash">docker stack deploy --compose-file<span class="token operator">=</span>portainer-agent-stack.yml portainer
 </code></pre>
       <h2 id="运行容器"><a class="anchor" aria-hidden="true" tabindex="-1" href="#运行容器"><span class="octicon octicon-link"></span></a>运行容器</h2>
-      <pre class="language-bash"><code class="language-bash">docker run -d <span class="token punctuation">\</span>
-  -p <span class="token number">8000</span>:8000 <span class="token punctuation">\</span>
-  -p <span class="token number">9000</span>:9000 <span class="token punctuation">\</span>
+      <pre class="language-bash"><code class="language-bash">docker run -d -p <span class="token number">8000</span>:8000 -p <span class="token number">9000</span>:9000 -p <span class="token number">9443</span>:9443 <span class="token punctuation">\</span>
+  --name<span class="token operator">=</span>portainer --restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
   -v /var/run/docker.sock:/var/run/docker.sock <span class="token punctuation">\</span>
-  -v ~/_docker/portainer/data:/data portainer/portainer:1.23.2
+  -v ~/_docker/portainer/data:/data <span class="token punctuation">\</span>
+  portainer/portainer-ce:latest
 </code></pre>
     </div>
   </body>
