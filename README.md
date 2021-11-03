@@ -39,6 +39,9 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [`Gitlab`](#gitlab)
   - [`Rocket.Chat`](#rocketchat)
   - [`Rancher`](#rancher)
+  - [`Portainer`](#portainer)
+  - [`Sourcegraph`](#sourcegraph)
+  - [`Mattermost`](#Mattermost)
   - [`Humpback`](#humpback)
   - [`Seafile`](#seafile)
   - [更多](#更多)
@@ -582,6 +585,18 @@ docker container stop registry && docker container rm -v registry
 ### `Rancher`
 
 [在 docker 中部署 Rancher](docker/rancher.md)
+
+### `Portainer`
+
+[在 docker 中部署 Portainer](docker/portainer.md)
+
+### `Sourcegraph`
+
+[在 docker 中部署 Sourcegraph](docker/sourcegraph.md)
+
+### `Mattermost`
+
+[在 docker 中部署 Mattermost](docker/mattermost.md)
 
 ### `Humpback`
 

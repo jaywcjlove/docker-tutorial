@@ -1,7 +1,7 @@
-Slack
+Mattermost
 ===
 
-Slack 的开源替代品 [Mattermost](https://github.com/mattermost)，使用下面命令即可启动 Mattermost，并且可以直接使用。
+`Slack` 的开源替代品 [`Mattermost`](https://github.com/mattermost)，使用下面命令即可启动 `Mattermost`，并且可以直接使用。
 
 ```bash
 docker run --name mattermost-preview \
