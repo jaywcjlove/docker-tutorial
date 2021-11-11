@@ -383,3 +383,46 @@ gitlab ci ERROR: Uploading artifacts to coordinator... too large archive
 ```nginx
 client_max_body_size       10m;
 ```
+
+### 升级
+
+目标版本 | 你的版本 | 支持升级 | 路径 | 注意
+---- | ---- | ---- | ---- | ----
+`14.1.6` | `13.9.2` | `13.9.2` -> `13.12.12` -> `14.0.11` -> `14.1.6` | 需要两个中间版本：`13.12` 和 `14.0`，然后是 `14.1`。
+`13.12.10` | `12.9.2` | `12.9.2` -> `12.10.14` -> `13.0.14` -> `13.1.11` -> `13.8.8` -> `13.12.10` | 需要四个中间版本：`12.10`、`13.0`、`13.1` 和 `13.8.8`，然后是 `13.12.10`。
+`13.2.10` | `11.5.0` | `11.5.0` -> `11.11.8` -> `12.0.12` -> `12.1.17` -> `12.10.14` -> `13.0.14` -> `13.1.11` -> `13.2.10` | 需要六个中间版本：`11.11`、`12.0`、`12.1`、`12.10`、`13.0` 和 `13.1`，然后是 `13.2.10`。
+
+假设我是 `13.9.2` 升级到 `14.1.6`，通过官方提供的[升级路径](https://docs.gitlab.com/ee/update/index.html#upgrade-paths) => `13.9.2` -> `13.12.12` -> `14.0.11` -> `14.1.6`
+
+```bash
+docker pull gitlab/gitlab-ce:13.12.12-ce.0
+docker pull gitlab/gitlab-ce:13.12.15-ce.0
+docker pull gitlab/gitlab-ce:14.0.11-ce.0
+docker pull gitlab/gitlab-ce:14.0.12-ce.0
+docker pull gitlab/gitlab-ce:14.1.6-ce.0
+docker pull gitlab/gitlab-ce:14.1.7-ce.0
+```
+
+我先将所有的版本下载到本地。先将 `13.9.2` 升级到 `14.0.11`，启动的时候会有提示升级需要更改配置：
+
+```bash
+There was an error running gitlab-ctl reconfigure:
+
+Removed configurations found in gitlab.rb. Aborting reconfigure.
+
+* unicorn['worker_processes'] has been deprecated since 13.10 and was removed in 14.0. Starting with GitLab 14.0, Unicorn is no longer supported and users must switch to Puma, following https://docs.gitlab.com/ee/administration/operations/puma.html.
+* unicorn['worker_memory_limit_min'] has been deprecated since 13.10 and was removed in 14.0. Starting with GitLab 14.0, Unicorn is no longer supported and users must switch to Puma, following https://docs.gitlab.com/ee/administration/operations/puma.html.
+* unicorn['worker_memory_limit_max'] has been deprecated since 13.10 and was removed in 14.0. Starting with GitLab 14.0, Unicorn is no longer supported and users must switch to Puma, following https://docs.gitlab.com/ee/administration/operations/puma.html.
+
+Running handlers complete
+
+Chef Infra Client failed. 0 resources updated in 12 seconds
+```
+
+通过回滚到 `13.9.2` 更改配置重新加载配置：
+
+```bash
+gitlab-ctl reconfigure
+```
+
+启动没有问题再升级到 `14.0.11`。
