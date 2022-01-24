@@ -327,6 +327,13 @@ ERROR: error during connect: Get http://docker:2375/v1.40/info: dial tcp: lookup
 ```
 
 3. `pull_policy = "if-not-present"` 策略改为：镜像不存在时才拉取。
+4. Gitlab runner: This job is stuck because the project doesn't have any runners online assigned to it.
+
+工作被卡住了，因为你的 runner 有标签，但你的 job 没有。 按照以下 4 个步骤，让您的 runner 在没有标签的情况下运行：
+
+![Gitlab runner](https://user-images.githubusercontent.com/1680273/150721733-d4fb90b8-29e4-44bf-b238-9d88ac01b5bd.png)
+
+![Gitlab runner](https://user-images.githubusercontent.com/1680273/150721878-24f6b6f6-a476-4f7e-a0da-092ea4771ecb.png)
 
 ### CI 中使用编译提交镜像
 
