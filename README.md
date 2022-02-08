@@ -31,7 +31,8 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
 - [Docker私有仓库搭建](#docker私有仓库搭建)
   - [`registry`](#registry)
   - [`Harbor`](#harbor)
-- [使用Docker实战](#使用docker实战)
+- [使用 Docker 实战](#使用docker实战)
+- [Docker REST API](#docker-rest-api)
   - [`Nginx`](#nginx)
   - [`MySQL`](#mysql)
   - [`PostgreSQL`](#postgres)
@@ -107,12 +108,12 @@ sudo yum install docker-ce
 
 ```bash
 $ yum list docker-ce --showduplicates | sort -r
-# docker-ce.x86_64            18.06.1.ce-3.el7                   docker-ce-stable
-# docker-ce.x86_64            18.06.1.ce-3.el7                   @docker-ce-stable
-# docker-ce.x86_64            18.06.0.ce-3.el7                   docker-ce-stable
-# docker-ce.x86_64            18.03.1.ce-1.el7.centos            docker-ce-stable
-# docker-ce.x86_64            18.03.0.ce-1.el7.centos            docker-ce-stable
-# docker-ce.x86_64            17.12.1.ce-1.el7.centos            docker-ce-stable
+# docker-ce.x86_64       18.06.1.ce-3.el7              docker-ce-stable
+# docker-ce.x86_64       18.06.1.ce-3.el7              @docker-ce-stable
+# docker-ce.x86_64       18.06.0.ce-3.el7              docker-ce-stable
+# docker-ce.x86_64       18.03.1.ce-1.el7.centos       docker-ce-stable
+# docker-ce.x86_64       18.03.0.ce-1.el7.centos       docker-ce-stable
+# docker-ce.x86_64       17.12.1.ce-1.el7.centos       docker-ce-stable
 # 选择版本安装
 $ sudo yum install docker-ce-<VERSION STRING>
 
@@ -141,7 +142,6 @@ pacman -S docker          # Arch 中安装
 emerge --ask docker       # Gentoo 中安装
 
 #=====================
-
 docker version      # 通过查看版本，检查安装是否成功
 # Client:
 #  Version:         1.12.6
@@ -215,7 +215,7 @@ chkconfig docker on        # 设置为开机启动
 ```bash
 docker pull centos:latest  # 从docker.io中下载centos镜像到本地
 docker images              # 查看已下载的镜像
-docker rmi [image_id] # 删除镜像，指定镜像id
+docker rmi [image_id]      # 删除镜像，指定镜像id
 
 # 删除所有镜像
 # none 默认为 docker.io
@@ -353,15 +353,15 @@ docker container cp [containID]:[/path/to/file] .
 
 docker run centos echo "hello world"  # 在docker容器中运行hello world!
 docker run centos yum install -y wget # 在docker容器中，安装wget软件
-docker ps                           # 列出包括未运行的容器
-docker ps -a                        # 查看所有容器(包括正在运行和已停止的)
-docker logs my-nginx                # 查看 my-nginx 容器日志
+docker ps                             # 列出包括未运行的容器
+docker ps -a                          # 查看所有容器(包括正在运行和已停止的)
+docker logs my-nginx                  # 查看 my-nginx 容器日志
 
-docker run -i -t centos /bin/bash   # 启动一个容器
-docker inspect centos     # 检查运行中的镜像
-docker commit 8bd centos  # 保存对容器的修改
+docker run -i -t centos /bin/bash     # 启动一个容器
+docker inspect centos                 # 检查运行中的镜像
+docker commit 8bd centos              # 保存对容器的修改
 docker commit -m "n changed" my-nginx my-nginx-image # 使用已经存在的容器创建一个镜像
-docker inspect -f {{.State.Pid}} 44fc0f0582d9 # 获取id为 44fc0f0582d9 的PID进程编号
+docker inspect -f {{.State.Pid}} 44fc0f0582d9        # 获取id为 44fc0f0582d9 的PID进程编号
 # 下载指定版本容器镜像
 docker pull gitlab/gitlab-ce:11.2.3-ce.0
 ```
@@ -369,22 +369,22 @@ docker pull gitlab/gitlab-ce:11.2.3-ce.0
 ### 容器服务管理
 
 ```bash
-docker run -itd --name my-nginx2 nginx # 通过nginx镜像，【创建】容器名为 my-nginx2 的容器
-docker start my-nginx --restart=always    # 【启动策略】一个已经存在的容器启动添加策略
-                               # no - 容器不重启
-                               # on-failure - 容器推出状态非0时重启
-                               # always - 始终重启
-docker start my-nginx               # 【启动】一个已经存在的容器
-docker restart my-nginx             # 【重启】容器
-docker stop my-nginx                # 【停止运行】一个容器
-docker kill my-nginx                # 【杀死】一个运行中的容器
-docker rename my-nginx new-nginx    # 【重命名】容器
-docker rm new-nginx                 # 【删除】容器
+docker run -itd --name my-nginx2 nginx  # 通过nginx镜像，【创建】容器名为 my-nginx2 的容器
+docker start my-nginx --restart=always  # 【启动策略】一个已经存在的容器启动添加策略
+    # no - 容器不重启
+    # on-failure - 容器推出状态非0时重启
+    # always - 始终重启
+docker start my-nginx             # 【启动】一个已经存在的容器
+docker restart my-nginx           # 【重启】容器
+docker stop my-nginx              # 【停止运行】一个容器
+docker kill my-nginx              # 【杀死】一个运行中的容器
+docker rename my-nginx new-nginx  # 【重命名】容器
+docker rm new-nginx               # 【删除】容器
 ```
 
 ### 进入容器
 
-1. 创建一个守护状态的Docker容器
+1. 创建一个守护状态的 Docker 容器
 
 ```bash
 docker run -itd my-nginx /bin/bash
@@ -394,8 +394,8 @@ docker run -itd my-nginx /bin/bash
 
 ```bash
 docker ps
-# CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-# 6bd0496da64f        nginx               "/bin/bash"         20 seconds ago      Up 18 seconds       80/tcp              high_shirley
+# CONTAINER ID  IMAGE  COMMAND      CREATED          STATUS          PORTS    NAMES
+# 6bd0496da64f  nginx  "/bin/bash"  20 seconds ago   Up 18 seconds   80/tcp   high_shirley
 ```
 
 3. 使用`docker exec`命令进入一个已经在运行的容器
@@ -404,7 +404,7 @@ docker ps
 docker exec -it 6bd0496da64f /bin/bash
 ```
 
-通常有下面几种方式进入Docker的容器，推荐使用`exec`，使用`attach`一直进入失败。
+通常有下面几种方式进入Docker的容器，推荐使用 `exec`，使用 `attach` 一直进入失败。
 
 - 使用`docker attach`
 - 使用`SSH` [为什么不需要在 Docker 容器中运行 sshd](http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp)
@@ -415,7 +415,6 @@ docker exec -it 6bd0496da64f /bin/bash
 
 从主机复制到容器 `sudo docker cp host_path containerID:container_path`  
 从容器复制到主机 `sudo docker cp containerID:container_path host_path`
-
 
 ## Docker私有仓库搭建
 
@@ -466,16 +465,16 @@ docker push 192.168.31.69:5000/test-nginx:1.13
 # Get https://192.168.99.100:7000/v1/_ping: http: server gave HTTP response to HTTPS client
 ```
 
-在推送到的时候报错误，默认是使用`https`提交，这个搭建的默认使用的是 `http`，解决方法两个：
+在推送到的时候报错误，默认是使用 `https` 提交，这个搭建的默认使用的是 `http`，解决方法两个：
 
-1. 创建一个https映射
+1. 创建一个 `https` 映射
 2. 将仓库地址加入到不安全的仓库列表中
 
-我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件`vi /etc/docker/daemon.json` 添加 `insecure-registries`配置信息，如果 [daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file) 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。
+我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件 `vi /etc/docker/daemon.json` 添加 `insecure-registries` 配置信息，如果 [daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file) 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。
 
 ```js
 {
-  "insecure-registries":[ 
+  "insecure-registries":[
     "192.168.31.69:5000"
   ]
 }
@@ -693,7 +692,7 @@ docker run -d --net=host --restart=always \
 
 ### `Seafile`
 
-```
+```shell
 docker run -d --name seafile \
   -e SEAFILE_SERVER_HOSTNAME=seafile.example.com \
   -v /opt/seafile-data:/shared \
@@ -701,7 +700,7 @@ docker run -d --name seafile \
   seafileltd/seafile:latest
 ```
 
-```
+```shell
 docker run -d --name seafile \
   -e SEAFILE_SERVER_HOSTNAME=pan.showgold.com \
   -e SEAFILE_ADMIN_EMAIL=wcj@nihaosi.com \
