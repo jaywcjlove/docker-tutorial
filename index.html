@@ -51,7 +51,8 @@
             <li><a href="#harbor"><code>Harbor</code></a></li>
           </ul>
         </li>
-        <li><a href="#%E4%BD%BF%E7%94%A8docker%E5%AE%9E%E6%88%98">使用Docker实战</a>
+        <li><a href="#%E4%BD%BF%E7%94%A8docker%E5%AE%9E%E6%88%98">使用 Docker 实战</a></li>
+        <li><a href="#docker-rest-api">Docker REST API</a>
           <ul>
             <li><a href="#nginx"><code>Nginx</code></a></li>
             <li><a href="#mysql"><code>MySQL</code></a></li>
@@ -122,24 +123,24 @@ sudo yum install docker-ce
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>如果你想安装特定 <code>docker-ce</code> 版本，先列出 repo 中可用版本，然后选择安装</p>
       <pre class="language-bash"><code class="language-bash">$ yum list docker-ce --showduplicates <span class="token operator">|</span> <span class="token function">sort</span> -r
-<span class="token comment"># docker-ce.x86_64            18.06.1.ce-3.el7                   docker-ce-stable</span>
-<span class="token comment"># docker-ce.x86_64            18.06.1.ce-3.el7                   @docker-ce-stable</span>
-<span class="token comment"># docker-ce.x86_64            18.06.0.ce-3.el7                   docker-ce-stable</span>
-<span class="token comment"># docker-ce.x86_64            18.03.1.ce-1.el7.centos            docker-ce-stable</span>
-<span class="token comment"># docker-ce.x86_64            18.03.0.ce-1.el7.centos            docker-ce-stable</span>
-<span class="token comment"># docker-ce.x86_64            17.12.1.ce-1.el7.centos            docker-ce-stable</span>
+<span class="token comment"># docker-ce.x86_64       18.06.1.ce-3.el7              docker-ce-stable</span>
+<span class="token comment"># docker-ce.x86_64       18.06.1.ce-3.el7              @docker-ce-stable</span>
+<span class="token comment"># docker-ce.x86_64       18.06.0.ce-3.el7              docker-ce-stable</span>
+<span class="token comment"># docker-ce.x86_64       18.03.1.ce-1.el7.centos       docker-ce-stable</span>
+<span class="token comment"># docker-ce.x86_64       18.03.0.ce-1.el7.centos       docker-ce-stable</span>
+<span class="token comment"># docker-ce.x86_64       17.12.1.ce-1.el7.centos       docker-ce-stable</span>
 <span class="token comment"># 选择版本安装</span>
 $ <span class="token function">sudo</span> yum <span class="token function">install</span> docker-ce-<span class="token operator">&#x3C;</span>VERSION STRING<span class="token operator">></span>
 
 <span class="token comment"># 选择安装 docker-ce-18.06.1.ce</span>
 $ <span class="token function">sudo</span> yum <span class="token function">install</span> docker-ce-18.06.1.ce
 </code><div onclick="copied(this)" data-code="$ yum list docker-ce --showduplicates | sort -r
-# docker-ce.x86_64            18.06.1.ce-3.el7                   docker-ce-stable
-# docker-ce.x86_64            18.06.1.ce-3.el7                   @docker-ce-stable
-# docker-ce.x86_64            18.06.0.ce-3.el7                   docker-ce-stable
-# docker-ce.x86_64            18.03.1.ce-1.el7.centos            docker-ce-stable
-# docker-ce.x86_64            18.03.0.ce-1.el7.centos            docker-ce-stable
-# docker-ce.x86_64            17.12.1.ce-1.el7.centos            docker-ce-stable
+# docker-ce.x86_64       18.06.1.ce-3.el7              docker-ce-stable
+# docker-ce.x86_64       18.06.1.ce-3.el7              @docker-ce-stable
+# docker-ce.x86_64       18.06.0.ce-3.el7              docker-ce-stable
+# docker-ce.x86_64       18.03.1.ce-1.el7.centos       docker-ce-stable
+# docker-ce.x86_64       18.03.0.ce-1.el7.centos       docker-ce-stable
+# docker-ce.x86_64       17.12.1.ce-1.el7.centos       docker-ce-stable
 # 选择版本安装
 $ sudo yum install docker-ce-<VERSION STRING>
 
@@ -161,7 +162,6 @@ pacman -S docker          <span class="token comment"># Arch 中安装</span>
 emerge --ask docker       <span class="token comment"># Gentoo 中安装</span>
 
 <span class="token comment">#=====================</span>
-
 docker version      <span class="token comment"># 通过查看版本，检查安装是否成功</span>
 <span class="token comment"># Client:</span>
 <span class="token comment">#  Version:         1.12.6</span>
@@ -186,7 +186,6 @@ pacman -S docker          # Arch 中安装
 emerge --ask docker       # Gentoo 中安装
 
 #=====================
-
 docker version      # 通过查看版本，检查安装是否成功
 # Client:
 #  Version:         1.12.6
@@ -286,7 +285,7 @@ chkconfig docker on        # 设置为开机启动
       <p>镜像可以看做我们平时装系统的镜像，里面就是一个运行环境。</p>
       <pre class="language-bash"><code class="language-bash">docker pull centos:latest  <span class="token comment"># 从docker.io中下载centos镜像到本地</span>
 docker images              <span class="token comment"># 查看已下载的镜像</span>
-docker rmi <span class="token punctuation">[</span>image_id<span class="token punctuation">]</span> <span class="token comment"># 删除镜像，指定镜像id</span>
+docker rmi <span class="token punctuation">[</span>image_id<span class="token punctuation">]</span>      <span class="token comment"># 删除镜像，指定镜像id</span>
 
 <span class="token comment"># 删除所有镜像</span>
 <span class="token comment"># none 默认为 docker.io</span>
@@ -296,7 +295,7 @@ docker rmi <span class="token variable"><span class="token variable">$(</span>do
 docker run -t -i nginx:latest /bin/bash
 </code><div onclick="copied(this)" data-code="docker pull centos:latest  # 从docker.io中下载centos镜像到本地
 docker images              # 查看已下载的镜像
-docker rmi [image_id] # 删除镜像，指定镜像id
+docker rmi [image_id]      # 删除镜像，指定镜像id
 
 # 删除所有镜像
 # none 默认为 docker.io
@@ -431,15 +430,15 @@ docker container <span class="token function">cp</span> <span class="token punct
 
 docker run centos <span class="token builtin class-name">echo</span> <span class="token string">"hello world"</span>  <span class="token comment"># 在docker容器中运行hello world!</span>
 docker run centos yum <span class="token function">install</span> -y <span class="token function">wget</span> <span class="token comment"># 在docker容器中，安装wget软件</span>
-docker <span class="token function">ps</span>                           <span class="token comment"># 列出包括未运行的容器</span>
-docker <span class="token function">ps</span> -a                        <span class="token comment"># 查看所有容器(包括正在运行和已停止的)</span>
-docker logs my-nginx                <span class="token comment"># 查看 my-nginx 容器日志</span>
+docker <span class="token function">ps</span>                             <span class="token comment"># 列出包括未运行的容器</span>
+docker <span class="token function">ps</span> -a                          <span class="token comment"># 查看所有容器(包括正在运行和已停止的)</span>
+docker logs my-nginx                  <span class="token comment"># 查看 my-nginx 容器日志</span>
 
-docker run -i -t centos /bin/bash   <span class="token comment"># 启动一个容器</span>
-docker inspect centos     <span class="token comment"># 检查运行中的镜像</span>
-docker commit 8bd centos  <span class="token comment"># 保存对容器的修改</span>
+docker run -i -t centos /bin/bash     <span class="token comment"># 启动一个容器</span>
+docker inspect centos                 <span class="token comment"># 检查运行中的镜像</span>
+docker commit 8bd centos              <span class="token comment"># 保存对容器的修改</span>
 docker commit -m <span class="token string">"n changed"</span> my-nginx my-nginx-image <span class="token comment"># 使用已经存在的容器创建一个镜像</span>
-docker inspect -f <span class="token punctuation">{</span><span class="token punctuation">{</span>.State.Pid<span class="token punctuation">}</span><span class="token punctuation">}</span> 44fc0f0582d9 <span class="token comment"># 获取id为 44fc0f0582d9 的PID进程编号</span>
+docker inspect -f <span class="token punctuation">{</span><span class="token punctuation">{</span>.State.Pid<span class="token punctuation">}</span><span class="token punctuation">}</span> 44fc0f0582d9        <span class="token comment"># 获取id为 44fc0f0582d9 的PID进程编号</span>
 <span class="token comment"># 下载指定版本容器镜像</span>
 docker pull gitlab/gitlab-ce:11.2.3-ce.0
 </code><div onclick="copied(this)" data-code="# 列出本机正在运行的容器
@@ -457,45 +456,45 @@ docker container cp [containID]:[/path/to/file] .
 
 docker run centos echo &#x22;hello world&#x22;  # 在docker容器中运行hello world!
 docker run centos yum install -y wget # 在docker容器中，安装wget软件
-docker ps                           # 列出包括未运行的容器
-docker ps -a                        # 查看所有容器(包括正在运行和已停止的)
-docker logs my-nginx                # 查看 my-nginx 容器日志
+docker ps                             # 列出包括未运行的容器
+docker ps -a                          # 查看所有容器(包括正在运行和已停止的)
+docker logs my-nginx                  # 查看 my-nginx 容器日志
 
-docker run -i -t centos /bin/bash   # 启动一个容器
-docker inspect centos     # 检查运行中的镜像
-docker commit 8bd centos  # 保存对容器的修改
+docker run -i -t centos /bin/bash     # 启动一个容器
+docker inspect centos                 # 检查运行中的镜像
+docker commit 8bd centos              # 保存对容器的修改
 docker commit -m &#x22;n changed&#x22; my-nginx my-nginx-image # 使用已经存在的容器创建一个镜像
-docker inspect -f {{.State.Pid}} 44fc0f0582d9 # 获取id为 44fc0f0582d9 的PID进程编号
+docker inspect -f {{.State.Pid}} 44fc0f0582d9        # 获取id为 44fc0f0582d9 的PID进程编号
 # 下载指定版本容器镜像
 docker pull gitlab/gitlab-ce:11.2.3-ce.0
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h3 id="容器服务管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器服务管理"><span class="octicon octicon-link"></span></a>容器服务管理</h3>
-      <pre class="language-bash"><code class="language-bash">docker run -itd --name my-nginx2 nginx <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
-docker start my-nginx --restart<span class="token operator">=</span>always    <span class="token comment"># 【启动策略】一个已经存在的容器启动添加策略</span>
-                               <span class="token comment"># no - 容器不重启</span>
-                               <span class="token comment"># on-failure - 容器推出状态非0时重启</span>
-                               <span class="token comment"># always - 始终重启</span>
-docker start my-nginx               <span class="token comment"># 【启动】一个已经存在的容器</span>
-docker restart my-nginx             <span class="token comment"># 【重启】容器</span>
-docker stop my-nginx                <span class="token comment"># 【停止运行】一个容器</span>
-docker <span class="token function">kill</span> my-nginx                <span class="token comment"># 【杀死】一个运行中的容器</span>
-docker <span class="token function">rename</span> my-nginx new-nginx    <span class="token comment"># 【重命名】容器</span>
-docker <span class="token function">rm</span> new-nginx                 <span class="token comment"># 【删除】容器</span>
-</code><div onclick="copied(this)" data-code="docker run -itd --name my-nginx2 nginx # 通过nginx镜像，【创建】容器名为 my-nginx2 的容器
-docker start my-nginx --restart=always    # 【启动策略】一个已经存在的容器启动添加策略
-                               # no - 容器不重启
-                               # on-failure - 容器推出状态非0时重启
-                               # always - 始终重启
-docker start my-nginx               # 【启动】一个已经存在的容器
-docker restart my-nginx             # 【重启】容器
-docker stop my-nginx                # 【停止运行】一个容器
-docker kill my-nginx                # 【杀死】一个运行中的容器
-docker rename my-nginx new-nginx    # 【重命名】容器
-docker rm new-nginx                 # 【删除】容器
+      <pre class="language-bash"><code class="language-bash">docker run -itd --name my-nginx2 nginx  <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
+docker start my-nginx --restart<span class="token operator">=</span>always  <span class="token comment"># 【启动策略】一个已经存在的容器启动添加策略</span>
+    <span class="token comment"># no - 容器不重启</span>
+    <span class="token comment"># on-failure - 容器推出状态非0时重启</span>
+    <span class="token comment"># always - 始终重启</span>
+docker start my-nginx             <span class="token comment"># 【启动】一个已经存在的容器</span>
+docker restart my-nginx           <span class="token comment"># 【重启】容器</span>
+docker stop my-nginx              <span class="token comment"># 【停止运行】一个容器</span>
+docker <span class="token function">kill</span> my-nginx              <span class="token comment"># 【杀死】一个运行中的容器</span>
+docker <span class="token function">rename</span> my-nginx new-nginx  <span class="token comment"># 【重命名】容器</span>
+docker <span class="token function">rm</span> new-nginx               <span class="token comment"># 【删除】容器</span>
+</code><div onclick="copied(this)" data-code="docker run -itd --name my-nginx2 nginx  # 通过nginx镜像，【创建】容器名为 my-nginx2 的容器
+docker start my-nginx --restart=always  # 【启动策略】一个已经存在的容器启动添加策略
+    # no - 容器不重启
+    # on-failure - 容器推出状态非0时重启
+    # always - 始终重启
+docker start my-nginx             # 【启动】一个已经存在的容器
+docker restart my-nginx           # 【重启】容器
+docker stop my-nginx              # 【停止运行】一个容器
+docker kill my-nginx              # 【杀死】一个运行中的容器
+docker rename my-nginx new-nginx  # 【重命名】容器
+docker rm new-nginx               # 【删除】容器
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h3 id="进入容器"><a class="anchor" aria-hidden="true" tabindex="-1" href="#进入容器"><span class="octicon octicon-link"></span></a>进入容器</h3>
       <ol>
-        <li>创建一个守护状态的Docker容器</li>
+        <li>创建一个守护状态的 Docker 容器</li>
       </ol>
       <pre class="language-bash"><code class="language-bash">docker run -itd my-nginx /bin/bash
 </code><div onclick="copied(this)" data-code="docker run -itd my-nginx /bin/bash
@@ -504,11 +503,11 @@ docker rm new-nginx                 # 【删除】容器
         <li>使用<code>docker ps</code>查看到该容器信息</li>
       </ol>
       <pre class="language-bash"><code class="language-bash">docker <span class="token function">ps</span>
-<span class="token comment"># CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span>
-<span class="token comment"># 6bd0496da64f        nginx               "/bin/bash"         20 seconds ago      Up 18 seconds       80/tcp              high_shirley</span>
+<span class="token comment"># CONTAINER ID  IMAGE  COMMAND      CREATED          STATUS          PORTS    NAMES</span>
+<span class="token comment"># 6bd0496da64f  nginx  "/bin/bash"  20 seconds ago   Up 18 seconds   80/tcp   high_shirley</span>
 </code><div onclick="copied(this)" data-code="docker ps
-# CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-# 6bd0496da64f        nginx               &#x22;/bin/bash&#x22;         20 seconds ago      Up 18 seconds       80/tcp              high_shirley
+# CONTAINER ID  IMAGE  COMMAND      CREATED          STATUS          PORTS    NAMES
+# 6bd0496da64f  nginx  &#x22;/bin/bash&#x22;  20 seconds ago   Up 18 seconds   80/tcp   high_shirley
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <ol start="3">
         <li>使用<code>docker exec</code>命令进入一个已经在运行的容器</li>
@@ -516,7 +515,7 @@ docker rm new-nginx                 # 【删除】容器
       <pre class="language-bash"><code class="language-bash">docker <span class="token builtin class-name">exec</span> -it 6bd0496da64f /bin/bash
 </code><div onclick="copied(this)" data-code="docker exec -it 6bd0496da64f /bin/bash
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <p>通常有下面几种方式进入Docker的容器，推荐使用<code>exec</code>，使用<code>attach</code>一直进入失败。</p>
+      <p>通常有下面几种方式进入Docker的容器，推荐使用 <code>exec</code>，使用 <code>attach</code> 一直进入失败。</p>
       <ul>
         <li>使用<code>docker attach</code></li>
         <li>使用<code>SSH</code> <a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp">为什么不需要在 Docker 容器中运行 sshd</a></li>
@@ -589,19 +588,19 @@ docker push 192.168.31.69:5000/test-nginx:1.13
 # The push refers to a repository [192.168.99.100:7000/test-nginx]
 # Get https://192.168.99.100:7000/v1/_ping: http: server gave HTTP response to HTTPS client
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <p>在推送到的时候报错误，默认是使用<code>https</code>提交，这个搭建的默认使用的是 <code>http</code>，解决方法两个：</p>
+      <p>在推送到的时候报错误，默认是使用 <code>https</code> 提交，这个搭建的默认使用的是 <code>http</code>，解决方法两个：</p>
       <ol>
-        <li>创建一个https映射</li>
+        <li>创建一个 <code>https</code> 映射</li>
         <li>将仓库地址加入到不安全的仓库列表中</li>
       </ol>
-      <p>我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件<code>vi /etc/docker/daemon.json</code> 添加 <code>insecure-registries</code>配置信息，如果 <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。</p>
+      <p>我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件 <code>vi /etc/docker/daemon.json</code> 添加 <code>insecure-registries</code> 配置信息，如果 <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span> 
+  <span class="token string">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span>
     <span class="token string">"192.168.31.69:5000"</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code><div onclick="copied(this)" data-code="{
-  &#x22;insecure-registries&#x22;:[ 
+  &#x22;insecure-registries&#x22;:[
     &#x22;192.168.31.69:5000&#x22;
   ]
 }
@@ -819,10 +818,10 @@ docker run -d --net=host --restart=always \
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>访问站点，打开浏览器输入：<a href="http://192.168.99.100:7001/">http://192.168.99.100:7001</a> ，默认账户：<code>admin</code> 密码：<code>123456</code></p>
       <h3 id="seafile"><a class="anchor" aria-hidden="true" tabindex="-1" href="#seafile"><span class="octicon octicon-link"></span></a><code>Seafile</code></h3>
-      <pre><code>docker run -d --name seafile \
-  -e SEAFILE_SERVER_HOSTNAME=seafile.example.com \
-  -v /opt/seafile-data:/shared \
-  -p 80:80 \
+      <pre class="language-shell"><code class="language-shell">docker run -d --name seafile <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>seafile.example.com <span class="token punctuation">\</span>
+  -v /opt/seafile-data:/shared <span class="token punctuation">\</span>
+  -p <span class="token number">80</span>:80 <span class="token punctuation">\</span>
   seafileltd/seafile:latest
 </code><div onclick="copied(this)" data-code="docker run -d --name seafile \
   -e SEAFILE_SERVER_HOSTNAME=seafile.example.com \
@@ -830,12 +829,12 @@ docker run -d --net=host --restart=always \
   -p 80:80 \
   seafileltd/seafile:latest
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <pre><code>docker run -d --name seafile \
-  -e SEAFILE_SERVER_HOSTNAME=pan.showgold.com \
-  -e SEAFILE_ADMIN_EMAIL=wcj@nihaosi.com \
-  -e SEAFILE_ADMIN_PASSWORD=wcj@nihaosi.com \
-  -v $HOME/_docker/seafile-data:/shared \
-  -p 80:80 \
+      <pre class="language-shell"><code class="language-shell">docker run -d --name seafile <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>pan.showgold.com <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">SEAFILE_ADMIN_EMAIL</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">SEAFILE_ADMIN_PASSWORD</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
+  -v <span class="token environment constant">$HOME</span>/_docker/seafile-data:/shared <span class="token punctuation">\</span>
+  -p <span class="token number">80</span>:80 <span class="token punctuation">\</span>
   seafileltd/seafile:latest
 </code><div onclick="copied(this)" data-code="docker run -d --name seafile \
   -e SEAFILE_SERVER_HOSTNAME=pan.showgold.com \
