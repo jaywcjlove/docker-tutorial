@@ -513,6 +513,71 @@ docker container stop registry && docker container rm -v registry
 
 [部署 registry 管理工具 Harbor](docker/harbor.md)
 
+## Docker REST API
+
+`Docker` 不仅可以通过本地命令行 `docker` 命令进行调用，还可以通过开启远程控制 `API`，使用 `HTTP` 调用接口来进行访问，远程控制 `Docker Daemon` 来做很多操作。`Docker` 的远程 `API` 服务默认监听的是 TCP `2375` 端口，为了保证安全，Docker 安装后默认不会启用远程 `API` 服务，因为这个服务默认不做权限认证。
+
+### CentOS
+
+CentOS 的开启方法比较简单，先修改配置：
+
+```shell
+vim /usr/lib/systemd/system/docker.service
+```
+
+修改 `ExecStart` 配置项，默认如下：
+
+```shell
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+```
+
+增加一个 `-H tcp://0.0.0.0:2375` 选项
+
+```shell
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --containerd=/run/containerd/containerd.sock
+```
+
+如果是内网生产环境，也可以将 `0.0.0.0` 改为内网 IP。同样的，`2375` 端口也可以修改。
+
+但是这样可能还有一个问题，无法在命令行使用 `docker` 命令了，还需要添加 `sock` 选项：`-H unix:///var/run/docker.sock`，最后为：
+
+```shell
+ExecStart=/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://10.105.3.115:2375 --containerd=/run/containerd/containerd.sock
+```
+
+修改完配置之后需要重启 Docker 服务：
+
+```bash
+systemctl daemon-reload
+systemctl restart docker
+```
+
+重启完成后，可以使用 netstat 查看端口是否监听来确认是否成功：
+
+```bash
+[root@VM-3-115-centos ~]# netstat -nutlp | grep 2375
+tcp        0      0 10.105.3.115:2375       0.0.0.0:*               LISTEN      32316/dockerd
+```
+
+### MacOS
+
+在 Mac 下无法直接修改配置文件来开启远程 API 服务，后来在 [`docker/for-mac`](https://github.com/docker/for-mac) 的 [`issue`](https://github.com/docker/for-mac/issues/770) 中得到了解决方案。
+
+可以运行一个 [`socat`](https://hub.docker.com/r/bobrik/socat) 容器，将 `unix socket` 上的 Docker API 转发到 MacOS 上指定的端口中：
+
+```bash
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
+```
+
+### 测试
+
+启用成功后，可以进行一些测试，例如直接使用浏览器访问 info 和 version 等页面获取信息。
+
+```bash
+http://127.0.0.1:2375/info
+http://127.0.0.1:2375/version
+```
+
 ## 使用Docker实战
 
 > ⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件
