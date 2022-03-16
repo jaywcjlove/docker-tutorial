@@ -408,6 +408,8 @@ docker pull gitlab/gitlab-ce:14.0.11-ce.0
 docker pull gitlab/gitlab-ce:14.0.12-ce.0
 docker pull gitlab/gitlab-ce:14.1.6-ce.0
 docker pull gitlab/gitlab-ce:14.1.7-ce.0
+docker pull gitlab/gitlab-ce:14.1.8-ce.0
+docker pull gitlab/gitlab-ce:14.8.2-ce.0
 ```
 
 我先将所有的版本下载到本地。先将 `13.9.2` 升级到 `14.0.11`，启动的时候会有提示升级需要更改配置：
