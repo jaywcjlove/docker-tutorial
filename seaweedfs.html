@@ -18,13 +18,13 @@
     <div class="markdown-body">
       <h1 id="seaweedfs-docker"><a class="anchor" aria-hidden="true" tabindex="-1" href="#seaweedfs-docker"><span class="octicon octicon-link"></span></a>seaweedfs-docker</h1>
       <p><a href="https://github.com/chrislusf/seaweedfs">SeaweedFS</a> 是一个简单且高度可扩展的分布式文件系统。 有两个目标：存储数十亿个文件！ 快速提供文件！ SeaweedFS实现了一个带有O（1）磁盘搜索的对象存储，以及一个带有POSIX接口的可选Filer。</p>
-      <pre class="language-bash"><code class="language-bash">docker build -t wcjiang/seaweedfs <span class="token builtin class-name">.</span> <span class="token comment"># 编译docker镜像</span>
-docker push wcjiang/seaweedfs:latest
-docker-compose up <span class="token comment"># 使用docker-compose 执行新建容器组</span>
-docker-compose start <span class="token comment"># 启动容器组</span>
-docker-compose stop <span class="token comment"># 停止容器组</span>
-docker-compose <span class="token function">ps</span>   <span class="token comment"># 查询容器组所有容器状态</span>
-docker-compose down <span class="token comment"># 删除容器组</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> build -t wcjiang/seaweedfs <span class="token builtin class-name">.</span> <span class="token comment"># 编译docker镜像</span>
+<span class="token function">docker</span> push wcjiang/seaweedfs:latest
+<span class="token function">docker-compose</span> up <span class="token comment"># 使用docker-compose 执行新建容器组</span>
+<span class="token function">docker-compose</span> start <span class="token comment"># 启动容器组</span>
+<span class="token function">docker-compose</span> stop <span class="token comment"># 停止容器组</span>
+<span class="token function">docker-compose</span> <span class="token function">ps</span>   <span class="token comment"># 查询容器组所有容器状态</span>
+<span class="token function">docker-compose</span> down <span class="token comment"># 删除容器组</span>
 </code><div onclick="copied(this)" data-code="docker build -t wcjiang/seaweedfs . # 编译docker镜像
 docker push wcjiang/seaweedfs:latest
 docker-compose up # 使用docker-compose 执行新建容器组
@@ -131,7 +131,9 @@ http://localhost:8083/3/01637037d6.jpg?height<span class="token operator">=</spa
 http://localhost:8083/3/01637037d6.jpg?height=200&#x26;width=200&#x26;mode=fit
 http://localhost:8083/3/01637037d6.jpg?height=200&#x26;width=200&#x26;mode=fill
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <script>function copied(target, str) {
+      <script>/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
+function copied(target, str) {
 target.classList.add('active');
 copyTextToClipboard(target.dataset.code, function() {
 setTimeout(() => {
@@ -139,7 +141,6 @@ target.classList.remove('active');
 }, 2000);
 });
 }</script>
-      <script src="https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js"></script>
     </div>
   </body>
 </html>

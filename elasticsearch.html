@@ -18,9 +18,9 @@
     <div class="markdown-body">
       <h1 id="elasticsearch-642"><a class="anchor" aria-hidden="true" tabindex="-1" href="#elasticsearch-642"><span class="octicon octicon-link"></span></a>ElasticSearch 6.4.2</h1>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 最新版本</span>
-docker pull docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+<span class="token function">docker</span> pull docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 <span class="token comment"># 运行容器</span>
-docker run <span class="token punctuation">\</span>
+<span class="token function">docker</span> run <span class="token punctuation">\</span>
   --name es
   -p <span class="token number">9200</span>:9200 -p <span class="token number">9300</span>:9300 <span class="token punctuation">\</span>
   -e <span class="token string">"discovery.type=single-node"</span> <span class="token punctuation">\</span>
@@ -37,9 +37,9 @@ docker run \
       <h2 id="elasticsearch-533"><a class="anchor" aria-hidden="true" tabindex="-1" href="#elasticsearch-533"><span class="octicon octicon-link"></span></a>ElasticSearch 5.3.3</h2>
       <p>ElasticSearch 5.3.3 docker 运行</p>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 下载老版本</span>
-docker pull docker.elastic.co/elasticsearch/elasticsearch:5.3.3
+<span class="token function">docker</span> pull docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 <span class="token comment"># 运行容器</span>
-docker run <span class="token punctuation">\</span>
+<span class="token function">docker</span> run <span class="token punctuation">\</span>
   --name es <span class="token punctuation">\</span>
   -p <span class="token number">9200</span>:9200 <span class="token punctuation">\</span>
   -e <span class="token string">"http.host=0.0.0.0"</span> <span class="token punctuation">\</span>
@@ -179,10 +179,10 @@ networks:
     driver: bridge
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>示例显示包含两个 <code>Elasticsearch</code> 节点的集群。 要打开群集，请使用 <code>docker-compose.yml</code> 并输入：</p>
-      <pre class="language-bash"><code class="language-bash">docker-compose up -d 
-docker-compose down    <span class="token comment"># 停止集群</span>
-docker-compose down -v <span class="token comment"># 销毁集群和数据卷</span>
-docker logs elasticsearch1 <span class="token comment"># 查看日志</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker-compose</span> up -d 
+<span class="token function">docker-compose</span> down    <span class="token comment"># 停止集群</span>
+<span class="token function">docker-compose</span> down -v <span class="token comment"># 销毁集群和数据卷</span>
+<span class="token function">docker</span> logs elasticsearch1 <span class="token comment"># 查看日志</span>
 </code><div onclick="copied(this)" data-code="docker-compose up -d 
 docker-compose down    # 停止集群
 docker-compose down -v # 销毁集群和数据卷
@@ -241,10 +241,10 @@ RUN chown elasticsearch:elasticsearch config/elasticsearch.yml
 USER elasticsearch
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>然后，您可以使用以下内容构建和尝试运行镜像：</p>
-      <pre class="language-bash"><code class="language-bash">docker build --tag<span class="token operator">=</span>elasticsearch-custom <span class="token builtin class-name">.</span>
-docker run -ti -v /usr/share/elasticsearch/data elasticsearch-custom
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> build --tag<span class="token operator">=</span>elasticsearch-custom <span class="token builtin class-name">.</span>
+<span class="token function">docker</span> run -ti -v /usr/share/elasticsearch/data elasticsearch-custom
 <span class="token comment"># 覆盖默认的 CMD </span>
-docker run <span class="token operator">&#x3C;</span>各种参数<span class="token operator">></span> bin/elasticsearch -Ecluster.name<span class="token operator">=</span>mynewclustername
+<span class="token function">docker</span> run <span class="token operator">&#x3C;</span>各种参数<span class="token operator">></span> bin/elasticsearch -Ecluster.name<span class="token operator">=</span>mynewclustername
 </code><div onclick="copied(this)" data-code="docker build --tag=elasticsearch-custom .
 docker run -ti -v /usr/share/elasticsearch/data elasticsearch-custom
 # 覆盖默认的 CMD 
@@ -261,7 +261,9 @@ docker run <各种参数> bin/elasticsearch -Ecluster.name=mynewclustername
         <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html">ElasticSearch 官方 Docker 安装教程</a></li>
         <li><a href="https://hub.docker.com/r/library/elasticsearch/">Docker 镜像仓库</a></li>
       </ul>
-      <script>function copied(target, str) {
+      <script>/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
+function copied(target, str) {
 target.classList.add('active');
 copyTextToClipboard(target.dataset.code, function() {
 setTimeout(() => {
@@ -269,7 +271,6 @@ target.classList.remove('active');
 }, 2000);
 });
 }</script>
-      <script src="https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js"></script>
     </div>
   </body>
 </html>

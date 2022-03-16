@@ -22,7 +22,7 @@
       <p>下面是 nginx 在 Docker 中的应用，这里还有 <a href="https://github.com/jaywcjlove/nginx-tutorial">nginx入门教程</a> 供你参考</p>
       <h2 id="查找镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#查找镜像"><span class="octicon octicon-link"></span></a>查找镜像</h2>
       <p>在 docker hub 中查找 nginx 相关镜像。</p>
-      <pre class="language-bash"><code class="language-bash">$ docker search nginx
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> search nginx
 
 <span class="token comment"># INDEX       NAME                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span>
 <span class="token comment"># docker.io   docker.io/nginx                 Official build of Nginx.                        7006      [OK]</span>
@@ -35,7 +35,7 @@
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="下载镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#下载镜像"><span class="octicon octicon-link"></span></a>下载镜像</h2>
       <p>拉取官方镜像，其中上面的非官方镜像是用户们根据自己的需要制作的镜像，方便大家的使用。</p>
-      <pre class="language-bash"><code class="language-bash">$ docker pull nginx
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> pull nginx
 <span class="token comment"># Using default tag: latest</span>
 <span class="token comment"># Trying to pull repository docker.io/library/nginx ...</span>
 <span class="token comment"># latest: Pulling from docker.io/library/nginx</span>
@@ -52,7 +52,7 @@
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="启动容器"><a class="anchor" aria-hidden="true" tabindex="-1" href="#启动容器"><span class="octicon octicon-link"></span></a>启动容器</h2>
       <p>利用这个镜像启动一个新的容器</p>
-      <pre class="language-bash"><code class="language-bash">docker run --name my-nginx -d -p <span class="token number">8080</span>:80 nginx /bin/bash
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run --name my-nginx -d -p <span class="token number">8080</span>:80 nginx /bin/bash
 <span class="token comment"># faaed6a2d63af248961aab59713e515c76aea447</span>
 </code><div onclick="copied(this)" data-code="docker run --name my-nginx -d -p 8080:80 nginx /bin/bash
 # faaed6a2d63af248961aab59713e515c76aea447
@@ -65,7 +65,7 @@
       <h2 id="运行容器示例一"><a class="anchor" aria-hidden="true" tabindex="-1" href="#运行容器示例一"><span class="octicon octicon-link"></span></a>运行容器示例一</h2>
       <p>启动一个更复杂Nginx的例子：</p>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 上面的命令将本地文件中的 nginx.conf 配置文件挂载到容器，并且将要展示的静态页面也挂载到容器。</span>
-docker run --name my-nginx <span class="token punctuation">\</span> 
+<span class="token function">docker</span> run --name my-nginx <span class="token punctuation">\</span> 
     -v /host/path/nginx.conf:/etc/nginx/nginx.conf:ro <span class="token punctuation">\</span>
     -v /some/html:/usr/share/nginx/html:ro <span class="token punctuation">\</span>
     -p <span class="token number">8080</span>:80 <span class="token punctuation">\</span>
@@ -88,7 +88,7 @@ docker run --name my-nginx \
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 创建目录 nginx, 用于存放 nginx 的相关东西</span>
 <span class="token function">mkdir</span> -p ~/_docker/nginx
 <span class="token comment"># 拉取官方的镜像</span>
-docker pull nginx
+<span class="token function">docker</span> pull nginx
 </code><div onclick="copied(this)" data-code="# 创建目录 nginx, 用于存放 nginx 的相关东西
 mkdir -p ~/_docker/nginx
 # 拉取官方的镜像
@@ -96,11 +96,11 @@ docker pull nginx
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>运行容器，记住先将目录中的 <code>/etc/nginx/conf.d/defautl.conf</code> 文件复制出来，不然会报错。</p>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 拷贝容器中的内容</span>
-docker container <span class="token function">cp</span> webserver:/etc/nginx/conf.d <span class="token environment constant">$HOME</span>/docker/nginx
-docker container <span class="token function">cp</span> webserver:/usr/share/nginx/html <span class="token environment constant">$HOME</span>/docker/nginx
+<span class="token function">docker</span> container <span class="token function">cp</span> webserver:/etc/nginx/conf.d <span class="token environment constant">$HOME</span>/docker/nginx
+<span class="token function">docker</span> container <span class="token function">cp</span> webserver:/usr/share/nginx/html <span class="token environment constant">$HOME</span>/docker/nginx
 
 <span class="token comment"># 运行容器并挂载目录</span>
-docker run -d --name webserver  <span class="token punctuation">\</span>
+<span class="token function">docker</span> run -d --name webserver  <span class="token punctuation">\</span>
   --restart always <span class="token punctuation">\</span>
   -p <span class="token number">443</span>:443 -p <span class="token number">80</span>:80 <span class="token punctuation">\</span>
   -v <span class="token environment constant">$HOME</span>/docker/nginx/html:/usr/share/nginx/html <span class="token punctuation">\</span>
@@ -112,7 +112,7 @@ docker run -d --name webserver  <span class="token punctuation">\</span>
   nginx
 
 <span class="token comment"># 命令行进入容器</span>
-docker <span class="token builtin class-name">exec</span> -it webserver /bin/bash
+<span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it webserver /bin/bash
 </code><div onclick="copied(this)" data-code="# 拷贝容器中的内容
 docker container cp webserver:/etc/nginx/conf.d $HOME/docker/nginx
 docker container cp webserver:/usr/share/nginx/html $HOME/docker/nginx
@@ -143,9 +143,9 @@ docker exec -it webserver /bin/bash
       </ul>
       <p>默认挂载的路径权限为读写。如果指定为只读可以用：ro<br>重载 nginx 配置</p>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 测试配置是否正确</span>
-docker <span class="token builtin class-name">exec</span> -it webserver nginx -t
+<span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it webserver nginx -t
 <span class="token comment"># 重新加载配置</span>
-docker <span class="token builtin class-name">exec</span> -it webserver nginx -s reload
+<span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it webserver nginx -s reload
 </code><div onclick="copied(this)" data-code="# 测试配置是否正确
 docker exec -it webserver nginx -t
 # 重新加载配置
@@ -154,14 +154,14 @@ docker exec -it webserver nginx -s reload
       <p>注意：⚠️ webserver 可以是 <code>容器名称</code> 或者 <code>容器ID</code></p>
       <h2 id="启用-gitlab-registry-功能"><a class="anchor" aria-hidden="true" tabindex="-1" href="#启用-gitlab-registry-功能"><span class="octicon octicon-link"></span></a>启用 Gitlab Registry 功能</h2>
       <p>修改配置 <code>/etc/gitlab/gitlab.rb</code> 文件，将 <code>registry_external_url</code> 的值修改为 <a href="http://192.168.188.211:5008/">http://192.168.188.211:5008</a></p>
-      <pre class="language-ruby"><code class="language-ruby">registry_external_url <span class="token string">'http://192.168.188.211:5008'</span>
+      <pre class="language-ruby"><code class="language-ruby">registry_external_url <span class="token string-literal"><span class="token string">'http://192.168.188.211:5008'</span></span>
 </code><div onclick="copied(this)" data-code="registry_external_url &#x27;http://192.168.188.211:5008&#x27;
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p><code>registry_external_url</code> 这个地址是我们使用 <code>docker</code> 命令进行 <code>pull</code> 或者 <code>push</code> 镜像的仓库地址。</p>
       <p>重启 <code>Gitlab</code> 后，可以在 <code>Gitlab</code> 左侧面板看到 <code>Container Registry</code> 的菜单。</p>
       <p>修改 <code>vim ~/.docker/daemon.json</code> 添加 <code>"192.168.188.211:5008"</code></p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+  <span class="token string-property property">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span>
     <span class="token string">"192.168.188.211:5008"</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
@@ -172,7 +172,7 @@ docker exec -it webserver nginx -s reload
 }
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>按照 gitlab 给出的提示，我们先登录上 gitlab 的 registry：</p>
-      <pre class="language-bash"><code class="language-bash">docker login <span class="token number">192.168</span>.188.211:5008
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> login <span class="token number">192.168</span>.188.211:5008
 Username: ****
 Password: **
 </code><div onclick="copied(this)" data-code="docker login 192.168.188.211:5008
@@ -187,7 +187,9 @@ docker push 192.168.188.211:5008/docker/docker-static-service-template
 # 提交镜像
 docker push 192.168.188.211:5008/docker/docker-static-service-template
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <script>function copied(target, str) {
+      <script>/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
+function copied(target, str) {
 target.classList.add('active');
 copyTextToClipboard(target.dataset.code, function() {
 setTimeout(() => {
@@ -195,7 +197,6 @@ target.classList.remove('active');
 }, 2000);
 });
 }</script>
-      <script src="https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js"></script>
     </div>
   </body>
 </html>

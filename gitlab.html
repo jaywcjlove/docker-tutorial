@@ -19,11 +19,11 @@
       <h1 id="docker-部署-gitlab"><a class="anchor" aria-hidden="true" tabindex="-1" href="#docker-部署-gitlab"><span class="octicon octicon-link"></span></a>Docker 部署 Gitlab</h1>
       <p>在 Docker 中安装 Gitlab 教程，<a href="https://docs.gitlab.com/omnibus/docker/">官方文档</a>，如果你想使用原生安装，教程在这里：<a href="https://github.com/jaywcjlove/handbook/blob/9adc40d9e684928ee68d3301afbd78eee7fe3816/CentOS/CentOS7%E5%AE%89%E8%A3%85%E7%BB%B4%E6%8A%A4Gitlab.md">CentOS7安装维护Gitlab</a></p>
       <h2 id="下载镜像"><a class="anchor" aria-hidden="true" tabindex="-1" href="#下载镜像"><span class="octicon octicon-link"></span></a>下载镜像</h2>
-      <pre class="language-bash"><code class="language-bash">docker pull gitlab/gitlab-ce
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> pull gitlab/gitlab-ce
 </code><div onclick="copied(this)" data-code="docker pull gitlab/gitlab-ce
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="运行容器"><a class="anchor" aria-hidden="true" tabindex="-1" href="#运行容器"><span class="octicon octicon-link"></span></a>运行容器</h2>
-      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> docker run <span class="token punctuation">\</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">docker</span> run <span class="token punctuation">\</span>
   --hostname gitlab.example.com <span class="token punctuation">\</span>
   --publish <span class="token number">8443</span>:443 --publish <span class="token number">8081</span>:80 -p <span class="token number">2222</span>:22 <span class="token punctuation">\</span>
   --name gitlab <span class="token punctuation">\</span>
@@ -72,18 +72,18 @@ iptables -A OUTPUT -p tcp --sport 2222 -j ACCEPT
 iptables -L -n
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>如果此容器由于权限问题而无法启动，请尝试通过执行以下操作来修复它：</p>
-      <pre class="language-bash"><code class="language-bash">docker <span class="token builtin class-name">exec</span> -it gitlab update-permissions
-docker restart gitlab
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it gitlab update-permissions
+<span class="token function">docker</span> restart gitlab
 </code><div onclick="copied(this)" data-code="docker exec -it gitlab update-permissions
 docker restart gitlab
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="容器手动备份"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器手动备份"><span class="octicon octicon-link"></span></a>容器手动备份</h2>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 第一种进行入容器执行命令的方法进行手工备份</span>
-docker <span class="token builtin class-name">exec</span> -it 容器名或容器id <span class="token function">bash</span>  <span class="token comment"># 进入容器</span>
+<span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it 容器名或容器id <span class="token function">bash</span>  <span class="token comment"># 进入容器</span>
 gitlab-rake gitlab:backup:create   <span class="token comment"># 执行gitlab备份命令</span>
 
 <span class="token comment"># 第二种直接使用外部命令执行，一次完成</span>
-docker <span class="token builtin class-name">exec</span> 容器名或容器id gitlab-rake gitlab:backup:create
+<span class="token function">docker</span> <span class="token builtin class-name">exec</span> 容器名或容器id gitlab-rake gitlab:backup:create
 </code><div onclick="copied(this)" data-code="# 第一种进行入容器执行命令的方法进行手工备份
 docker exec -it 容器名或容器id bash  # 进入容器
 gitlab-rake gitlab:backup:create   # 执行gitlab备份命令
@@ -97,7 +97,7 @@ docker exec 容器名或容器id gitlab-rake gitlab:backup:create
       <pre class="language-shell"><code class="language-shell"><span class="token shebang important">#!/bin/bash</span>
 <span class="token keyword">case</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token keyword">in</span> 
   start<span class="token punctuation">)</span>
-    docker <span class="token builtin class-name">exec</span> gitlab-ce11.2.3 gitlab-rake gitlab:backup:create
+    <span class="token function">docker</span> <span class="token builtin class-name">exec</span> gitlab-ce11.2.3 gitlab-rake gitlab:backup:create
     <span class="token punctuation">;</span><span class="token punctuation">;</span>
 <span class="token keyword">esac</span>
 </code><div onclick="copied(this)" data-code="#!/bin/bash
@@ -153,17 +153,17 @@ gitlab_rails<span class="token punctuation">[</span><span class="token string">'
 gitlab_rails[&#x27;backup_keep_time&#x27;] = 604800  
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>重新加载 <code>gitlab</code> 配置文件</p>
-      <pre class="language-bash"><code class="language-bash">docker <span class="token builtin class-name">exec</span> 容器名或容器ID gitlab-ctl reconfigure  
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> 容器名或容器ID gitlab-ctl reconfigure  
 </code><div onclick="copied(this)" data-code="docker exec 容器名或容器ID gitlab-ctl reconfigure  
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h3 id="容器管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器管理"><span class="octicon octicon-link"></span></a>容器管理</h3>
-      <pre class="language-bash"><code class="language-bash">docker stop gitlab <span class="token comment"># 停止容器</span>
-docker <span class="token function">rm</span> gitlab <span class="token comment"># 删除容器</span>
-docker start gitlab <span class="token comment"># 启动容器</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> stop gitlab <span class="token comment"># 停止容器</span>
+<span class="token function">docker</span> <span class="token function">rm</span> gitlab <span class="token comment"># 删除容器</span>
+<span class="token function">docker</span> start gitlab <span class="token comment"># 启动容器</span>
 <span class="token comment"># 编辑 gitlab 容器配置</span>
-docker <span class="token builtin class-name">exec</span> -it gitlab <span class="token function">vim</span> /etc/gitlab/gitlab.rb
+<span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it gitlab <span class="token function">vim</span> /etc/gitlab/gitlab.rb
 <span class="token comment"># 重启 gitlab 容器</span>
-docker restart gitlab
+<span class="token function">docker</span> restart gitlab
 </code><div onclick="copied(this)" data-code="docker stop gitlab # 停止容器
 docker rm gitlab # 删除容器
 docker start gitlab # 启动容器
@@ -280,10 +280,10 @@ secrets:
     file: ./root_password.txt
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>创建 <code>gitlab.rb</code> 文件</p>
-      <pre class="language-rb"><code class="language-rb">external_url <span class="token string">'https://my.domain.com/'</span>
-gitlab_rails<span class="token punctuation">[</span><span class="token string">'initial_root_password'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">File</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token string">'/run/secrets/gitlab_root_password'</span><span class="token punctuation">)</span>
-gitlab_rails<span class="token punctuation">[</span><span class="token string">'backup_keep_time'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">604800</span> 
-gitlab_rails<span class="token punctuation">[</span><span class="token string">'time_zone'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'Asia/Shanghai'</span> <span class="token comment"># 中国的东八区时间</span>
+      <pre class="language-rb"><code class="language-rb">external_url <span class="token string-literal"><span class="token string">'https://my.domain.com/'</span></span>
+gitlab_rails<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">'initial_root_password'</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">File</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token string-literal"><span class="token string">'/run/secrets/gitlab_root_password'</span></span><span class="token punctuation">)</span>
+gitlab_rails<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">'backup_keep_time'</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">604800</span> 
+gitlab_rails<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">'time_zone'</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'Asia/Shanghai'</span></span> <span class="token comment"># 中国的东八区时间</span>
 </code><div onclick="copied(this)" data-code="external_url &#x27;https://my.domain.com/&#x27;
 gitlab_rails[&#x27;initial_root_password&#x27;] = File.read(&#x27;/run/secrets/gitlab_root_password&#x27;)
 gitlab_rails[&#x27;backup_keep_time&#x27;] = 604800 
@@ -294,26 +294,26 @@ gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27; # 中国的东�
 </code><div onclick="copied(this)" data-code="MySuperSecretAndSecurePass0rd!
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>确保您与 <code>docker-compose.yml</code> 在同一目录中并运行：</p>
-      <pre class="language-bash"><code class="language-bash">docker stack deploy --compose-file docker-compose.yml gitlab
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> stack deploy --compose-file docker-compose.yml gitlab
 </code><div onclick="copied(this)" data-code="docker stack deploy --compose-file docker-compose.yml gitlab
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="注册-runner"><a class="anchor" aria-hidden="true" tabindex="-1" href="#注册-runner"><span class="octicon octicon-link"></span></a><a href="https://docs.gitlab.com/runner/install/docker.html"><code>注册 runner</code></a></h2>
       <h3 id="更新配置"><a class="anchor" aria-hidden="true" tabindex="-1" href="#更新配置"><span class="octicon octicon-link"></span></a>更新配置</h3>
       <p>如果您在 <code>config.toml</code> 中更改配置，则可能需要重新启动运行程序以应用更改。 确保重新启动整个容器，而不是使用 <code>gitlab-runner restart</code>：</p>
-      <pre class="language-shell"><code class="language-shell">docker restart gitlab-runner
+      <pre class="language-shell"><code class="language-shell"><span class="token function">docker</span> restart gitlab-runner
 </code><div onclick="copied(this)" data-code="docker restart gitlab-runner
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h3 id="升级版本"><a class="anchor" aria-hidden="true" tabindex="-1" href="#升级版本"><span class="octicon octicon-link"></span></a>升级版本</h3>
       <p>Pull the latest version (or a specific tag):</p>
-      <pre class="language-shell"><code class="language-shell">docker pull gitlab/gitlab-runner:latest
+      <pre class="language-shell"><code class="language-shell"><span class="token function">docker</span> pull gitlab/gitlab-runner:latest
 </code><div onclick="copied(this)" data-code="docker pull gitlab/gitlab-runner:latest
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>Stop and remove the existing container:</p>
-      <pre class="language-shell"><code class="language-shell">docker stop gitlab-runner <span class="token operator">&#x26;&#x26;</span> docker <span class="token function">rm</span> gitlab-runner
+      <pre class="language-shell"><code class="language-shell"><span class="token function">docker</span> stop gitlab-runner <span class="token operator">&#x26;&#x26;</span> <span class="token function">docker</span> <span class="token function">rm</span> gitlab-runner
 </code><div onclick="copied(this)" data-code="docker stop gitlab-runner &#x26;&#x26; docker rm gitlab-runner
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>Start the container as you did originally:</p>
-      <pre class="language-shell"><code class="language-shell">docker run -d --name gitlab-runner --restart always <span class="token punctuation">\</span>
+      <pre class="language-shell"><code class="language-shell"><span class="token function">docker</span> run -d --name gitlab-runner --restart always <span class="token punctuation">\</span>
   -v /var/run/docker.sock:/var/run/docker.sock <span class="token punctuation">\</span>
   -v /home/www/gitlab/gitlab-runner/config:/etc/gitlab-runner <span class="token punctuation">\</span>
   gitlab/gitlab-runner:latest
@@ -323,7 +323,7 @@ gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27; # 中国的东�
   gitlab/gitlab-runner:latest
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>服务 gitlab-runner 跑起来之后可以注册对应的仓库</p>
-      <pre class="language-shell"><code class="language-shell">docker run --rm -it -v /home/www/gitlab/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
+      <pre class="language-shell"><code class="language-shell"><span class="token function">docker</span> run --rm -it -v /home/www/gitlab/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
 
 <span class="token comment"># Runtime platform                                    arch=amd64 os=linux pid=8 revision=943fc252 version=13.7.0</span>
 <span class="token comment"># Running in system-mode.</span>
@@ -548,18 +548,22 @@ check_interval = 0
         </tbody>
       </table>
       <p>假设我是 <code>13.9.2</code> 升级到 <code>14.1.6</code>，通过官方提供的<a href="https://docs.gitlab.com/ee/update/index.html#upgrade-paths">升级路径</a> => <code>13.9.2</code> -> <code>13.12.12</code> -> <code>14.0.11</code> -> <code>14.1.6</code></p>
-      <pre class="language-bash"><code class="language-bash">docker pull gitlab/gitlab-ce:13.12.12-ce.0
-docker pull gitlab/gitlab-ce:13.12.15-ce.0
-docker pull gitlab/gitlab-ce:14.0.11-ce.0
-docker pull gitlab/gitlab-ce:14.0.12-ce.0
-docker pull gitlab/gitlab-ce:14.1.6-ce.0
-docker pull gitlab/gitlab-ce:14.1.7-ce.0
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> pull gitlab/gitlab-ce:13.12.12-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:13.12.15-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:14.0.11-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:14.0.12-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:14.1.6-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:14.1.7-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:14.1.8-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:14.8.2-ce.0
 </code><div onclick="copied(this)" data-code="docker pull gitlab/gitlab-ce:13.12.12-ce.0
 docker pull gitlab/gitlab-ce:13.12.15-ce.0
 docker pull gitlab/gitlab-ce:14.0.11-ce.0
 docker pull gitlab/gitlab-ce:14.0.12-ce.0
 docker pull gitlab/gitlab-ce:14.1.6-ce.0
 docker pull gitlab/gitlab-ce:14.1.7-ce.0
+docker pull gitlab/gitlab-ce:14.1.8-ce.0
+docker pull gitlab/gitlab-ce:14.8.2-ce.0
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>我先将所有的版本下载到本地。先将 <code>13.9.2</code> 升级到 <code>14.0.11</code>，启动的时候会有提示升级需要更改配置：</p>
       <pre class="language-bash"><code class="language-bash">There was an error running gitlab-ctl reconfigure:
@@ -590,7 +594,9 @@ Chef Infra Client failed. 0 resources updated in 12 seconds
 </code><div onclick="copied(this)" data-code="gitlab-ctl reconfigure
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>启动没有问题再升级到 <code>14.0.11</code>。</p>
-      <script>function copied(target, str) {
+      <script>/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
+function copied(target, str) {
 target.classList.add('active');
 copyTextToClipboard(target.dataset.code, function() {
 setTimeout(() => {
@@ -598,7 +604,6 @@ target.classList.remove('active');
 }, 2000);
 });
 }</script>
-      <script src="https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js"></script>
     </div>
   </body>
 </html>

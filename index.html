@@ -148,21 +148,21 @@ $ sudo yum install docker-ce-<VERSION STRING>
 $ sudo yum install docker-ce-18.06.1.ce
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>启动 Docker 后台服务</p>
-      <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> systemctl start docker
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> systemctl start <span class="token function">docker</span>
 </code><div onclick="copied(this)" data-code="$ sudo systemctl start docker
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>通过运行 <code>hello-world</code> 镜像，验证是否正确安装了 <code>docker</code>。</p>
-      <pre class="language-bash"><code class="language-bash">$ docker run hello-world
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> run hello-world
 </code><div onclick="copied(this)" data-code="$ docker run hello-world
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="旧版本安装"><a class="anchor" aria-hidden="true" tabindex="-1" href="#旧版本安装"><span class="octicon octicon-link"></span></a>旧版本安装</h2>
-      <pre class="language-bash"><code class="language-bash">yum <span class="token function">install</span> docker        <span class="token comment"># CentOS 中安装</span>
+      <pre class="language-bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token function">docker</span>        <span class="token comment"># CentOS 中安装</span>
 <span class="token function">apt-get</span> <span class="token function">install</span> docker-ce <span class="token comment"># Ubuntu 中安装</span>
-pacman -S docker          <span class="token comment"># Arch 中安装</span>
-emerge --ask docker       <span class="token comment"># Gentoo 中安装</span>
+pacman -S <span class="token function">docker</span>          <span class="token comment"># Arch 中安装</span>
+emerge --ask <span class="token function">docker</span>       <span class="token comment"># Gentoo 中安装</span>
 
 <span class="token comment">#=====================</span>
-docker version      <span class="token comment"># 通过查看版本，检查安装是否成功</span>
+<span class="token function">docker</span> version      <span class="token comment"># 通过查看版本，检查安装是否成功</span>
 <span class="token comment"># Client:</span>
 <span class="token comment">#  Version:         1.12.6</span>
 <span class="token comment">#  API version:     1.24</span>
@@ -206,7 +206,7 @@ docker version      # 通过查看版本，检查安装是否成功
 #  OS/Arch:         linux/amd64
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="命令介绍"><a class="anchor" aria-hidden="true" tabindex="-1" href="#命令介绍"><span class="octicon octicon-link"></span></a>命令介绍</h2>
-      <pre class="language-bash"><code class="language-bash">$ docker --help
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> --help
 
 管理命令:
   container   管理容器
@@ -272,10 +272,10 @@ docker version      # 通过查看版本，检查安装是否成功
   unpause     恢复一个或多个容器内所有被暂停的进程
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="服务管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#服务管理"><span class="octicon octicon-link"></span></a>服务管理</h2>
-      <pre class="language-bash"><code class="language-bash"><span class="token function">service</span> docker start       <span class="token comment"># 启动 docker 服务，守护进程</span>
-<span class="token function">service</span> docker stop        <span class="token comment"># 停止 docker 服务</span>
-<span class="token function">service</span> docker status      <span class="token comment"># 查看 docker 服务状态</span>
-<span class="token function">chkconfig</span> docker on        <span class="token comment"># 设置为开机启动</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">service</span> <span class="token function">docker</span> start       <span class="token comment"># 启动 docker 服务，守护进程</span>
+<span class="token function">service</span> <span class="token function">docker</span> stop        <span class="token comment"># 停止 docker 服务</span>
+<span class="token function">service</span> <span class="token function">docker</span> status      <span class="token comment"># 查看 docker 服务状态</span>
+<span class="token function">chkconfig</span> <span class="token function">docker</span> on        <span class="token comment"># 设置为开机启动</span>
 </code><div onclick="copied(this)" data-code="service docker start       # 启动 docker 服务，守护进程
 service docker stop        # 停止 docker 服务
 service docker status      # 查看 docker 服务状态
@@ -283,16 +283,16 @@ chkconfig docker on        # 设置为开机启动
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="镜像管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#镜像管理"><span class="octicon octicon-link"></span></a>镜像管理</h2>
       <p>镜像可以看做我们平时装系统的镜像，里面就是一个运行环境。</p>
-      <pre class="language-bash"><code class="language-bash">docker pull centos:latest  <span class="token comment"># 从docker.io中下载centos镜像到本地</span>
-docker images              <span class="token comment"># 查看已下载的镜像</span>
-docker rmi <span class="token punctuation">[</span>image_id<span class="token punctuation">]</span>      <span class="token comment"># 删除镜像，指定镜像id</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> pull centos:latest  <span class="token comment"># 从docker.io中下载centos镜像到本地</span>
+<span class="token function">docker</span> images              <span class="token comment"># 查看已下载的镜像</span>
+<span class="token function">docker</span> rmi <span class="token punctuation">[</span>image_id<span class="token punctuation">]</span>      <span class="token comment"># 删除镜像，指定镜像id</span>
 
 <span class="token comment"># 删除所有镜像</span>
 <span class="token comment"># none 默认为 docker.io</span>
-docker rmi <span class="token variable"><span class="token variable">$(</span>docker images <span class="token operator">|</span> <span class="token function">grep</span> none <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print $3}'</span> <span class="token operator">|</span> <span class="token function">sort</span> -r<span class="token variable">)</span></span>
+<span class="token function">docker</span> rmi <span class="token variable"><span class="token variable">$(</span><span class="token function">docker</span> images <span class="token operator">|</span> <span class="token function">grep</span> none <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print $3}'</span> <span class="token operator">|</span> <span class="token function">sort</span> -r<span class="token variable">)</span></span>
 
 <span class="token comment"># 连接进行进入命令行模式，exit命令退出。</span>
-docker run -t -i nginx:latest /bin/bash
+<span class="token function">docker</span> run -t -i nginx:latest /bin/bash
 </code><div onclick="copied(this)" data-code="docker pull centos:latest  # 从docker.io中下载centos镜像到本地
 docker images              # 查看已下载的镜像
 docker rmi [image_id]      # 删除镜像，指定镜像id
@@ -311,7 +311,7 @@ docker run -t -i nginx:latest /bin/bash
         <li>使用 Dockerfile 指令来创建一个新的镜像</li>
       </ol>
       <p>下面通过已存在的容器创建一个新的镜像。</p>
-      <pre class="language-bash"><code class="language-bash">docker commit -m<span class="token operator">=</span><span class="token string">"First Docker"</span> -a<span class="token operator">=</span><span class="token string">"wcjiang"</span> a6b0a6cfdacf wcjiang/nginx:v1.2.1
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> commit -m<span class="token operator">=</span><span class="token string">"First Docker"</span> -a<span class="token operator">=</span><span class="token string">"wcjiang"</span> a6b0a6cfdacf wcjiang/nginx:v1.2.1
 </code><div onclick="copied(this)" data-code="docker commit -m=&#x22;First Docker&#x22; -a=&#x22;wcjiang&#x22; a6b0a6cfdacf wcjiang/nginx:v1.2.1
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>上面命令参数说明：</p>
@@ -354,9 +354,9 @@ EXPOSE 3000
         <li><code>EXPOSE 3000</code>：将容器 <code>3000</code> 端口暴露出来， 允许外部连接这个端口。</li>
       </ul>
       <p>有了 <code>Dockerfile</code> 文件以后，就可以使用 <code>docker image build</code> 命令创建 <code>image</code> 文件了。</p>
-      <pre class="language-bash"><code class="language-bash">$ docker image build -t koa-demo <span class="token builtin class-name">.</span>
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> image build -t koa-demo <span class="token builtin class-name">.</span>
 <span class="token comment"># 或者</span>
-$ docker image build -t koa-demo:0.0.1 <span class="token builtin class-name">.</span>
+$ <span class="token function">docker</span> image build -t koa-demo:0.0.1 <span class="token builtin class-name">.</span>
 </code><div onclick="copied(this)" data-code="$ docker image build -t koa-demo .
 # 或者
 $ docker image build -t koa-demo:0.0.1 .
@@ -367,7 +367,7 @@ $ docker image build -t koa-demo:0.0.1 .
         <li>在<a href="https://www.docker.com/">Docker</a> 注册账户，发布的镜像都在<a href="https://cloud.docker.com/repository/list">这个页面里</a>展示</li>
         <li>将上面做的镜像<code>nginx</code>，起个新的名字<code>nginx-test</code></li>
       </ol>
-      <pre class="language-bash"><code class="language-bash">docker tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
 </code><div onclick="copied(this)" data-code="docker tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <ol start="3">
@@ -379,7 +379,7 @@ $ docker image build -t koa-demo:0.0.1 .
       <ol start="4">
         <li>上传<code>nginx-test</code>镜像</li>
       </ol>
-      <pre class="language-bash"><code class="language-bash">docker push wcjiang/nginx-test:lastest
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> push wcjiang/nginx-test:lastest
 <span class="token comment"># The push refers to a repository [docker.io/wcjiang/nginx-test]</span>
 <span class="token comment"># 2f5c6a3c22e3: Mounted from wcjiang/nginx</span>
 <span class="token comment"># cf516324493c: Mounted from wcjiang/nginx</span>
@@ -405,7 +405,7 @@ apt-get install vim
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>如果你安装了CentOS或者Ubuntu系统可以进入系统安装相关软件</p>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 进入到centos7镜像系统</span>
-docker run -i -t centos:7 /bin/bash
+<span class="token function">docker</span> run -i -t centos:7 /bin/bash
 yum update
 yum <span class="token function">install</span> <span class="token function">vim</span>
 </code><div onclick="copied(this)" data-code="# 进入到centos7镜像系统
@@ -416,31 +416,31 @@ yum install vim
       <h2 id="容器管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器管理"><span class="octicon octicon-link"></span></a>容器管理</h2>
       <p>容器就像一个类的实例</p>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 列出本机正在运行的容器</span>
-docker container <span class="token function">ls</span>
+<span class="token function">docker</span> container <span class="token function">ls</span>
 <span class="token comment"># 列出本机所有容器，包括终止运行的容器</span>
-docker container <span class="token function">ls</span> --all
-docker start <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span> <span class="token comment"># 启动容器</span>
-docker stop <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span>  <span class="token comment"># 停止容器</span>
-docker <span class="token function">rm</span> <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span>    <span class="token comment"># 删除容器</span>
-docker logs <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span>  <span class="token comment"># 查看日志</span>
-docker <span class="token builtin class-name">exec</span> -it <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span> /bin/bash  <span class="token comment"># 进入容器</span>
+<span class="token function">docker</span> container <span class="token function">ls</span> --all
+<span class="token function">docker</span> start <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span> <span class="token comment"># 启动容器</span>
+<span class="token function">docker</span> stop <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span>  <span class="token comment"># 停止容器</span>
+<span class="token function">docker</span> <span class="token function">rm</span> <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span>    <span class="token comment"># 删除容器</span>
+<span class="token function">docker</span> logs <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span>  <span class="token comment"># 查看日志</span>
+<span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it <span class="token punctuation">[</span>containerID/Names<span class="token punctuation">]</span> /bin/bash  <span class="token comment"># 进入容器</span>
 
 <span class="token comment"># 从正在运行的 Docker 容器里面，将文件拷贝到本机，注意后面有个【点】拷贝到当前目录</span>
-docker container <span class="token function">cp</span> <span class="token punctuation">[</span>containID<span class="token punctuation">]</span>:<span class="token punctuation">[</span>/path/to/file<span class="token punctuation">]</span> <span class="token builtin class-name">.</span>
+<span class="token function">docker</span> container <span class="token function">cp</span> <span class="token punctuation">[</span>containID<span class="token punctuation">]</span>:<span class="token punctuation">[</span>/path/to/file<span class="token punctuation">]</span> <span class="token builtin class-name">.</span>
 
-docker run centos <span class="token builtin class-name">echo</span> <span class="token string">"hello world"</span>  <span class="token comment"># 在docker容器中运行hello world!</span>
-docker run centos yum <span class="token function">install</span> -y <span class="token function">wget</span> <span class="token comment"># 在docker容器中，安装wget软件</span>
-docker <span class="token function">ps</span>                             <span class="token comment"># 列出包括未运行的容器</span>
-docker <span class="token function">ps</span> -a                          <span class="token comment"># 查看所有容器(包括正在运行和已停止的)</span>
-docker logs my-nginx                  <span class="token comment"># 查看 my-nginx 容器日志</span>
+<span class="token function">docker</span> run centos <span class="token builtin class-name">echo</span> <span class="token string">"hello world"</span>  <span class="token comment"># 在docker容器中运行hello world!</span>
+<span class="token function">docker</span> run centos yum <span class="token function">install</span> -y <span class="token function">wget</span> <span class="token comment"># 在docker容器中，安装wget软件</span>
+<span class="token function">docker</span> <span class="token function">ps</span>                             <span class="token comment"># 列出包括未运行的容器</span>
+<span class="token function">docker</span> <span class="token function">ps</span> -a                          <span class="token comment"># 查看所有容器(包括正在运行和已停止的)</span>
+<span class="token function">docker</span> logs my-nginx                  <span class="token comment"># 查看 my-nginx 容器日志</span>
 
-docker run -i -t centos /bin/bash     <span class="token comment"># 启动一个容器</span>
-docker inspect centos                 <span class="token comment"># 检查运行中的镜像</span>
-docker commit 8bd centos              <span class="token comment"># 保存对容器的修改</span>
-docker commit -m <span class="token string">"n changed"</span> my-nginx my-nginx-image <span class="token comment"># 使用已经存在的容器创建一个镜像</span>
-docker inspect -f <span class="token punctuation">{</span><span class="token punctuation">{</span>.State.Pid<span class="token punctuation">}</span><span class="token punctuation">}</span> 44fc0f0582d9        <span class="token comment"># 获取id为 44fc0f0582d9 的PID进程编号</span>
+<span class="token function">docker</span> run -i -t centos /bin/bash     <span class="token comment"># 启动一个容器</span>
+<span class="token function">docker</span> inspect centos                 <span class="token comment"># 检查运行中的镜像</span>
+<span class="token function">docker</span> commit 8bd centos              <span class="token comment"># 保存对容器的修改</span>
+<span class="token function">docker</span> commit -m <span class="token string">"n changed"</span> my-nginx my-nginx-image <span class="token comment"># 使用已经存在的容器创建一个镜像</span>
+<span class="token function">docker</span> inspect -f <span class="token punctuation">{</span><span class="token punctuation">{</span>.State.Pid<span class="token punctuation">}</span><span class="token punctuation">}</span> 44fc0f0582d9        <span class="token comment"># 获取id为 44fc0f0582d9 的PID进程编号</span>
 <span class="token comment"># 下载指定版本容器镜像</span>
-docker pull gitlab/gitlab-ce:11.2.3-ce.0
+<span class="token function">docker</span> pull gitlab/gitlab-ce:11.2.3-ce.0
 </code><div onclick="copied(this)" data-code="# 列出本机正在运行的容器
 docker container ls
 # 列出本机所有容器，包括终止运行的容器
@@ -469,17 +469,17 @@ docker inspect -f {{.State.Pid}} 44fc0f0582d9        # 获取id为 44fc0f0582d9 
 docker pull gitlab/gitlab-ce:11.2.3-ce.0
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h3 id="容器服务管理"><a class="anchor" aria-hidden="true" tabindex="-1" href="#容器服务管理"><span class="octicon octicon-link"></span></a>容器服务管理</h3>
-      <pre class="language-bash"><code class="language-bash">docker run -itd --name my-nginx2 nginx  <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
-docker start my-nginx --restart<span class="token operator">=</span>always  <span class="token comment"># 【启动策略】一个已经存在的容器启动添加策略</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run -itd --name my-nginx2 nginx  <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
+<span class="token function">docker</span> start my-nginx --restart<span class="token operator">=</span>always  <span class="token comment"># 【启动策略】一个已经存在的容器启动添加策略</span>
     <span class="token comment"># no - 容器不重启</span>
     <span class="token comment"># on-failure - 容器推出状态非0时重启</span>
     <span class="token comment"># always - 始终重启</span>
-docker start my-nginx             <span class="token comment"># 【启动】一个已经存在的容器</span>
-docker restart my-nginx           <span class="token comment"># 【重启】容器</span>
-docker stop my-nginx              <span class="token comment"># 【停止运行】一个容器</span>
-docker <span class="token function">kill</span> my-nginx              <span class="token comment"># 【杀死】一个运行中的容器</span>
-docker <span class="token function">rename</span> my-nginx new-nginx  <span class="token comment"># 【重命名】容器</span>
-docker <span class="token function">rm</span> new-nginx               <span class="token comment"># 【删除】容器</span>
+<span class="token function">docker</span> start my-nginx             <span class="token comment"># 【启动】一个已经存在的容器</span>
+<span class="token function">docker</span> restart my-nginx           <span class="token comment"># 【重启】容器</span>
+<span class="token function">docker</span> stop my-nginx              <span class="token comment"># 【停止运行】一个容器</span>
+<span class="token function">docker</span> <span class="token function">kill</span> my-nginx              <span class="token comment"># 【杀死】一个运行中的容器</span>
+<span class="token function">docker</span> <span class="token function">rename</span> my-nginx new-nginx  <span class="token comment"># 【重命名】容器</span>
+<span class="token function">docker</span> <span class="token function">rm</span> new-nginx               <span class="token comment"># 【删除】容器</span>
 </code><div onclick="copied(this)" data-code="docker run -itd --name my-nginx2 nginx  # 通过nginx镜像，【创建】容器名为 my-nginx2 的容器
 docker start my-nginx --restart=always  # 【启动策略】一个已经存在的容器启动添加策略
     # no - 容器不重启
@@ -496,13 +496,13 @@ docker rm new-nginx               # 【删除】容器
       <ol>
         <li>创建一个守护状态的 Docker 容器</li>
       </ol>
-      <pre class="language-bash"><code class="language-bash">docker run -itd my-nginx /bin/bash
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run -itd my-nginx /bin/bash
 </code><div onclick="copied(this)" data-code="docker run -itd my-nginx /bin/bash
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <ol start="2">
         <li>使用<code>docker ps</code>查看到该容器信息</li>
       </ol>
-      <pre class="language-bash"><code class="language-bash">docker <span class="token function">ps</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">ps</span>
 <span class="token comment"># CONTAINER ID  IMAGE  COMMAND      CREATED          STATUS          PORTS    NAMES</span>
 <span class="token comment"># 6bd0496da64f  nginx  "/bin/bash"  20 seconds ago   Up 18 seconds   80/tcp   high_shirley</span>
 </code><div onclick="copied(this)" data-code="docker ps
@@ -512,7 +512,7 @@ docker rm new-nginx               # 【删除】容器
       <ol start="3">
         <li>使用<code>docker exec</code>命令进入一个已经在运行的容器</li>
       </ol>
-      <pre class="language-bash"><code class="language-bash">docker <span class="token builtin class-name">exec</span> -it 6bd0496da64f /bin/bash
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it 6bd0496da64f /bin/bash
 </code><div onclick="copied(this)" data-code="docker exec -it 6bd0496da64f /bin/bash
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>通常有下面几种方式进入Docker的容器，推荐使用 <code>exec</code>，使用 <code>attach</code> 一直进入失败。</p>
@@ -531,25 +531,25 @@ docker rm new-nginx               # 【删除】容器
       </blockquote>
       <p>除了 <a href="https://github.com/goharbor/harbor">Harbor</a> 还有 <a href="https://github.com/humpback/humpback">humpback</a> 和 <a href="https://github.com/rancher/rancher">rancher</a></p>
       <h3 id="registry"><a class="anchor" aria-hidden="true" tabindex="-1" href="#registry"><span class="octicon octicon-link"></span></a><code>registry</code></h3>
-      <pre class="language-bash"><code class="language-bash">docker pull registry:2.6.2
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> pull registry:2.6.2
 </code><div onclick="copied(this)" data-code="docker pull registry:2.6.2
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>创建容器并运行，创建成功之后，可访问 <code>http://192.168.99.100:7000/v2/</code>，来检查仓库是否正常运行，当返回 <code>{}</code> 时，表示部署成功。</p>
-      <pre class="language-bash"><code class="language-bash">docker run -d <span class="token punctuation">\</span>
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
   -p <span class="token number">5000</span>:5000 <span class="token punctuation">\</span>
   --restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
   --name registry <span class="token punctuation">\</span>
   registry:2
 
 <span class="token comment"># 自定义存储位置</span>
-docker run -d <span class="token punctuation">\</span>
+<span class="token function">docker</span> run -d <span class="token punctuation">\</span>
   -p <span class="token number">5000</span>:5000 <span class="token punctuation">\</span>
   --restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
   --name registry <span class="token punctuation">\</span>
   -v <span class="token environment constant">$HOME</span>/_docker/registry:/var/lib/registry <span class="token punctuation">\</span>
   registry:2
 
-docker run -d -p <span class="token number">5000</span>:5000 --restart<span class="token operator">=</span>always --name registry <span class="token punctuation">\</span>
+<span class="token function">docker</span> run -d -p <span class="token number">5000</span>:5000 --restart<span class="token operator">=</span>always --name registry <span class="token punctuation">\</span>
     -v <span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>/config.yml:/etc/docker/registry/config.yml <span class="token punctuation">\</span>
     registry:2
 </code><div onclick="copied(this)" data-code="docker run -d \
@@ -572,11 +572,11 @@ docker run -d -p 5000:5000 --restart=always --name registry \
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>推送镜像到私有仓库</p>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 从官方仓库拉取一个镜像</span>
-docker pull nginx:1.13
+<span class="token function">docker</span> pull nginx:1.13
 <span class="token comment"># 为镜像 `nginx:1.13` 创建一个新标签 `192.168.31.69:7000/test-nginx:1.13`</span>
-docker tag nginx:latest <span class="token number">192.168</span>.31.69:5000/test-nginx:1.13
+<span class="token function">docker</span> tag nginx:latest <span class="token number">192.168</span>.31.69:5000/test-nginx:1.13
 <span class="token comment"># 推送到私有仓库中</span>
-docker push <span class="token number">192.168</span>.31.69:5000/test-nginx:1.13
+<span class="token function">docker</span> push <span class="token number">192.168</span>.31.69:5000/test-nginx:1.13
 <span class="token comment"># The push refers to a repository [192.168.99.100:7000/test-nginx]</span>
 <span class="token comment"># Get https://192.168.99.100:7000/v1/_ping: http: server gave HTTP response to HTTPS client</span>
 </code><div onclick="copied(this)" data-code="# 从官方仓库拉取一个镜像
@@ -595,7 +595,7 @@ docker push 192.168.31.69:5000/test-nginx:1.13
       </ol>
       <p>我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件 <code>vi /etc/docker/daemon.json</code> 添加 <code>insecure-registries</code> 配置信息，如果 <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+  <span class="token string-property property">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span>
     <span class="token string">"192.168.31.69:5000"</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
@@ -609,7 +609,7 @@ docker push 192.168.31.69:5000/test-nginx:1.13
         <p>如果是 macOS 可以通过 docker 客户端，<code>Preferences</code> => <code>Advanced</code> => <code>添加配置</code> => <code>Apply &#x26; Restart</code>，重启docker就可以了。</p>
       </blockquote>
       <p>重启服务 <code>service docker restart</code>，默认情况下 push 是会报如下错误的：</p>
-      <pre class="language-bash"><code class="language-bash">docker push <span class="token number">192.168</span>.99.100:7000/test-nginx:1.13
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> push <span class="token number">192.168</span>.99.100:7000/test-nginx:1.13
 <span class="token comment"># The push refers to a repository [192.168.99.100:7000/test-nginx]</span>
 <span class="token comment"># a1a53f8d99b5: Retrying in 1 second</span>
 <span class="token comment"># ...</span>
@@ -629,9 +629,9 @@ getenforce
 # Permissive  
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 停止本地 registry</span>
-docker container stop registry
+<span class="token function">docker</span> container stop registry
 <span class="token comment"># 要删除容器，请使用 docker container rm</span>
-docker container stop registry <span class="token operator">&#x26;&#x26;</span> docker container <span class="token function">rm</span> -v registry
+<span class="token function">docker</span> container stop registry <span class="token operator">&#x26;&#x26;</span> <span class="token function">docker</span> container <span class="token function">rm</span> -v registry
 <span class="token comment"># 自定义存储位置</span>
 </code><div onclick="copied(this)" data-code="# 停止本地 registry
 docker container stop registry
@@ -666,8 +666,8 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --containerd=/run/cont
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>修改完配置之后需要重启 Docker 服务：</p>
       <pre class="language-bash"><code class="language-bash">systemctl daemon-reload
-systemctl restart docker
-<span class="token function">sudo</span> <span class="token function">service</span> docker restart
+systemctl restart <span class="token function">docker</span>
+<span class="token function">sudo</span> <span class="token function">service</span> <span class="token function">docker</span> restart
 </code><div onclick="copied(this)" data-code="systemctl daemon-reload
 systemctl restart docker
 sudo service docker restart
@@ -681,7 +681,7 @@ tcp   0   0 10.105.3.115:2375   0.0.0.0:*     LISTEN    32316/dockerd
       <h3 id="macos"><a class="anchor" aria-hidden="true" tabindex="-1" href="#macos"><span class="octicon octicon-link"></span></a>MacOS</h3>
       <p>在 Mac 下无法直接修改配置文件来开启远程 API 服务，后来在 <a href="https://github.com/docker/for-mac"><code>docker/for-mac</code></a> 的 <a href="https://github.com/docker/for-mac/issues/770"><code>issue</code></a> 中得到了解决方案。</p>
       <p>可以运行一个 <a href="https://hub.docker.com/r/bobrik/socat"><code>bobrik/socat</code></a> 容器，将 <code>unix socket</code> 上的 Docker API 转发到 MacOS 上指定的端口中：</p>
-      <pre class="language-bash"><code class="language-bash">docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p <span class="token number">127.0</span>.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
+      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run -d -v /var/run/docker.sock:/var/run/docker.sock -p <span class="token number">127.0</span>.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
 </code><div onclick="copied(this)" data-code="docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h3 id="测试"><a class="anchor" aria-hidden="true" tabindex="-1" href="#测试"><span class="octicon octicon-link"></span></a>测试</h3>
@@ -694,7 +694,7 @@ http://127.0.0.1:2375/version
       <p>下面可测试 docker 是否启动了</p>
       <pre class="language-bash"><code class="language-bash"><span class="token function">curl</span> -s --unix-socket /var/run/docker.sock http://dummy/containers/json
 <span class="token comment">## 或者使用下面命令</span>
-docker info
+<span class="token function">docker</span> info
 </code><div onclick="copied(this)" data-code="curl -s --unix-socket /var/run/docker.sock http://dummy/containers/json
 ## 或者使用下面命令
 docker info
@@ -811,9 +811,9 @@ docker info
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 创建放持久化数据文件夹</span>
 <span class="token function">mkdir</span> -p /opt/app/humpback-web
 <span class="token comment"># 下载humpback-web镜像到本地</span>
-docker pull humpbacks/humpback-web:1.0.0
+<span class="token function">docker</span> pull humpbacks/humpback-web:1.0.0
 <span class="token comment"># 启动 humpback-web 容器，将容器命名为 humpback-web</span>
-docker run -d --net<span class="token operator">=</span>host --restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
+<span class="token function">docker</span> run -d --net<span class="token operator">=</span>host --restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
  -e <span class="token assign-left variable">HUMPBACK_LISTEN_PORT</span><span class="token operator">=</span><span class="token number">7001</span> <span class="token punctuation">\</span>
  -v /opt/app/humpback-web/dbFiles:/humpback-web/dbFiles <span class="token punctuation">\</span>
  --name humpback-web <span class="token punctuation">\</span>
@@ -831,7 +831,7 @@ docker run -d --net=host --restart=always \
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>访问站点，打开浏览器输入：<a href="http://192.168.99.100:7001/">http://192.168.99.100:7001</a> ，默认账户：<code>admin</code> 密码：<code>123456</code></p>
       <h3 id="seafile"><a class="anchor" aria-hidden="true" tabindex="-1" href="#seafile"><span class="octicon octicon-link"></span></a><code>Seafile</code></h3>
-      <pre class="language-shell"><code class="language-shell">docker run -d --name seafile <span class="token punctuation">\</span>
+      <pre class="language-shell"><code class="language-shell"><span class="token function">docker</span> run -d --name seafile <span class="token punctuation">\</span>
   -e <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>seafile.example.com <span class="token punctuation">\</span>
   -v /opt/seafile-data:/shared <span class="token punctuation">\</span>
   -p <span class="token number">80</span>:80 <span class="token punctuation">\</span>
@@ -842,7 +842,7 @@ docker run -d --net=host --restart=always \
   -p 80:80 \
   seafileltd/seafile:latest
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <pre class="language-shell"><code class="language-shell">docker run -d --name seafile <span class="token punctuation">\</span>
+      <pre class="language-shell"><code class="language-shell"><span class="token function">docker</span> run -d --name seafile <span class="token punctuation">\</span>
   -e <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>pan.showgold.com <span class="token punctuation">\</span>
   -e <span class="token assign-left variable">SEAFILE_ADMIN_EMAIL</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
   -e <span class="token assign-left variable">SEAFILE_ADMIN_PASSWORD</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
@@ -861,7 +861,7 @@ docker run -d --net=host --restart=always \
       <p><a href="docker/">更多 docker 工具部署，在 docker 目录中</a></p>
       <h2 id="卸载旧的版本"><a class="anchor" aria-hidden="true" tabindex="-1" href="#卸载旧的版本"><span class="octicon octicon-link"></span></a>卸载旧的版本</h2>
       <p>移除旧的版本</p>
-      <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> yum remove docker <span class="token punctuation">\</span>
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> yum remove <span class="token function">docker</span> <span class="token punctuation">\</span>
   docker-client <span class="token punctuation">\</span>
   docker-client-latest <span class="token punctuation">\</span>
   docker-common <span class="token punctuation">\</span>
@@ -890,13 +890,13 @@ docker run -d --net=host --restart=always \
       <p><strong>镜像拉不下来</strong></p>
       <p>修改 Docker <code>daemon.json</code> 配置 macOS: <code>/etc/docker/daemon.json</code>，Linux: <code>~/.docker/daemon.json</code></p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"registry-mirrors"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+  <span class="token string-property property">"registry-mirrors"</span><span class="token operator">:</span><span class="token punctuation">[</span>
      <span class="token string">"https://docker.mirrors.ustc.edu.cn"</span><span class="token punctuation">,</span>
      <span class="token string">"https://hub-mirror.c.163.com"</span><span class="token punctuation">,</span>
      <span class="token string">"https://mirror.baidubce.com"</span><span class="token punctuation">,</span>
      <span class="token string">"https://registry.docker-cn.com"</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token string">"insecure-registries"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  <span class="token string-property property">"insecure-registries"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
      <span class="token string">"192.168.188.111:2021"</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
@@ -944,7 +944,9 @@ docker run -d --net=host --restart=always \
         <li><a href="https://wiki.openstack.org/wiki/Docker">https://wiki.openstack.org/wiki/Docker</a></li>
         <li><a href="https://wiki.archlinux.org/index.php/Docker">https://wiki.archlinux.org/index.php/Docker</a></li>
       </ul>
-      <script>function copied(target, str) {
+      <script>/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
+function copied(target, str) {
 target.classList.add('active');
 copyTextToClipboard(target.dataset.code, function() {
 setTimeout(() => {
@@ -952,7 +954,6 @@ target.classList.remove('active');
 }, 2000);
 });
 }</script>
-      <script src="https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js"></script>
     </div>
   </body>
 </html>

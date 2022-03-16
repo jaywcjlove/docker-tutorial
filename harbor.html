@@ -31,7 +31,7 @@
 <span class="token comment"># 对二进制文件应用可执行权限：</span>
 <span class="token function">sudo</span> <span class="token function">chmod</span> +x /usr/local/bin/docker-compose
 <span class="token comment"># 测试是否安装成功</span>
-docker-compose --version
+<span class="token function">docker-compose</span> --version
 <span class="token comment"># docker-compose version 1.22.0, build f46880fe</span>
 </code><div onclick="copied(this)" data-code="# 下载最新版 &#x60;Docker Compose&#x60;
 sudo curl -L &#x22;https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)&#x22; -o /usr/local/bin/docker-compose
@@ -124,11 +124,11 @@ customize_crt = on
 </code><div onclick="copied(this)" data-code="sudo ./install.sh
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>要更改 Harbour 的配置，请先停止现有的 Harbor 实例并更新 <code>harbour.cfg</code>。 然后运行 <code>prepare</code> 脚本来填充配置，最后重新创建并启动Harbor的实例：</p>
-      <pre class="language-bash"><code class="language-bash">$ docker-compose down -v
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">docker-compose</span> down -v
 <span class="token comment"># 注：其实上面是停止 docker-compose.yml 中定义的所有容器</span>
 $ <span class="token function">vim</span> harbor.cfg
 $ prepare
-$ docker-compose up -d
+$ <span class="token function">docker-compose</span> up -d
 </code><div onclick="copied(this)" data-code="$ docker-compose down -v
 # 注：其实上面是停止 docker-compose.yml 中定义的所有容器
 $ vim harbor.cfg
@@ -183,13 +183,13 @@ service: harbor-registry
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="使用-harbor"><a class="anchor" aria-hidden="true" tabindex="-1" href="#使用-harbor"><span class="octicon octicon-link"></span></a>使用 harbor</h2>
       <pre class="language-bash"><code class="language-bash"><span class="token comment"># 镜像推送</span>
-docker login <span class="token number">192.168</span>.188.222:8070
+<span class="token function">docker</span> login <span class="token number">192.168</span>.188.222:8070
 <span class="token comment"># 查看 cat ~/.docker/config.json</span>
 <span class="token comment"># 镜像打包时候需要按一定规则 tag</span>
-docker pull nginx
-docker tag nginx <span class="token number">192.168</span>.188.222:8070/library/nginx:latest
-docker push <span class="token number">192.168</span>.188.222:8070/library/nginx
-docker rmi -f <span class="token number">192.168</span>.188.222:8070/library/nginx:latest
+<span class="token function">docker</span> pull nginx
+<span class="token function">docker</span> tag nginx <span class="token number">192.168</span>.188.222:8070/library/nginx:latest
+<span class="token function">docker</span> push <span class="token number">192.168</span>.188.222:8070/library/nginx
+<span class="token function">docker</span> rmi -f <span class="token number">192.168</span>.188.222:8070/library/nginx:latest
 </code><div onclick="copied(this)" data-code="# 镜像推送
 docker login 192.168.188.222:8070
 # 查看 cat ~/.docker/config.json
@@ -242,7 +242,9 @@ ExecStart=/usr/bin/dockerd --insecure-registry=192.168.188.222:8070
 }
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>客户机docker启动时候带上 <code>--insecure-registry=docker.xxx.com</code> 强制 <code>docker login</code> 走 <code>http</code> 的 <code>80</code> 端口，就可以正常 <code>push</code> 了</p>
-      <script>function copied(target, str) {
+      <script>/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
+function copied(target, str) {
 target.classList.add('active');
 copyTextToClipboard(target.dataset.code, function() {
 setTimeout(() => {
@@ -250,7 +252,6 @@ target.classList.remove('active');
 }, 2000);
 });
 }</script>
-      <script src="https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js"></script>
     </div>
   </body>
 </html>
