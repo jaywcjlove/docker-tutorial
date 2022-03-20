@@ -156,6 +156,9 @@ web:
   environment:
     GITLAB_OMNIBUS_CONFIG: |
       external_url 'https://gitlab.example.com'
+      gitlab_rails['time_zone'] = 'Asia/Shanghai'
+      gitlab_rails['backup_keep_time'] = 259200 # 3 Day, 259200 seconds 
+      registry_external_url 'http://192.168.188.222:5008'
   ports:
     - '8081:80'
     - '8443:443'
