@@ -182,7 +182,10 @@ docker restart gitlab
   <span class="token key atrule">hostname</span><span class="token punctuation">:</span> <span class="token string">'gitlab.example.com'</span>
   <span class="token key atrule">environment</span><span class="token punctuation">:</span>
     <span class="token key atrule">GITLAB_OMNIBUS_CONFIG</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
-      external_url 'https://gitlab.example.com'</span>
+      external_url 'https://gitlab.example.com'
+      gitlab_rails['time_zone'] = 'Asia/Shanghai'
+      gitlab_rails['backup_keep_time'] = 259200 # 3 Day, 259200 seconds 
+      registry_external_url 'http://192.168.188.222:5008'</span>
   <span class="token key atrule">ports</span><span class="token punctuation">:</span>
     <span class="token punctuation">-</span> <span class="token string">'8081:80'</span>
     <span class="token punctuation">-</span> <span class="token string">'8443:443'</span>
@@ -199,6 +202,9 @@ docker restart gitlab
   environment:
     GITLAB_OMNIBUS_CONFIG: |
       external_url &#x27;https://gitlab.example.com&#x27;
+      gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27;
+      gitlab_rails[&#x27;backup_keep_time&#x27;] = 259200 # 3 Day, 259200 seconds 
+      registry_external_url &#x27;http://192.168.188.222:5008&#x27;
   ports:
     - &#x27;8081:80&#x27;
     - &#x27;8443:443&#x27;
