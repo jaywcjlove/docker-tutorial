@@ -38,14 +38,28 @@ docker-compose --version
 # docker-compose version 1.22.0, build 1719ceb
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <h2 id="服务运行"><a class="anchor" aria-hidden="true" tabindex="-1" href="#服务运行"><span class="octicon octicon-link"></span></a>服务运行</h2>
-      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> stack deploy --compose-file<span class="token operator">=</span>docker-compose.yml my-name
+      <pre class="language-bash"><code class="language-bash">
+<span class="token comment"># 停止当前服务</span>
+<span class="token function">docker-compose</span> -p intelligent-community-dev -f docker-compose.dev.yml down
+<span class="token comment"># 使用 docker-compose 后台启动服务</span>
+<span class="token function">docker-compose</span> -f docker-compose.dev.yml pull
+<span class="token function">docker-compose</span> -p intelligent-community-dev -f docker-compose.dev.yml up -d
+
+<span class="token function">docker</span> stack deploy --compose-file<span class="token operator">=</span>docker-compose.yml my-name
 <span class="token function">docker</span> stack services my-name <span class="token comment"># 部署成功之后查看详情</span>
 <span class="token function">docker</span> stack deploy	  <span class="token comment"># 部署新的堆栈或更新现有堆栈</span>
 <span class="token function">docker</span> stack <span class="token function">ls</span>	      <span class="token comment"># 列出现有堆栈</span>
 <span class="token function">docker</span> stack <span class="token function">ps</span>	      <span class="token comment"># 列出堆栈中的任务</span>
 <span class="token function">docker</span> stack <span class="token function">rm</span>	      <span class="token comment"># 删除一个或多个堆栈</span>
 <span class="token function">docker</span> stack services	<span class="token comment"># 列出堆栈中的服务</span>
-</code><div onclick="copied(this)" data-code="docker stack deploy --compose-file=docker-compose.yml my-name
+</code><div onclick="copied(this)" data-code="
+# 停止当前服务
+docker-compose -p intelligent-community-dev -f docker-compose.dev.yml down
+# 使用 docker-compose 后台启动服务
+docker-compose -f docker-compose.dev.yml pull
+docker-compose -p intelligent-community-dev -f docker-compose.dev.yml up -d
+
+docker stack deploy --compose-file=docker-compose.yml my-name
 docker stack services my-name # 部署成功之后查看详情
 docker stack deploy	  # 部署新的堆栈或更新现有堆栈
 docker stack ls	      # 列出现有堆栈
