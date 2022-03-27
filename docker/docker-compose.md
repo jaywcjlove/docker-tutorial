@@ -22,6 +22,13 @@ docker-compose --version
 ## 服务运行
 
 ```bash
+
+# 停止当前服务
+docker-compose -p intelligent-community-dev -f docker-compose.dev.yml down
+# 使用 docker-compose 后台启动服务
+docker-compose -f docker-compose.dev.yml pull
+docker-compose -p intelligent-community-dev -f docker-compose.dev.yml up -d
+
 docker stack deploy --compose-file=docker-compose.yml my-name
 docker stack services my-name # 部署成功之后查看详情
 docker stack deploy	  # 部署新的堆栈或更新现有堆栈
