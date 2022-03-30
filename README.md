@@ -46,6 +46,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [`Mattermost`](#Mattermost)
   - [`Humpback`](#humpback)
   - [`Seafile`](#seafile)
+  - [`NPS`](#nps)
   - [更多](#更多)
 - [卸载旧的版本](#卸载旧的版本)
 - [错误处理](#错误处理)
@@ -674,7 +675,7 @@ docker info
 
 ### `NPS`
 
-[在 docker 中搭建内网穿透服务器，带WEB管理](docker/nps/README.md)
+[在 docker 中搭建内网穿透服务器，带WEB管理](docker/nps.md)
 
 ### `Humpback`
 
