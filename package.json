@@ -18,6 +18,7 @@
       "docker/mattermost.md": "mattermost.html",
       "docker/mysql.md": "mysql.html",
       "docker/nginx.md": "nginx.html",
+      "docker/nps.md": "nps.html",
       "docker/portainer.md": "portainer.html",
       "docker/postgres.md": "postgres.html",
       "docker/redis.md": "redis.html",

@@ -26,6 +26,7 @@ jobs:
       - run: markdown-to-html -s docker/mattermost.md --output build/mattermost.html
       - run: markdown-to-html -s docker/mysql.md --output build/mysql.html
       - run: markdown-to-html -s docker/nginx.md --output build/nginx.html
+      - run: markdown-to-html -s docker/nps.md --output build/nps.html
       - run: markdown-to-html -s docker/portainer.md --output build/portainer.html
       - run: markdown-to-html -s docker/postgres.md --output build/postgres.html
       - run: markdown-to-html -s docker/rancher.md --output build/rancher.html
