@@ -16,98 +16,85 @@
         <path class="octo-body" fill="currentColor" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"></path>
       </svg></a>
     <div class="markdown-body">
-      <h1 id="mattermost"><a class="anchor" aria-hidden="true" tabindex="-1" href="#mattermost"><span class="octicon octicon-link"></span></a>Mattermost</h1>
-      <p><code>Slack</code> 的开源替代品 <a href="https://github.com/mattermost"><code>Mattermost</code></a>，使用下面命令即可启动 <code>Mattermost</code>，并且可以直接使用。</p>
-      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run --name mattermost-preview <span class="token punctuation">\</span>
-  --publish <span class="token number">8065</span>:8065 <span class="token punctuation">\</span>
-  --add-host dockerhost:127.0.0.1 <span class="token punctuation">\</span>
-  --rm <span class="token punctuation">\</span>
-  -d mattermost/mattermost-preview:5.4.0
-</code><div onclick="copied(this)" data-code="docker run --name mattermost-preview \
-  --publish 8065:8065 \
-  --add-host dockerhost:127.0.0.1 \
-  --rm \
-  -d mattermost/mattermost-preview:5.4.0
+      <h1 id="nps"><a class="anchor" aria-hidden="true" tabindex="-1" href="#nps"><span class="octicon octicon-link"></span></a>nps</h1>
+      <p>一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等</p>
+      <h3 id="-搭建nps服务端"><a class="anchor" aria-hidden="true" tabindex="-1" href="#-搭建nps服务端"><span class="octicon octicon-link"></span></a>① 搭建NPS服务端</h3>
+      <p>服务器搭建在拥有公网 <code>ip=150.106.195.110</code> 的服务器上。下载配置 <a href="https://github.com/ehang-io/nps/tree/master/conf">nps/conf</a>，将配置放在 <code>/opt/nps/conf</code> 目录下，下面我们使用 docker 部署 NPS 服务端：</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 创建 /opt/nps 目录存放配置文件</span>
+<span class="token function">mkdir</span> /opt/nps
+<span class="token comment"># 拉取 ffdfgdfg/nps 镜像</span>
+<span class="token function">docker</span> pull ffdfgdfg/nps
+<span class="token comment"># 运行 nps 容器，配置文件夹 conf 在 /opt/nps/conf 目录下</span>
+<span class="token function">docker</span> run -d --name<span class="token operator">=</span>nps --restart<span class="token operator">=</span>always --net<span class="token operator">=</span>host -v /opt/nps/conf:/conf ffdfgdfg/nps
+<span class="token comment"># 查看日志</span>
+<span class="token function">docker</span> logs nps
+</code><div onclick="copied(this)" data-code="# 创建 /opt/nps 目录存放配置文件
+mkdir /opt/nps
+# 拉取 ffdfgdfg/nps 镜像
+docker pull ffdfgdfg/nps
+# 运行 nps 容器，配置文件夹 conf 在 /opt/nps/conf 目录下
+docker run -d --name=nps --restart=always --net=host -v /opt/nps/conf:/conf ffdfgdfg/nps
+# 查看日志
+docker logs nps
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <p>上面命令直接在命令行运行，就可以使用，通常情况我们想映射配置和存储，以便删除容器数据还存在，避免数据丢失。首先我们需要通过上面运行好的容器，将里面的配置拷贝出来。</p>
-      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> container <span class="token function">cp</span> mattermost-preview:/mm/mattermost/config <span class="token environment constant">$HOME</span>/_docker/mattermost/
-</code><div onclick="copied(this)" data-code="docker container cp mattermost-preview:/mm/mattermost/config $HOME/_docker/mattermost/
+      <p>启动之后默认端口 <code>8080</code>，通过使用 <code>http://&#x3C;你服务器IP>:8080</code> 访问管理界面。</p>
+      <p>
+        <img src="https://user-images.githubusercontent.com/1680273/160862086-1cfc09c2-6b10-4c10-b8d8-094ed10dfd99.png" alt="">
+      </p>
+      <p>使用用户名和密码登陆（默认<code>admin/123</code>，正式使用一定要更改，修改 <code>/opt/nps/conf/nps.conf</code> 配置文件中的 <code>web_password</code>），也可以在这里配置更改默认控制台管理平台端口（<code>web_port</code> = <code>8666</code>），通道端口更改 <code>bridge_port=8024</code></p>
+      <p>记得在控制台开放端口，面板<strong>默认端口</strong>是 <code>8080</code>，与客户端<strong>通信端口</strong>是 <code>8024</code>。</p>
+      <h3 id="-添加客户端"><a class="anchor" aria-hidden="true" tabindex="-1" href="#-添加客户端"><span class="octicon octicon-link"></span></a>② 添加客户端</h3>
+      <img src="https://user-images.githubusercontent.com/1680273/160861860-8968d67f-ab85-425c-a482-2d1c98055529.png" width="620">
+      <img src="https://user-images.githubusercontent.com/1680273/160861528-d52bc738-2023-4df7-812e-76a0af2d4455.png" width="620">
+      <img src="https://user-images.githubusercontent.com/1680273/160861122-ac553e4e-d702-4296-a3a6-f2aaea55d973.png">
+      <p>注意：客户端命令 <code>./npc -server=150.106.195.110:8024 -vkey=&#x3C;唯一验证密钥> -type=tcp</code> 中的 <code>唯一验证密钥</code> 用于客户端安装需要使用</p>
+      <h3 id="-客户端安装使用"><a class="anchor" aria-hidden="true" tabindex="-1" href="#-客户端安装使用"><span class="octicon octicon-link"></span></a>③ 客户端安装使用</h3>
+      <p>客户端安装在你需要穿透的内网服务器(电脑)上。</p>
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 创建 /opt/nps 目录存放配置文件</span>
+<span class="token function">mkdir</span> /opt/npc
+<span class="token comment"># 拉取 ffdfgdfg/nps 镜像</span>
+<span class="token function">docker</span> pull ffdfgdfg/npc
+<span class="token comment"># 运行 npc 容器，按提示改好命令，如下图所示</span>
+<span class="token comment"># 唯一验证密钥在管理界面中获取</span>
+<span class="token function">docker</span> run -d --name<span class="token operator">=</span>npc --restart<span class="token operator">=</span>always --net<span class="token operator">=</span>host ffdfgdfg/npc -server<span class="token operator">=</span><span class="token operator">&#x3C;</span>ip:port<span class="token operator">></span> -vkey<span class="token operator">=</span><span class="token operator">&#x3C;</span>web界面中显示的密钥<span class="token operator">></span> <span class="token operator">&#x3C;</span>以及一些其他参数<span class="token operator">></span>
+<span class="token comment"># 示例</span>
+<span class="token function">docker</span> run -d --name<span class="token operator">=</span>npc --restart<span class="token operator">=</span>always --net<span class="token operator">=</span>host ffdfgdfg/npc -server<span class="token operator">=</span><span class="token number">150.106</span>.195.110:8024 -vkey<span class="token operator">=</span><span class="token operator">&#x3C;</span>唯一验证密钥<span class="token operator">></span>
+<span class="token comment"># 查看日志</span>
+<span class="token function">docker</span> logs npc
+</code><div onclick="copied(this)" data-code="# 创建 /opt/nps 目录存放配置文件
+mkdir /opt/npc
+# 拉取 ffdfgdfg/nps 镜像
+docker pull ffdfgdfg/npc
+# 运行 npc 容器，按提示改好命令，如下图所示
+# 唯一验证密钥在管理界面中获取
+docker run -d --name=npc --restart=always --net=host ffdfgdfg/npc -server=<ip:port> -vkey=<web界面中显示的密钥> <以及一些其他参数>
+# 示例
+docker run -d --name=npc --restart=always --net=host ffdfgdfg/npc -server=150.106.195.110:8024 -vkey=<唯一验证密钥>
+# 查看日志
+docker logs npc
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <p>挂载配置目录数据库目录运行</p>
-      <pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run --name mattermost-preview <span class="token punctuation">\</span>
-  --publish <span class="token number">8065</span>:8065 <span class="token punctuation">\</span>
-  --add-host dockerhost:127.0.0.1 <span class="token punctuation">\</span>
-  -v <span class="token environment constant">$HOME</span>/_docker/mattermost/config:/mm/mattermost/config <span class="token punctuation">\</span>
-  -v <span class="token environment constant">$HOME</span>/_docker/mattermost/mysql:/var/lib/mysql <span class="token punctuation">\</span>
-  -v <span class="token environment constant">$HOME</span>/_docker/mattermost/data:/mm/mattermost-data <span class="token punctuation">\</span>
-  -d mattermost/mattermost-preview:5.4.0
-</code><div onclick="copied(this)" data-code="docker run --name mattermost-preview \
-  --publish 8065:8065 \
-  --add-host dockerhost:127.0.0.1 \
-  -v $HOME/_docker/mattermost/config:/mm/mattermost/config \
-  -v $HOME/_docker/mattermost/mysql:/var/lib/mysql \
-  -v $HOME/_docker/mattermost/data:/mm/mattermost-data \
-  -d mattermost/mattermost-preview:5.4.0
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <h2 id="设置gitlab单点登陆"><a class="anchor" aria-hidden="true" tabindex="-1" href="#设置gitlab单点登陆"><span class="octicon octicon-link"></span></a>设置gitlab单点登陆</h2>
-      <p>这个功能官方说需要购买 <a href="https://about.mattermost.com/pricing/">Mattermost Enterprise Edition</a> 版本，文档这里: <a href="https://docs.mattermost.com/deployment/sso-gitlab.html">GitLab Single Sign-On</a>。</p>
-      <p>修改 mattermost 配置 <code>vim $HOME/_docker/mattermost/config/config.json</code>。</p>
-      <pre class="language-json"><code class="language-json"><span class="token property">"GitLabSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-  <span class="token property">"Enable"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-  <span class="token property">"Secret"</span><span class="token operator">:</span> <span class="token string">"{mattermost-app-secret-from-gitlab}"</span><span class="token punctuation">,</span>
-  <span class="token property">"Id"</span><span class="token operator">:</span> <span class="token string">"{mattermost-app-application-id-from-gitlab}"</span><span class="token punctuation">,</span>
-  <span class="token property">"Scope"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"AuthEndpoint"</span><span class="token operator">:</span> <span class="token string">"https://{gitlab-site-name}/oauth/authorize"</span><span class="token punctuation">,</span>
-  <span class="token property">"TokenEndpoint"</span><span class="token operator">:</span> <span class="token string">"https://{gitlab-site-name}/oauth/token"</span><span class="token punctuation">,</span>
-  <span class="token property">"UserApiEndpoint"</span><span class="token operator">:</span> <span class="token string">"https://{gitlab-site-name}/api/v4/user"</span>
-<span class="token punctuation">}</span>
-</code><div onclick="copied(this)" data-code="&#x22;GitLabSettings&#x22;: {
-  &#x22;Enable&#x22;: true,
-  &#x22;Secret&#x22;: &#x22;{mattermost-app-secret-from-gitlab}&#x22;,
-  &#x22;Id&#x22;: &#x22;{mattermost-app-application-id-from-gitlab}&#x22;,
-  &#x22;Scope&#x22;: &#x22;&#x22;,
-  &#x22;AuthEndpoint&#x22;: &#x22;https://{gitlab-site-name}/oauth/authorize&#x22;,
-  &#x22;TokenEndpoint&#x22;: &#x22;https://{gitlab-site-name}/oauth/token&#x22;,
-  &#x22;UserApiEndpoint&#x22;: &#x22;https://{gitlab-site-name}/api/v4/user&#x22;
-}
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <p><a href="https://docs.gitlab.com/omnibus/gitlab-mattermost/">您可以在GitLab服务器上运行GitLab Mattermost服务。</a>，这篇文档介绍了修改 gitlab 配置。</p>
-      <pre class="language-bash"><code class="language-bash"><span class="token function">vim</span> /etc/gitlab/gitlab.rb
-
-mattermost_external_url <span class="token string">'http://mattermost.example.com'</span>
-
-gitlab_rails<span class="token punctuation">[</span><span class="token string">'mattermost_host'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"https://mattermost.example.com"</span>
-</code><div onclick="copied(this)" data-code="vim /etc/gitlab/gitlab.rb
-
-mattermost_external_url &#x27;http://mattermost.example.com&#x27;
-
-gitlab_rails[&#x27;mattermost_host&#x27;] = &#x22;https://mattermost.example.com&#x22;
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <p>下面这部分配置在 <code>gitlab.rb</code> 中设置，之后<strong>还需要</strong>在 <code>mattermost</code> 系统中设置 <a href="http://mattermost.example.com/admin_console/authentication/gitlab">http://mattermost.example.com/admin_console/authentication/gitlab</a></p>
-      <pre class="language-bash"><code class="language-bash">mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_enable'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span>
-mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_id'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"12345656"</span>
-mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_secret'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"123456789"</span>
-mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_scope'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">""</span>
-mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_auth_endpoint'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"http://gitlab.example.com/oauth/authorize"</span>
-mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_token_endpoint'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"http://gitlab.example.com/oauth/token"</span>
-mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_user_api_endpoint'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"http://gitlab.example.com/api/v4/user"</span>
-</code><div onclick="copied(this)" data-code="mattermost[&#x27;gitlab_enable&#x27;] = true
-mattermost[&#x27;gitlab_id&#x27;] = &#x22;12345656&#x22;
-mattermost[&#x27;gitlab_secret&#x27;] = &#x22;123456789&#x22;
-mattermost[&#x27;gitlab_scope&#x27;] = &#x22;&#x22;
-mattermost[&#x27;gitlab_auth_endpoint&#x27;] = &#x22;http://gitlab.example.com/oauth/authorize&#x22;
-mattermost[&#x27;gitlab_token_endpoint&#x27;] = &#x22;http://gitlab.example.com/oauth/token&#x22;
-mattermost[&#x27;gitlab_user_api_endpoint&#x27;] = &#x22;http://gitlab.example.com/api/v4/user&#x22;
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-      <p>如果您使用的是 <code>GitLab Mattermost</code>，请在系统控制台或 <code>gitlab.rb</code> 中<a href="https://docs.mattermost.com/administration/config-settings.html?highlight=add%20members%20team#site-url">配置您的站点URL</a>。</p>
-      <p>在配置 <code>vim $HOME/_docker/mattermost/config/config.json</code>，这个目录是你挂载出来的配置目录文件，容器中实际目录 <code>/mm/mattermost/config</code>，修改下面内容。</p>
-      <pre class="language-json"><code class="language-json"><span class="token property">"ServiceSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-  <span class="token property">"SiteURL"</span><span class="token operator">:</span> <span class="token string">"http://mattermost.example.com"</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-</code><div onclick="copied(this)" data-code="&#x22;ServiceSettings&#x22;: {
-  &#x22;SiteURL&#x22;: &#x22;http://mattermost.example.com&#x22;,
-}
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+      <p>服务运行起来，这样客户端就连接到了 NPS 的服务端了</p>
+      <p>
+        <img src="https://user-images.githubusercontent.com/1680273/160865479-c0d13263-06c3-4278-944d-6f7d57b5e6fb.png" alt="">
+      </p>
+      <h3 id="-建立内网穿透隧道"><a class="anchor" aria-hidden="true" tabindex="-1" href="#-建立内网穿透隧道"><span class="octicon octicon-link"></span></a>④ 建立内网穿透隧道</h3>
+      <p>
+        <img src="https://user-images.githubusercontent.com/1680273/160866018-795d0aff-c0da-4815-bb0e-23c19b8613bb.png" alt="">
+      </p>
+      <p>
+        <img src="https://user-images.githubusercontent.com/1680273/160866655-6545f5cb-c1dc-403f-a7b3-621c8630a3ef.png" alt="">
+      </p>
+      <p>假设我们要穿透局域网 MySQL 数据库，在 <code>目标 (IP:端口)</code> 配置内网 MySQL IP:端口 <code>192.168.188.222:3306</code>，在外网访问的端口 <code>服务端端口</code> 配置 <code>33066</code></p>
+      <p>
+        <img src="https://user-images.githubusercontent.com/1680273/160867661-99b51fa0-e9d5-481c-a707-0cdec55937bb.png" alt="">
+      </p>
+      <p>配置完成之后你可以使用公网 <code>ip=150.106.195.110</code> IP 地址 和端口 <code>33066</code> 连接到你内网的机器中的数据库。</p>
+      <p>到这里就完成了，你可以自己继续研究一下更多的功能，也可以看看官方的<a href="https://ehang-io.github.io/nps/#/">说明文档</a>。</p>
+      <h3 id="相关链接"><a class="anchor" aria-hidden="true" tabindex="-1" href="#相关链接"><span class="octicon octicon-link"></span></a>相关链接</h3>
+      <ul>
+        <li>官网文档：<a href="https://ehang-io.github.io/nps/">https://ehang-io.github.io/nps/</a></li>
+        <li>GitHub：<a href="https://github.com/ehang-io/nps">https://github.com/ehang-io/nps</a></li>
+      </ul>
       <script>/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
 !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
 
