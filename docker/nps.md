@@ -72,6 +72,20 @@ docker logs npc
 
 到这里就完成了，你可以自己继续研究一下更多的功能，也可以看看官方的[说明文档](https://ehang-io.github.io/nps/#/)。
 
+### 新建 Socks5 代理
+
+通过 Socks5 代理可以访问内网任意服务，不必建立一个个的内网穿透隧道。在设置代理之前确保 `客户端` 建立好，并且 `链接` 状态为 `在线`。
+
+![](https://user-images.githubusercontent.com/1680273/160966085-fcf3ff10-f40c-4623-98ea-e092f13660c5.png)
+
+![](https://user-images.githubusercontent.com/1680273/160967031-667073be-8918-4bc7-9657-2e929fd11678.png)
+
+![](https://user-images.githubusercontent.com/1680273/160966764-b370bf84-0d1b-4774-a73b-536233af20f7.png)
+
+在建立好 Socks5 代理之后，需要使用 [`proxifier`](https://www.proxifier.com/) 配置代理访问公司内网
+
+![](https://user-images.githubusercontent.com/1680273/160967991-7a04c3d3-3a4e-4457-ad4f-37d65a2c198c.png)
+
 ### 相关链接
 
 - 官网文档：https://ehang-io.github.io/nps/
