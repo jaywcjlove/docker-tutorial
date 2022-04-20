@@ -57,8 +57,8 @@ iptables -L -n
 docker exec -it gitlab update-permissions
 docker restart gitlab
 ```
-## 容器手动备份
 
+## 容器手动备份
 
 ```bash
 # 第一种进行入容器执行命令的方法进行手工备份
@@ -127,7 +127,7 @@ gitlab_rails['backup_keep_time'] = 604800
 docker exec 容器名或容器ID gitlab-ctl reconfigure  
 ```
 
-### 容器管理
+## 容器管理
 
 ```bash
 docker stop gitlab # 停止容器
@@ -139,7 +139,7 @@ docker exec -it gitlab vim /etc/gitlab/gitlab.rb
 docker restart gitlab
 ```
 
-### 通过 Docker Compose 按照
+## 通过 Docker Compose 安装
 
 使用 Docker Compose，可以轻松配置，安装和升级基于 Docker 的 GitLab 安装，[官方教程在这里](https://docs.gitlab.com/omnibus/docker/README.html#install-gitlab-using-docker-compose)。
 
@@ -173,7 +173,7 @@ web:
 **第三步：** 确保与 `docker-compose.yml` 文件同一目录下运行 `docker-compose up -d` 启动 Gitlab
 
 
-### 使用 Docker Swarm
+## 使用 Docker Swarm
 
 [官方教程](https://docs.gitlab.com/omnibus/docker/README.html#deploy-gitlab-in-a-docker-swarm) 创建 `docker-compose.yml` 文件
 
@@ -234,7 +234,9 @@ MySuperSecretAndSecurePass0rd!
 docker stack deploy --compose-file docker-compose.yml gitlab
 ```
 
-## [`注册 runner`](https://docs.gitlab.com/runner/install/docker.html)
+## 注册 Runner
+
+官方 [`注册 runner`](https://docs.gitlab.com/runner/install/docker.html) 文档
 
 ### 更新配置
 
@@ -334,11 +336,11 @@ ERROR: error during connect: Get http://docker:2375/v1.40/info: dial tcp: lookup
 
 工作被卡住了，因为你的 runner 有标签，但你的 job 没有。 按照以下 4 个步骤，让您的 runner 在没有标签的情况下运行：
 
-![Gitlab runner](https://user-images.githubusercontent.com/1680273/150721733-d4fb90b8-29e4-44bf-b238-9d88ac01b5bd.png)
+![Gitlab runner](./001.png)
 
-![Gitlab runner](https://user-images.githubusercontent.com/1680273/150721878-24f6b6f6-a476-4f7e-a0da-092ea4771ecb.png)
+![Gitlab runner](./002.png)
 
-### CI 中使用编译提交镜像
+## CI 中使用编译提交镜像
 
 下面是 [官方仓库 Docker.gitlab-ci.yml](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Docker.gitlab-ci.yml) 模板
 
@@ -382,7 +384,7 @@ docker-build:
     - master
 ```
 
-### 错误处理
+## 错误处理
 
 ```bash
 gitlab ci ERROR: Uploading artifacts to coordinator... too large archive
@@ -394,7 +396,7 @@ gitlab ci ERROR: Uploading artifacts to coordinator... too large archive
 client_max_body_size       10m;
 ```
 
-### 升级
+## 升级
 
 目标版本 | 你的版本 | 支持升级 | 路径 | 注意
 ---- | ---- | ---- | ---- | ----

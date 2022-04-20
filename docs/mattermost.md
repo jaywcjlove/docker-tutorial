@@ -3,6 +3,8 @@ Mattermost
 
 `Slack` 的开源替代品 [`Mattermost`](https://github.com/mattermost)，使用下面命令即可启动 `Mattermost`，并且可以直接使用。
 
+## 运行容器
+
 ```bash
 docker run --name mattermost-preview \
   --publish 8065:8065 \
@@ -29,7 +31,7 @@ docker run --name mattermost-preview \
   -d mattermost/mattermost-preview:5.4.0
 ```
 
-## 设置gitlab单点登陆
+## 设置 Gitlab 单点登陆
 
 这个功能官方说需要购买 [Mattermost Enterprise Edition](https://about.mattermost.com/pricing/) 版本，文档这里: [GitLab Single Sign-On](https://docs.mattermost.com/deployment/sso-gitlab.html)。
 

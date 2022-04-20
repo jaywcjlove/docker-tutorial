@@ -1,6 +1,8 @@
 MySQL
 ===
 
+[MySQL](https://www.mysql.com/) 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一，属于 Oracle 旗下产品。
+
 ## 下载镜像
 
 拉取官方的镜像，标签为`5.7`，[Docker官方资料](https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose)、[MySQL 官方资料](https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-more-topics.html)，[MySQL镜像](https://hub.docker.com/_/mysql/)

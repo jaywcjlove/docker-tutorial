@@ -1,6 +1,7 @@
 Docker Compose
 ===
 
+![](./logo.png)
 
 `docker-compose` 是用来做 `docker` 的多容器控制，这个工具是用于 docker 自动化的东西，将多个 docker 容器的操作命令，简化成一条命令，自动完成配置中的容器启动。
 
@@ -22,7 +23,6 @@ docker-compose --version
 ## 服务运行
 
 ```bash
-
 # 停止当前服务
 docker-compose -p intelligent-community-dev -f docker-compose.dev.yml down
 # 使用 docker-compose 后台启动服务

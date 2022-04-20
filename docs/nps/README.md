@@ -1,7 +1,7 @@
-nps
+NPS
 ===
 
-一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等
+[nps](https://github.com/ehang-io/nps) 一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等
 
 ### ① 搭建NPS服务端
 
@@ -20,7 +20,7 @@ docker logs nps
 
 启动之后默认端口 `8080`，通过使用 `http://<你服务器IP>:8080` 访问管理界面。
 
-![](https://user-images.githubusercontent.com/1680273/160862086-1cfc09c2-6b10-4c10-b8d8-094ed10dfd99.png)
+![](./001.png)
 
 使用用户名和密码登陆（默认`admin/123`，正式使用一定要更改，修改 `/opt/nps/conf/nps.conf` 配置文件中的 `web_password`），也可以在这里配置更改默认控制台管理平台端口（`web_port` = `8666`），通道端口更改 `bridge_port=8024`
 
@@ -28,11 +28,11 @@ docker logs nps
 
 ### ② 添加客户端
 
-<img src="https://user-images.githubusercontent.com/1680273/160861860-8968d67f-ab85-425c-a482-2d1c98055529.png" width="620" />
+![](./002.png)
 
-<img src="https://user-images.githubusercontent.com/1680273/160861528-d52bc738-2023-4df7-812e-76a0af2d4455.png" width="620" />
+![](./003.png)
 
-<img src="https://user-images.githubusercontent.com/1680273/160861122-ac553e4e-d702-4296-a3a6-f2aaea55d973.png" />
+![](./004.png)
 
 注意：客户端命令 `./npc -server=150.106.195.110:8024 -vkey=<唯一验证密钥> -type=tcp` 中的 `唯一验证密钥` 用于客户端安装需要使用
 
@@ -56,17 +56,17 @@ docker logs npc
 
 服务运行起来，这样客户端就连接到了 NPS 的服务端了
 
-![](https://user-images.githubusercontent.com/1680273/160865479-c0d13263-06c3-4278-944d-6f7d57b5e6fb.png)
+![](./005.png)
 
 ### ④ 建立内网穿透隧道
 
-![](https://user-images.githubusercontent.com/1680273/160866018-795d0aff-c0da-4815-bb0e-23c19b8613bb.png)
+![](./006.png)
 
-![](https://user-images.githubusercontent.com/1680273/160866655-6545f5cb-c1dc-403f-a7b3-621c8630a3ef.png)
+![](./007.png)
 
 假设我们要穿透局域网 MySQL 数据库，在 `目标 (IP:端口)` 配置内网 MySQL IP:端口 `192.168.188.222:3306`，在外网访问的端口 `服务端端口` 配置 `33066`
 
-![](https://user-images.githubusercontent.com/1680273/160867661-99b51fa0-e9d5-481c-a707-0cdec55937bb.png)
+![](./008.png)
 
 配置完成之后你可以使用公网 `ip=150.106.195.110` IP 地址 和端口 `33066` 连接到你内网的机器中的数据库。
 
@@ -76,15 +76,15 @@ docker logs npc
 
 通过 Socks5 代理可以访问内网任意服务，不必建立一个个的内网穿透隧道。在设置代理之前确保 `客户端` 建立好，并且 `链接` 状态为 `在线`。
 
-![](https://user-images.githubusercontent.com/1680273/160966085-fcf3ff10-f40c-4623-98ea-e092f13660c5.png)
+![](./009.png)
 
-![](https://user-images.githubusercontent.com/1680273/160967031-667073be-8918-4bc7-9657-2e929fd11678.png)
+![](./010.png)
 
-![](https://user-images.githubusercontent.com/1680273/160966764-b370bf84-0d1b-4774-a73b-536233af20f7.png)
+![](./011.png)
 
 在建立好 Socks5 代理之后，需要使用 [`proxifier`](https://www.proxifier.com/) 配置代理访问公司内网
 
-![](https://user-images.githubusercontent.com/1680273/160967991-7a04c3d3-3a4e-4457-ad4f-37d65a2c198c.png)
+![](./012.png)
 
 ### 相关链接
 

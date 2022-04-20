@@ -1,14 +1,14 @@
 
-<p align="center">
-<img width="130" align="center" src="img/logo.svg"/>
-</p>
+
+<!--idoc:ignore:start-->
 <h1 align="center">Docker入门教程</h1>
+<!--idoc:ignore:end-->
 
-
-
-Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
+[Docker](https://www.docker.com/) 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
 - Docker 的局限性之一，它只能用在 64 位的操作系统上。
+
+<!--idoc:ignore:start-->
 
 目录
 ===
@@ -56,6 +56,7 @@ Docker 是一个开源的应用容器引擎，而一个<ruby>容器<rt>container
   - [其它资源](#其它资源)
 
 <!-- /TOC -->
+<!--idoc:ignore:end-->
 
 Docker 从 `1.13` 版本之后采用时间线的方式作为版本号，分为社区版 `CE` 和企业版 `EE`，社区版是免费提供给个人开发者和小型团体使用的，企业版会提供额外的收费服务，比如经过官方测试认证过的基础设施、容器、插件等。
 
@@ -511,7 +512,7 @@ docker container stop registry && docker container rm -v registry
 
 ### `Harbor`
 
-[部署 registry 管理工具 Harbor](docker/harbor.md)
+[部署 registry 管理工具 Harbor](docs/harbor.md)
 
 ## Docker REST API
 
@@ -627,55 +628,55 @@ docker info
 
 ### `Nginx`
 
-[在 docker 中部署 Nginx](docker/nginx.md)
+[在 docker 中部署 Nginx](docs/nginx.md)
 
 ### `MySQL`
 
-[在 docker 中部署 MySQL](docker/mysql.md)
+[在 docker 中部署 MySQL](docs/mysql.md)
 
 ### `PostgreSQL`
 
-[在 docker 中部署 PostgreSQL](docker/postgres.md)
+[在 docker 中部署 PostgreSQL](docs/postgres.md)
 
 ### `Redis`
 
-[在 docker 中部署 Redis](docker/redis.md)
+[在 docker 中部署 Redis](docs/redis.md)
 
 ### `Elasticsearch`
 
-[在 docker 中部署 Elasticsearch](docker/elasticsearch.md)
+[在 docker 中部署 Elasticsearch](docs/elasticsearch.md)
 
 ### `Gitlab`
 
-[在 docker 中部署 Gitlab](docker/gitlab.md)
+[在 docker 中部署 Gitlab](docs/gitlab/README.md)
 
 ### `Rocket.Chat`
 
-[在 docker 中部署 Gitlab](docker/rocket.chat/README.md)
+[在 docker 中部署 Gitlab](docs/rocket.chat/README.md)
 
 ### `Rancher`
 
-[在 docker 中部署 Rancher](docker/rancher.md)
+[在 docker 中部署 Rancher](docs/rancher.md)
 
 ### `Portainer`
 
-[在 docker 中部署 Portainer](docker/portainer.md)
+[在 docker 中部署 Portainer](docs/portainer.md)
 
 ### `Sourcegraph`
 
-[在 docker 中部署 Sourcegraph](docker/sourcegraph.md)
+[在 docker 中部署 Sourcegraph](docs/sourcegraph/README.md)
 
 ### `Mattermost`
 
-[在 docker 中部署 Mattermost](docker/mattermost.md)
+[在 docker 中部署 Mattermost](docs/mattermost.md)
 
 ### `SeaweedFS`
 
-[在 docker 中部署 SeaweedFS](docker/seaweedfs/README.md)
+[在 docker 中部署 SeaweedFS](docs/seaweedfs/README.md)
 
 ### `NPS`
 
-[在 docker 中搭建内网穿透服务器，带WEB管理](docker/nps.md)
+[在 docker 中搭建内网穿透服务器，带WEB管理](docs/nps/README.md)
 
 ### `Humpback`
 
@@ -718,7 +719,7 @@ docker run -d --name seafile \
 
 ### 更多
 
-[更多 docker 工具部署，在 docker 目录中](docker/)
+[更多 docker 工具部署，在 docker 目录中](docs/)
 
 ## 卸载旧的版本
 
@@ -793,3 +794,17 @@ Create more free space in thin pool or use dm.min_free_space option to change be
 - https://github.com/docker/docker
 - https://wiki.openstack.org/wiki/Docker
 - https://wiki.archlinux.org/index.php/Docker
+
+## Contributors
+
+As always, thanks to our amazing contributors!
+
+<a href="https://github.com/jaywcjlove/docker-tutorial/graphs/contributors">
+  <img src="https://jaywcjlove.github.io/docker-tutorial/CONTRIBUTORS.svg" />
+</a>
+
+Made with [action-contributors](https://github.com/jaywcjlove/github-action-contributors).
+
+## License
+
+Licensed under the MIT License.

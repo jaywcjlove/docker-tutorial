@@ -1,29 +1,23 @@
 {
-  "markdown-to-html": {
-    "document": {
-      "title": "Docker 入门教程",
-      "meta": [
-        { "description": "Docker 是一个开源的应用容器引擎，而一个容器其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。" },
-        { "keywords": "docker,tutorial,containers" }
-      ]
-    },
-    "github-corners": "https://github.com/jaywcjlove/docker-tutorial",
-    "favicon": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐳</text></svg>",
-    "reurls": {
-      "docker/rocket.chat/README.md": "rocket.chat.html",
-      "docker/elasticsearch.md": "elasticsearch.html",
-      "docker/rancher.md": "rancher.html",
-      "docker/gitlab.md": "gitlab.html",
-      "docker/harbor.md": "harbor.html",
-      "docker/mattermost.md": "mattermost.html",
-      "docker/mysql.md": "mysql.html",
-      "docker/nginx.md": "nginx.html",
-      "docker/nps.md": "nps.html",
-      "docker/portainer.md": "portainer.html",
-      "docker/postgres.md": "postgres.html",
-      "docker/redis.md": "redis.html",
-      "docker/seaweedfs/README.md": "seaweedfs.html",
-      "docker/sourcegraph.md": "sourcegraph.html"
-    }
+  "$schema": "https://json.schemastore.org/package.json",
+  "private": true,
+  "name": "docker-tutorial",
+  "description": "Docker 是一个开源的应用容器引擎，而一个容器其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "idoc --watch",
+    "build": "idoc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaywcjlove/docker-tutorial"
+  },
+  "keywords": [
+    "docker",
+    "containers",
+    "tutorial"
+  ],
+  "dependencies": {
+    "idoc": "^1.10.5"
   }
 }

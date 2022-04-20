@@ -1,6 +1,8 @@
 Rancher 单节点安装
 ===
 
+[Rancher](https://github.com/rancher/rancher) 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足 IT 需求规范，赋能 DevOps 团队。
+
 ### Rancher 2.5.x 及之后的版本
 
 登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。

@@ -1,9 +1,9 @@
-postgres
+PostgreSQL
 ===
 
-![postgres logo](https://raw.githubusercontent.com/docker-library/docs/01c12653951b2fe592c1f93a13b4e289ada0e3a1/postgres/logo.png)
+[PostgreSQL](https://www.postgresql.org/) (也叫 Postgres)是一个自由的对象-关系数据库服务器(数据库管理系统)，它在灵活的 BSD-风格许可证下发行。
 
-快速启动
+## 快速启动容器
 
 ```bash
 docker run \
@@ -15,7 +15,7 @@ docker run \
   postgres:latest
 ```
 
-使用 stack 部署示例
+## 使用 stack 部署示例
 
 ```yml
 # Use postgres/example user/password credentials
