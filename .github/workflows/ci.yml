@@ -35,6 +35,10 @@ jobs:
         with:
           package-path: ./package.json
 
+      - name: get tag version
+        id: tag_version
+        uses: jaywcjlove/changelog-generator@v1.5.3
+
       - name: Deploy Website
         uses: peaceiris/actions-gh-pages@v3
         with:
