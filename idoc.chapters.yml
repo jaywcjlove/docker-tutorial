@@ -1,17 +1,17 @@
 - README.md: 入门
 - README: 实践
 - docker-compose.md: Docker Compose
-- elasticsearch.md: ElasticSearch
-- gitlab/README.md: Gitlab
+- elasticsearch.md: ElasticSearch 搜索服务器
+- gitlab/README.md: Gitlab 代码仓库管理系统
 - harbor.md: Harbor
-- mattermost.md: Mattermost
-- mysql.md: MySQL
-- nginx.md: Nginx
-- nps/README.md: NPS
-- portainer.md: Portainer
-- postgres.md: PostgreSQL
-- rancher.md: Rancher
-- redis.md: Redis
-- rocket.chat/README.md: Rocket.Chat
-- seaweedfs/README.md: SeaweedFS
-- sourcegraph/README.md: Sourcegraph
+- mattermost.md: Mattermost 聊天工具
+- mysql.md: MySQL 数据库
+- nginx.md: Nginx Web 服务器
+- nps/README.md: NPS 内网穿透
+- portainer.md: Portainer Docker 管理
+- postgres.md: PostgreSQL 数据库
+- rancher.md: Rancher 容器管理平台
+- redis.md: Redis 数据库
+- rocket.chat/README.md: Rocket.Chat 聊天工具
+- seaweedfs/README.md: SeaweedFS 文件系统
+- sourcegraph/README.md: Sourcegraph 代码搜索引擎
