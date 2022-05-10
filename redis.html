@@ -11,19 +11,21 @@
   
   <meta name="keywords" content="docker,containers,tutorial">
   
-  <link rel="stylesheet" type="text/css" href="css/main.css?v=1650525380124">
-  <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1650525380124">
-  <link rel="stylesheet" type="text/css" href="css/media.css?v=1650525380124">
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1650525380124">
-  <link rel="stylesheet" type="text/css" href="css/copy.css?v=1650525380124">
+  <link rel="stylesheet" type="text/css" href="css/main.css?v=1.18.0">
+  <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.18.0">
+  <link rel="stylesheet" type="text/css" href="css/media.css?v=1.18.0">
+  <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.18.0">
+  <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.18.0">
+  <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.18.0">
   
     <link rel="icon" href="img/logo.svg" type="image/x-icon">
   
-  <script src="js/copy.js"></script>
-  <script src="js/dark-mode.js"></script>
-  <script src="js/markdown-style.js"></script>
+  <script src="js/copy.js?v=1.18.0"></script>
+  <script src="js/dark-mode.js?v=1.18.0"></script>
+  <script src="js/markdown-style.js?v=1.18.0"></script>
 </head>
-<body>
+<body id="idoctotop">
+  <a href="#idoctotop" class="gototop">top</a>
 <header class="header">
   <article class="inner warpper">
     <a class="logo" href="index.html">
@@ -73,11 +75,11 @@
       
     
       
-        <a href="elasticsearch.html" class="">ElasticSearch</a>
+        <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
       
     
       
-        <a href="gitlab/index.html" class="">Gitlab</a>
+        <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
       
     
       
@@ -85,47 +87,47 @@
       
     
       
-        <a href="mattermost.html" class="">Mattermost</a>
+        <a href="mattermost.html" class="">Mattermost 聊天工具</a>
       
     
       
-        <a href="mysql.html" class="">MySQL</a>
+        <a href="mysql.html" class="">MySQL 数据库</a>
       
     
       
-        <a href="nginx.html" class="">Nginx</a>
+        <a href="nginx.html" class="">Nginx Web 服务器</a>
       
     
       
-        <a href="nps/index.html" class="">NPS</a>
+        <a href="nps/index.html" class="">NPS 内网穿透</a>
       
     
       
-        <a href="portainer.html" class="">Portainer</a>
+        <a href="portainer.html" class="">Portainer Docker 管理</a>
       
     
       
-        <a href="postgres.html" class="">PostgreSQL</a>
+        <a href="postgres.html" class="">PostgreSQL 数据库</a>
       
     
       
-        <a href="rancher.html" class="">Rancher</a>
+        <a href="rancher.html" class="">Rancher 容器管理平台</a>
       
     
       
-        <a href="redis.html" class="active">Redis</a>
+        <a href="redis.html" class="active">Redis 数据库</a>
       
     
       
-        <a href="rocket.chat/index.html" class="">Rocket.Chat</a>
+        <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
       
     
       
-        <a href="seaweedfs/index.html" class="">SeaweedFS</a>
+        <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
       
     
       
-        <a href="sourcegraph/index.html" class="">Sourcegraph</a>
+        <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
       
     
     </div>
@@ -136,25 +138,25 @@
     <h1 id="redis"><a aria-hidden="true" tabindex="-1" href="#redis" class="anchor"><span class="icon icon-link"></span></a>Redis</h1>
 <p><a href="https://redis.io/">Redis</a>（Remote Dictionary Server )，即远程字典服务，是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。</p>
 <h2 id="下载镜像"><a aria-hidden="true" tabindex="-1" href="#下载镜像" class="anchor"><span class="icon icon-link"></span></a>下载镜像</h2>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">$ <span class="token function">docker</span> pull redis:4.0.11
-</span></code><div onclick="copied(this)" data-code="$ docker pull redis:4.0.11
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> pull redis:4.0.11
+</span></code><input type="hidden" value="$ docker pull redis:4.0.11
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
 <h2 id="运行容器"><a aria-hidden="true" tabindex="-1" href="#运行容器" class="anchor"><span class="icon icon-link"></span></a>运行容器</h2>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">$ <span class="token function">docker</span> run -d --rm -p  <span class="token number">6389</span>:6379 --name redis2 redis:4.0.11 redis-server --appendonly <span class="token function">yes</span>
-</span></code><div onclick="copied(this)" data-code="$ docker run -d --rm -p  6389:6379 --name redis2 redis:4.0.11 redis-server --appendonly yes
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> run -d --rm -p  <span class="token number">6389</span>:6379 --name redis2 redis:4.0.11 redis-server --appendonly <span class="token function">yes</span>
+</span></code><input type="hidden" value="$ docker run -d --rm -p  6389:6379 --name redis2 redis:4.0.11 redis-server --appendonly yes
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
 <h2 id="使用自己的配置"><a aria-hidden="true" tabindex="-1" href="#使用自己的配置" class="anchor"><span class="icon icon-link"></span></a>使用自己的配置</h2>
 <p><a href="https://hub.docker.com/_/redis/">Redis</a> 加载自己的配置文件，需要重新编译一个 <code>images</code>，通过复制官方<a href="https://github.com/antirez/redis/blob/3a27b3d0d85d56ecd758b56c6af477ae5ff08a76/redis.conf">Redis 配置</a>。</p>
-<pre class="language-dockerfile"><code class="language-dockerfile code-highlight"><span class="code-line"><span class="token instruction"><span class="token keyword">FROM</span> redis:4.0.11</span>
-</span><span class="code-line"><span class="token instruction"><span class="token keyword">RUN</span> mkdir -p /etc/redis</span>
-</span><span class="code-line"><span class="token comment"># 设置时区</span>
-</span><span class="code-line"><span class="token instruction"><span class="token keyword">ENV</span> TimeZone=Asia/Shanghai   </span>
-</span><span class="code-line"><span class="token instruction"><span class="token keyword">RUN</span> ln -snf /usr/share/zoneinfo/<span class="token variable">$TimeZone</span> /etc/localtime &#x26;&#x26; echo <span class="token variable">$TimeZone</span> > /etc/timezone</span>
-</span><span class="code-line">
-</span><span class="code-line"><span class="token instruction"><span class="token keyword">COPY</span> ./redis.conf /etc/redis/redis.conf</span>
-</span><span class="code-line"><span class="token instruction"><span class="token keyword">CMD</span> [ <span class="token string">"redis-server"</span>, <span class="token string">"/etc/redis/redis.conf"</span> ]</span>
-</span><span class="code-line"><span class="token instruction"><span class="token keyword">EXPOSE</span> 6379</span>
-</span></code><div onclick="copied(this)" data-code="FROM redis:4.0.11
+<pre class="language-dockerfile"><code class="language-dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> redis:4.0.11</span>
+</span><span class="code-line line-number" line="2"><span class="token instruction"><span class="token keyword">RUN</span> mkdir -p /etc/redis</span>
+</span><span class="code-line line-number" line="3"><span class="token comment"># 设置时区</span>
+</span><span class="code-line line-number" line="4"><span class="token instruction"><span class="token keyword">ENV</span> TimeZone=Asia/Shanghai   </span>
+</span><span class="code-line line-number" line="5"><span class="token instruction"><span class="token keyword">RUN</span> ln -snf /usr/share/zoneinfo/<span class="token variable">$TimeZone</span> /etc/localtime &#x26;&#x26; echo <span class="token variable">$TimeZone</span> > /etc/timezone</span>
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7"><span class="token instruction"><span class="token keyword">COPY</span> ./redis.conf /etc/redis/redis.conf</span>
+</span><span class="code-line line-number" line="8"><span class="token instruction"><span class="token keyword">CMD</span> [ <span class="token string">"redis-server"</span>, <span class="token string">"/etc/redis/redis.conf"</span> ]</span>
+</span><span class="code-line line-number" line="9"><span class="token instruction"><span class="token keyword">EXPOSE</span> 6379</span>
+</span></code><input type="hidden" value="FROM redis:4.0.11
 RUN mkdir -p /etc/redis
 # 设置时区
 ENV TimeZone=Asia/Shanghai   
@@ -163,29 +165,29 @@ RUN ln -snf /usr/share/zoneinfo/$TimeZone /etc/localtime &#x26;&#x26; echo $Time
 COPY ./redis.conf /etc/redis/redis.conf
 CMD [ &#x22;redis-server&#x22;, &#x22;/etc/redis/redis.conf&#x22; ]
 EXPOSE 6379
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
 <p>创建 docker 镜像，镜像名字为 <code>redis</code>，标记 <code>4.0.11</code></p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token function">docker</span> image build -t redis:4.0.11 <span class="token builtin class-name">.</span>
-</span></code><div onclick="copied(this)" data-code="docker image build -t redis:4.0.11 .
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> image build -t redis:4.0.11 <span class="token builtin class-name">.</span>
+</span></code><input type="hidden" value="docker image build -t redis:4.0.11 .
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
 <p>如果你不需要更改配置，可以直接 <code>docker pull redis:4.0.11</code> 下载镜像。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># 先运行 redis</span>
-</span><span class="code-line"><span class="token function">docker</span> run -d --rm -p  <span class="token number">6389</span>:6379 --name redis2 redis:4.0.11 redis-server --appendonly <span class="token function">yes</span>
-</span><span class="code-line"><span class="token comment"># docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件</span>
-</span><span class="code-line"><span class="token function">docker</span> container <span class="token function">cp</span> redis2:/etc/redis/redis.conf <span class="token environment constant">$HOME</span>/_docker/redis/conf/redis.conf
-</span><span class="code-line"><span class="token comment"># 完成拷贝文件，停止 redis 容器 --rm 参数表示停止删除 redis2 容器</span>
-</span><span class="code-line"><span class="token function">docker</span> stop redis2
-</span><span class="code-line"><span class="token comment"># 这个时候，container 中已经存在的配置文件</span>
-</span><span class="code-line"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
-</span><span class="code-line">  -p <span class="token number">6389</span>:6379 <span class="token punctuation">\</span>
-</span><span class="code-line">  --name redis2 <span class="token punctuation">\</span>
-</span><span class="code-line">  --restart always <span class="token punctuation">\</span>
-</span><span class="code-line">  -v <span class="token environment constant">$HOME</span>/_docker/redis/data:/data <span class="token punctuation">\</span>
-</span><span class="code-line">  -v <span class="token environment constant">$HOME</span>/_docker/redis/conf:/etc/redis <span class="token punctuation">\</span>
-</span><span class="code-line">  -v /etc/localtime:/etc/localtime:ro <span class="token punctuation">\</span>
-</span><span class="code-line">  redis:4.0.11 redis-server --appendonly <span class="token function">yes</span>
-</span><span class="code-line"><span class="token comment"># redis-server --appendonly yes 数据持久化</span>
-</span></code><div onclick="copied(this)" data-code="# 先运行 redis
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 先运行 redis</span>
+</span><span class="code-line line-number" line="2"><span class="token function">docker</span> run -d --rm -p  <span class="token number">6389</span>:6379 --name redis2 redis:4.0.11 redis-server --appendonly <span class="token function">yes</span>
+</span><span class="code-line line-number" line="3"><span class="token comment"># docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件</span>
+</span><span class="code-line line-number" line="4"><span class="token function">docker</span> container <span class="token function">cp</span> redis2:/etc/redis/redis.conf <span class="token environment constant">$HOME</span>/_docker/redis/conf/redis.conf
+</span><span class="code-line line-number" line="5"><span class="token comment"># 完成拷贝文件，停止 redis 容器 --rm 参数表示停止删除 redis2 容器</span>
+</span><span class="code-line line-number" line="6"><span class="token function">docker</span> stop redis2
+</span><span class="code-line line-number" line="7"><span class="token comment"># 这个时候，container 中已经存在的配置文件</span>
+</span><span class="code-line line-number" line="8"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="9">  -p <span class="token number">6389</span>:6379 <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="10">  --name redis2 <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="11">  --restart always <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="12">  -v <span class="token environment constant">$HOME</span>/_docker/redis/data:/data <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="13">  -v <span class="token environment constant">$HOME</span>/_docker/redis/conf:/etc/redis <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="14">  -v /etc/localtime:/etc/localtime:ro <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="15">  redis:4.0.11 redis-server --appendonly <span class="token function">yes</span>
+</span><span class="code-line line-number" line="16"><span class="token comment"># redis-server --appendonly yes 数据持久化</span>
+</span></code><input type="hidden" value="# 先运行 redis
 docker run -d --rm -p  6389:6379 --name redis2 redis:4.0.11 redis-server --appendonly yes
 # docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件
 docker container cp redis2:/etc/redis/redis.conf $HOME/_docker/redis/conf/redis.conf
@@ -201,33 +203,18 @@ docker run -d \
   -v /etc/localtime:/etc/localtime:ro \
   redis:4.0.11 redis-server --appendonly yes
 # redis-server --appendonly yes 数据持久化
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
 <h2 id="修改配置文件"><a aria-hidden="true" tabindex="-1" href="#修改配置文件" class="anchor"><span class="icon icon-link"></span></a>修改配置文件</h2>
 <p>修改配置文件 <code>$HOME/_docker/redis/conf/redis.conf</code> 将数据持久化目录指向 <code>/data</code> 目录，设置配置中的 <code>dir /data</code>。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token function">vim</span> ~/_docker/redis/redis.conf
-</span></code><div onclick="copied(this)" data-code="vim ~/_docker/redis/redis.conf
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">vim</span> ~/_docker/redis/redis.conf
+</span></code><input type="hidden" value="vim ~/_docker/redis/redis.conf
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
 <h2 id="重启容器让配置生效"><a aria-hidden="true" tabindex="-1" href="#重启容器让配置生效" class="anchor"><span class="icon icon-link"></span></a>重启容器让配置生效</h2>
-<pre><code class="code-highlight"><span class="code-line">docker restart redis2
-</span></code><div onclick="copied(this)" data-code="docker restart redis2
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+<pre><code class="code-highlight"><span class="code-line line-number" line="1">docker restart redis2
+</span></code><input type="hidden" value="docker restart redis2
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     
 
-<footer class="article-footer warpper">
-  <section>
-    
-    <a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/redis.md" class="edit-button" target="_blank" rel="noopener noreferrer">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-      </svg>
-      <span>Edit this page on GitHub</span>
-    </a>
-    
-    <span class="atime">2022/04/21</span>
-    
-  </section>
-  
-  
 <div class="previous">
   
   <a class="prev" href="rancher.html">
@@ -236,14 +223,14 @@ docker run -d \
       <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
     </svg>
     <span>
-      Rancher
+      Rancher 容器管理平台
     </span>
   </a>
   
   
   <a class="next" href="rocket.chat/index.html">
     <span>
-      Rocket.Chat
+      Rocket.Chat 聊天工具
     </span>
     <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
       <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
@@ -253,41 +240,68 @@ docker run -d \
   
 </div>
 
-</footer>
+
+
+<section class="article-footer">
+  <a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/redis.md" class="edit-button" target="_blank" rel="noopener noreferrer">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+    </svg>
+    <span>Edit this page on GitHub</span>
+  </a>
+  
+  <span class="atime">2022/05/10</span>
+  
+</section>
 
   </markdown-style>
   
 <nav class="tocs">
-  <aside class="inner toc"></aside>
+  <aside class="inner toc">
+    <ol class="tocs-list">
+    
+      <li>
+        <a href="#下载镜像" class="tocs-link">下载镜像</a>
+        
+      </li>
+    
+      <li>
+        <a href="#运行容器" class="tocs-link">运行容器</a>
+        
+      </li>
+    
+      <li>
+        <a href="#使用自己的配置" class="tocs-link">使用自己的配置</a>
+        
+      </li>
+    
+      <li>
+        <a href="#修改配置文件" class="tocs-link">修改配置文件</a>
+        
+      </li>
+    
+      <li>
+        <a href="#重启容器让配置生效" class="tocs-link">重启容器让配置生效</a>
+        
+      </li>
+    
+    </ol>
+  </aside>
 </nav>
 
-
-<script src="js/tocbot.min.js?v=4.18.2"></script>
-<script>
-tocbot.init({
-  tocSelector: 'aside.inner',
-  contentSelector: 'markdown-style',
-  positionFixedSelector: 'aside.inner',
-  headingSelector: 'h1, h2, h3, h4',
-  collapseDepth: 2,
-
-  includeHtml: true,
-  includeTitleTags: false,
-  hasInnerContainers: true,
-  onClick: (e) => { console.log('you clicked a link', e) },
-  headingsOffset: 40,
-  scrollSmoothOffset: -40,
-});
-</script>
-
 </div>
+
+<script src="js/demo-preview.js?v=1.18.0"></script>
 
 
 <div class="footer warpper">
   Released under the MIT License. Copyright © 2022 Kenny Wong<br />
-Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.10.6
+Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.18.0
 
 </div>
+
+
+<script src="js/tocbot.js?v=1.18.0"></script>
 
 </body>
 </html>

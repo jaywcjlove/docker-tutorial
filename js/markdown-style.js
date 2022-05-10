@@ -110,7 +110,7 @@ ${octiconLinkStyle}
 markdown-style {
   display: block;
   -webkit-text-size-adjust: 100%;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-family: -apple-system,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
@@ -540,14 +540,14 @@ markdown-style .absent {
   color: var(--color-danger-fg);
 }
 
-markdown-style .anchor {
+markdown-style a.anchor {
   float: left;
   padding-right: 4px;
   margin-left: -20px;
   line-height: 1;
 }
 
-markdown-style .anchor:focus {
+markdown-style a.anchor:focus {
   outline: none;
 }
 
@@ -700,6 +700,7 @@ markdown-style table tr:nth-child(2n) {
 
 markdown-style table img {
   background-color: transparent;
+  vertical-align: middle;
 }
 
 markdown-style img[align=right] {
