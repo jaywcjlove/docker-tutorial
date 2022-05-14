@@ -1,142 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ElasticSearch 6.4.2 Docker 入门教程 </title>
-  
-  <meta name="description" content="ElasticSearch 5.3.3 docker 运行">
-  
-  
-  <meta name="keywords" content="docker,containers,tutorial">
-  
-  <link rel="stylesheet" type="text/css" href="css/main.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/media.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.18.0">
-  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElasticSearch 6.4.2 Docker 入门教程</title>
+    <meta name="description" content="ElasticSearch 5.3.3 docker 运行">
+    <meta name="keywords" content="docker,containers,tutorial">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/media.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.21.1">
     <link rel="icon" href="img/logo.svg" type="image/x-icon">
-  
-  <script src="js/copy.js?v=1.18.0"></script>
-  <script src="js/dark-mode.js?v=1.18.0"></script>
-  <script src="js/markdown-style.js?v=1.18.0"></script>
-</head>
-<body id="idoctotop">
-  <a href="#idoctotop" class="gototop">top</a>
-<header class="header">
-  <article class="inner warpper">
-    <a class="logo" href="index.html">
-      
-        <svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
-</svg>
-      
-      <span class="title">Docker 入门教程</span>
-    </a>
-    <div class="content">
-      <ul class="menu">
-        
-        <li>
-          <a href="index.html" target="" class=""> Home </a>
-        </li>
-        
-      </ul>
-      
-        <a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    <script src="js/copy.js?v=1.21.1"></script>
+    <script src="js/dark-mode.js?v=1.21.1"></script>
+    <script src="js/markdown-style.js?v=1.21.1"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="index.html"><svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
           </svg>
-        </a>
-      
-      <dark-mode permanent></dark-mode>
-    </div>
-  </article>
-</header>
-
-<div class="warpper-content warpper sidebar ">
-  
-<div class="sidebar-border">
-  <aside class="sidebar" role="navigation">
-    <div>
-    
-      
-        <a href="index.html" class="">入门</a>
-      
-    
-      
-        <label>实践</label>
-      
-    
-      
-        <a href="docker-compose.html" class="">Docker Compose</a>
-      
-    
-      
-        <a href="elasticsearch.html" class="active">ElasticSearch 搜索服务器</a>
-      
-    
-      
-        <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
-      
-    
-      
-        <a href="harbor.html" class="">Harbor</a>
-      
-    
-      
-        <a href="mattermost.html" class="">Mattermost 聊天工具</a>
-      
-    
-      
-        <a href="mysql.html" class="">MySQL 数据库</a>
-      
-    
-      
-        <a href="nginx.html" class="">Nginx Web 服务器</a>
-      
-    
-      
-        <a href="nps/index.html" class="">NPS 内网穿透</a>
-      
-    
-      
-        <a href="portainer.html" class="">Portainer Docker 管理</a>
-      
-    
-      
-        <a href="postgres.html" class="">PostgreSQL 数据库</a>
-      
-    
-      
-        <a href="rancher.html" class="">Rancher 容器管理平台</a>
-      
-    
-      
-        <a href="redis.html" class="">Redis 数据库</a>
-      
-    
-      
-        <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
-      
-    
-      
-        <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
-      
-    
-      
-        <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
-      
-    
-    </div>
-  </aside>
-</div>
-
-  <markdown-style>
-    <h1 id="elasticsearch-642"><a aria-hidden="true" tabindex="-1" href="#elasticsearch-642" class="anchor"><span class="icon icon-link"></span></a>ElasticSearch 6.4.2</h1>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 最新版本</span>
+<span class="title">Docker 入门教程</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="index.html" target="" class="">Home</a></li>
+          </ul><a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">入门</a>
+            <label>实践</label>
+            <a href="docker-compose.html" class="">Docker Compose</a>
+            <a href="elasticsearch.html" class="active">ElasticSearch 搜索服务器</a>
+            <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
+            <a href="harbor.html" class="">Harbor</a>
+            <a href="mattermost.html" class="">Mattermost 聊天工具</a>
+            <a href="mysql.html" class="">MySQL 数据库</a>
+            <a href="nginx.html" class="">Nginx Web 服务器</a>
+            <a href="nps/index.html" class="">NPS 内网穿透</a>
+            <a href="portainer.html" class="">Portainer Docker 管理</a>
+            <a href="postgres.html" class="">PostgreSQL 数据库</a>
+            <a href="rancher.html" class="">Rancher 容器管理平台</a>
+            <a href="redis.html" class="">Redis 数据库</a>
+            <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
+            <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
+            <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="elasticsearch-642"><a aria-hidden="true" tabindex="-1" href="#elasticsearch-642" class="anchor"><span class="icon icon-link"></span></a>ElasticSearch 6.4.2</h1>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 最新版本</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 </span><span class="code-line line-number" line="3"><span class="token comment"># 运行容器</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> run <span class="token punctuation">\</span>
@@ -153,9 +77,9 @@ docker run \
   -e &#x22;discovery.type=single-node&#x22; \
   docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="elasticsearch-533"><a aria-hidden="true" tabindex="-1" href="#elasticsearch-533" class="anchor"><span class="icon icon-link"></span></a>ElasticSearch 5.3.3</h2>
-<p>ElasticSearch 5.3.3 docker 运行</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 下载老版本</span>
+        <h2 id="elasticsearch-533"><a aria-hidden="true" tabindex="-1" href="#elasticsearch-533" class="anchor"><span class="icon icon-link"></span></a>ElasticSearch 5.3.3</h2>
+        <p>ElasticSearch 5.3.3 docker 运行</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 下载老版本</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 </span><span class="code-line line-number" line="3"><span class="token comment"># 运行容器</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> run <span class="token punctuation">\</span>
@@ -174,17 +98,17 @@ docker run \
   -e &#x22;transport.host=127.0.0.1&#x22; \
   -d docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p><strong>Linux</strong></p>
-<p>⚠️注意：vm_max_map_count 内核设置需要设置为至少262144以供生产使用。</p>
-<p>应在 <code>/etc/sysctl.conf</code> 中永久设置 <code>vm_map_max_count</code> 设置：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">grep</span> vm.max_map_count /etc/sysctl.conf
+        <p><strong>Linux</strong></p>
+        <p>⚠️注意：vm_max_map_count 内核设置需要设置为至少262144以供生产使用。</p>
+        <p>应在 <code>/etc/sysctl.conf</code> 中永久设置 <code>vm_map_max_count</code> 设置：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">grep</span> vm.max_map_count /etc/sysctl.conf
 </span><span class="code-line line-number" line="2">vm.max_map_count<span class="token operator">=</span><span class="token number">262144</span>
 </span></code><input type="hidden" value="$ grep vm.max_map_count /etc/sysctl.conf
 vm.max_map_count=262144
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="通过-docker-compose-安装使用"><a aria-hidden="true" tabindex="-1" href="#通过-docker-compose-安装使用" class="anchor"><span class="icon icon-link"></span></a>通过 docker-compose 安装使用</h2>
-<p>新建 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.3/docker.html">docker-compose.yml</a> 文件</p>
-<pre class="language-yaml"><code class="language-yaml code-highlight"><span class="code-line line-number" line="1"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'2'</span>
+        <h2 id="通过-docker-compose-安装使用"><a aria-hidden="true" tabindex="-1" href="#通过-docker-compose-安装使用" class="anchor"><span class="icon icon-link"></span></a>通过 docker-compose 安装使用</h2>
+        <p>新建 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.3/docker.html">docker-compose.yml</a> 文件</p>
+        <pre class="language-yaml"><code class="language-yaml code-highlight"><span class="code-line line-number" line="1"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'2'</span>
 </span><span class="code-line line-number" line="2"><span class="token key atrule">services</span><span class="token punctuation">:</span>
 </span><span class="code-line line-number" line="3">  <span class="token key atrule">elasticsearch1</span><span class="token punctuation">:</span>
 </span><span class="code-line line-number" line="4">    <span class="token key atrule">image</span><span class="token punctuation">:</span> docker.elastic.co/elasticsearch/elasticsearch<span class="token punctuation">:</span>5.3.3
@@ -297,8 +221,8 @@ networks:
   esnet:
     driver: bridge
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>示例显示包含两个 <code>Elasticsearch</code> 节点的集群。 要打开群集，请使用 <code>docker-compose.yml</code> 并输入：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker-compose</span> up -d 
+        <p>示例显示包含两个 <code>Elasticsearch</code> 节点的集群。 要打开群集，请使用 <code>docker-compose.yml</code> 并输入：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker-compose</span> up -d 
 </span><span class="code-line line-number" line="2"><span class="token function">docker-compose</span> down    <span class="token comment"># 停止集群</span>
 </span><span class="code-line line-number" line="3"><span class="token function">docker-compose</span> down -v <span class="token comment"># 销毁集群和数据卷</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> logs elasticsearch1 <span class="token comment"># 查看日志</span>
@@ -307,32 +231,32 @@ docker-compose down    # 停止集群
 docker-compose down -v # 销毁集群和数据卷
 docker logs elasticsearch1 # 查看日志
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p><code>elasticsearch1</code> 监听 <code>localhost:9200</code>，而 <code>elasticsearch2</code> 通过 <code>Docker</code> 网络与 <code>elasticsearch1</code> 进行通信。</p>
-<p>此示例还使用名为 <code>esdata1</code> 和 <code>esdata2</code> 的 <a href="https://docs.docker.com/engine/tutorials/dockervolumes">Docker named volumes</a>，如果尚未存在，将创建它们。</p>
-<h2 id="检查集群的状态"><a aria-hidden="true" tabindex="-1" href="#检查集群的状态" class="anchor"><span class="icon icon-link"></span></a>检查集群的状态</h2>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -u elastic http://127.0.0.1:9200/_cat/health
+        <p><code>elasticsearch1</code> 监听 <code>localhost:9200</code>，而 <code>elasticsearch2</code> 通过 <code>Docker</code> 网络与 <code>elasticsearch1</code> 进行通信。</p>
+        <p>此示例还使用名为 <code>esdata1</code> 和 <code>esdata2</code> 的 <a href="https://docs.docker.com/engine/tutorials/dockervolumes">Docker named volumes</a>，如果尚未存在，将创建它们。</p>
+        <h2 id="检查集群的状态"><a aria-hidden="true" tabindex="-1" href="#检查集群的状态" class="anchor"><span class="icon icon-link"></span></a>检查集群的状态</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -u elastic http://127.0.0.1:9200/_cat/health
 </span><span class="code-line line-number" line="2">Enter <span class="token function">host</span> password <span class="token keyword">for</span> user <span class="token string">'elastic'</span><span class="token builtin class-name">:</span>
 </span><span class="code-line line-number" line="3"><span class="token number">1472225929</span> <span class="token number">15</span>:38:49 docker-cluster green <span class="token number">2</span> <span class="token number">2</span> <span class="token number">4</span> <span class="token number">2</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> - <span class="token number">100.0</span>%
 </span></code><input type="hidden" value="curl -u elastic http://127.0.0.1:9200/_cat/health
 Enter host password for user &#x27;elastic&#x27;:
 1472225929 15:38:49 docker-cluster green 2 2 4 2 0 0 0 0 - 100.0%
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="用户名密码"><a aria-hidden="true" tabindex="-1" href="#用户名密码" class="anchor"><span class="icon icon-link"></span></a>用户名密码</h2>
-<p>默认用户名密码 <code>elastic/changeme</code></p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -XPUT -u elastic <span class="token string">'http://localhost:9200/_xpack/security/user/kibana/_password'</span> -d <span class="token string">'{
+        <h2 id="用户名密码"><a aria-hidden="true" tabindex="-1" href="#用户名密码" class="anchor"><span class="icon icon-link"></span></a>用户名密码</h2>
+        <p>默认用户名密码 <code>elastic/changeme</code></p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -XPUT -u elastic <span class="token string">'http://localhost:9200/_xpack/security/user/kibana/_password'</span> -d <span class="token string">'{
 </span></span><span class="code-line line-number" line="2"><span class="token string">  "password" : "yourpasswd"
 </span></span><span class="code-line line-number" line="3"><span class="token string">}'</span>
 </span></code><input type="hidden" value="curl -XPUT -u elastic &#x27;http://localhost:9200/_xpack/security/user/kibana/_password&#x27; -d &#x27;{
   &#x22;password&#x22; : &#x22;yourpasswd&#x22;
 }&#x27;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="挂载配置"><a aria-hidden="true" tabindex="-1" href="#挂载配置" class="anchor"><span class="icon icon-link"></span></a>挂载配置</h2>
-<p>创建自定义配置文件并将其挂载到映像的相应文件上。 例如，可以使用以下参数来完成使用 <code>docker run</code> 绑定安装custom_elasticsearch.yml：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">-v full_path_to/custom_elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        <h2 id="挂载配置"><a aria-hidden="true" tabindex="-1" href="#挂载配置" class="anchor"><span class="icon icon-link"></span></a>挂载配置</h2>
+        <p>创建自定义配置文件并将其挂载到映像的相应文件上。 例如，可以使用以下参数来完成使用 <code>docker run</code> 绑定安装custom_elasticsearch.yml：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">-v full_path_to/custom_elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 </span></code><input type="hidden" value="-v full_path_to/custom_elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>其它配置修改项</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 避免出现跨域问题</span>
+        <p>其它配置修改项</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 避免出现跨域问题</span>
 </span><span class="code-line line-number" line="2">http.cors.enabled: <span class="token boolean">true</span>
 </span><span class="code-line line-number" line="3">http.cors.allow-origin: <span class="token string">"*"</span>
 </span><span class="code-line line-number" line="4"><span class="token comment"># 在chorem中 当elasticsearch安装x-pack后还可以访问</span>
@@ -347,8 +271,8 @@ http.cors.allow-headers: Authorization
 # 启用审核以跟踪与您的Elasticsearch群集进行的尝试和成功的交互
 xpack.security.audit.enabled: true
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="定义镜像"><a aria-hidden="true" tabindex="-1" href="#定义镜像" class="anchor"><span class="icon icon-link"></span></a>定义镜像</h2>
-<pre class="language-dockerfile"><code class="language-dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> docker.elastic.co/elasticsearch/elasticsearch:5.3.3</span>
+        <h2 id="定义镜像"><a aria-hidden="true" tabindex="-1" href="#定义镜像" class="anchor"><span class="icon icon-link"></span></a>定义镜像</h2>
+        <pre class="language-dockerfile"><code class="language-dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> docker.elastic.co/elasticsearch/elasticsearch:5.3.3</span>
 </span><span class="code-line line-number" line="2"><span class="token instruction"><span class="token keyword">ADD</span> elasticsearch.yml /usr/share/elasticsearch/config/</span>
 </span><span class="code-line line-number" line="3"><span class="token instruction"><span class="token keyword">USER</span> root</span>
 </span><span class="code-line line-number" line="4"><span class="token instruction"><span class="token keyword">RUN</span> chown elasticsearch:elasticsearch config/elasticsearch.yml</span>
@@ -359,8 +283,8 @@ USER root
 RUN chown elasticsearch:elasticsearch config/elasticsearch.yml
 USER elasticsearch
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>然后，您可以使用以下内容构建和尝试运行镜像：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> build --tag<span class="token operator">=</span>elasticsearch-custom <span class="token builtin class-name">.</span>
+        <p>然后，您可以使用以下内容构建和尝试运行镜像：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> build --tag<span class="token operator">=</span>elasticsearch-custom <span class="token builtin class-name">.</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> run -ti -v /usr/share/elasticsearch/data elasticsearch-custom
 </span><span class="code-line line-number" line="3"><span class="token comment"># 覆盖默认的 CMD </span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> run <span class="token operator">&#x3C;</span>各种参数<span class="token operator">></span> bin/elasticsearch -Ecluster.name<span class="token operator">=</span>mynewclustername
@@ -369,121 +293,50 @@ docker run -ti -v /usr/share/elasticsearch/data elasticsearch-custom
 # 覆盖默认的 CMD 
 docker run <各种参数> bin/elasticsearch -Ecluster.name=mynewclustername
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="生产的一些经验"><a aria-hidden="true" tabindex="-1" href="#生产的一些经验" class="anchor"><span class="icon icon-link"></span></a>生产的一些经验</h2>
-<ul>
-<li>镜像公开 <code>TCP</code> 端口 <code>9200</code> 和 <code>9300</code>。对于群集，建议使用 <code>--publish-all</code> 随机化已发布的端口，除非您为每个主机固定一个容器。</li>
-<li>使用 <code>ES_JAVA_OPTS</code> 环境变量来设置堆大小，例如使用 <code>16GB</code> 通过使用 <code>-e ES_JAVA_OPTS=-Xms16g -Xms16g"</code> 和 <code>dcker run</code> 来运行。 还建议为容器设置内存限制。</li>
-</ul>
-<h2 id="其它"><a aria-hidden="true" tabindex="-1" href="#其它" class="anchor"><span class="icon icon-link"></span></a>其它</h2>
-<ul>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.3/docker.html">ElasticSearch 5.3 官方 Docker 安装教程</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html">ElasticSearch 官方 Docker 安装教程</a></li>
-<li><a href="https://hub.docker.com/r/library/elasticsearch/">Docker 镜像仓库</a></li>
-</ul>
-    
-
-<div class="previous">
-  
-  <a class="prev" href="docker-compose.html">
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
-      <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
-    </svg>
-    <span>
-      Docker Compose
-    </span>
-  </a>
-  
-  
-  <a class="next" href="gitlab/index.html">
-    <span>
-      Gitlab 代码仓库管理系统
-    </span>
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
-      <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
-    </svg>
-  </a>
-  
-</div>
-
-
-
-<section class="article-footer">
-  <a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/elasticsearch.md" class="edit-button" target="_blank" rel="noopener noreferrer">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-    </svg>
-    <span>Edit this page on GitHub</span>
-  </a>
-  
-  <span class="atime">2022/05/10</span>
-  
-</section>
-
-  </markdown-style>
-  
-<nav class="tocs">
-  <aside class="inner toc">
-    <ol class="tocs-list">
-    
-      <li>
-        <a href="#elasticsearch-533" class="tocs-link">ElasticSearch 5.3.3</a>
-        
-      </li>
-    
-      <li>
-        <a href="#通过-docker-compose-安装使用" class="tocs-link">通过 docker-compose 安装使用</a>
-        
-      </li>
-    
-      <li>
-        <a href="#检查集群的状态" class="tocs-link">检查集群的状态</a>
-        
-      </li>
-    
-      <li>
-        <a href="#用户名密码" class="tocs-link">用户名密码</a>
-        
-      </li>
-    
-      <li>
-        <a href="#挂载配置" class="tocs-link">挂载配置</a>
-        
-      </li>
-    
-      <li>
-        <a href="#定义镜像" class="tocs-link">定义镜像</a>
-        
-      </li>
-    
-      <li>
-        <a href="#生产的一些经验" class="tocs-link">生产的一些经验</a>
-        
-      </li>
-    
-      <li>
-        <a href="#其它" class="tocs-link">其它</a>
-        
-      </li>
-    
-    </ol>
-  </aside>
-</nav>
-
-</div>
-
-<script src="js/demo-preview.js?v=1.18.0"></script>
-
-
-<div class="footer warpper">
-  Released under the MIT License. Copyright © 2022 Kenny Wong<br />
-Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.18.0
-
-</div>
-
-
-<script src="js/tocbot.js?v=1.18.0"></script>
-
-</body>
+        <h2 id="生产的一些经验"><a aria-hidden="true" tabindex="-1" href="#生产的一些经验" class="anchor"><span class="icon icon-link"></span></a>生产的一些经验</h2>
+        <ul>
+          <li>镜像公开 <code>TCP</code> 端口 <code>9200</code> 和 <code>9300</code>。对于群集，建议使用 <code>--publish-all</code> 随机化已发布的端口，除非您为每个主机固定一个容器。</li>
+          <li>使用 <code>ES_JAVA_OPTS</code> 环境变量来设置堆大小，例如使用 <code>16GB</code> 通过使用 <code>-e ES_JAVA_OPTS=-Xms16g -Xms16g"</code> 和 <code>dcker run</code> 来运行。 还建议为容器设置内存限制。</li>
+        </ul>
+        <h2 id="其它"><a aria-hidden="true" tabindex="-1" href="#其它" class="anchor"><span class="icon icon-link"></span></a>其它</h2>
+        <ul>
+          <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.3/docker.html">ElasticSearch 5.3 官方 Docker 安装教程</a></li>
+          <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html">ElasticSearch 官方 Docker 安装教程</a></li>
+          <li><a href="https://hub.docker.com/r/library/elasticsearch/">Docker 镜像仓库</a></li>
+        </ul>
+        <div class="previous"><a class="prev" href="docker-compose.html"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
+              <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
+            </svg>
+<span>Docker Compose
+</span></a><a class="next" href="gitlab/index.html"><span>Gitlab 代码仓库管理系统
+</span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
+              <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
+            </svg></a></div>
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/elasticsearch.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+<span>Edit this page on GitHub</span>
+</a><span class="atime">2022/05/14</span></section>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#elasticsearch-533" class="tocs-link">ElasticSearch 5.3.3</a></li>
+            <li><a href="#通过-docker-compose-安装使用" class="tocs-link">通过 docker-compose 安装使用</a></li>
+            <li><a href="#检查集群的状态" class="tocs-link">检查集群的状态</a></li>
+            <li><a href="#用户名密码" class="tocs-link">用户名密码</a></li>
+            <li><a href="#挂载配置" class="tocs-link">挂载配置</a></li>
+            <li><a href="#定义镜像" class="tocs-link">定义镜像</a></li>
+            <li><a href="#生产的一些经验" class="tocs-link">生产的一些经验</a></li>
+            <li><a href="#其它" class="tocs-link">其它</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="js/demo-preview.js?v=1.21.1"></script>
+    <div class="footer warpper">Released under the MIT License. Copyright © 2022 Kenny Wong<br>Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.21.1</div>
+    <script src="js/tocbot.js?v=1.21.1"></script>
+  </body>
 </html>

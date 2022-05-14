@@ -1,160 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SeaweedFS Docker 入门教程 </title>
-  
-  <meta name="description" content="Docker 是一个开源的应用容器引擎，而一个容器containers其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制">
-  
-  
-  <meta name="keywords" content="docker,containers,tutorial">
-  
-  <link rel="stylesheet" type="text/css" href="css/main.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/media.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.18.0">
-  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeaweedFS Docker 入门教程</title>
+    <meta name="description" content="Docker 是一个开源的应用容器引擎，而一个容器containers其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制">
+    <meta name="keywords" content="docker,containers,tutorial">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/media.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.21.1">
     <link rel="icon" href="img/logo.svg" type="image/x-icon">
-  
-  <script src="js/copy.js?v=1.18.0"></script>
-  <script src="js/dark-mode.js?v=1.18.0"></script>
-  <script src="js/markdown-style.js?v=1.18.0"></script>
-</head>
-<body id="idoctotop">
-  <a href="#idoctotop" class="gototop">top</a>
-<header class="header">
-  <article class="inner warpper">
-    <a class="logo" href="index.html">
-      
-        <svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
-</svg>
-      
-      <span class="title">Docker 入门教程</span>
-    </a>
-    <div class="content">
-      <ul class="menu">
-        
-        <li>
-          <a href="index.html" target="" class="active"> Home </a>
-        </li>
-        
-      </ul>
-      
-        <a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    <script src="js/copy.js?v=1.21.1"></script>
+    <script src="js/dark-mode.js?v=1.21.1"></script>
+    <script src="js/markdown-style.js?v=1.21.1"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="index.html"><svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
           </svg>
-        </a>
-      
-      <dark-mode permanent></dark-mode>
-    </div>
-  </article>
-</header>
-
-<div class="warpper-content warpper sidebar ">
-  
-<div class="sidebar-border">
-  <aside class="sidebar" role="navigation">
-    <div>
-    
-      
-        <a href="index.html" class="active">入门</a>
-      
-    
-      
-        <label>实践</label>
-      
-    
-      
-        <a href="docker-compose.html" class="">Docker Compose</a>
-      
-    
-      
-        <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
-      
-    
-      
-        <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
-      
-    
-      
-        <a href="harbor.html" class="">Harbor</a>
-      
-    
-      
-        <a href="mattermost.html" class="">Mattermost 聊天工具</a>
-      
-    
-      
-        <a href="mysql.html" class="">MySQL 数据库</a>
-      
-    
-      
-        <a href="nginx.html" class="">Nginx Web 服务器</a>
-      
-    
-      
-        <a href="nps/index.html" class="">NPS 内网穿透</a>
-      
-    
-      
-        <a href="portainer.html" class="">Portainer Docker 管理</a>
-      
-    
-      
-        <a href="postgres.html" class="">PostgreSQL 数据库</a>
-      
-    
-      
-        <a href="rancher.html" class="">Rancher 容器管理平台</a>
-      
-    
-      
-        <a href="redis.html" class="">Redis 数据库</a>
-      
-    
-      
-        <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
-      
-    
-      
-        <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
-      
-    
-      
-        <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
-      
-    
-    </div>
-  </aside>
-</div>
-
-  <markdown-style>
-    <p align="center">
-<img width="130" align="center" src="img/logo.svg">
-</p>
-
-<p><a href="https://www.docker.com/">Docker</a> 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
-<ul>
-<li>Docker 的局限性之一，它只能用在 64 位的操作系统上。</li>
-</ul>
-
-<p>Docker 从 <code>1.13</code> 版本之后采用时间线的方式作为版本号，分为社区版 <code>CE</code> 和企业版 <code>EE</code>，社区版是免费提供给个人开发者和小型团体使用的，企业版会提供额外的收费服务，比如经过官方测试认证过的基础设施、容器、插件等。</p>
-<p>社区版按照 <code>stable</code> 和 <code>edge</code> 两种方式发布，每个季度更新 <code>stable</code> 版本，如 <code>17.06</code>，<code>17.09</code>；每个月份更新 <code>edge</code> 版本，如<code>17.09</code>，<code>17.10</code>。</p>
-<p>下面教程运行在 <code>Centos</code> 中</p>
-<h2 id="新版本安装"><a aria-hidden="true" tabindex="-1" href="#新版本安装" class="anchor"><span class="icon icon-link"></span></a>新版本安装</h2>
-<p>Docker 官方的安装教程，<a href="https://docs.docker.com/install/linux/docker-ce/centos/">在这里</a>。</p>
-<p>安装一些必要的系统工具</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">sudo</span> yum <span class="token function">install</span> -y yum-utils device-mapper-persistent-data lvm2
+<span class="title">Docker 入门教程</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="index.html" target="" class="active">Home</a></li>
+          </ul><a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="active">入门</a>
+            <label>实践</label>
+            <a href="docker-compose.html" class="">Docker Compose</a>
+            <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
+            <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
+            <a href="harbor.html" class="">Harbor</a>
+            <a href="mattermost.html" class="">Mattermost 聊天工具</a>
+            <a href="mysql.html" class="">MySQL 数据库</a>
+            <a href="nginx.html" class="">Nginx Web 服务器</a>
+            <a href="nps/index.html" class="">NPS 内网穿透</a>
+            <a href="portainer.html" class="">Portainer Docker 管理</a>
+            <a href="postgres.html" class="">PostgreSQL 数据库</a>
+            <a href="rancher.html" class="">Rancher 容器管理平台</a>
+            <a href="redis.html" class="">Redis 数据库</a>
+            <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
+            <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
+            <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <p align="center">
+          <img width="130" align="center" src="img/logo.svg">
+        </p>
+        <p><a href="https://www.docker.com/">Docker</a> 是一个开源的应用容器引擎，而一个<ruby>容器<rt>containers</rt></ruby>其实是一个虚拟化的独立的环境，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+        <ul>
+          <li>Docker 的局限性之一，它只能用在 64 位的操作系统上。</li>
+        </ul>
+        <p>Docker 从 <code>1.13</code> 版本之后采用时间线的方式作为版本号，分为社区版 <code>CE</code> 和企业版 <code>EE</code>，社区版是免费提供给个人开发者和小型团体使用的，企业版会提供额外的收费服务，比如经过官方测试认证过的基础设施、容器、插件等。</p>
+        <p>社区版按照 <code>stable</code> 和 <code>edge</code> 两种方式发布，每个季度更新 <code>stable</code> 版本，如 <code>17.06</code>，<code>17.09</code>；每个月份更新 <code>edge</code> 版本，如<code>17.09</code>，<code>17.10</code>。</p>
+        <p>下面教程运行在 <code>Centos</code> 中</p>
+        <h2 id="新版本安装"><a aria-hidden="true" tabindex="-1" href="#新版本安装" class="anchor"><span class="icon icon-link"></span></a>新版本安装</h2>
+        <p>Docker 官方的安装教程，<a href="https://docs.docker.com/install/linux/docker-ce/centos/">在这里</a>。</p>
+        <p>安装一些必要的系统工具</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">sudo</span> yum <span class="token function">install</span> -y yum-utils device-mapper-persistent-data lvm2
 </span></code><input type="hidden" value="sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>添加软件源信息</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># docker 官方源</span>
+        <p>添加软件源信息</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># docker 官方源</span>
 </span><span class="code-line line-number" line="2"><span class="token function">sudo</span> yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 </span><span class="code-line line-number" line="3"><span class="token comment"># 阿里云源</span>
 </span><span class="code-line line-number" line="4"><span class="token function">sudo</span> yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
@@ -163,20 +85,20 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 # 阿里云源
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>可选：启用 <code>edge</code> 和 <code>test</code> 存储库。 这些存储库包含在上面的 <code>docker.repo</code> 文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。</p>
-<pre><code class="code-highlight"><span class="code-line line-number" line="1">$ sudo yum-config-manager --enable docker-ce-edge
+        <p>可选：启用 <code>edge</code> 和 <code>test</code> 存储库。 这些存储库包含在上面的 <code>docker.repo</code> 文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。</p>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">$ sudo yum-config-manager --enable docker-ce-edge
 </span><span class="code-line line-number" line="2">$ sudo yum-config-manager --enable docker-ce-test
 </span></code><input type="hidden" value="$ sudo yum-config-manager --enable docker-ce-edge
 $ sudo yum-config-manager --enable docker-ce-test
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>您可以通过使用 <code>--disable</code> 标志运行 <code>yum-config-manager</code> 命令来禁用边缘或测试存储库。 要重新启用它，请使用 <code>--enable</code> 标志。 以下命令禁用 <code>edge</code> 存储库:</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">sudo</span> yum-config-manager --disable docker-ce-edge
+        <p>您可以通过使用 <code>--disable</code> 标志运行 <code>yum-config-manager</code> 命令来禁用边缘或测试存储库。 要重新启用它，请使用 <code>--enable</code> 标志。 以下命令禁用 <code>edge</code> 存储库:</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">sudo</span> yum-config-manager --disable docker-ce-edge
 </span><span class="code-line line-number" line="2">$ <span class="token function">sudo</span> yum-config-manager --disable docker-ce-test
 </span></code><input type="hidden" value="$ sudo yum-config-manager --disable docker-ce-edge
 $ sudo yum-config-manager --disable docker-ce-test
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>安装 Docker-ce</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 安装前可以先更新 yum 缓存：</span>
+        <p>安装 Docker-ce</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 安装前可以先更新 yum 缓存：</span>
 </span><span class="code-line line-number" line="2"><span class="token function">sudo</span> yum makecache fast
 </span><span class="code-line line-number" line="3"><span class="token comment"># 安装 Docker-ce</span>
 </span><span class="code-line line-number" line="4"><span class="token function">sudo</span> yum <span class="token function">install</span> docker-ce
@@ -185,8 +107,8 @@ sudo yum makecache fast
 # 安装 Docker-ce
 sudo yum install docker-ce
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>如果你想安装特定 <code>docker-ce</code> 版本，先列出 repo 中可用版本，然后选择安装</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ yum list docker-ce --showduplicates <span class="token operator">|</span> <span class="token function">sort</span> -r
+        <p>如果你想安装特定 <code>docker-ce</code> 版本，先列出 repo 中可用版本，然后选择安装</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ yum list docker-ce --showduplicates <span class="token operator">|</span> <span class="token function">sort</span> -r
 </span><span class="code-line line-number" line="2"><span class="token comment"># docker-ce.x86_64       18.06.1.ce-3.el7              docker-ce-stable</span>
 </span><span class="code-line line-number" line="3"><span class="token comment"># docker-ce.x86_64       18.06.1.ce-3.el7              @docker-ce-stable</span>
 </span><span class="code-line line-number" line="4"><span class="token comment"># docker-ce.x86_64       18.06.0.ce-3.el7              docker-ce-stable</span>
@@ -211,16 +133,16 @@ $ sudo yum install docker-ce-<VERSION STRING>
 # 选择安装 docker-ce-18.06.1.ce
 $ sudo yum install docker-ce-18.06.1.ce
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>启动 Docker 后台服务</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">sudo</span> systemctl start <span class="token function">docker</span>
+        <p>启动 Docker 后台服务</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">sudo</span> systemctl start <span class="token function">docker</span>
 </span></code><input type="hidden" value="$ sudo systemctl start docker
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>通过运行 <code>hello-world</code> 镜像，验证是否正确安装了 <code>docker</code>。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> run hello-world
+        <p>通过运行 <code>hello-world</code> 镜像，验证是否正确安装了 <code>docker</code>。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> run hello-world
 </span></code><input type="hidden" value="$ docker run hello-world
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="旧版本安装"><a aria-hidden="true" tabindex="-1" href="#旧版本安装" class="anchor"><span class="icon icon-link"></span></a>旧版本安装</h2>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">yum <span class="token function">install</span> <span class="token function">docker</span>        <span class="token comment"># CentOS 中安装</span>
+        <h2 id="旧版本安装"><a aria-hidden="true" tabindex="-1" href="#旧版本安装" class="anchor"><span class="icon icon-link"></span></a>旧版本安装</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">yum <span class="token function">install</span> <span class="token function">docker</span>        <span class="token comment"># CentOS 中安装</span>
 </span><span class="code-line line-number" line="2"><span class="token function">apt-get</span> <span class="token function">install</span> docker-ce <span class="token comment"># Ubuntu 中安装</span>
 </span><span class="code-line line-number" line="3">pacman -S <span class="token function">docker</span>          <span class="token comment"># Arch 中安装</span>
 </span><span class="code-line line-number" line="4">emerge --ask <span class="token function">docker</span>       <span class="token comment"># Gentoo 中安装</span>
@@ -269,8 +191,8 @@ docker version      # 通过查看版本，检查安装是否成功
 #  Built:           Thu Sep 21 22:33:52 2017
 #  OS/Arch:         linux/amd64
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="命令介绍"><a aria-hidden="true" tabindex="-1" href="#命令介绍" class="anchor"><span class="icon icon-link"></span></a>命令介绍</h2>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> --help
+        <h2 id="命令介绍"><a aria-hidden="true" tabindex="-1" href="#命令介绍" class="anchor"><span class="icon icon-link"></span></a>命令介绍</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> --help
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3">管理命令:
 </span><span class="code-line line-number" line="4">  container   管理容器
@@ -335,8 +257,8 @@ docker version      # 通过查看版本，检查安装是否成功
   top         显示一个容器内的所有进程
   unpause     恢复一个或多个容器内所有被暂停的进程
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="服务管理"><a aria-hidden="true" tabindex="-1" href="#服务管理" class="anchor"><span class="icon icon-link"></span></a>服务管理</h2>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">service</span> <span class="token function">docker</span> start       <span class="token comment"># 启动 docker 服务，守护进程</span>
+        <h2 id="服务管理"><a aria-hidden="true" tabindex="-1" href="#服务管理" class="anchor"><span class="icon icon-link"></span></a>服务管理</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">service</span> <span class="token function">docker</span> start       <span class="token comment"># 启动 docker 服务，守护进程</span>
 </span><span class="code-line line-number" line="2"><span class="token function">service</span> <span class="token function">docker</span> stop        <span class="token comment"># 停止 docker 服务</span>
 </span><span class="code-line line-number" line="3"><span class="token function">service</span> <span class="token function">docker</span> status      <span class="token comment"># 查看 docker 服务状态</span>
 </span><span class="code-line line-number" line="4"><span class="token function">chkconfig</span> <span class="token function">docker</span> on        <span class="token comment"># 设置为开机启动</span>
@@ -345,9 +267,9 @@ service docker stop        # 停止 docker 服务
 service docker status      # 查看 docker 服务状态
 chkconfig docker on        # 设置为开机启动
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="镜像管理"><a aria-hidden="true" tabindex="-1" href="#镜像管理" class="anchor"><span class="icon icon-link"></span></a>镜像管理</h2>
-<p>镜像可以看做我们平时装系统的镜像，里面就是一个运行环境。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> pull centos:latest  <span class="token comment"># 从docker.io中下载centos镜像到本地</span>
+        <h2 id="镜像管理"><a aria-hidden="true" tabindex="-1" href="#镜像管理" class="anchor"><span class="icon icon-link"></span></a>镜像管理</h2>
+        <p>镜像可以看做我们平时装系统的镜像，里面就是一个运行环境。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> pull centos:latest  <span class="token comment"># 从docker.io中下载centos镜像到本地</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> images              <span class="token comment"># 查看已下载的镜像</span>
 </span><span class="code-line line-number" line="3"><span class="token function">docker</span> rmi <span class="token punctuation">[</span>image_id<span class="token punctuation">]</span>      <span class="token comment"># 删除镜像，指定镜像id</span>
 </span><span class="code-line line-number" line="4">
@@ -368,38 +290,38 @@ docker rmi $(docker images | grep none | awk &#x27;{print $3}&#x27; | sort -r)
 # 连接进行进入命令行模式，exit命令退出。
 docker run -t -i nginx:latest /bin/bash
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="通过容器创建镜像"><a aria-hidden="true" tabindex="-1" href="#通过容器创建镜像" class="anchor"><span class="icon icon-link"></span></a>通过容器创建镜像</h3>
-<p>我们可以通过以下两种方式对镜像进行更改。</p>
-<ol>
-<li>从已经创建的容器中更新镜像，并且提交这个镜像</li>
-<li>使用 Dockerfile 指令来创建一个新的镜像</li>
-</ol>
-<p>下面通过已存在的容器创建一个新的镜像。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> commit -m<span class="token operator">=</span><span class="token string">"First Docker"</span> -a<span class="token operator">=</span><span class="token string">"wcjiang"</span> a6b0a6cfdacf wcjiang/nginx:v1.2.1
+        <h3 id="通过容器创建镜像"><a aria-hidden="true" tabindex="-1" href="#通过容器创建镜像" class="anchor"><span class="icon icon-link"></span></a>通过容器创建镜像</h3>
+        <p>我们可以通过以下两种方式对镜像进行更改。</p>
+        <ol>
+          <li>从已经创建的容器中更新镜像，并且提交这个镜像</li>
+          <li>使用 Dockerfile 指令来创建一个新的镜像</li>
+        </ol>
+        <p>下面通过已存在的容器创建一个新的镜像。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> commit -m<span class="token operator">=</span><span class="token string">"First Docker"</span> -a<span class="token operator">=</span><span class="token string">"wcjiang"</span> a6b0a6cfdacf wcjiang/nginx:v1.2.1
 </span></code><input type="hidden" value="docker commit -m=&#x22;First Docker&#x22; -a=&#x22;wcjiang&#x22; a6b0a6cfdacf wcjiang/nginx:v1.2.1
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>上面命令参数说明：</p>
-<ul>
-<li><code>-m</code> 提交的描述信息</li>
-<li><code>-a</code> 指定镜像作者</li>
-<li><code>a6b0a6cfdacf</code> 记住这个是容器id，不是镜像id</li>
-<li><code>wcjiang/nginx:v1.2.1</code> 创建的目标镜像名</li>
-</ul>
-<h3 id="通过dockerfile创建镜像"><a aria-hidden="true" tabindex="-1" href="#通过dockerfile创建镜像" class="anchor"><span class="icon icon-link"></span></a>通过Dockerfile创建镜像</h3>
-<p>假设创建一个 node.js 镜像，首先在 node.js 项目根目录创建文件。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">touch</span> Dockerfile .dockerignore
+        <p>上面命令参数说明：</p>
+        <ul>
+          <li><code>-m</code> 提交的描述信息</li>
+          <li><code>-a</code> 指定镜像作者</li>
+          <li><code>a6b0a6cfdacf</code> 记住这个是容器id，不是镜像id</li>
+          <li><code>wcjiang/nginx:v1.2.1</code> 创建的目标镜像名</li>
+        </ul>
+        <h3 id="通过dockerfile创建镜像"><a aria-hidden="true" tabindex="-1" href="#通过dockerfile创建镜像" class="anchor"><span class="icon icon-link"></span></a>通过Dockerfile创建镜像</h3>
+        <p>假设创建一个 node.js 镜像，首先在 node.js 项目根目录创建文件。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">touch</span> Dockerfile .dockerignore
 </span></code><input type="hidden" value="touch Dockerfile .dockerignore
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p><code>.dockerignore</code> 文件内容，下面代码表示，这三个路径要排除，不要打包进入 image 文件。如果你没有路径要排除，这个文件可以不新建。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">.git
+        <p><code>.dockerignore</code> 文件内容，下面代码表示，这三个路径要排除，不要打包进入 image 文件。如果你没有路径要排除，这个文件可以不新建。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">.git
 </span><span class="code-line line-number" line="2">node_modules
 </span><span class="code-line line-number" line="3">npm-debug.log
 </span></code><input type="hidden" value=".git
 node_modules
 npm-debug.log
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>Dockerfile 文件内容</p>
-<pre class="language-dockerfile"><code class="language-Dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> node:8.4</span>
+        <p>Dockerfile 文件内容</p>
+        <pre class="language-dockerfile"><code class="language-Dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> node:8.4</span>
 </span><span class="code-line line-number" line="2"><span class="token instruction"><span class="token keyword">COPY</span> . /app</span>
 </span><span class="code-line line-number" line="3"><span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
 </span><span class="code-line line-number" line="4"><span class="token instruction"><span class="token keyword">RUN</span> npm install --registry=https://registry.npm.taobao.org</span>
@@ -410,40 +332,40 @@ WORKDIR /app
 RUN npm install --registry=https://registry.npm.taobao.org
 EXPOSE 3000
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<ul>
-<li><code>FROM node:8.4</code>：该 <code>image</code> 文件继承官方的 <code>node image</code>，冒号表示标签，这里标签是<code>8.4</code>，即<code>8.4</code>版本的 <code>node</code>。</li>
-<li><code>COPY . /app</code>：将当前目录下的所有文件（除了 <code>.dockerignore</code> 排除的路径），都拷贝进入 <code>image</code> 文件的 <code>/app</code> 目录。</li>
-<li><code>WORKDIR /app</code>：指定接下来的工作路径为<code>/app</code>。</li>
-<li><code>RUN npm install</code>：在/app目录下，运行 <code>npm install</code> 命令安装依赖。注意，安装后所有的依赖，都将打包进入 <code>image</code> 文件。</li>
-<li><code>EXPOSE 3000</code>：将容器 <code>3000</code> 端口暴露出来， 允许外部连接这个端口。</li>
-</ul>
-<p>有了 <code>Dockerfile</code> 文件以后，就可以使用 <code>docker image build</code> 命令创建 <code>image</code> 文件了。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> image build -t koa-demo <span class="token builtin class-name">.</span>
+        <ul>
+          <li><code>FROM node:8.4</code>：该 <code>image</code> 文件继承官方的 <code>node image</code>，冒号表示标签，这里标签是<code>8.4</code>，即<code>8.4</code>版本的 <code>node</code>。</li>
+          <li><code>COPY . /app</code>：将当前目录下的所有文件（除了 <code>.dockerignore</code> 排除的路径），都拷贝进入 <code>image</code> 文件的 <code>/app</code> 目录。</li>
+          <li><code>WORKDIR /app</code>：指定接下来的工作路径为<code>/app</code>。</li>
+          <li><code>RUN npm install</code>：在/app目录下，运行 <code>npm install</code> 命令安装依赖。注意，安装后所有的依赖，都将打包进入 <code>image</code> 文件。</li>
+          <li><code>EXPOSE 3000</code>：将容器 <code>3000</code> 端口暴露出来， 允许外部连接这个端口。</li>
+        </ul>
+        <p>有了 <code>Dockerfile</code> 文件以后，就可以使用 <code>docker image build</code> 命令创建 <code>image</code> 文件了。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> image build -t koa-demo <span class="token builtin class-name">.</span>
 </span><span class="code-line line-number" line="2"><span class="token comment"># 或者</span>
 </span><span class="code-line line-number" line="3">$ <span class="token function">docker</span> image build -t koa-demo:0.0.1 <span class="token builtin class-name">.</span>
 </span></code><input type="hidden" value="$ docker image build -t koa-demo .
 # 或者
 $ docker image build -t koa-demo:0.0.1 .
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>上面命令，<code>-t</code> 参数用来指定 <code>image</code> 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是 <code>latest</code>。注意后面有个 <code>.</code>，表示 Dockerfile 文件所在的路径为当前路径</p>
-<h3 id="发布自己的镜像"><a aria-hidden="true" tabindex="-1" href="#发布自己的镜像" class="anchor"><span class="icon icon-link"></span></a>发布自己的镜像</h3>
-<ol>
-<li>在<a href="https://www.docker.com/">Docker</a> 注册账户，发布的镜像都在<a href="https://cloud.docker.com/repository/list">这个页面里</a>展示</li>
-<li>将上面做的镜像<code>nginx</code>，起个新的名字<code>nginx-test</code></li>
-</ol>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
+        <p>上面命令，<code>-t</code> 参数用来指定 <code>image</code> 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是 <code>latest</code>。注意后面有个 <code>.</code>，表示 Dockerfile 文件所在的路径为当前路径</p>
+        <h3 id="发布自己的镜像"><a aria-hidden="true" tabindex="-1" href="#发布自己的镜像" class="anchor"><span class="icon icon-link"></span></a>发布自己的镜像</h3>
+        <ol>
+          <li>在<a href="https://www.docker.com/">Docker</a> 注册账户，发布的镜像都在<a href="https://cloud.docker.com/repository/list">这个页面里</a>展示</li>
+          <li>将上面做的镜像<code>nginx</code>，起个新的名字<code>nginx-test</code></li>
+        </ol>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
 </span></code><input type="hidden" value="docker tag wcjiang/nginx:v1.2.1 wcjiang/nginx-test:lastest
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<ol start="3">
-<li>登录docker</li>
-</ol>
-<pre><code class="code-highlight"><span class="code-line line-number" line="1">docker login
+        <ol start="3">
+          <li>登录docker</li>
+        </ol>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">docker login
 </span></code><input type="hidden" value="docker login
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<ol start="4">
-<li>上传<code>nginx-test</code>镜像</li>
-</ol>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> push wcjiang/nginx-test:lastest
+        <ol start="4">
+          <li>上传<code>nginx-test</code>镜像</li>
+        </ol>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> push wcjiang/nginx-test:lastest
 </span><span class="code-line line-number" line="2"><span class="token comment"># The push refers to a repository [docker.io/wcjiang/nginx-test]</span>
 </span><span class="code-line line-number" line="3"><span class="token comment"># 2f5c6a3c22e3: Mounted from wcjiang/nginx</span>
 </span><span class="code-line line-number" line="4"><span class="token comment"># cf516324493c: Mounted from wcjiang/nginx</span>
@@ -454,9 +376,9 @@ $ docker image build -t koa-demo:0.0.1 .
 # cf516324493c: Mounted from wcjiang/nginx
 # lastest: digest: sha256:73ae804b2c60327d1269aa387cf782f664bc91da3180d10dbd49027d7adaa789 size: 736
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="镜像中安装软件"><a aria-hidden="true" tabindex="-1" href="#镜像中安装软件" class="anchor"><span class="icon icon-link"></span></a>镜像中安装软件</h3>
-<p>通常情况下，使用docker官方镜像，如 mysql镜像，默认情况下镜像中啥软件也没有，通过下面命令安装你所需要的软件：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 第一次需要运行这个命令，确保源的索引是最新的</span>
+        <h3 id="镜像中安装软件"><a aria-hidden="true" tabindex="-1" href="#镜像中安装软件" class="anchor"><span class="icon icon-link"></span></a>镜像中安装软件</h3>
+        <p>通常情况下，使用docker官方镜像，如 mysql镜像，默认情况下镜像中啥软件也没有，通过下面命令安装你所需要的软件：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 第一次需要运行这个命令，确保源的索引是最新的</span>
 </span><span class="code-line line-number" line="2"><span class="token comment"># 同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引</span>
 </span><span class="code-line line-number" line="3"><span class="token function">apt-get</span> update
 </span><span class="code-line line-number" line="4"><span class="token comment"># 做过上面更新同步之后，可以运行下面的命令了</span>
@@ -467,8 +389,8 @@ apt-get update
 # 做过上面更新同步之后，可以运行下面的命令了
 apt-get install vim
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>如果你安装了CentOS或者Ubuntu系统可以进入系统安装相关软件</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 进入到centos7镜像系统</span>
+        <p>如果你安装了CentOS或者Ubuntu系统可以进入系统安装相关软件</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 进入到centos7镜像系统</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> run -i -t centos:7 /bin/bash
 </span><span class="code-line line-number" line="3">yum update
 </span><span class="code-line line-number" line="4">yum <span class="token function">install</span> <span class="token function">vim</span>
@@ -477,9 +399,9 @@ docker run -i -t centos:7 /bin/bash
 yum update
 yum install vim
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="容器管理"><a aria-hidden="true" tabindex="-1" href="#容器管理" class="anchor"><span class="icon icon-link"></span></a>容器管理</h2>
-<p>容器就像一个类的实例</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 列出本机正在运行的容器</span>
+        <h2 id="容器管理"><a aria-hidden="true" tabindex="-1" href="#容器管理" class="anchor"><span class="icon icon-link"></span></a>容器管理</h2>
+        <p>容器就像一个类的实例</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 列出本机正在运行的容器</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> container <span class="token function">ls</span>
 </span><span class="code-line line-number" line="3"><span class="token comment"># 列出本机所有容器，包括终止运行的容器</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> container <span class="token function">ls</span> --all
@@ -532,8 +454,8 @@ docker inspect -f {{.State.Pid}} 44fc0f0582d9        # 获取id为 44fc0f0582d9 
 # 下载指定版本容器镜像
 docker pull gitlab/gitlab-ce:11.2.3-ce.0
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="容器服务管理"><a aria-hidden="true" tabindex="-1" href="#容器服务管理" class="anchor"><span class="icon icon-link"></span></a>容器服务管理</h3>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -itd --name my-nginx2 nginx  <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
+        <h3 id="容器服务管理"><a aria-hidden="true" tabindex="-1" href="#容器服务管理" class="anchor"><span class="icon icon-link"></span></a>容器服务管理</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -itd --name my-nginx2 nginx  <span class="token comment"># 通过nginx镜像，【创建】容器名为 my-nginx2 的容器</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> start my-nginx --restart<span class="token operator">=</span>always  <span class="token comment"># 【启动策略】一个已经存在的容器启动添加策略</span>
 </span><span class="code-line line-number" line="3">    <span class="token comment"># no - 容器不重启</span>
 </span><span class="code-line line-number" line="4">    <span class="token comment"># on-failure - 容器推出状态非0时重启</span>
@@ -556,51 +478,50 @@ docker kill my-nginx              # 【杀死】一个运行中的容器
 docker rename my-nginx new-nginx  # 【重命名】容器
 docker rm new-nginx               # 【删除】容器
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="进入容器"><a aria-hidden="true" tabindex="-1" href="#进入容器" class="anchor"><span class="icon icon-link"></span></a>进入容器</h3>
-<ol>
-<li>创建一个守护状态的 Docker 容器</li>
-</ol>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -itd my-nginx /bin/bash
+        <h3 id="进入容器"><a aria-hidden="true" tabindex="-1" href="#进入容器" class="anchor"><span class="icon icon-link"></span></a>进入容器</h3>
+        <ol>
+          <li>创建一个守护状态的 Docker 容器</li>
+        </ol>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -itd my-nginx /bin/bash
 </span></code><input type="hidden" value="docker run -itd my-nginx /bin/bash
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<ol start="2">
-<li>使用<code>docker ps</code>查看到该容器信息</li>
-</ol>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> <span class="token function">ps</span>
+        <ol start="2">
+          <li>使用<code>docker ps</code>查看到该容器信息</li>
+        </ol>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> <span class="token function">ps</span>
 </span><span class="code-line line-number" line="2"><span class="token comment"># CONTAINER ID  IMAGE  COMMAND      CREATED          STATUS          PORTS    NAMES</span>
 </span><span class="code-line line-number" line="3"><span class="token comment"># 6bd0496da64f  nginx  "/bin/bash"  20 seconds ago   Up 18 seconds   80/tcp   high_shirley</span>
 </span></code><input type="hidden" value="docker ps
 # CONTAINER ID  IMAGE  COMMAND      CREATED          STATUS          PORTS    NAMES
 # 6bd0496da64f  nginx  &#x22;/bin/bash&#x22;  20 seconds ago   Up 18 seconds   80/tcp   high_shirley
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<ol start="3">
-<li>使用<code>docker exec</code>命令进入一个已经在运行的容器</li>
-</ol>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it 6bd0496da64f /bin/bash
+        <ol start="3">
+          <li>使用<code>docker exec</code>命令进入一个已经在运行的容器</li>
+        </ol>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it 6bd0496da64f /bin/bash
 </span></code><input type="hidden" value="docker exec -it 6bd0496da64f /bin/bash
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>通常有下面几种方式进入Docker的容器，推荐使用 <code>exec</code>，使用 <code>attach</code> 一直进入失败。</p>
-<ul>
-<li>使用<code>docker attach</code></li>
-<li>使用<code>SSH</code> <a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp">为什么不需要在 Docker 容器中运行 sshd</a></li>
-<li>使用<code>nsenter</code>进入Docker容器，<a href="https://github.com/jpetazzo/nsenter">nsenter官方仓库</a></li>
-<li>使用<code>docker exec</code>，在<code>1.3.*</code>之后提供了一个新的命令<code>exec</code>用于进入容器</li>
-</ul>
-<h2 id="文件拷贝"><a aria-hidden="true" tabindex="-1" href="#文件拷贝" class="anchor"><span class="icon icon-link"></span></a>文件拷贝</h2>
-<p>从主机复制到容器 <code>sudo docker cp host_path containerID:container_path</code><br>
-从容器复制到主机 <code>sudo docker cp containerID:container_path host_path</code></p>
-<h2 id="docker私有仓库搭建"><a aria-hidden="true" tabindex="-1" href="#docker私有仓库搭建" class="anchor"><span class="icon icon-link"></span></a>Docker私有仓库搭建</h2>
-<p>通过官方提供的私有仓库镜像<code>registry</code>来搭建私有仓库。通过 <a href="https://humpback.github.io">humpback</a> 快速搭建轻量级的Docker容器云管理平台。关于仓库配置说明请参见<a href="https://github.com/docker/distribution/blob/master/docs/configuration.md">configuration.md</a></p>
-<blockquote>
-<p>⚠️ 注意：也可以通过部署管理工具 <code>Harbor</code> 来部署 <code>registry</code></p>
-</blockquote>
-<p>除了 <a href="https://github.com/goharbor/harbor">Harbor</a> 还有 <a href="https://github.com/humpback/humpback">humpback</a> 和 <a href="https://github.com/rancher/rancher">rancher</a></p>
-<h3 id="registry"><a aria-hidden="true" tabindex="-1" href="#registry" class="anchor"><span class="icon icon-link"></span></a><code>registry</code></h3>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> pull registry:2.6.2
+        <p>通常有下面几种方式进入Docker的容器，推荐使用 <code>exec</code>，使用 <code>attach</code> 一直进入失败。</p>
+        <ul>
+          <li>使用<code>docker attach</code></li>
+          <li>使用<code>SSH</code> <a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp">为什么不需要在 Docker 容器中运行 sshd</a></li>
+          <li>使用<code>nsenter</code>进入Docker容器，<a href="https://github.com/jpetazzo/nsenter">nsenter官方仓库</a></li>
+          <li>使用<code>docker exec</code>，在<code>1.3.*</code>之后提供了一个新的命令<code>exec</code>用于进入容器</li>
+        </ul>
+        <h2 id="文件拷贝"><a aria-hidden="true" tabindex="-1" href="#文件拷贝" class="anchor"><span class="icon icon-link"></span></a>文件拷贝</h2>
+        <p>从主机复制到容器 <code>sudo docker cp host_path containerID:container_path</code><br>从容器复制到主机 <code>sudo docker cp containerID:container_path host_path</code></p>
+        <h2 id="docker私有仓库搭建"><a aria-hidden="true" tabindex="-1" href="#docker私有仓库搭建" class="anchor"><span class="icon icon-link"></span></a>Docker私有仓库搭建</h2>
+        <p>通过官方提供的私有仓库镜像<code>registry</code>来搭建私有仓库。通过 <a href="https://humpback.github.io">humpback</a> 快速搭建轻量级的Docker容器云管理平台。关于仓库配置说明请参见<a href="https://github.com/docker/distribution/blob/master/docs/configuration.md">configuration.md</a></p>
+        <blockquote>
+          <p>⚠️ 注意：也可以通过部署管理工具 <code>Harbor</code> 来部署 <code>registry</code></p>
+        </blockquote>
+        <p>除了 <a href="https://github.com/goharbor/harbor">Harbor</a> 还有 <a href="https://github.com/humpback/humpback">humpback</a> 和 <a href="https://github.com/rancher/rancher">rancher</a></p>
+        <h3 id="registry"><a aria-hidden="true" tabindex="-1" href="#registry" class="anchor"><span class="icon icon-link"></span></a><code>registry</code></h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> pull registry:2.6.2
 </span></code><input type="hidden" value="docker pull registry:2.6.2
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>创建容器并运行，创建成功之后，可访问 <code>http://192.168.99.100:7000/v2/</code>，来检查仓库是否正常运行，当返回 <code>{}</code> 时，表示部署成功。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+        <p>创建容器并运行，创建成功之后，可访问 <code>http://192.168.99.100:7000/v2/</code>，来检查仓库是否正常运行，当返回 <code>{}</code> 时，表示部署成功。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">  -p <span class="token number">5000</span>:5000 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">  --restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">  --name registry <span class="token punctuation">\</span>
@@ -635,8 +556,8 @@ docker run -d -p 5000:5000 --restart=always --name registry \
     -v &#x60;pwd&#x60;/config.yml:/etc/docker/registry/config.yml \
     registry:2
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>推送镜像到私有仓库</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 从官方仓库拉取一个镜像</span>
+        <p>推送镜像到私有仓库</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 从官方仓库拉取一个镜像</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull nginx:1.13
 </span><span class="code-line line-number" line="3"><span class="token comment"># 为镜像 `nginx:1.13` 创建一个新标签 `192.168.31.69:7000/test-nginx:1.13`</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> tag nginx:latest <span class="token number">192.168</span>.31.69:5000/test-nginx:1.13
@@ -653,13 +574,13 @@ docker push 192.168.31.69:5000/test-nginx:1.13
 # The push refers to a repository [192.168.99.100:7000/test-nginx]
 # Get https://192.168.99.100:7000/v1/_ping: http: server gave HTTP response to HTTPS client
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>在推送到的时候报错误，默认是使用 <code>https</code> 提交，这个搭建的默认使用的是 <code>http</code>，解决方法两个：</p>
-<ol>
-<li>创建一个 <code>https</code> 映射</li>
-<li>将仓库地址加入到不安全的仓库列表中</li>
-</ol>
-<p>我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件 <code>vi /etc/docker/daemon.json</code> 添加 <code>insecure-registries</code> 配置信息，如果 <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。</p>
-<pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+        <p>在推送到的时候报错误，默认是使用 <code>https</code> 提交，这个搭建的默认使用的是 <code>http</code>，解决方法两个：</p>
+        <ol>
+          <li>创建一个 <code>https</code> 映射</li>
+          <li>将仓库地址加入到不安全的仓库列表中</li>
+        </ol>
+        <p>我们使用第二种方法，加入到不安全的仓库列表中，修改docker配置文件 <code>vi /etc/docker/daemon.json</code> 添加 <code>insecure-registries</code> 配置信息，如果 <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> 文件不存在可以创建，关键配置项，将仓库将入到不安全的仓库列表中。</p>
+        <pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">  <span class="token string-property property">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span>
 </span><span class="code-line line-number" line="3">    <span class="token string">"192.168.31.69:5000"</span>
 </span><span class="code-line line-number" line="4">  <span class="token punctuation">]</span>
@@ -670,11 +591,11 @@ docker push 192.168.31.69:5000/test-nginx:1.13
   ]
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<blockquote>
-<p>如果是 macOS 可以通过 docker 客户端，<code>Preferences</code> => <code>Advanced</code> => <code>添加配置</code> => <code>Apply &#x26; Restart</code>，重启docker就可以了。</p>
-</blockquote>
-<p>重启服务 <code>service docker restart</code>，默认情况下 push 是会报如下错误的：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> push <span class="token number">192.168</span>.99.100:7000/test-nginx:1.13
+        <blockquote>
+          <p>如果是 macOS 可以通过 docker 客户端，<code>Preferences</code> => <code>Advanced</code> => <code>添加配置</code> => <code>Apply &#x26; Restart</code>，重启docker就可以了。</p>
+        </blockquote>
+        <p>重启服务 <code>service docker restart</code>，默认情况下 push 是会报如下错误的：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> push <span class="token number">192.168</span>.99.100:7000/test-nginx:1.13
 </span><span class="code-line line-number" line="2"><span class="token comment"># The push refers to a repository [192.168.99.100:7000/test-nginx]</span>
 </span><span class="code-line line-number" line="3"><span class="token comment"># a1a53f8d99b5: Retrying in 1 second</span>
 </span><span class="code-line line-number" line="4"><span class="token comment"># ...</span>
@@ -685,15 +606,15 @@ docker push 192.168.31.69:5000/test-nginx:1.13
 # ...
 # received unexpected HTTP status: 500 Internal Server Error
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>上面错误是 <code>SELinux</code> 强制访问控制安全系统，阻止导致的错误，通过下面方法禁用 SELinux 之后就可以 push 了。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">setenforce <span class="token number">0</span>  
+        <p>上面错误是 <code>SELinux</code> 强制访问控制安全系统，阻止导致的错误，通过下面方法禁用 SELinux 之后就可以 push 了。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">setenforce <span class="token number">0</span>  
 </span><span class="code-line line-number" line="2">getenforce   
 </span><span class="code-line line-number" line="3"><span class="token comment"># Permissive  </span>
 </span></code><input type="hidden" value="setenforce 0  
 getenforce   
 # Permissive  
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 停止本地 registry</span>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 停止本地 registry</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> container stop registry
 </span><span class="code-line line-number" line="3"><span class="token comment"># 要删除容器，请使用 docker container rm</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> container stop registry <span class="token operator">&#x26;&#x26;</span> <span class="token function">docker</span> container <span class="token function">rm</span> -v registry
@@ -704,13 +625,13 @@ docker container stop registry
 docker container stop registry &#x26;&#x26; docker container rm -v registry
 # 自定义存储位置
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="harbor"><a aria-hidden="true" tabindex="-1" href="#harbor" class="anchor"><span class="icon icon-link"></span></a><code>Harbor</code></h3>
-<p><a href="harbor.html">部署 registry 管理工具 Harbor</a></p>
-<h2 id="docker-rest-api"><a aria-hidden="true" tabindex="-1" href="#docker-rest-api" class="anchor"><span class="icon icon-link"></span></a>Docker REST API</h2>
-<p><code>Docker</code> 不仅可以通过本地命令行 <code>docker</code> 命令进行调用，还可以通过开启远程控制 <code>API</code>，使用 <code>HTTP</code> 调用接口来进行访问，远程控制 <code>Docker Daemon</code> 来做很多操作。<code>Docker</code> 的远程 <code>API</code> 服务默认监听的是 TCP <code>2375</code> 端口，为了保证安全，Docker 安装后默认不会启用远程 <code>API</code> 服务，因为这个服务默认不做权限认证。</p>
-<h3 id="centos"><a aria-hidden="true" tabindex="-1" href="#centos" class="anchor"><span class="icon icon-link"></span></a>CentOS</h3>
-<p>CentOS 的开启方法比较简单，先修改配置：</p>
-<pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token function">vim</span> /usr/lib/systemd/system/docker.service
+        <h3 id="harbor"><a aria-hidden="true" tabindex="-1" href="#harbor" class="anchor"><span class="icon icon-link"></span></a><code>Harbor</code></h3>
+        <p><a href="harbor.html">部署 registry 管理工具 Harbor</a></p>
+        <h2 id="docker-rest-api"><a aria-hidden="true" tabindex="-1" href="#docker-rest-api" class="anchor"><span class="icon icon-link"></span></a>Docker REST API</h2>
+        <p><code>Docker</code> 不仅可以通过本地命令行 <code>docker</code> 命令进行调用，还可以通过开启远程控制 <code>API</code>，使用 <code>HTTP</code> 调用接口来进行访问，远程控制 <code>Docker Daemon</code> 来做很多操作。<code>Docker</code> 的远程 <code>API</code> 服务默认监听的是 TCP <code>2375</code> 端口，为了保证安全，Docker 安装后默认不会启用远程 <code>API</code> 服务，因为这个服务默认不做权限认证。</p>
+        <h3 id="centos"><a aria-hidden="true" tabindex="-1" href="#centos" class="anchor"><span class="icon icon-link"></span></a>CentOS</h3>
+        <p>CentOS 的开启方法比较简单，先修改配置：</p>
+        <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token function">vim</span> /usr/lib/systemd/system/docker.service
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3"><span class="token comment"># 修改 `ExecStart` 配置项，默认如下：</span>
 </span><span class="code-line line-number" line="4"><span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/bin/dockerd -H fd:// --containerd<span class="token operator">=</span>/run/containerd/containerd.sock
@@ -725,50 +646,50 @@ ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 # 增加一个 &#x60;-H tcp://0.0.0.0:2375&#x60; 选项
 ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --containerd=/run/containerd/containerd.sock
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>如果是内网生产环境，也可以将 <code>0.0.0.0</code> 改为内网 IP。同样的，<code>2375</code> 端口也可以修改。但是这样可能还有一个问题，无法在命令行使用 <code>docker</code> 命令了，还需要添加 <code>sock</code> 选项：<code>-H unix:///var/run/docker.sock</code>，最后为：</p>
-<pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://10.105.3.115:2375 --containerd<span class="token operator">=</span>/run/containerd/containerd.sock
+        <p>如果是内网生产环境，也可以将 <code>0.0.0.0</code> 改为内网 IP。同样的，<code>2375</code> 端口也可以修改。但是这样可能还有一个问题，无法在命令行使用 <code>docker</code> 命令了，还需要添加 <code>sock</code> 选项：<code>-H unix:///var/run/docker.sock</code>，最后为：</p>
+        <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://10.105.3.115:2375 --containerd<span class="token operator">=</span>/run/containerd/containerd.sock
 </span></code><input type="hidden" value="ExecStart=/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://10.105.3.115:2375 --containerd=/run/containerd/containerd.sock
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>修改完配置之后需要重启 Docker 服务：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">systemctl daemon-reload
+        <p>修改完配置之后需要重启 Docker 服务：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">systemctl daemon-reload
 </span><span class="code-line line-number" line="2">systemctl restart <span class="token function">docker</span>
 </span><span class="code-line line-number" line="3"><span class="token function">sudo</span> <span class="token function">service</span> <span class="token function">docker</span> restart
 </span></code><input type="hidden" value="systemctl daemon-reload
 systemctl restart docker
 sudo service docker restart
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>重启完成后，可以使用 netstat 查看端口是否监听来确认是否成功：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">[</span>root@VM-3-115-centos ~<span class="token punctuation">]</span><span class="token comment"># netstat -nutlp | grep 2375</span>
+        <p>重启完成后，可以使用 netstat 查看端口是否监听来确认是否成功：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">[</span>root@VM-3-115-centos ~<span class="token punctuation">]</span><span class="token comment"># netstat -nutlp | grep 2375</span>
 </span><span class="code-line line-number" line="2">tcp   <span class="token number">0</span>   <span class="token number">0</span> <span class="token number">10.105</span>.3.115:2375   <span class="token number">0.0</span>.0.0:*     LISTEN    <span class="token number">32316</span>/dockerd
 </span></code><input type="hidden" value="[root@VM-3-115-centos ~]# netstat -nutlp | grep 2375
 tcp   0   0 10.105.3.115:2375   0.0.0.0:*     LISTEN    32316/dockerd
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="macos"><a aria-hidden="true" tabindex="-1" href="#macos" class="anchor"><span class="icon icon-link"></span></a>MacOS</h3>
-<p>在 Mac 下无法直接修改配置文件来开启远程 API 服务，后来在 <a href="https://github.com/docker/for-mac"><code>docker/for-mac</code></a> 的 <a href="https://github.com/docker/for-mac/issues/770"><code>issue</code></a> 中得到了解决方案。</p>
-<p>可以运行一个 <a href="https://hub.docker.com/r/bobrik/socat"><code>bobrik/socat</code></a> 容器，将 <code>unix socket</code> 上的 Docker API 转发到 MacOS 上指定的端口中：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d -v /var/run/docker.sock:/var/run/docker.sock -p <span class="token number">127.0</span>.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
+        <h3 id="macos"><a aria-hidden="true" tabindex="-1" href="#macos" class="anchor"><span class="icon icon-link"></span></a>MacOS</h3>
+        <p>在 Mac 下无法直接修改配置文件来开启远程 API 服务，后来在 <a href="https://github.com/docker/for-mac"><code>docker/for-mac</code></a> 的 <a href="https://github.com/docker/for-mac/issues/770"><code>issue</code></a> 中得到了解决方案。</p>
+        <p>可以运行一个 <a href="https://hub.docker.com/r/bobrik/socat"><code>bobrik/socat</code></a> 容器，将 <code>unix socket</code> 上的 Docker API 转发到 MacOS 上指定的端口中：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d -v /var/run/docker.sock:/var/run/docker.sock -p <span class="token number">127.0</span>.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
 </span></code><input type="hidden" value="docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="测试"><a aria-hidden="true" tabindex="-1" href="#测试" class="anchor"><span class="icon icon-link"></span></a>测试</h3>
-<p>启用成功后，可以进行一些测试，例如直接使用浏览器访问 info 和 version 等页面获取信息。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">http://127.0.0.1:2375/info
+        <h3 id="测试"><a aria-hidden="true" tabindex="-1" href="#测试" class="anchor"><span class="icon icon-link"></span></a>测试</h3>
+        <p>启用成功后，可以进行一些测试，例如直接使用浏览器访问 info 和 version 等页面获取信息。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">http://127.0.0.1:2375/info
 </span><span class="code-line line-number" line="2">http://127.0.0.1:2375/version
 </span></code><input type="hidden" value="http://127.0.0.1:2375/info
 http://127.0.0.1:2375/version
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>下面可测试 docker 是否启动了</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -s --unix-socket /var/run/docker.sock http://dummy/containers/json
+        <p>下面可测试 docker 是否启动了</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -s --unix-socket /var/run/docker.sock http://dummy/containers/json
 </span><span class="code-line line-number" line="2"><span class="token comment">## 或者使用下面命令</span>
 </span><span class="code-line line-number" line="3"><span class="token function">docker</span> info
 </span></code><input type="hidden" value="curl -s --unix-socket /var/run/docker.sock http://dummy/containers/json
 ## 或者使用下面命令
 docker info
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="使用docker实战"><a aria-hidden="true" tabindex="-1" href="#使用docker实战" class="anchor"><span class="icon icon-link"></span></a>使用Docker实战</h2>
-<blockquote>
-<p>⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件</p>
-</blockquote>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">-d, --detach<span class="token operator">=</span>false      <span class="token comment"># 指定容器运行于前台还是后台，默认为false   </span>
+        <h2 id="使用docker实战"><a aria-hidden="true" tabindex="-1" href="#使用docker实战" class="anchor"><span class="icon icon-link"></span></a>使用Docker实战</h2>
+        <blockquote>
+          <p>⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件</p>
+        </blockquote>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">-d, --detach<span class="token operator">=</span>false      <span class="token comment"># 指定容器运行于前台还是后台，默认为false   </span>
 </span><span class="code-line line-number" line="2">-i, --interactive<span class="token operator">=</span>false <span class="token comment"># 打开STDIN，用于控制台交互  </span>
 </span><span class="code-line line-number" line="3">-t, --tty<span class="token operator">=</span>false         <span class="token comment"># 分配tty设备，该可以支持终端登录，默认为false  </span>
 </span><span class="code-line line-number" line="4">-u, --user<span class="token operator">=</span><span class="token string">""</span>           <span class="token comment"># 指定容器的用户  </span>
@@ -847,35 +768,35 @@ docker info
 --rm=false              # 指定容器停止后自动删除容器(不支持以docker run -d启动的容器)  
 --sig-proxy=true        # 设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="nginx"><a aria-hidden="true" tabindex="-1" href="#nginx" class="anchor"><span class="icon icon-link"></span></a><code>Nginx</code></h3>
-<p><a href="nginx.html">在 docker 中部署 Nginx</a></p>
-<h3 id="mysql"><a aria-hidden="true" tabindex="-1" href="#mysql" class="anchor"><span class="icon icon-link"></span></a><code>MySQL</code></h3>
-<p><a href="mysql.html">在 docker 中部署 MySQL</a></p>
-<h3 id="postgresql"><a aria-hidden="true" tabindex="-1" href="#postgresql" class="anchor"><span class="icon icon-link"></span></a><code>PostgreSQL</code></h3>
-<p><a href="postgres.html">在 docker 中部署 PostgreSQL</a></p>
-<h3 id="redis"><a aria-hidden="true" tabindex="-1" href="#redis" class="anchor"><span class="icon icon-link"></span></a><code>Redis</code></h3>
-<p><a href="redis.html">在 docker 中部署 Redis</a></p>
-<h3 id="elasticsearch"><a aria-hidden="true" tabindex="-1" href="#elasticsearch" class="anchor"><span class="icon icon-link"></span></a><code>Elasticsearch</code></h3>
-<p><a href="elasticsearch.html">在 docker 中部署 Elasticsearch</a></p>
-<h3 id="gitlab"><a aria-hidden="true" tabindex="-1" href="#gitlab" class="anchor"><span class="icon icon-link"></span></a><code>Gitlab</code></h3>
-<p><a href="gitlab/readme.html">在 docker 中部署 Gitlab</a></p>
-<h3 id="rocketchat"><a aria-hidden="true" tabindex="-1" href="#rocketchat" class="anchor"><span class="icon icon-link"></span></a><code>Rocket.Chat</code></h3>
-<p><a href="rocket.chat/readme.html">在 docker 中部署 Gitlab</a></p>
-<h3 id="rancher"><a aria-hidden="true" tabindex="-1" href="#rancher" class="anchor"><span class="icon icon-link"></span></a><code>Rancher</code></h3>
-<p><a href="rancher.html">在 docker 中部署 Rancher</a></p>
-<h3 id="portainer"><a aria-hidden="true" tabindex="-1" href="#portainer" class="anchor"><span class="icon icon-link"></span></a><code>Portainer</code></h3>
-<p><a href="portainer.html">在 docker 中部署 Portainer</a></p>
-<h3 id="sourcegraph"><a aria-hidden="true" tabindex="-1" href="#sourcegraph" class="anchor"><span class="icon icon-link"></span></a><code>Sourcegraph</code></h3>
-<p><a href="sourcegraph/readme.html">在 docker 中部署 Sourcegraph</a></p>
-<h3 id="mattermost"><a aria-hidden="true" tabindex="-1" href="#mattermost" class="anchor"><span class="icon icon-link"></span></a><code>Mattermost</code></h3>
-<p><a href="mattermost.html">在 docker 中部署 Mattermost</a></p>
-<h3 id="seaweedfs"><a aria-hidden="true" tabindex="-1" href="#seaweedfs" class="anchor"><span class="icon icon-link"></span></a><code>SeaweedFS</code></h3>
-<p><a href="seaweedfs/readme.html">在 docker 中部署 SeaweedFS</a></p>
-<h3 id="nps"><a aria-hidden="true" tabindex="-1" href="#nps" class="anchor"><span class="icon icon-link"></span></a><code>NPS</code></h3>
-<p><a href="nps/readme.html">在 docker 中搭建内网穿透服务器，带WEB管理</a></p>
-<h3 id="humpback"><a aria-hidden="true" tabindex="-1" href="#humpback" class="anchor"><span class="icon icon-link"></span></a><code>Humpback</code></h3>
-<p>首先创建放持久化数据文件夹，<code>mkdir -p /opt/app/humpback-web</code>，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 创建放持久化数据文件夹</span>
+        <h3 id="nginx"><a aria-hidden="true" tabindex="-1" href="#nginx" class="anchor"><span class="icon icon-link"></span></a><code>Nginx</code></h3>
+        <p><a href="nginx.html">在 docker 中部署 Nginx</a></p>
+        <h3 id="mysql"><a aria-hidden="true" tabindex="-1" href="#mysql" class="anchor"><span class="icon icon-link"></span></a><code>MySQL</code></h3>
+        <p><a href="mysql.html">在 docker 中部署 MySQL</a></p>
+        <h3 id="postgresql"><a aria-hidden="true" tabindex="-1" href="#postgresql" class="anchor"><span class="icon icon-link"></span></a><code>PostgreSQL</code></h3>
+        <p><a href="postgres.html">在 docker 中部署 PostgreSQL</a></p>
+        <h3 id="redis"><a aria-hidden="true" tabindex="-1" href="#redis" class="anchor"><span class="icon icon-link"></span></a><code>Redis</code></h3>
+        <p><a href="redis.html">在 docker 中部署 Redis</a></p>
+        <h3 id="elasticsearch"><a aria-hidden="true" tabindex="-1" href="#elasticsearch" class="anchor"><span class="icon icon-link"></span></a><code>Elasticsearch</code></h3>
+        <p><a href="elasticsearch.html">在 docker 中部署 Elasticsearch</a></p>
+        <h3 id="gitlab"><a aria-hidden="true" tabindex="-1" href="#gitlab" class="anchor"><span class="icon icon-link"></span></a><code>Gitlab</code></h3>
+        <p><a href="gitlab/index.html">在 docker 中部署 Gitlab</a></p>
+        <h3 id="rocketchat"><a aria-hidden="true" tabindex="-1" href="#rocketchat" class="anchor"><span class="icon icon-link"></span></a><code>Rocket.Chat</code></h3>
+        <p><a href="rocket.chat/index.html">在 docker 中部署 Gitlab</a></p>
+        <h3 id="rancher"><a aria-hidden="true" tabindex="-1" href="#rancher" class="anchor"><span class="icon icon-link"></span></a><code>Rancher</code></h3>
+        <p><a href="rancher.html">在 docker 中部署 Rancher</a></p>
+        <h3 id="portainer"><a aria-hidden="true" tabindex="-1" href="#portainer" class="anchor"><span class="icon icon-link"></span></a><code>Portainer</code></h3>
+        <p><a href="portainer.html">在 docker 中部署 Portainer</a></p>
+        <h3 id="sourcegraph"><a aria-hidden="true" tabindex="-1" href="#sourcegraph" class="anchor"><span class="icon icon-link"></span></a><code>Sourcegraph</code></h3>
+        <p><a href="sourcegraph/index.html">在 docker 中部署 Sourcegraph</a></p>
+        <h3 id="mattermost"><a aria-hidden="true" tabindex="-1" href="#mattermost" class="anchor"><span class="icon icon-link"></span></a><code>Mattermost</code></h3>
+        <p><a href="mattermost.html">在 docker 中部署 Mattermost</a></p>
+        <h3 id="seaweedfs"><a aria-hidden="true" tabindex="-1" href="#seaweedfs" class="anchor"><span class="icon icon-link"></span></a><code>SeaweedFS</code></h3>
+        <p><a href="seaweedfs/index.html">在 docker 中部署 SeaweedFS</a></p>
+        <h3 id="nps"><a aria-hidden="true" tabindex="-1" href="#nps" class="anchor"><span class="icon icon-link"></span></a><code>NPS</code></h3>
+        <p><a href="nps/index.html">在 docker 中搭建内网穿透服务器，带WEB管理</a></p>
+        <h3 id="humpback"><a aria-hidden="true" tabindex="-1" href="#humpback" class="anchor"><span class="icon icon-link"></span></a><code>Humpback</code></h3>
+        <p>首先创建放持久化数据文件夹，<code>mkdir -p /opt/app/humpback-web</code>，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 创建放持久化数据文件夹</span>
 </span><span class="code-line line-number" line="2"><span class="token function">mkdir</span> -p /opt/app/humpback-web
 </span><span class="code-line line-number" line="3"><span class="token comment"># 下载humpback-web镜像到本地</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> pull humpbacks/humpback-web:1.0.0
@@ -896,9 +817,9 @@ docker run -d --net=host --restart=always \
  --name humpback-web \
  humpbacks/humpback-web:1.0.0
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>访问站点，打开浏览器输入：<a href="http://192.168.99.100:7001">http://192.168.99.100:7001</a> ，默认账户：<code>admin</code> 密码：<code>123456</code></p>
-<h3 id="seafile"><a aria-hidden="true" tabindex="-1" href="#seafile" class="anchor"><span class="icon icon-link"></span></a><code>Seafile</code></h3>
-<pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --name seafile <span class="token punctuation">\</span>
+        <p>访问站点，打开浏览器输入：<a href="http://192.168.99.100:7001">http://192.168.99.100:7001</a> ，默认账户：<code>admin</code> 密码：<code>123456</code></p>
+        <h3 id="seafile"><a aria-hidden="true" tabindex="-1" href="#seafile" class="anchor"><span class="icon icon-link"></span></a><code>Seafile</code></h3>
+        <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --name seafile <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">  -e <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>seafile.example.com <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">  -v /opt/seafile-data:/shared <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">  -p <span class="token number">80</span>:80 <span class="token punctuation">\</span>
@@ -909,7 +830,7 @@ docker run -d --net=host --restart=always \
   -p 80:80 \
   seafileltd/seafile:latest
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --name seafile <span class="token punctuation">\</span>
+        <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --name seafile <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">  -e <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>pan.showgold.com <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">  -e <span class="token assign-left variable">SEAFILE_ADMIN_EMAIL</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">  -e <span class="token assign-left variable">SEAFILE_ADMIN_PASSWORD</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
@@ -924,11 +845,11 @@ docker run -d --net=host --restart=always \
   -p 80:80 \
   seafileltd/seafile:latest
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="更多"><a aria-hidden="true" tabindex="-1" href="#更多" class="anchor"><span class="icon icon-link"></span></a>更多</h3>
-<p><a href="docs/" src="">更多 docker 工具部署，在 docker 目录中</a></p>
-<h2 id="卸载旧的版本"><a aria-hidden="true" tabindex="-1" href="#卸载旧的版本" class="anchor"><span class="icon icon-link"></span></a>卸载旧的版本</h2>
-<p>移除旧的版本</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">sudo</span> yum remove <span class="token function">docker</span> <span class="token punctuation">\</span>
+        <h3 id="更多"><a aria-hidden="true" tabindex="-1" href="#更多" class="anchor"><span class="icon icon-link"></span></a>更多</h3>
+        <p><a href="docs/" src="">更多 docker 工具部署，在 docker 目录中</a></p>
+        <h2 id="卸载旧的版本"><a aria-hidden="true" tabindex="-1" href="#卸载旧的版本" class="anchor"><span class="icon icon-link"></span></a>卸载旧的版本</h2>
+        <p>移除旧的版本</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">sudo</span> yum remove <span class="token function">docker</span> <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">  docker-client <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">  docker-client-latest <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">  docker-common <span class="token punctuation">\</span>
@@ -949,14 +870,14 @@ docker run -d --net=host --restart=always \
   docker-engine-selinux \
   docker-engine
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="错误处理"><a aria-hidden="true" tabindex="-1" href="#错误处理" class="anchor"><span class="icon icon-link"></span></a>错误处理</h2>
-<p>Create more free space in thin pool or use dm.min_free_space option to change behavior</p>
-<blockquote>
-<p>特别慎用，东西都没有了，注意备份哦。<a href="https://github.com/moby/moby/issues/3182#issuecomment-256532928">https://github.com/moby/moby/issues/3182#issuecomment-256532928</a></p>
-</blockquote>
-<p><strong>镜像拉不下来</strong></p>
-<p>修改 Docker <code>daemon.json</code> 配置 macOS: <code>/etc/docker/daemon.json</code>，Linux: <code>~/.docker/daemon.json</code></p>
-<pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+        <h2 id="错误处理"><a aria-hidden="true" tabindex="-1" href="#错误处理" class="anchor"><span class="icon icon-link"></span></a>错误处理</h2>
+        <p>Create more free space in thin pool or use dm.min_free_space option to change behavior</p>
+        <blockquote>
+          <p>特别慎用，东西都没有了，注意备份哦。<a href="https://github.com/moby/moby/issues/3182#issuecomment-256532928">https://github.com/moby/moby/issues/3182#issuecomment-256532928</a></p>
+        </blockquote>
+        <p><strong>镜像拉不下来</strong></p>
+        <p>修改 Docker <code>daemon.json</code> 配置 macOS: <code>/etc/docker/daemon.json</code>，Linux: <code>~/.docker/daemon.json</code></p>
+        <pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">  <span class="token string-property property">"registry-mirrors"</span><span class="token operator">:</span><span class="token punctuation">[</span>
 </span><span class="code-line line-number" line="3">     <span class="token string">"https://docker.mirrors.ustc.edu.cn"</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="4">     <span class="token string">"https://hub-mirror.c.163.com"</span><span class="token punctuation">,</span>
@@ -979,351 +900,126 @@ docker run -d --net=host --restart=always \
   ]
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="参考资料"><a aria-hidden="true" tabindex="-1" href="#参考资料" class="anchor"><span class="icon icon-link"></span></a>参考资料</h2>
-<h3 id="官方英文资源"><a aria-hidden="true" tabindex="-1" href="#官方英文资源" class="anchor"><span class="icon icon-link"></span></a>官方英文资源</h3>
-<ul>
-<li>Docker官网：<a href="http://www.docker.com">http://www.docker.com</a></li>
-<li>Docker windows入门：<a href="https://docs.docker.com/windows/">https://docs.docker.com/windows/</a></li>
-<li>Docker Linux 入门：<a href="https://docs.docker.com/linux/">https://docs.docker.com/linux/</a></li>
-<li>Docker mac 入门：<a href="https://docs.docker.com/mac/">https://docs.docker.com/mac/</a></li>
-<li>Docker 用户指引：<a href="https://docs.docker.com/engine/userguide/">https://docs.docker.com/engine/userguide/</a></li>
-<li>Docker 官方博客：<a href="http://blog.docker.com/">http://blog.docker.com/</a></li>
-<li>Docker Hub: <a href="https://hub.docker.com/">https://hub.docker.com/</a></li>
-<li>Docker开源： <a href="https://www.docker.com/open-source">https://www.docker.com/open-source</a></li>
-</ul>
-<h3 id="中文资源"><a aria-hidden="true" tabindex="-1" href="#中文资源" class="anchor"><span class="icon icon-link"></span></a>中文资源</h3>
-<ul>
-<li>Docker中文网站：<a href="http://www.docker.org.cn">http://www.docker.org.cn</a></li>
-<li>Docker中文文档：<a href="http://www.dockerinfo.net/document">http://www.dockerinfo.net/document</a></li>
-<li>Docker安装手册：<a href="http://www.docker.org.cn/book/install.html">http://www.docker.org.cn/book/install.html</a></li>
-<li>一小时Docker教程 ：<a href="https://blog.csphere.cn/archives/22">https://blog.csphere.cn/archives/22</a></li>
-<li>Docker中文指南：<a href="http://www.widuu.com/chinese_docker/index.html">http://www.widuu.com/chinese_docker/index.html</a></li>
-</ul>
-<h3 id="其它资源"><a aria-hidden="true" tabindex="-1" href="#其它资源" class="anchor"><span class="icon icon-link"></span></a>其它资源</h3>
-<ul>
-<li><a href="https://github.com/eon01/DockerCheatSheet">Docker 快速手册！</a></li>
-<li><a href="http://www.runoob.com/docker/docker-tutorial.html">Docker 教程</a></li>
-<li><a href="https://www.gitbook.com/book/yeasy/docker_practice">Docker 从入门到实践</a></li>
-<li><a href="http://blog.csdn.net/zhangchao19890805/article/details/52756865">MySQL Docker 单一机器上如何配置自动备份</a></li>
-<li><a href="http://dockone.io/article/834">使用Docker Compose管理多个容器</a></li>
-<li><a href="https://segmentfault.com/t/docker">https://segmentfault.com/t/docker</a></li>
-<li><a href="https://github.com/docker/docker">https://github.com/docker/docker</a></li>
-<li><a href="https://wiki.openstack.org/wiki/Docker">https://wiki.openstack.org/wiki/Docker</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Docker">https://wiki.archlinux.org/index.php/Docker</a></li>
-</ul>
-<h2 id="contributors"><a aria-hidden="true" tabindex="-1" href="#contributors" class="anchor"><span class="icon icon-link"></span></a>Contributors</h2>
-<p>As always, thanks to our amazing contributors!</p>
-<a href="https://github.com/jaywcjlove/docker-tutorial/graphs/contributors">
-  <img src="https://jaywcjlove.github.io/docker-tutorial/CONTRIBUTORS.svg">
-</a>
-<p>Made with <a href="https://github.com/jaywcjlove/github-action-contributors">action-contributors</a>.</p>
-<h2 id="license"><a aria-hidden="true" tabindex="-1" href="#license" class="anchor"><span class="icon icon-link"></span></a>License</h2>
-<p>Licensed under the MIT License.</p>
-    
-
-<div class="previous">
-  
-    <span></span>
-  
-  
-  <a class="next" href="docker-compose.html">
-    <span>
-      Docker Compose
-    </span>
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
-      <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
-    </svg>
-  </a>
-  
-</div>
-
-
-
-<section class="article-footer">
-  <a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/README.md" class="edit-button" target="_blank" rel="noopener noreferrer">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-    </svg>
-    <span>Edit this page on GitHub</span>
-  </a>
-  
-  <span class="atime">2022/05/10</span>
-  
-</section>
-
-  </markdown-style>
-  
-<nav class="tocs">
-  <aside class="inner toc">
-    <ol class="tocs-list">
-    
-      <li>
-        <a href="#新版本安装" class="tocs-link">新版本安装</a>
-        
-      </li>
-    
-      <li>
-        <a href="#旧版本安装" class="tocs-link">旧版本安装</a>
-        
-      </li>
-    
-      <li>
-        <a href="#命令介绍" class="tocs-link">命令介绍</a>
-        
-      </li>
-    
-      <li>
-        <a href="#服务管理" class="tocs-link">服务管理</a>
-        
-      </li>
-    
-      <li>
-        <a href="#镜像管理" class="tocs-link">镜像管理</a>
-        
-          <ol class="tocs-list is-collapsed">
-            
-              <li>
-                <a href="#通过容器创建镜像" class="tocs-link">通过容器创建镜像</a>
-                
-              </li>
-            
-              <li>
-                <a href="#通过dockerfile创建镜像" class="tocs-link">通过Dockerfile创建镜像</a>
-                
-              </li>
-            
-              <li>
-                <a href="#发布自己的镜像" class="tocs-link">发布自己的镜像</a>
-                
-              </li>
-            
-              <li>
-                <a href="#镜像中安装软件" class="tocs-link">镜像中安装软件</a>
-                
-              </li>
-            
+        <h2 id="参考资料"><a aria-hidden="true" tabindex="-1" href="#参考资料" class="anchor"><span class="icon icon-link"></span></a>参考资料</h2>
+        <h3 id="官方英文资源"><a aria-hidden="true" tabindex="-1" href="#官方英文资源" class="anchor"><span class="icon icon-link"></span></a>官方英文资源</h3>
+        <ul>
+          <li>Docker官网：<a href="http://www.docker.com">http://www.docker.com</a></li>
+          <li>Docker windows入门：<a href="https://docs.docker.com/windows/">https://docs.docker.com/windows/</a></li>
+          <li>Docker Linux 入门：<a href="https://docs.docker.com/linux/">https://docs.docker.com/linux/</a></li>
+          <li>Docker mac 入门：<a href="https://docs.docker.com/mac/">https://docs.docker.com/mac/</a></li>
+          <li>Docker 用户指引：<a href="https://docs.docker.com/engine/userguide/">https://docs.docker.com/engine/userguide/</a></li>
+          <li>Docker 官方博客：<a href="http://blog.docker.com/">http://blog.docker.com/</a></li>
+          <li>Docker Hub: <a href="https://hub.docker.com/">https://hub.docker.com/</a></li>
+          <li>Docker开源： <a href="https://www.docker.com/open-source">https://www.docker.com/open-source</a></li>
+        </ul>
+        <h3 id="中文资源"><a aria-hidden="true" tabindex="-1" href="#中文资源" class="anchor"><span class="icon icon-link"></span></a>中文资源</h3>
+        <ul>
+          <li>Docker中文网站：<a href="http://www.docker.org.cn">http://www.docker.org.cn</a></li>
+          <li>Docker中文文档：<a href="http://www.dockerinfo.net/document">http://www.dockerinfo.net/document</a></li>
+          <li>Docker安装手册：<a href="http://www.docker.org.cn/book/install.html">http://www.docker.org.cn/book/install.html</a></li>
+          <li>一小时Docker教程 ：<a href="https://blog.csphere.cn/archives/22">https://blog.csphere.cn/archives/22</a></li>
+          <li>Docker中文指南：<a href="http://www.widuu.com/chinese_docker/index.html">http://www.widuu.com/chinese_docker/index.html</a></li>
+        </ul>
+        <h3 id="其它资源"><a aria-hidden="true" tabindex="-1" href="#其它资源" class="anchor"><span class="icon icon-link"></span></a>其它资源</h3>
+        <ul>
+          <li><a href="https://github.com/eon01/DockerCheatSheet">Docker 快速手册！</a></li>
+          <li><a href="http://www.runoob.com/docker/docker-tutorial.html">Docker 教程</a></li>
+          <li><a href="https://www.gitbook.com/book/yeasy/docker_practice">Docker 从入门到实践</a></li>
+          <li><a href="http://blog.csdn.net/zhangchao19890805/article/details/52756865">MySQL Docker 单一机器上如何配置自动备份</a></li>
+          <li><a href="http://dockone.io/article/834">使用Docker Compose管理多个容器</a></li>
+          <li><a href="https://segmentfault.com/t/docker">https://segmentfault.com/t/docker</a></li>
+          <li><a href="https://github.com/docker/docker">https://github.com/docker/docker</a></li>
+          <li><a href="https://wiki.openstack.org/wiki/Docker">https://wiki.openstack.org/wiki/Docker</a></li>
+          <li><a href="https://wiki.archlinux.org/index.php/Docker">https://wiki.archlinux.org/index.php/Docker</a></li>
+        </ul>
+        <h2 id="contributors"><a aria-hidden="true" tabindex="-1" href="#contributors" class="anchor"><span class="icon icon-link"></span></a>Contributors</h2>
+        <p>As always, thanks to our amazing contributors!</p><a href="https://github.com/jaywcjlove/docker-tutorial/graphs/contributors"><img src="https://jaywcjlove.github.io/docker-tutorial/CONTRIBUTORS.svg"></a>
+        <p>Made with <a href="https://github.com/jaywcjlove/github-action-contributors">action-contributors</a>.</p>
+        <h2 id="license"><a aria-hidden="true" tabindex="-1" href="#license" class="anchor"><span class="icon icon-link"></span></a>License</h2>
+        <p>Licensed under the MIT License.</p>
+        <div class="previous"><span></span><a class="next" href="docker-compose.html"><span>Docker Compose
+</span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
+              <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
+            </svg></a></div>
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/README.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+<span>Edit this page on GitHub</span>
+</a><span class="atime">2022/05/14</span></section>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#新版本安装" class="tocs-link">新版本安装</a></li>
+            <li><a href="#旧版本安装" class="tocs-link">旧版本安装</a></li>
+            <li><a href="#命令介绍" class="tocs-link">命令介绍</a></li>
+            <li><a href="#服务管理" class="tocs-link">服务管理</a></li>
+            <li><a href="#镜像管理" class="tocs-link">镜像管理</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#通过容器创建镜像" class="tocs-link">通过容器创建镜像</a></li>
+                <li><a href="#通过dockerfile创建镜像" class="tocs-link">通过Dockerfile创建镜像</a></li>
+                <li><a href="#发布自己的镜像" class="tocs-link">发布自己的镜像</a></li>
+                <li><a href="#镜像中安装软件" class="tocs-link">镜像中安装软件</a></li>
+              </ol>
+            </li>
+            <li><a href="#容器管理" class="tocs-link">容器管理</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#容器服务管理" class="tocs-link">容器服务管理</a></li>
+                <li><a href="#进入容器" class="tocs-link">进入容器</a></li>
+              </ol>
+            </li>
+            <li><a href="#文件拷贝" class="tocs-link">文件拷贝</a></li>
+            <li><a href="#docker私有仓库搭建" class="tocs-link">Docker私有仓库搭建</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#registry" class="tocs-link">registry</a></li>
+                <li><a href="#harbor" class="tocs-link">Harbor</a></li>
+              </ol>
+            </li>
+            <li><a href="#docker-rest-api" class="tocs-link">Docker REST API</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#centos" class="tocs-link">CentOS</a></li>
+                <li><a href="#macos" class="tocs-link">MacOS</a></li>
+                <li><a href="#测试" class="tocs-link">测试</a></li>
+              </ol>
+            </li>
+            <li><a href="#使用docker实战" class="tocs-link">使用Docker实战</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#nginx" class="tocs-link">Nginx</a></li>
+                <li><a href="#mysql" class="tocs-link">MySQL</a></li>
+                <li><a href="#postgresql" class="tocs-link">PostgreSQL</a></li>
+                <li><a href="#redis" class="tocs-link">Redis</a></li>
+                <li><a href="#elasticsearch" class="tocs-link">Elasticsearch</a></li>
+                <li><a href="#gitlab" class="tocs-link">Gitlab</a></li>
+                <li><a href="#rocketchat" class="tocs-link">Rocket.Chat</a></li>
+                <li><a href="#rancher" class="tocs-link">Rancher</a></li>
+                <li><a href="#portainer" class="tocs-link">Portainer</a></li>
+                <li><a href="#sourcegraph" class="tocs-link">Sourcegraph</a></li>
+                <li><a href="#mattermost" class="tocs-link">Mattermost</a></li>
+                <li><a href="#seaweedfs" class="tocs-link">SeaweedFS</a></li>
+                <li><a href="#nps" class="tocs-link">NPS</a></li>
+                <li><a href="#humpback" class="tocs-link">Humpback</a></li>
+                <li><a href="#seafile" class="tocs-link">Seafile</a></li>
+                <li><a href="#更多" class="tocs-link">更多</a></li>
+              </ol>
+            </li>
+            <li><a href="#卸载旧的版本" class="tocs-link">卸载旧的版本</a></li>
+            <li><a href="#错误处理" class="tocs-link">错误处理</a></li>
+            <li><a href="#参考资料" class="tocs-link">参考资料</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#官方英文资源" class="tocs-link">官方英文资源</a></li>
+                <li><a href="#中文资源" class="tocs-link">中文资源</a></li>
+                <li><a href="#其它资源" class="tocs-link">其它资源</a></li>
+              </ol>
+            </li>
+            <li><a href="#contributors" class="tocs-link">Contributors</a></li>
+            <li><a href="#license" class="tocs-link">License</a></li>
           </ol>
-        
-      </li>
-    
-      <li>
-        <a href="#容器管理" class="tocs-link">容器管理</a>
-        
-          <ol class="tocs-list is-collapsed">
-            
-              <li>
-                <a href="#容器服务管理" class="tocs-link">容器服务管理</a>
-                
-              </li>
-            
-              <li>
-                <a href="#进入容器" class="tocs-link">进入容器</a>
-                
-              </li>
-            
-          </ol>
-        
-      </li>
-    
-      <li>
-        <a href="#文件拷贝" class="tocs-link">文件拷贝</a>
-        
-      </li>
-    
-      <li>
-        <a href="#docker私有仓库搭建" class="tocs-link">Docker私有仓库搭建</a>
-        
-          <ol class="tocs-list is-collapsed">
-            
-              <li>
-                <a href="#registry" class="tocs-link">registry</a>
-                
-              </li>
-            
-              <li>
-                <a href="#harbor" class="tocs-link">Harbor</a>
-                
-              </li>
-            
-          </ol>
-        
-      </li>
-    
-      <li>
-        <a href="#docker-rest-api" class="tocs-link">Docker REST API</a>
-        
-          <ol class="tocs-list is-collapsed">
-            
-              <li>
-                <a href="#centos" class="tocs-link">CentOS</a>
-                
-              </li>
-            
-              <li>
-                <a href="#macos" class="tocs-link">MacOS</a>
-                
-              </li>
-            
-              <li>
-                <a href="#测试" class="tocs-link">测试</a>
-                
-              </li>
-            
-          </ol>
-        
-      </li>
-    
-      <li>
-        <a href="#使用docker实战" class="tocs-link">使用Docker实战</a>
-        
-          <ol class="tocs-list is-collapsed">
-            
-              <li>
-                <a href="#nginx" class="tocs-link">Nginx</a>
-                
-              </li>
-            
-              <li>
-                <a href="#mysql" class="tocs-link">MySQL</a>
-                
-              </li>
-            
-              <li>
-                <a href="#postgresql" class="tocs-link">PostgreSQL</a>
-                
-              </li>
-            
-              <li>
-                <a href="#redis" class="tocs-link">Redis</a>
-                
-              </li>
-            
-              <li>
-                <a href="#elasticsearch" class="tocs-link">Elasticsearch</a>
-                
-              </li>
-            
-              <li>
-                <a href="#gitlab" class="tocs-link">Gitlab</a>
-                
-              </li>
-            
-              <li>
-                <a href="#rocketchat" class="tocs-link">Rocket.Chat</a>
-                
-              </li>
-            
-              <li>
-                <a href="#rancher" class="tocs-link">Rancher</a>
-                
-              </li>
-            
-              <li>
-                <a href="#portainer" class="tocs-link">Portainer</a>
-                
-              </li>
-            
-              <li>
-                <a href="#sourcegraph" class="tocs-link">Sourcegraph</a>
-                
-              </li>
-            
-              <li>
-                <a href="#mattermost" class="tocs-link">Mattermost</a>
-                
-              </li>
-            
-              <li>
-                <a href="#seaweedfs" class="tocs-link">SeaweedFS</a>
-                
-              </li>
-            
-              <li>
-                <a href="#nps" class="tocs-link">NPS</a>
-                
-              </li>
-            
-              <li>
-                <a href="#humpback" class="tocs-link">Humpback</a>
-                
-              </li>
-            
-              <li>
-                <a href="#seafile" class="tocs-link">Seafile</a>
-                
-              </li>
-            
-              <li>
-                <a href="#更多" class="tocs-link">更多</a>
-                
-              </li>
-            
-          </ol>
-        
-      </li>
-    
-      <li>
-        <a href="#卸载旧的版本" class="tocs-link">卸载旧的版本</a>
-        
-      </li>
-    
-      <li>
-        <a href="#错误处理" class="tocs-link">错误处理</a>
-        
-      </li>
-    
-      <li>
-        <a href="#参考资料" class="tocs-link">参考资料</a>
-        
-          <ol class="tocs-list is-collapsed">
-            
-              <li>
-                <a href="#官方英文资源" class="tocs-link">官方英文资源</a>
-                
-              </li>
-            
-              <li>
-                <a href="#中文资源" class="tocs-link">中文资源</a>
-                
-              </li>
-            
-              <li>
-                <a href="#其它资源" class="tocs-link">其它资源</a>
-                
-              </li>
-            
-          </ol>
-        
-      </li>
-    
-      <li>
-        <a href="#contributors" class="tocs-link">Contributors</a>
-        
-      </li>
-    
-      <li>
-        <a href="#license" class="tocs-link">License</a>
-        
-      </li>
-    
-    </ol>
-  </aside>
-</nav>
-
-</div>
-
-<script src="js/demo-preview.js?v=1.18.0"></script>
-
-
-<div class="footer warpper">
-  Released under the MIT License. Copyright © 2022 Kenny Wong<br />
-Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.18.0
-
-</div>
-
-
-<script src="js/tocbot.js?v=1.18.0"></script>
-
-</body>
+        </aside>
+      </nav>
+    </div>
+    <script src="js/demo-preview.js?v=1.21.1"></script>
+    <div class="footer warpper">Released under the MIT License. Copyright © 2022 Kenny Wong<br>Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.21.1</div>
+    <script src="js/tocbot.js?v=1.21.1"></script>
+  </body>
 </html>

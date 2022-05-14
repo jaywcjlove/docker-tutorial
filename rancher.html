@@ -1,146 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rancher 单节点安装 Docker 入门教程 </title>
-  
-  <meta name="description" content="Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足 IT 需求规范，赋能 De">
-  
-  
-  <meta name="keywords" content="docker,containers,tutorial">
-  
-  <link rel="stylesheet" type="text/css" href="css/main.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/media.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.18.0">
-  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rancher 单节点安装 Docker 入门教程</title>
+    <meta name="description" content="Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足 IT 需求规范，赋能 De">
+    <meta name="keywords" content="docker,containers,tutorial">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/media.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.21.1">
     <link rel="icon" href="img/logo.svg" type="image/x-icon">
-  
-  <script src="js/copy.js?v=1.18.0"></script>
-  <script src="js/dark-mode.js?v=1.18.0"></script>
-  <script src="js/markdown-style.js?v=1.18.0"></script>
-</head>
-<body id="idoctotop">
-  <a href="#idoctotop" class="gototop">top</a>
-<header class="header">
-  <article class="inner warpper">
-    <a class="logo" href="index.html">
-      
-        <svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
-</svg>
-      
-      <span class="title">Docker 入门教程</span>
-    </a>
-    <div class="content">
-      <ul class="menu">
-        
-        <li>
-          <a href="index.html" target="" class=""> Home </a>
-        </li>
-        
-      </ul>
-      
-        <a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    <script src="js/copy.js?v=1.21.1"></script>
+    <script src="js/dark-mode.js?v=1.21.1"></script>
+    <script src="js/markdown-style.js?v=1.21.1"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="index.html"><svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
           </svg>
-        </a>
-      
-      <dark-mode permanent></dark-mode>
-    </div>
-  </article>
-</header>
-
-<div class="warpper-content warpper sidebar ">
-  
-<div class="sidebar-border">
-  <aside class="sidebar" role="navigation">
-    <div>
-    
-      
-        <a href="index.html" class="">入门</a>
-      
-    
-      
-        <label>实践</label>
-      
-    
-      
-        <a href="docker-compose.html" class="">Docker Compose</a>
-      
-    
-      
-        <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
-      
-    
-      
-        <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
-      
-    
-      
-        <a href="harbor.html" class="">Harbor</a>
-      
-    
-      
-        <a href="mattermost.html" class="">Mattermost 聊天工具</a>
-      
-    
-      
-        <a href="mysql.html" class="">MySQL 数据库</a>
-      
-    
-      
-        <a href="nginx.html" class="">Nginx Web 服务器</a>
-      
-    
-      
-        <a href="nps/index.html" class="">NPS 内网穿透</a>
-      
-    
-      
-        <a href="portainer.html" class="">Portainer Docker 管理</a>
-      
-    
-      
-        <a href="postgres.html" class="">PostgreSQL 数据库</a>
-      
-    
-      
-        <a href="rancher.html" class="active">Rancher 容器管理平台</a>
-      
-    
-      
-        <a href="redis.html" class="">Redis 数据库</a>
-      
-    
-      
-        <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
-      
-    
-      
-        <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
-      
-    
-      
-        <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
-      
-    
-    </div>
-  </aside>
-</div>
-
-  <markdown-style>
-    <h1 id="rancher-单节点安装"><a aria-hidden="true" tabindex="-1" href="#rancher-单节点安装" class="anchor"><span class="icon icon-link"></span></a>Rancher 单节点安装</h1>
-<p><a href="https://github.com/rancher/rancher">Rancher</a> 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足 IT 需求规范，赋能 DevOps 团队。</p>
-<h3 id="rancher-25x-及之后的版本"><a aria-hidden="true" tabindex="-1" href="#rancher-25x-及之后的版本" class="anchor"><span class="icon icon-link"></span></a>Rancher 2.5.x 及之后的版本</h3>
-<p>登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。</p>
-<p>与 2.4.x 或之前的版本相比，使用docker run命令安装 Rancher 2.5.x 时，需要添加 <code>--privileged</code> 标志变量，启用特权模式安装 Rancher。</p>
-<pre><code class="code-highlight"><span class="code-line line-number" line="1">docker run -d --restart=unless-stopped \
+<span class="title">Docker 入门教程</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="index.html" target="" class="">Home</a></li>
+          </ul><a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">入门</a>
+            <label>实践</label>
+            <a href="docker-compose.html" class="">Docker Compose</a>
+            <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
+            <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
+            <a href="harbor.html" class="">Harbor</a>
+            <a href="mattermost.html" class="">Mattermost 聊天工具</a>
+            <a href="mysql.html" class="">MySQL 数据库</a>
+            <a href="nginx.html" class="">Nginx Web 服务器</a>
+            <a href="nps/index.html" class="">NPS 内网穿透</a>
+            <a href="portainer.html" class="">Portainer Docker 管理</a>
+            <a href="postgres.html" class="">PostgreSQL 数据库</a>
+            <a href="rancher.html" class="active">Rancher 容器管理平台</a>
+            <a href="redis.html" class="">Redis 数据库</a>
+            <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
+            <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
+            <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="rancher-单节点安装"><a aria-hidden="true" tabindex="-1" href="#rancher-单节点安装" class="anchor"><span class="icon icon-link"></span></a>Rancher 单节点安装</h1>
+        <p><a href="https://github.com/rancher/rancher">Rancher</a> 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足 IT 需求规范，赋能 DevOps 团队。</p>
+        <h3 id="rancher-25x-及之后的版本"><a aria-hidden="true" tabindex="-1" href="#rancher-25x-及之后的版本" class="anchor"><span class="icon icon-link"></span></a>Rancher 2.5.x 及之后的版本</h3>
+        <p>登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。</p>
+        <p>与 2.4.x 或之前的版本相比，使用docker run命令安装 Rancher 2.5.x 时，需要添加 <code>--privileged</code> 标志变量，启用特权模式安装 Rancher。</p>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">docker run -d --restart=unless-stopped \
 </span><span class="code-line line-number" line="2">  -p 80:80 -p 443:443 \
 </span><span class="code-line line-number" line="3">  --privileged \
 </span><span class="code-line line-number" line="4">  rancher/rancher:latest
@@ -149,8 +73,8 @@
   --privileged \
   rancher/rancher:latest
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="使用已有的可信证书"><a aria-hidden="true" tabindex="-1" href="#使用已有的可信证书" class="anchor"><span class="icon icon-link"></span></a>使用已有的可信证书</h3>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+        <h3 id="使用已有的可信证书"><a aria-hidden="true" tabindex="-1" href="#使用已有的可信证书" class="anchor"><span class="icon icon-link"></span></a>使用已有的可信证书</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">    -p <span class="token number">80</span>:80 -p <span class="token number">443</span>:443 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">    -v /etc/letsencrypt/live/xxxx.cn/cert.pem:/etc/rancher/ssl/cert.pem <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">    -v /etc/letsencrypt/live/xxxx.cn/key.pem:/etc/rancher/ssl/key.pem <span class="token punctuation">\</span>
@@ -167,8 +91,8 @@
     --privileged \
     rancher/rancher:latest
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="使用-lets-encrypt-证书"><a aria-hidden="true" tabindex="-1" href="#使用-lets-encrypt-证书" class="anchor"><span class="icon icon-link"></span></a>使用 Let's Encrypt 证书</h3>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+        <h3 id="使用-lets-encrypt-证书"><a aria-hidden="true" tabindex="-1" href="#使用-lets-encrypt-证书" class="anchor"><span class="icon icon-link"></span></a>使用 Let's Encrypt 证书</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">    -p <span class="token number">80</span>:80 -p <span class="token number">443</span>:443 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">    --privileged <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">    rancher/rancher:latest <span class="token punctuation">\</span>
@@ -179,8 +103,8 @@
     rancher/rancher:latest \
     --acme-domain rancher.mydomain.com
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h3 id="持久化数据"><a aria-hidden="true" tabindex="-1" href="#持久化数据" class="anchor"><span class="icon icon-link"></span></a>持久化数据</h3>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+        <h3 id="持久化数据"><a aria-hidden="true" tabindex="-1" href="#持久化数据" class="anchor"><span class="icon icon-link"></span></a>持久化数据</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run -d --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">    -p <span class="token number">80</span>:80 -p <span class="token number">443</span>:443 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">    -v <span class="token environment constant">$HOME</span>/docker/rancher:/var/lib/rancher <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">    --privileged <span class="token punctuation">\</span>
@@ -193,90 +117,35 @@
     rancher/rancher:latest \
     --acme-domain rancher.mydomain.com
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    
-
-<div class="previous">
-  
-  <a class="prev" href="postgres.html">
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
-      <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
-    </svg>
-    <span>
-      PostgreSQL 数据库
-    </span>
-  </a>
-  
-  
-  <a class="next" href="redis.html">
-    <span>
-      Redis 数据库
-    </span>
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
-      <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
-    </svg>
-  </a>
-  
-</div>
-
-
-
-<section class="article-footer">
-  <a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/rancher.md" class="edit-button" target="_blank" rel="noopener noreferrer">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-    </svg>
-    <span>Edit this page on GitHub</span>
-  </a>
-  
-  <span class="atime">2022/05/10</span>
-  
-</section>
-
-  </markdown-style>
-  
-<nav class="tocs">
-  <aside class="inner toc">
-    <ol class="tocs-list">
-    
-      <li>
-        <a href="#rancher-25x-及之后的版本" class="tocs-link">Rancher 2.5.x 及之后的版本</a>
-        
-      </li>
-    
-      <li>
-        <a href="#使用已有的可信证书" class="tocs-link">使用已有的可信证书</a>
-        
-      </li>
-    
-      <li>
-        <a href="#使用-lets-encrypt-证书" class="tocs-link">使用 Let&#39;s Encrypt 证书</a>
-        
-      </li>
-    
-      <li>
-        <a href="#持久化数据" class="tocs-link">持久化数据</a>
-        
-      </li>
-    
-    </ol>
-  </aside>
-</nav>
-
-</div>
-
-<script src="js/demo-preview.js?v=1.18.0"></script>
-
-
-<div class="footer warpper">
-  Released under the MIT License. Copyright © 2022 Kenny Wong<br />
-Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.18.0
-
-</div>
-
-
-<script src="js/tocbot.js?v=1.18.0"></script>
-
-</body>
+        <div class="previous"><a class="prev" href="postgres.html"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
+              <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
+            </svg>
+<span>PostgreSQL 数据库
+</span></a><a class="next" href="redis.html"><span>Redis 数据库
+</span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
+              <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
+            </svg></a></div>
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/rancher.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+<span>Edit this page on GitHub</span>
+</a><span class="atime">2022/05/14</span></section>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#rancher-25x-及之后的版本" class="tocs-link">Rancher 2.5.x 及之后的版本</a></li>
+            <li><a href="#使用已有的可信证书" class="tocs-link">使用已有的可信证书</a></li>
+            <li><a href="#使用-lets-encrypt-证书" class="tocs-link">使用 Let's Encrypt 证书</a></li>
+            <li><a href="#持久化数据" class="tocs-link">持久化数据</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="js/demo-preview.js?v=1.21.1"></script>
+    <div class="footer warpper">Released under the MIT License. Copyright © 2022 Kenny Wong<br>Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.21.1</div>
+    <script src="js/tocbot.js?v=1.21.1"></script>
+  </body>
 </html>

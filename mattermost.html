@@ -1,144 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mattermost Docker 入门教程 </title>
-  
-  <meta name="description" content="Slack 的开源替代品 Mattermost，使用下面命令即可启动 Mattermost，并且可以直接使用。">
-  
-  
-  <meta name="keywords" content="docker,containers,tutorial">
-  
-  <link rel="stylesheet" type="text/css" href="css/main.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/media.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.18.0">
-  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mattermost Docker 入门教程</title>
+    <meta name="description" content="Slack 的开源替代品 Mattermost，使用下面命令即可启动 Mattermost，并且可以直接使用。">
+    <meta name="keywords" content="docker,containers,tutorial">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/media.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.21.1">
     <link rel="icon" href="img/logo.svg" type="image/x-icon">
-  
-  <script src="js/copy.js?v=1.18.0"></script>
-  <script src="js/dark-mode.js?v=1.18.0"></script>
-  <script src="js/markdown-style.js?v=1.18.0"></script>
-</head>
-<body id="idoctotop">
-  <a href="#idoctotop" class="gototop">top</a>
-<header class="header">
-  <article class="inner warpper">
-    <a class="logo" href="index.html">
-      
-        <svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
-</svg>
-      
-      <span class="title">Docker 入门教程</span>
-    </a>
-    <div class="content">
-      <ul class="menu">
-        
-        <li>
-          <a href="index.html" target="" class=""> Home </a>
-        </li>
-        
-      </ul>
-      
-        <a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    <script src="js/copy.js?v=1.21.1"></script>
+    <script src="js/dark-mode.js?v=1.21.1"></script>
+    <script src="js/markdown-style.js?v=1.21.1"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="index.html"><svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
           </svg>
-        </a>
-      
-      <dark-mode permanent></dark-mode>
-    </div>
-  </article>
-</header>
-
-<div class="warpper-content warpper sidebar ">
-  
-<div class="sidebar-border">
-  <aside class="sidebar" role="navigation">
-    <div>
-    
-      
-        <a href="index.html" class="">入门</a>
-      
-    
-      
-        <label>实践</label>
-      
-    
-      
-        <a href="docker-compose.html" class="">Docker Compose</a>
-      
-    
-      
-        <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
-      
-    
-      
-        <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
-      
-    
-      
-        <a href="harbor.html" class="">Harbor</a>
-      
-    
-      
-        <a href="mattermost.html" class="active">Mattermost 聊天工具</a>
-      
-    
-      
-        <a href="mysql.html" class="">MySQL 数据库</a>
-      
-    
-      
-        <a href="nginx.html" class="">Nginx Web 服务器</a>
-      
-    
-      
-        <a href="nps/index.html" class="">NPS 内网穿透</a>
-      
-    
-      
-        <a href="portainer.html" class="">Portainer Docker 管理</a>
-      
-    
-      
-        <a href="postgres.html" class="">PostgreSQL 数据库</a>
-      
-    
-      
-        <a href="rancher.html" class="">Rancher 容器管理平台</a>
-      
-    
-      
-        <a href="redis.html" class="">Redis 数据库</a>
-      
-    
-      
-        <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
-      
-    
-      
-        <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
-      
-    
-      
-        <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
-      
-    
-    </div>
-  </aside>
-</div>
-
-  <markdown-style>
-    <h1 id="mattermost"><a aria-hidden="true" tabindex="-1" href="#mattermost" class="anchor"><span class="icon icon-link"></span></a>Mattermost</h1>
-<p><code>Slack</code> 的开源替代品 <a href="https://github.com/mattermost"><code>Mattermost</code></a>，使用下面命令即可启动 <code>Mattermost</code>，并且可以直接使用。</p>
-<h2 id="运行容器"><a aria-hidden="true" tabindex="-1" href="#运行容器" class="anchor"><span class="icon icon-link"></span></a>运行容器</h2>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run --name mattermost-preview <span class="token punctuation">\</span>
+<span class="title">Docker 入门教程</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="index.html" target="" class="">Home</a></li>
+          </ul><a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">入门</a>
+            <label>实践</label>
+            <a href="docker-compose.html" class="">Docker Compose</a>
+            <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
+            <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
+            <a href="harbor.html" class="">Harbor</a>
+            <a href="mattermost.html" class="active">Mattermost 聊天工具</a>
+            <a href="mysql.html" class="">MySQL 数据库</a>
+            <a href="nginx.html" class="">Nginx Web 服务器</a>
+            <a href="nps/index.html" class="">NPS 内网穿透</a>
+            <a href="portainer.html" class="">Portainer Docker 管理</a>
+            <a href="postgres.html" class="">PostgreSQL 数据库</a>
+            <a href="rancher.html" class="">Rancher 容器管理平台</a>
+            <a href="redis.html" class="">Redis 数据库</a>
+            <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
+            <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
+            <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="mattermost"><a aria-hidden="true" tabindex="-1" href="#mattermost" class="anchor"><span class="icon icon-link"></span></a>Mattermost</h1>
+        <p><code>Slack</code> 的开源替代品 <a href="https://github.com/mattermost"><code>Mattermost</code></a>，使用下面命令即可启动 <code>Mattermost</code>，并且可以直接使用。</p>
+        <h2 id="运行容器"><a aria-hidden="true" tabindex="-1" href="#运行容器" class="anchor"><span class="icon icon-link"></span></a>运行容器</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run --name mattermost-preview <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">  --publish <span class="token number">8065</span>:8065 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">  --add-host dockerhost:127.0.0.1 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">  --rm <span class="token punctuation">\</span>
@@ -149,12 +73,12 @@
   --rm \
   -d mattermost/mattermost-preview:5.4.0
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>上面命令直接在命令行运行，就可以使用，通常情况我们想映射配置和存储，以便删除容器数据还存在，避免数据丢失。首先我们需要通过上面运行好的容器，将里面的配置拷贝出来。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> container <span class="token function">cp</span> mattermost-preview:/mm/mattermost/config <span class="token environment constant">$HOME</span>/_docker/mattermost/
+        <p>上面命令直接在命令行运行，就可以使用，通常情况我们想映射配置和存储，以便删除容器数据还存在，避免数据丢失。首先我们需要通过上面运行好的容器，将里面的配置拷贝出来。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> container <span class="token function">cp</span> mattermost-preview:/mm/mattermost/config <span class="token environment constant">$HOME</span>/_docker/mattermost/
 </span></code><input type="hidden" value="docker container cp mattermost-preview:/mm/mattermost/config $HOME/_docker/mattermost/
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>挂载配置目录数据库目录运行</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run --name mattermost-preview <span class="token punctuation">\</span>
+        <p>挂载配置目录数据库目录运行</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run --name mattermost-preview <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="2">  --publish <span class="token number">8065</span>:8065 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="3">  --add-host dockerhost:127.0.0.1 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">  -v <span class="token environment constant">$HOME</span>/_docker/mattermost/config:/mm/mattermost/config <span class="token punctuation">\</span>
@@ -169,10 +93,10 @@
   -v $HOME/_docker/mattermost/data:/mm/mattermost-data \
   -d mattermost/mattermost-preview:5.4.0
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="设置-gitlab-单点登陆"><a aria-hidden="true" tabindex="-1" href="#设置-gitlab-单点登陆" class="anchor"><span class="icon icon-link"></span></a>设置 Gitlab 单点登陆</h2>
-<p>这个功能官方说需要购买 <a href="https://about.mattermost.com/pricing/">Mattermost Enterprise Edition</a> 版本，文档这里: <a href="https://docs.mattermost.com/deployment/sso-gitlab.html">GitLab Single Sign-On</a>。</p>
-<p>修改 mattermost 配置 <code>vim $HOME/_docker/mattermost/config/config.json</code>。</p>
-<pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token property">"GitLabSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <h2 id="设置-gitlab-单点登陆"><a aria-hidden="true" tabindex="-1" href="#设置-gitlab-单点登陆" class="anchor"><span class="icon icon-link"></span></a>设置 Gitlab 单点登陆</h2>
+        <p>这个功能官方说需要购买 <a href="https://about.mattermost.com/pricing/">Mattermost Enterprise Edition</a> 版本，文档这里: <a href="https://docs.mattermost.com/deployment/sso-gitlab.html">GitLab Single Sign-On</a>。</p>
+        <p>修改 mattermost 配置 <code>vim $HOME/_docker/mattermost/config/config.json</code>。</p>
+        <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token property">"GitLabSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">  <span class="token property">"Enable"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="3">  <span class="token property">"Secret"</span><span class="token operator">:</span> <span class="token string">"{mattermost-app-secret-from-gitlab}"</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="4">  <span class="token property">"Id"</span><span class="token operator">:</span> <span class="token string">"{mattermost-app-application-id-from-gitlab}"</span><span class="token punctuation">,</span>
@@ -191,8 +115,8 @@
   &#x22;UserApiEndpoint&#x22;: &#x22;https://{gitlab-site-name}/api/v4/user&#x22;
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p><a href="https://docs.gitlab.com/omnibus/gitlab-mattermost/">您可以在GitLab服务器上运行GitLab Mattermost服务。</a>，这篇文档介绍了修改 gitlab 配置。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">vim</span> /etc/gitlab/gitlab.rb
+        <p><a href="https://docs.gitlab.com/omnibus/gitlab-mattermost/">您可以在GitLab服务器上运行GitLab Mattermost服务。</a>，这篇文档介绍了修改 gitlab 配置。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">vim</span> /etc/gitlab/gitlab.rb
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3">mattermost_external_url <span class="token string">'http://mattermost.example.com'</span>
 </span><span class="code-line line-number" line="4">
@@ -203,8 +127,8 @@ mattermost_external_url &#x27;http://mattermost.example.com&#x27;
 
 gitlab_rails[&#x27;mattermost_host&#x27;] = &#x22;https://mattermost.example.com&#x22;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>下面这部分配置在 <code>gitlab.rb</code> 中设置，之后<strong>还需要</strong>在 <code>mattermost</code> 系统中设置 <a href="http://mattermost.example.com/admin_console/authentication/gitlab">http://mattermost.example.com/admin_console/authentication/gitlab</a></p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_enable'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+        <p>下面这部分配置在 <code>gitlab.rb</code> 中设置，之后<strong>还需要</strong>在 <code>mattermost</code> 系统中设置 <a href="http://mattermost.example.com/admin_console/authentication/gitlab">http://mattermost.example.com/admin_console/authentication/gitlab</a></p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_enable'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span>
 </span><span class="code-line line-number" line="2">mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_id'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"12345656"</span>
 </span><span class="code-line line-number" line="3">mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_secret'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"123456789"</span>
 </span><span class="code-line line-number" line="4">mattermost<span class="token punctuation">[</span><span class="token string">'gitlab_scope'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">""</span>
@@ -219,89 +143,42 @@ mattermost[&#x27;gitlab_auth_endpoint&#x27;] = &#x22;http://gitlab.example.com/o
 mattermost[&#x27;gitlab_token_endpoint&#x27;] = &#x22;http://gitlab.example.com/oauth/token&#x22;
 mattermost[&#x27;gitlab_user_api_endpoint&#x27;] = &#x22;http://gitlab.example.com/api/v4/user&#x22;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>如果您使用的是 <code>GitLab Mattermost</code>，请在系统控制台或 <code>gitlab.rb</code> 中<a href="https://docs.mattermost.com/administration/config-settings.html?highlight=add%20members%20team#site-url">配置您的站点URL</a>。</p>
-<p>在配置 <code>vim $HOME/_docker/mattermost/config/config.json</code>，这个目录是你挂载出来的配置目录文件，容器中实际目录 <code>/mm/mattermost/config</code>，修改下面内容。</p>
-<pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token property">"ServiceSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <p>如果您使用的是 <code>GitLab Mattermost</code>，请在系统控制台或 <code>gitlab.rb</code> 中<a href="https://docs.mattermost.com/administration/config-settings.html?highlight=add%20members%20team#site-url">配置您的站点URL</a>。</p>
+        <p>在配置 <code>vim $HOME/_docker/mattermost/config/config.json</code>，这个目录是你挂载出来的配置目录文件，容器中实际目录 <code>/mm/mattermost/config</code>，修改下面内容。</p>
+        <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token property">"ServiceSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">  <span class="token property">"SiteURL"</span><span class="token operator">:</span> <span class="token string">"http://mattermost.example.com"</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="3"><span class="token punctuation">}</span>
 </span></code><input type="hidden" value="&#x22;ServiceSettings&#x22;: {
   &#x22;SiteURL&#x22;: &#x22;http://mattermost.example.com&#x22;,
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    
-
-<div class="previous">
-  
-  <a class="prev" href="harbor.html">
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
-      <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
-    </svg>
-    <span>
-      Harbor
-    </span>
-  </a>
-  
-  
-  <a class="next" href="mysql.html">
-    <span>
-      MySQL 数据库
-    </span>
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
-      <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
-    </svg>
-  </a>
-  
-</div>
-
-
-
-<section class="article-footer">
-  <a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/mattermost.md" class="edit-button" target="_blank" rel="noopener noreferrer">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-    </svg>
-    <span>Edit this page on GitHub</span>
-  </a>
-  
-  <span class="atime">2022/05/10</span>
-  
-</section>
-
-  </markdown-style>
-  
-<nav class="tocs">
-  <aside class="inner toc">
-    <ol class="tocs-list">
-    
-      <li>
-        <a href="#运行容器" class="tocs-link">运行容器</a>
-        
-      </li>
-    
-      <li>
-        <a href="#设置-gitlab-单点登陆" class="tocs-link">设置 Gitlab 单点登陆</a>
-        
-      </li>
-    
-    </ol>
-  </aside>
-</nav>
-
-</div>
-
-<script src="js/demo-preview.js?v=1.18.0"></script>
-
-
-<div class="footer warpper">
-  Released under the MIT License. Copyright © 2022 Kenny Wong<br />
-Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.18.0
-
-</div>
-
-
-<script src="js/tocbot.js?v=1.18.0"></script>
-
-</body>
+        <div class="previous"><a class="prev" href="harbor.html"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
+              <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
+            </svg>
+<span>Harbor
+</span></a><a class="next" href="mysql.html"><span>MySQL 数据库
+</span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
+              <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
+            </svg></a></div>
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/mattermost.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+<span>Edit this page on GitHub</span>
+</a><span class="atime">2022/05/14</span></section>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#运行容器" class="tocs-link">运行容器</a></li>
+            <li><a href="#设置-gitlab-单点登陆" class="tocs-link">设置 Gitlab 单点登陆</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="js/demo-preview.js?v=1.21.1"></script>
+    <div class="footer warpper">Released under the MIT License. Copyright © 2022 Kenny Wong<br>Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.21.1</div>
+    <script src="js/tocbot.js?v=1.21.1"></script>
+  </body>
 </html>

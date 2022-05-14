@@ -1,151 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MySQL Docker 入门教程 </title>
-  
-  <meta name="description" content="Nginx 是一款面向性能设计的 HTTP 服务器，能反向代理 HTTP，HTTPS 和邮件相关(SMTP，POP3，IMAP)的协议链接。并且提供了负载均衡以及 HTTP 缓存。它的设计充分使用异步事件模型，削减上下文调度的开销，提高服务">
-  
-  
-  <meta name="keywords" content="docker,containers,tutorial">
-  
-  <link rel="stylesheet" type="text/css" href="css/main.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/media.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.18.0">
-  <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.18.0">
-  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL Docker 入门教程</title>
+    <meta name="description" content="Nginx 是一款面向性能设计的 HTTP 服务器，能反向代理 HTTP，HTTPS 和邮件相关(SMTP，POP3，IMAP)的协议链接。并且提供了负载均衡以及 HTTP 缓存。它的设计充分使用异步事件模型，削减上下文调度的开销，提高服务">
+    <meta name="keywords" content="docker,containers,tutorial">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/media.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/copy.css?v=1.21.1">
+    <link rel="stylesheet" type="text/css" href="css/demo-preview.css?v=1.21.1">
     <link rel="icon" href="img/logo.svg" type="image/x-icon">
-  
-  <script src="js/copy.js?v=1.18.0"></script>
-  <script src="js/dark-mode.js?v=1.18.0"></script>
-  <script src="js/markdown-style.js?v=1.18.0"></script>
-</head>
-<body id="idoctotop">
-  <a href="#idoctotop" class="gototop">top</a>
-<header class="header">
-  <article class="inner warpper">
-    <a class="logo" href="index.html">
-      
-        <svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
-</svg>
-      
-      <span class="title">Docker 入门教程</span>
-    </a>
-    <div class="content">
-      <ul class="menu">
-        
-        <li>
-          <a href="index.html" target="" class=""> Home </a>
-        </li>
-        
-      </ul>
-      
-        <a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    <script src="js/copy.js?v=1.21.1"></script>
+    <script src="js/dark-mode.js?v=1.21.1"></script>
+    <script src="js/markdown-style.js?v=1.21.1"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="index.html"><svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
           </svg>
-        </a>
-      
-      <dark-mode permanent></dark-mode>
-    </div>
-  </article>
-</header>
-
-<div class="warpper-content warpper sidebar ">
-  
-<div class="sidebar-border">
-  <aside class="sidebar" role="navigation">
-    <div>
-    
-      
-        <a href="index.html" class="">入门</a>
-      
-    
-      
-        <label>实践</label>
-      
-    
-      
-        <a href="docker-compose.html" class="">Docker Compose</a>
-      
-    
-      
-        <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
-      
-    
-      
-        <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
-      
-    
-      
-        <a href="harbor.html" class="">Harbor</a>
-      
-    
-      
-        <a href="mattermost.html" class="">Mattermost 聊天工具</a>
-      
-    
-      
-        <a href="mysql.html" class="">MySQL 数据库</a>
-      
-    
-      
-        <a href="nginx.html" class="active">Nginx Web 服务器</a>
-      
-    
-      
-        <a href="nps/index.html" class="">NPS 内网穿透</a>
-      
-    
-      
-        <a href="portainer.html" class="">Portainer Docker 管理</a>
-      
-    
-      
-        <a href="postgres.html" class="">PostgreSQL 数据库</a>
-      
-    
-      
-        <a href="rancher.html" class="">Rancher 容器管理平台</a>
-      
-    
-      
-        <a href="redis.html" class="">Redis 数据库</a>
-      
-    
-      
-        <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
-      
-    
-      
-        <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
-      
-    
-      
-        <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
-      
-    
-    </div>
-  </aside>
-</div>
-
-  <markdown-style>
-    <p align="center">
-  <a href="http://nginx.org/">
-    <img width="210" src="https://raw.githubusercontent.com/jaywcjlove/nginx-tutorial/master/nginx.svg?sanitize=true">
-  </a>
-</p>
-<p>Nginx 是一款面向性能设计的 HTTP 服务器，能反向代理 HTTP，HTTPS 和邮件相关(SMTP，POP3，IMAP)的协议链接。并且提供了负载均衡以及 HTTP 缓存。它的设计充分使用异步事件模型，削减上下文调度的开销，提高服务器并发能力。采用了模块化设计，提供了丰富模块的第三方模块。</p>
-<p>所以关于 Nginx，有这些标签：「异步」「事件」「模块化」「高性能」「高并发」「反向代理」「负载均衡」</p>
-<p>下面是 nginx 在 Docker 中的应用，这里还有 <a href="https://github.com/jaywcjlove/nginx-tutorial">nginx入门教程</a> 供你参考</p>
-<h2 id="查找镜像"><a aria-hidden="true" tabindex="-1" href="#查找镜像" class="anchor"><span class="icon icon-link"></span></a>查找镜像</h2>
-<p>在 docker hub 中查找 nginx 相关镜像。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> search nginx
+<span class="title">Docker 入门教程</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="index.html" target="" class="">Home</a></li>
+          </ul><a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">入门</a>
+            <label>实践</label>
+            <a href="docker-compose.html" class="">Docker Compose</a>
+            <a href="elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
+            <a href="gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
+            <a href="harbor.html" class="">Harbor</a>
+            <a href="mattermost.html" class="">Mattermost 聊天工具</a>
+            <a href="mysql.html" class="">MySQL 数据库</a>
+            <a href="nginx.html" class="active">Nginx Web 服务器</a>
+            <a href="nps/index.html" class="">NPS 内网穿透</a>
+            <a href="portainer.html" class="">Portainer Docker 管理</a>
+            <a href="postgres.html" class="">PostgreSQL 数据库</a>
+            <a href="rancher.html" class="">Rancher 容器管理平台</a>
+            <a href="redis.html" class="">Redis 数据库</a>
+            <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
+            <a href="seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
+            <a href="sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <p align="center"><a href="http://nginx.org/"><img width="210" src="https://raw.githubusercontent.com/jaywcjlove/nginx-tutorial/master/nginx.svg?sanitize=true"></a></p>
+        <p>Nginx 是一款面向性能设计的 HTTP 服务器，能反向代理 HTTP，HTTPS 和邮件相关(SMTP，POP3，IMAP)的协议链接。并且提供了负载均衡以及 HTTP 缓存。它的设计充分使用异步事件模型，削减上下文调度的开销，提高服务器并发能力。采用了模块化设计，提供了丰富模块的第三方模块。</p>
+        <p>所以关于 Nginx，有这些标签：「异步」「事件」「模块化」「高性能」「高并发」「反向代理」「负载均衡」</p>
+        <p>下面是 nginx 在 Docker 中的应用，这里还有 <a href="https://github.com/jaywcjlove/nginx-tutorial">nginx入门教程</a> 供你参考</p>
+        <h2 id="查找镜像"><a aria-hidden="true" tabindex="-1" href="#查找镜像" class="anchor"><span class="icon icon-link"></span></a>查找镜像</h2>
+        <p>在 docker hub 中查找 nginx 相关镜像。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> search nginx
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3"><span class="token comment"># INDEX       NAME                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span>
 </span><span class="code-line line-number" line="4"><span class="token comment"># docker.io   docker.io/nginx                 Official build of Nginx.                        7006      [OK]</span>
@@ -156,9 +76,9 @@
 # docker.io   docker.io/nginx                 Official build of Nginx.                        7006      [OK]
 # docker.io   docker.io/jwilder/nginx-proxy   Automated Nginx reverse proxy for docker c...   1137                 [OK]
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="下载镜像"><a aria-hidden="true" tabindex="-1" href="#下载镜像" class="anchor"><span class="icon icon-link"></span></a>下载镜像</h2>
-<p>拉取官方镜像，其中上面的非官方镜像是用户们根据自己的需要制作的镜像，方便大家的使用。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> pull nginx
+        <h2 id="下载镜像"><a aria-hidden="true" tabindex="-1" href="#下载镜像" class="anchor"><span class="icon icon-link"></span></a>下载镜像</h2>
+        <p>拉取官方镜像，其中上面的非官方镜像是用户们根据自己的需要制作的镜像，方便大家的使用。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> pull nginx
 </span><span class="code-line line-number" line="2"><span class="token comment"># Using default tag: latest</span>
 </span><span class="code-line line-number" line="3"><span class="token comment"># Trying to pull repository docker.io/library/nginx ...</span>
 </span><span class="code-line line-number" line="4"><span class="token comment"># latest: Pulling from docker.io/library/nginx</span>
@@ -173,21 +93,21 @@
 # ...
 # Digest: sha256:004ac1d5e791e705f12a1
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="启动容器"><a aria-hidden="true" tabindex="-1" href="#启动容器" class="anchor"><span class="icon icon-link"></span></a>启动容器</h2>
-<p>利用这个镜像启动一个新的容器</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run --name my-nginx -d -p <span class="token number">8080</span>:80 nginx /bin/bash
+        <h2 id="启动容器"><a aria-hidden="true" tabindex="-1" href="#启动容器" class="anchor"><span class="icon icon-link"></span></a>启动容器</h2>
+        <p>利用这个镜像启动一个新的容器</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run --name my-nginx -d -p <span class="token number">8080</span>:80 nginx /bin/bash
 </span><span class="code-line line-number" line="2"><span class="token comment"># faaed6a2d63af248961aab59713e515c76aea447</span>
 </span></code><input type="hidden" value="docker run --name my-nginx -d -p 8080:80 nginx /bin/bash
 # faaed6a2d63af248961aab59713e515c76aea447
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="查看日志"><a aria-hidden="true" tabindex="-1" href="#查看日志" class="anchor"><span class="icon icon-link"></span></a>查看日志</h2>
-<p>查看容器运行日志</p>
-<pre><code class="code-highlight"><span class="code-line line-number" line="1">docker logs my-nginx
+        <h2 id="查看日志"><a aria-hidden="true" tabindex="-1" href="#查看日志" class="anchor"><span class="icon icon-link"></span></a>查看日志</h2>
+        <p>查看容器运行日志</p>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">docker logs my-nginx
 </span></code><input type="hidden" value="docker logs my-nginx
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<h2 id="运行容器示例一"><a aria-hidden="true" tabindex="-1" href="#运行容器示例一" class="anchor"><span class="icon icon-link"></span></a>运行容器示例一</h2>
-<p>启动一个更复杂Nginx的例子：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 上面的命令将本地文件中的 nginx.conf 配置文件挂载到容器，并且将要展示的静态页面也挂载到容器。</span>
+        <h2 id="运行容器示例一"><a aria-hidden="true" tabindex="-1" href="#运行容器示例一" class="anchor"><span class="icon icon-link"></span></a>运行容器示例一</h2>
+        <p>启动一个更复杂Nginx的例子：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 上面的命令将本地文件中的 nginx.conf 配置文件挂载到容器，并且将要展示的静态页面也挂载到容器。</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> run --name my-nginx <span class="token punctuation">\</span> 
 </span><span class="code-line line-number" line="3">    -v /host/path/nginx.conf:/etc/nginx/nginx.conf:ro <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="4">    -v /some/html:/usr/share/nginx/html:ro <span class="token punctuation">\</span>
@@ -200,15 +120,15 @@ docker run --name my-nginx \
     -p 8080:80 \
     -d nginx
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p><code>-v</code> 参数语法为 <code>-v host dir:container dir[:ro|rw]</code></p>
-<ul>
-<li>--name 为容器取一个名字</li>
-<li>-p 参数语法为 <code>-p host port:container port</code>; -p 8080:80 将主机上的8080端口绑定到容器上的80端口，因此在主机中访问8080端口时其实就是访问 nginx 容器的80端口</li>
-<li>-d 后台运行容器</li>
-</ul>
-<h2 id="运行容器示例二"><a aria-hidden="true" tabindex="-1" href="#运行容器示例二" class="anchor"><span class="icon icon-link"></span></a>运行容器示例二</h2>
-<p>新需求，nginx 容器需要加载 <a href="https://www.sslforfree.com/">Let's Encrypt</a> 提供的免费 SSL 证书，需要挂载证书目录，需要挂载一个静态资源目录。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 创建目录 nginx, 用于存放 nginx 的相关东西</span>
+        <p><code>-v</code> 参数语法为 <code>-v host dir:container dir[:ro|rw]</code></p>
+        <ul>
+          <li>--name 为容器取一个名字</li>
+          <li>-p 参数语法为 <code>-p host port:container port</code>; -p 8080:80 将主机上的8080端口绑定到容器上的80端口，因此在主机中访问8080端口时其实就是访问 nginx 容器的80端口</li>
+          <li>-d 后台运行容器</li>
+        </ul>
+        <h2 id="运行容器示例二"><a aria-hidden="true" tabindex="-1" href="#运行容器示例二" class="anchor"><span class="icon icon-link"></span></a>运行容器示例二</h2>
+        <p>新需求，nginx 容器需要加载 <a href="https://www.sslforfree.com/">Let's Encrypt</a> 提供的免费 SSL 证书，需要挂载证书目录，需要挂载一个静态资源目录。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 创建目录 nginx, 用于存放 nginx 的相关东西</span>
 </span><span class="code-line line-number" line="2"><span class="token function">mkdir</span> -p ~/_docker/nginx
 </span><span class="code-line line-number" line="3"><span class="token comment"># 拉取官方的镜像</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> pull nginx
@@ -217,8 +137,8 @@ mkdir -p ~/_docker/nginx
 # 拉取官方的镜像
 docker pull nginx
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>运行容器，记住先将目录中的 <code>/etc/nginx/conf.d/defautl.conf</code> 文件复制出来，不然会报错。</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 拷贝容器中的内容</span>
+        <p>运行容器，记住先将目录中的 <code>/etc/nginx/conf.d/defautl.conf</code> 文件复制出来，不然会报错。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 拷贝容器中的内容</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> container <span class="token function">cp</span> webserver:/etc/nginx/conf.d <span class="token environment constant">$HOME</span>/docker/nginx
 </span><span class="code-line line-number" line="3"><span class="token function">docker</span> container <span class="token function">cp</span> webserver:/usr/share/nginx/html <span class="token environment constant">$HOME</span>/docker/nginx
 </span><span class="code-line line-number" line="4">
@@ -255,18 +175,17 @@ docker run -d --name webserver  \
 # 命令行进入容器
 docker exec -it webserver /bin/bash
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<ul>
-<li><strong>--rm</strong>：容器停止运行后，自动删除容器文件</li>
-<li><strong>-d</strong>：在后台运行</li>
-<li><strong>-p 802:80</strong>：将容器的 <code>80</code> 端口映射到主机的 <code>802</code> 端口</li>
-<li><strong>--name webserver</strong>：将容器命名为 <code>webserver</code></li>
-<li><strong>-v $HOME/docker/nginx/html:/usr/share/nginx/html</strong>：将主机中当前目录下的 <code>html</code> 挂载到容器的 <code>/html</code></li>
-<li><strong>-v $HOME/docker/nginx/conf.d:/etc/nginx/conf.d</strong>：将主机中当前目录下的 <code>nginx</code> 配置，挂载到容器的 <code>/etc/nginx/conf.d</code></li>
-<li><strong>-v $HOME/docker/nginx/logs:/wwwlogs</strong>：将主机中当前目录下的logs挂载到容器的/wwwlogs</li>
-</ul>
-<p>默认挂载的路径权限为读写。如果指定为只读可以用：ro<br>
-重载 nginx 配置</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 测试配置是否正确</span>
+        <ul>
+          <li><strong>--rm</strong>：容器停止运行后，自动删除容器文件</li>
+          <li><strong>-d</strong>：在后台运行</li>
+          <li><strong>-p 802:80</strong>：将容器的 <code>80</code> 端口映射到主机的 <code>802</code> 端口</li>
+          <li><strong>--name webserver</strong>：将容器命名为 <code>webserver</code></li>
+          <li><strong>-v $HOME/docker/nginx/html:/usr/share/nginx/html</strong>：将主机中当前目录下的 <code>html</code> 挂载到容器的 <code>/html</code></li>
+          <li><strong>-v $HOME/docker/nginx/conf.d:/etc/nginx/conf.d</strong>：将主机中当前目录下的 <code>nginx</code> 配置，挂载到容器的 <code>/etc/nginx/conf.d</code></li>
+          <li><strong>-v $HOME/docker/nginx/logs:/wwwlogs</strong>：将主机中当前目录下的logs挂载到容器的/wwwlogs</li>
+        </ul>
+        <p>默认挂载的路径权限为读写。如果指定为只读可以用：ro<br>重载 nginx 配置</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 测试配置是否正确</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it webserver nginx -t
 </span><span class="code-line line-number" line="3"><span class="token comment"># 重新加载配置</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it webserver nginx -s reload
@@ -275,16 +194,16 @@ docker exec -it webserver nginx -t
 # 重新加载配置
 docker exec -it webserver nginx -s reload
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>注意：⚠️ webserver 可以是 <code>容器名称</code> 或者 <code>容器ID</code></p>
-<h2 id="启用-gitlab-registry-功能"><a aria-hidden="true" tabindex="-1" href="#启用-gitlab-registry-功能" class="anchor"><span class="icon icon-link"></span></a>启用 Gitlab Registry 功能</h2>
-<p>修改配置 <code>/etc/gitlab/gitlab.rb</code> 文件，将 <code>registry_external_url</code> 的值修改为 <a href="http://192.168.188.211:5008">http://192.168.188.211:5008</a></p>
-<pre class="language-ruby"><code class="language-ruby code-highlight"><span class="code-line line-number" line="1">registry_external_url <span class="token string-literal"><span class="token string">'http://192.168.188.211:5008'</span></span>
+        <p>注意：⚠️ webserver 可以是 <code>容器名称</code> 或者 <code>容器ID</code></p>
+        <h2 id="启用-gitlab-registry-功能"><a aria-hidden="true" tabindex="-1" href="#启用-gitlab-registry-功能" class="anchor"><span class="icon icon-link"></span></a>启用 Gitlab Registry 功能</h2>
+        <p>修改配置 <code>/etc/gitlab/gitlab.rb</code> 文件，将 <code>registry_external_url</code> 的值修改为 <a href="http://192.168.188.211:5008">http://192.168.188.211:5008</a></p>
+        <pre class="language-ruby"><code class="language-ruby code-highlight"><span class="code-line line-number" line="1">registry_external_url <span class="token string-literal"><span class="token string">'http://192.168.188.211:5008'</span></span>
 </span></code><input type="hidden" value="registry_external_url &#x27;http://192.168.188.211:5008&#x27;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p><code>registry_external_url</code> 这个地址是我们使用 <code>docker</code> 命令进行 <code>pull</code> 或者 <code>push</code> 镜像的仓库地址。</p>
-<p>重启 <code>Gitlab</code> 后，可以在 <code>Gitlab</code> 左侧面板看到 <code>Container Registry</code> 的菜单。</p>
-<p>修改 <code>vim  ~/.docker/daemon.json</code> 添加 <code>"192.168.188.211:5008"</code></p>
-<pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+        <p><code>registry_external_url</code> 这个地址是我们使用 <code>docker</code> 命令进行 <code>pull</code> 或者 <code>push</code> 镜像的仓库地址。</p>
+        <p>重启 <code>Gitlab</code> 后，可以在 <code>Gitlab</code> 左侧面板看到 <code>Container Registry</code> 的菜单。</p>
+        <p>修改 <code>vim ~/.docker/daemon.json</code> 添加 <code>"192.168.188.211:5008"</code></p>
+        <pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">  <span class="token string-property property">"insecure-registries"</span><span class="token operator">:</span><span class="token punctuation">[</span>
 </span><span class="code-line line-number" line="3">    <span class="token string">"192.168.188.211:5008"</span>
 </span><span class="code-line line-number" line="4">  <span class="token punctuation">]</span>
@@ -295,121 +214,54 @@ docker exec -it webserver nginx -s reload
   ]
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>按照 gitlab 给出的提示，我们先登录上 gitlab 的 registry：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> login <span class="token number">192.168</span>.188.211:5008
+        <p>按照 gitlab 给出的提示，我们先登录上 gitlab 的 registry：</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> login <span class="token number">192.168</span>.188.211:5008
 </span><span class="code-line line-number" line="2">Username: ****
 </span><span class="code-line line-number" line="3">Password: **
 </span></code><input type="hidden" value="docker login 192.168.188.211:5008
 Username: ****
 Password: **
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-<p>注意：⚠️ 密码是需要通过 <a href="http://gitlab.com/-/profile/personal_access_tokens">Gitlab > User Settings > Access Tokens > Add a personal access token</a> 生成一个 <code>personal_access_tokens</code> 而不是真正的密码</p>
-<pre><code class="code-highlight"><span class="code-line line-number" line="1">docker build -t 192.168.188.211:5008/docker/docker-static-service-template .
+        <p>注意：⚠️ 密码是需要通过 <a href="http://gitlab.com/-/profile/personal_access_tokens">Gitlab > User Settings > Access Tokens > Add a personal access token</a> 生成一个 <code>personal_access_tokens</code> 而不是真正的密码</p>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">docker build -t 192.168.188.211:5008/docker/docker-static-service-template .
 </span><span class="code-line line-number" line="2"># 提交镜像
 </span><span class="code-line line-number" line="3">docker push 192.168.188.211:5008/docker/docker-static-service-template
 </span></code><input type="hidden" value="docker build -t 192.168.188.211:5008/docker/docker-static-service-template .
 # 提交镜像
 docker push 192.168.188.211:5008/docker/docker-static-service-template
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    
-
-<div class="previous">
-  
-  <a class="prev" href="mysql.html">
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
-      <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
-    </svg>
-    <span>
-      MySQL 数据库
-    </span>
-  </a>
-  
-  
-  <a class="next" href="nps/index.html">
-    <span>
-      NPS 内网穿透
-    </span>
-    <svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
-      <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
-      <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
-    </svg>
-  </a>
-  
-</div>
-
-
-
-<section class="article-footer">
-  <a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/nginx.md" class="edit-button" target="_blank" rel="noopener noreferrer">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-    </svg>
-    <span>Edit this page on GitHub</span>
-  </a>
-  
-  <span class="atime">2022/05/10</span>
-  
-</section>
-
-  </markdown-style>
-  
-<nav class="tocs">
-  <aside class="inner toc">
-    <ol class="tocs-list">
-    
-      <li>
-        <a href="#查找镜像" class="tocs-link">查找镜像</a>
-        
-      </li>
-    
-      <li>
-        <a href="#下载镜像" class="tocs-link">下载镜像</a>
-        
-      </li>
-    
-      <li>
-        <a href="#启动容器" class="tocs-link">启动容器</a>
-        
-      </li>
-    
-      <li>
-        <a href="#查看日志" class="tocs-link">查看日志</a>
-        
-      </li>
-    
-      <li>
-        <a href="#运行容器示例一" class="tocs-link">运行容器示例一</a>
-        
-      </li>
-    
-      <li>
-        <a href="#运行容器示例二" class="tocs-link">运行容器示例二</a>
-        
-      </li>
-    
-      <li>
-        <a href="#启用-gitlab-registry-功能" class="tocs-link">启用 Gitlab Registry 功能</a>
-        
-      </li>
-    
-    </ol>
-  </aside>
-</nav>
-
-</div>
-
-<script src="js/demo-preview.js?v=1.18.0"></script>
-
-
-<div class="footer warpper">
-  Released under the MIT License. Copyright © 2022 Kenny Wong<br />
-Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.18.0
-
-</div>
-
-
-<script src="js/tocbot.js?v=1.18.0"></script>
-
-</body>
+        <div class="previous"><a class="prev" href="mysql.html"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
+              <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
+            </svg>
+<span>MySQL 数据库
+</span></a><a class="next" href="nps/index.html"><span>NPS 内网穿透
+</span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
+              <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
+            </svg></a></div>
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docs/nginx.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+<span>Edit this page on GitHub</span>
+</a><span class="atime">2022/05/14</span></section>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#查找镜像" class="tocs-link">查找镜像</a></li>
+            <li><a href="#下载镜像" class="tocs-link">下载镜像</a></li>
+            <li><a href="#启动容器" class="tocs-link">启动容器</a></li>
+            <li><a href="#查看日志" class="tocs-link">查看日志</a></li>
+            <li><a href="#运行容器示例一" class="tocs-link">运行容器示例一</a></li>
+            <li><a href="#运行容器示例二" class="tocs-link">运行容器示例二</a></li>
+            <li><a href="#启用-gitlab-registry-功能" class="tocs-link">启用 Gitlab Registry 功能</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="js/demo-preview.js?v=1.21.1"></script>
+    <div class="footer warpper">Released under the MIT License. Copyright © 2022 Kenny Wong<br>Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.21.1</div>
+    <script src="js/tocbot.js?v=1.21.1"></script>
+  </body>
 </html>
