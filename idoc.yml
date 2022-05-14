@@ -2,6 +2,10 @@ site: Docker 入门教程
 logo: "./img/logo.svg"
 favicon: "./img/logo.svg"
 
+cacheFileStat: true
+
+homepage: https://wangchujiang.com/docker-tutorial/
+
 menus:
   Home: index.html
 
