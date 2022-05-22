@@ -292,6 +292,16 @@ $ docker image build -t koa-demo:0.0.1 .
 
 上面命令，`-t` 参数用来指定 `image` 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是 `latest`。注意后面有个 `.`，表示 Dockerfile 文件所在的路径为当前路径
 
+
+```bash
+docker run --name koa-demo-name --rm -d -p 9066:3000 koa-demo:latest
+# 或者
+docker run --name koa-demo-name --rm -d -p 9066:3000 koa-demo:0.0.1
+```
+
+上面命令，将刚创建的 koa-demo 景象跑起来。
+
+
 ### 发布自己的镜像
 
 1. 在[Docker](https://www.docker.com/) 注册账户，发布的镜像都在[这个页面里](https://cloud.docker.com/repository/list)展示
