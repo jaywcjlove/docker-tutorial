@@ -348,6 +348,14 @@ EXPOSE 3000
 $ docker image build -t koa-demo:0.0.1 .
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>上面命令，<code>-t</code> 参数用来指定 <code>image</code> 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是 <code>latest</code>。注意后面有个 <code>.</code>，表示 Dockerfile 文件所在的路径为当前路径</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run --name koa-demo-name --rm -d -p <span class="token number">9066</span>:3000 koa-demo:latest
+</span><span class="code-line line-number" line="2"><span class="token comment"># 或者</span>
+</span><span class="code-line line-number" line="3"><span class="token function">docker</span> run --name koa-demo-name --rm -d -p <span class="token number">9066</span>:3000 koa-demo:0.0.1
+</span></code><input type="hidden" value="docker run --name koa-demo-name --rm -d -p 9066:3000 koa-demo:latest
+# 或者
+docker run --name koa-demo-name --rm -d -p 9066:3000 koa-demo:0.0.1
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>上面命令，将刚创建的 koa-demo 景象跑起来。</p>
         <h3 id="发布自己的镜像"><a aria-hidden="true" tabindex="-1" href="#发布自己的镜像" class="anchor"><span class="icon icon-link"></span></a>发布自己的镜像</h3>
         <ol>
           <li>在<a href="https://www.docker.com/">Docker</a> 注册账户，发布的镜像都在<a href="https://cloud.docker.com/repository/list">这个页面里</a>展示</li>
@@ -946,7 +954,7 @@ docker run -d --net=host --restart=always \
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
             </svg>
 <span>Edit this page on GitHub</span>
-</a><span class="atime">2022/05/14</span></section>
+</a><span class="atime">2022/05/22</span></section>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
