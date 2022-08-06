@@ -69,6 +69,12 @@ gitlab-rake gitlab:backup:create   # 执行gitlab备份命令
 docker exec 容器名或容器id gitlab-rake gitlab:backup:create
 ```
 
+若结果显示 `Errno::EACCES: Permission denied @ dir_s_mkdir - /var/opt/gitlab/backups/db`，则说明当前路径的 `权限不足` 以及 `拥有者` 错误，需要授予当前路径对应的权限并把拥有者改为 `git`。进入容器执行下面命令：
+
+```bash
+chmod -R 755 /var/opt/gitlab/backups
+chown -R git:git /var/opt/gitlab/backups
+```
 
 ### 自动备份
 
