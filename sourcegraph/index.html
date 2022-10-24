@@ -66,11 +66,11 @@
           <img src="https://user-images.githubusercontent.com/1646931/46309383-09ba9800-c571-11e8-8ee4-1a2ec32072f2.png" alt="Screenshot">
         </p>
         <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="2">  --publish <span class="token number">7080</span>:7080 --rm <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="3">  --volume ~/_docker/sourcegraph/config:/etc/sourcegraph <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="4">  --volume ~/_docker/sourcegraph/data:/var/opt/sourcegraph <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="5">  --volume /var/run/docker.sock:/var/run/docker.sock <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="6">  -d sourcegraph/server:2.13.5
+</span><span class="code-line line-number" line="2">  <span class="token parameter variable">--publish</span> <span class="token number">7080</span>:7080 <span class="token parameter variable">--rm</span> <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="3">  <span class="token parameter variable">--volume</span> ~/_docker/sourcegraph/config:/etc/sourcegraph <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="4">  <span class="token parameter variable">--volume</span> ~/_docker/sourcegraph/data:/var/opt/sourcegraph <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="5">  <span class="token parameter variable">--volume</span> /var/run/docker.sock:/var/run/docker.sock <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="6">  <span class="token parameter variable">-d</span> sourcegraph/server:2.13.5
 </span></code><input type="hidden" value="docker run \
   --publish 7080:7080 --rm \
   --volume ~/_docker/sourcegraph/config:/etc/sourcegraph \

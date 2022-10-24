@@ -64,9 +64,9 @@
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 </span><span class="code-line line-number" line="3"><span class="token comment"># 运行容器</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> run <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="5">  --name es
-</span><span class="code-line line-number" line="6">  -p <span class="token number">9200</span>:9200 -p <span class="token number">9300</span>:9300 <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="7">  -e <span class="token string">"discovery.type=single-node"</span> <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="5">  <span class="token parameter variable">--name</span> es
+</span><span class="code-line line-number" line="6">  <span class="token parameter variable">-p</span> <span class="token number">9200</span>:9200 <span class="token parameter variable">-p</span> <span class="token number">9300</span>:9300 <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="7">  <span class="token parameter variable">-e</span> <span class="token string">"discovery.type=single-node"</span> <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="8">  docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 </span></code><input type="hidden" value="# 最新版本
 docker pull docker.elastic.co/elasticsearch/elasticsearch:6.4.2
@@ -83,11 +83,11 @@ docker run \
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 </span><span class="code-line line-number" line="3"><span class="token comment"># 运行容器</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> run <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="5">  --name es <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="6">  -p <span class="token number">9200</span>:9200 <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="7">  -e <span class="token string">"http.host=0.0.0.0"</span> <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="8">  -e <span class="token string">"transport.host=127.0.0.1"</span> <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="9">  -d docker.elastic.co/elasticsearch/elasticsearch:5.3.3
+</span><span class="code-line line-number" line="5">  <span class="token parameter variable">--name</span> es <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="6">  <span class="token parameter variable">-p</span> <span class="token number">9200</span>:9200 <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="7">  <span class="token parameter variable">-e</span> <span class="token string">"http.host=0.0.0.0"</span> <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="8">  <span class="token parameter variable">-e</span> <span class="token string">"transport.host=127.0.0.1"</span> <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="9">  <span class="token parameter variable">-d</span> docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 </span></code><input type="hidden" value="# 下载老版本
 docker pull docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 # 运行容器
@@ -102,7 +102,7 @@ docker run \
         <p>⚠️注意：vm_max_map_count 内核设置需要设置为至少262144以供生产使用。</p>
         <p>应在 <code>/etc/sysctl.conf</code> 中永久设置 <code>vm_map_max_count</code> 设置：</p>
         <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">grep</span> vm.max_map_count /etc/sysctl.conf
-</span><span class="code-line line-number" line="2">vm.max_map_count<span class="token operator">=</span><span class="token number">262144</span>
+</span><span class="code-line line-number" line="2"><span class="token assign-left variable">vm.max_map_count</span><span class="token operator">=</span><span class="token number">262144</span>
 </span></code><input type="hidden" value="$ grep vm.max_map_count /etc/sysctl.conf
 vm.max_map_count=262144
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
@@ -222,9 +222,9 @@ networks:
     driver: bridge
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>示例显示包含两个 <code>Elasticsearch</code> 节点的集群。 要打开群集，请使用 <code>docker-compose.yml</code> 并输入：</p>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker-compose</span> up -d 
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span> 
 </span><span class="code-line line-number" line="2"><span class="token function">docker-compose</span> down    <span class="token comment"># 停止集群</span>
-</span><span class="code-line line-number" line="3"><span class="token function">docker-compose</span> down -v <span class="token comment"># 销毁集群和数据卷</span>
+</span><span class="code-line line-number" line="3"><span class="token function">docker-compose</span> down <span class="token parameter variable">-v</span> <span class="token comment"># 销毁集群和数据卷</span>
 </span><span class="code-line line-number" line="4"><span class="token function">docker</span> logs elasticsearch1 <span class="token comment"># 查看日志</span>
 </span></code><input type="hidden" value="docker-compose up -d 
 docker-compose down    # 停止集群
@@ -234,7 +234,7 @@ docker logs elasticsearch1 # 查看日志
         <p><code>elasticsearch1</code> 监听 <code>localhost:9200</code>，而 <code>elasticsearch2</code> 通过 <code>Docker</code> 网络与 <code>elasticsearch1</code> 进行通信。</p>
         <p>此示例还使用名为 <code>esdata1</code> 和 <code>esdata2</code> 的 <a href="https://docs.docker.com/engine/tutorials/dockervolumes">Docker named volumes</a>，如果尚未存在，将创建它们。</p>
         <h2 id="检查集群的状态"><a aria-hidden="true" tabindex="-1" href="#检查集群的状态" class="anchor"><span class="icon icon-link"></span></a>检查集群的状态</h2>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -u elastic http://127.0.0.1:9200/_cat/health
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> <span class="token parameter variable">-u</span> elastic http://127.0.0.1:9200/_cat/health
 </span><span class="code-line line-number" line="2">Enter <span class="token function">host</span> password <span class="token keyword">for</span> user <span class="token string">'elastic'</span><span class="token builtin class-name">:</span>
 </span><span class="code-line line-number" line="3"><span class="token number">1472225929</span> <span class="token number">15</span>:38:49 docker-cluster green <span class="token number">2</span> <span class="token number">2</span> <span class="token number">4</span> <span class="token number">2</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> - <span class="token number">100.0</span>%
 </span></code><input type="hidden" value="curl -u elastic http://127.0.0.1:9200/_cat/health
@@ -243,7 +243,7 @@ Enter host password for user &#x27;elastic&#x27;:
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="用户名密码"><a aria-hidden="true" tabindex="-1" href="#用户名密码" class="anchor"><span class="icon icon-link"></span></a>用户名密码</h2>
         <p>默认用户名密码 <code>elastic/changeme</code></p>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> -XPUT -u elastic <span class="token string">'http://localhost:9200/_xpack/security/user/kibana/_password'</span> -d <span class="token string">'{
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">curl</span> <span class="token parameter variable">-XPUT</span> <span class="token parameter variable">-u</span> elastic <span class="token string">'http://localhost:9200/_xpack/security/user/kibana/_password'</span> <span class="token parameter variable">-d</span> <span class="token string">'{
 </span></span><span class="code-line line-number" line="2"><span class="token string">  "password" : "yourpasswd"
 </span></span><span class="code-line line-number" line="3"><span class="token string">}'</span>
 </span></code><input type="hidden" value="curl -XPUT -u elastic &#x27;http://localhost:9200/_xpack/security/user/kibana/_password&#x27; -d &#x27;{
@@ -252,7 +252,7 @@ Enter host password for user &#x27;elastic&#x27;:
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="挂载配置"><a aria-hidden="true" tabindex="-1" href="#挂载配置" class="anchor"><span class="icon icon-link"></span></a>挂载配置</h2>
         <p>创建自定义配置文件并将其挂载到映像的相应文件上。 例如，可以使用以下参数来完成使用 <code>docker run</code> 绑定安装custom_elasticsearch.yml：</p>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">-v full_path_to/custom_elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token parameter variable">-v</span> full_path_to/custom_elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 </span></code><input type="hidden" value="-v full_path_to/custom_elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>其它配置修改项</p>
@@ -284,10 +284,10 @@ RUN chown elasticsearch:elasticsearch config/elasticsearch.yml
 USER elasticsearch
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>然后，您可以使用以下内容构建和尝试运行镜像：</p>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> build --tag<span class="token operator">=</span>elasticsearch-custom <span class="token builtin class-name">.</span>
-</span><span class="code-line line-number" line="2"><span class="token function">docker</span> run -ti -v /usr/share/elasticsearch/data elasticsearch-custom
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> build <span class="token parameter variable">--tag</span><span class="token operator">=</span>elasticsearch-custom <span class="token builtin class-name">.</span>
+</span><span class="code-line line-number" line="2"><span class="token function">docker</span> run <span class="token parameter variable">-ti</span> <span class="token parameter variable">-v</span> /usr/share/elasticsearch/data elasticsearch-custom
 </span><span class="code-line line-number" line="3"><span class="token comment"># 覆盖默认的 CMD </span>
-</span><span class="code-line line-number" line="4"><span class="token function">docker</span> run <span class="token operator">&#x3C;</span>各种参数<span class="token operator">></span> bin/elasticsearch -Ecluster.name<span class="token operator">=</span>mynewclustername
+</span><span class="code-line line-number" line="4"><span class="token function">docker</span> run <span class="token operator">&#x3C;</span>各种参数<span class="token operator">></span> bin/elasticsearch <span class="token parameter variable">-Ecluster.name</span><span class="token operator">=</span>mynewclustername
 </span></code><input type="hidden" value="docker build --tag=elasticsearch-custom .
 docker run -ti -v /usr/share/elasticsearch/data elasticsearch-custom
 # 覆盖默认的 CMD 
