@@ -228,6 +228,14 @@ gitlab_rails['backup_keep_time'] = 604800
 gitlab_rails['time_zone'] = 'Asia/Shanghai' # 中国的东八区时间
 ```
 
+由于新版 `docker-runner` 不支持 `https`，必须设置 `ssl`
+
+```rb
+nginx['redirect_http_to_https'] = false
+nginx['ssl_certificate'] = "/var/opt/gitlab/ssl/fullchain.pem"
+nginx['ssl_certificate_key'] = "/var/opt/gitlab/ssl/privkey.pem"
+```
+
 创建 `root_password.txt` 文件
 
 ```
