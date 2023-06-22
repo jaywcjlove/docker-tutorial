@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PostgreSQL Docker 入门教程</title>
-    <meta name="description" content="PostgreSQL (也叫 Postgres)是一个自由的对象-关系数据库服务器(数据库管理系统)，它在灵活的 BSD-风格许可证下发行。">
+    <title>Navidrome Docker 入门教程</title>
+    <meta name="description" content="现代音乐服务器和流媒体兼容 Subsonic/Airsonic">
     <meta name="keywords" content="docker,containers,tutorial">
     <link rel="stylesheet" type="text/css" href="css/main.css?v=1.26.6">
     <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.26.6">
@@ -49,9 +49,9 @@
             <a href="nginx.html" class="">Nginx Web 服务器</a>
             <a href="nps/index.html" class="">NPS 内网穿透</a>
             <a href="portainer.html" class="">Portainer Docker 管理</a>
-            <a href="postgres.html" class="active">PostgreSQL 数据库</a>
+            <a href="postgres.html" class="">PostgreSQL 数据库</a>
             <a href="penpot.html" class="">Penpot 设计和原型</a>
-            <a href="navidrome.html" class="">Navidrome 音乐服务器</a>
+            <a href="navidrome.html" class="active">Navidrome 音乐服务器</a>
             <a href="rancher.html" class="">Rancher 容器管理平台</a>
             <a href="redis.html" class="">Redis 数据库</a>
             <a href="rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
@@ -61,82 +61,87 @@
         </aside>
       </div>
       <markdown-style>
-        <h1 id="postgresql"><a aria-hidden="true" tabindex="-1" href="#postgresql" class="anchor"><span class="icon icon-link"></span></a>PostgreSQL</h1>
-        <p><a href="https://www.postgresql.org/">PostgreSQL</a> (也叫 Postgres)是一个自由的对象-关系数据库服务器(数据库管理系统)，它在灵活的 BSD-风格许可证下发行。</p>
-        <h2 id="快速启动容器"><a aria-hidden="true" tabindex="-1" href="#快速启动容器" class="anchor"><span class="icon icon-link"></span></a>快速启动容器</h2>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="2">  <span class="token parameter variable">-p</span> <span class="token number">5432</span>:5432 <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="3">  <span class="token parameter variable">-e</span> <span class="token assign-left variable">POSTGRES_PASSWORD</span><span class="token operator">=</span>wcjiang <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="4">  <span class="token parameter variable">--name</span> postgres <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="5">  <span class="token parameter variable">--restart</span> always <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="6">  <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="7">  postgres:latest
-</span></code><input type="hidden" value="docker run \
-  -p 5432:5432 \
-  -e POSTGRES_PASSWORD=wcjiang \
-  --name postgres \
-  --restart always \
-  -d \
-  postgres:latest
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="使用-stack-部署示例"><a aria-hidden="true" tabindex="-1" href="#使用-stack-部署示例" class="anchor"><span class="icon icon-link"></span></a>使用 stack 部署示例</h2>
-        <pre class="language-yml"><code class="language-yml code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># Use postgres/example user/password credentials</span>
-</span><span class="code-line line-number" line="2"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.1'</span>
-</span><span class="code-line line-number" line="3">
-</span><span class="code-line line-number" line="4"><span class="token key atrule">services</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="5">
-</span><span class="code-line line-number" line="6">  <span class="token key atrule">db</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="7">    <span class="token key atrule">image</span><span class="token punctuation">:</span> postgres<span class="token punctuation">:</span>latest
-</span><span class="code-line line-number" line="8">    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+        <h1 id="navidrome"><a aria-hidden="true" tabindex="-1" href="#navidrome" class="anchor"><span class="icon icon-link"></span></a>Navidrome</h1>
+        <p>现代音乐服务器和流媒体兼容 Subsonic/Airsonic</p>
+        <h2 id="使用-docker-compose"><a aria-hidden="true" tabindex="-1" href="#使用-docker-compose" class="anchor"><span class="icon icon-link"></span></a>使用 <code>docker-compose</code></h2>
+        <p>创建包含以下内容的 <code>docker-compose.yml</code> 文件（或将下面的 navidrome 服务添加到现有文件中）：</p>
+        <pre class="language-yml"><code class="language-yml code-highlight"><span class="code-line line-number" line="1"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"3"</span>
+</span><span class="code-line line-number" line="2"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="3">  <span class="token key atrule">navidrome</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="4">    <span class="token key atrule">image</span><span class="token punctuation">:</span> deluan/navidrome<span class="token punctuation">:</span>latest
+</span><span class="code-line line-number" line="5">    <span class="token key atrule">user</span><span class="token punctuation">:</span> 1000<span class="token punctuation">:</span><span class="token number">1000</span> <span class="token comment"># should be owner of volumes</span>
+</span><span class="code-line line-number" line="6">    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="7">      <span class="token punctuation">-</span> <span class="token string">"4533:4533"</span>
+</span><span class="code-line line-number" line="8">    <span class="token key atrule">restart</span><span class="token punctuation">:</span> unless<span class="token punctuation">-</span>stopped
 </span><span class="code-line line-number" line="9">    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="10">      <span class="token key atrule">POSTGRES_PASSWORD</span><span class="token punctuation">:</span> example
-</span><span class="code-line line-number" line="11">
-</span><span class="code-line line-number" line="12">  <span class="token key atrule">adminer</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="13">    <span class="token key atrule">image</span><span class="token punctuation">:</span> adminer<span class="token punctuation">:</span>latest
-</span><span class="code-line line-number" line="14">    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
-</span><span class="code-line line-number" line="15">    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="16">      <span class="token punctuation">-</span> 8081<span class="token punctuation">:</span><span class="token number">8080</span>
-</span></code><input type="hidden" value="# Use postgres/example user/password credentials
-version: &#x27;3.1&#x27;
-
+</span><span class="code-line line-number" line="10">      <span class="token comment"># Optional: put your config options customization here. Examples:</span>
+</span><span class="code-line line-number" line="11">      <span class="token key atrule">ND_SCANSCHEDULE</span><span class="token punctuation">:</span> 1h
+</span><span class="code-line line-number" line="12">      <span class="token key atrule">ND_LOGLEVEL</span><span class="token punctuation">:</span> info  
+</span><span class="code-line line-number" line="13">      <span class="token key atrule">ND_SESSIONTIMEOUT</span><span class="token punctuation">:</span> 24h
+</span><span class="code-line line-number" line="14">      <span class="token key atrule">ND_BASEURL</span><span class="token punctuation">:</span> <span class="token string">""</span>
+</span><span class="code-line line-number" line="15">    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="16">      <span class="token punctuation">-</span> <span class="token string">"/path/to/data:/data"</span>
+</span><span class="code-line line-number" line="17">      <span class="token punctuation">-</span> <span class="token string">"/path/to/your/music/folder:/music:ro"</span>
+</span></code><input type="hidden" value="version: &#x22;3&#x22;
 services:
-
-  db:
-    image: postgres:latest
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: example
-
-  adminer:
-    image: adminer:latest
-    restart: always
+  navidrome:
+    image: deluan/navidrome:latest
+    user: 1000:1000 # should be owner of volumes
     ports:
-      - 8081:8080
+      - &#x22;4533:4533&#x22;
+    restart: unless-stopped
+    environment:
+      # Optional: put your config options customization here. Examples:
+      ND_SCANSCHEDULE: 1h
+      ND_LOGLEVEL: info  
+      ND_SESSIONTIMEOUT: 24h
+      ND_BASEURL: &#x22;&#x22;
+    volumes:
+      - &#x22;/path/to/data:/data&#x22;
+      - &#x22;/path/to/your/music/folder:/music:ro&#x22;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> stack deploy <span class="token parameter variable">-c</span> stack.yml postgres
-</span></code><input type="hidden" value="docker stack deploy -c stack.yml postgres
+        <p>使用 <code>docker-compose up -d</code> 启动它。 请注意，上面的环境变量只是一个示例，不是必需的。 示例中的值已经是默认值</p>
+        <h2 id="使用docker命令行工具"><a aria-hidden="true" tabindex="-1" href="#使用docker命令行工具" class="anchor"><span class="icon icon-link"></span></a>使用docker命令行工具</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="2">   <span class="token parameter variable">--name</span> navidrome <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="3">   <span class="token parameter variable">--restart</span><span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="4">   <span class="token parameter variable">--user</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> <span class="token parameter variable">-u</span><span class="token variable">)</span></span><span class="token builtin class-name">:</span><span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> <span class="token parameter variable">-g</span><span class="token variable">)</span></span> <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="5">   <span class="token parameter variable">-v</span> /path/to/music:/music <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="6">   <span class="token parameter variable">-v</span> /path/to/data:/data <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="7">   <span class="token parameter variable">-p</span> <span class="token number">4533</span>:4533 <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="8">   <span class="token parameter variable">-e</span> <span class="token assign-left variable">ND_LOGLEVEL</span><span class="token operator">=</span>info <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="9">   deluan/navidrome:latest
+</span></code><input type="hidden" value="$ docker run -d \
+   --name navidrome \
+   --restart=unless-stopped \
+   --user $(id -u):$(id -g) \
+   -v /path/to/music:/music \
+   -v /path/to/data:/data \
+   -p 4533:4533 \
+   -e ND_LOGLEVEL=info \
+   deluan/navidrome:latest
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <div class="previous"><a class="prev" href="portainer.html"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+        <div class="previous"><a class="prev" href="penpot.html"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
               <path d="M842.666667 864c-8.533333 0-14.933333-2.133333-21.333334-8.533333l-341.333333-309.333334c-6.4-6.4-10.666667-14.933333-10.666667-23.466666 0-8.533333 4.266667-17.066667 10.666667-23.466667l341.333333-309.333333c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133333 44.8L548.266667 522.666667l315.733333 285.866666c12.8 10.666667 14.933333 32 2.133333 44.8-6.4 6.4-14.933333 10.666667-23.466666 10.666667z"></path>
               <path d="M512 864c-8.533333 0-14.933333-2.133333-21.333333-8.533333L149.333333 546.133333c-6.4-6.4-10.666667-14.933333-10.666666-23.466666 0-8.533333 4.266667-17.066667 10.666666-23.466667L490.666667 189.866667c12.8-12.8 34.133333-10.666667 44.8 2.133333 12.8 12.8 10.666667 34.133333-2.133334 44.8L217.6 522.666667 533.333333 808.533333c12.8 12.8 14.933333 32 2.133334 44.8-6.4 6.4-14.933333 10.666667-23.466667 10.666667z"></path>
             </svg>
-<span>Portainer Docker 管理
-</span></a><a class="next" href="penpot.html"><span>Penpot 设计和原型
+<span>Penpot 设计和原型
+</span></a><a class="next" href="rancher.html"><span>Rancher 容器管理平台
 </span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
               <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
               <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
             </svg></a></div>
-        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/tree/master/docs/postgres.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/tree/master/docs/navidrome.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
             </svg>
 <span>Edit this page on GitHub</span>
-</a><span class="atime">2022/04/20</span></section>
+</a><span class="atime">2023/06/22</span></section>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#快速启动容器" class="tocs-link">快速启动容器</a></li>
-            <li><a href="#使用-stack-部署示例" class="tocs-link">使用 stack 部署示例</a></li>
+            <li><a href="#使用-docker-compose" class="tocs-link">使用 docker-compose</a></li>
+            <li><a href="#使用docker命令行工具" class="tocs-link">使用docker命令行工具</a></li>
           </ol>
         </aside>
       </nav>
