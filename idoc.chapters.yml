@@ -10,6 +10,8 @@
 - nps/README.md: NPS 内网穿透
 - portainer.md: Portainer Docker 管理
 - postgres.md: PostgreSQL 数据库
+- penpot.md: Penpot 设计和原型
+- navidrome.md: Navidrome 音乐服务器
 - rancher.md: Rancher 容器管理平台
 - redis.md: Redis 数据库
 - rocket.chat/README.md: Rocket.Chat 聊天工具

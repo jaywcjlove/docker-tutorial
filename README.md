@@ -691,6 +691,14 @@ docker info
 
 [在 docker 中搭建内网穿透服务器，带WEB管理](docs/nps/README.md)
 
+### `Penpot`
+
+[在 docker 中部署 Penpot](docs/penpot.md)
+
+### `Navidrome`
+
+[在 docker 中部署 Navidrome](docs/navidrome.md)
+
 ### `Humpback`
 
 首先创建放持久化数据文件夹，`mkdir -p /opt/app/humpback-web`，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。

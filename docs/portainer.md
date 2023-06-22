@@ -12,13 +12,20 @@ docker volume create portainer_data
 Docker Standalone
 
 ```bash
-docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+docker run -d \
+  -p 8000:8000 \
+  -p 9000:9000 \
+  --name=portainer \
+  --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer_data:/data \
+  portainer/portainer-ce
 ```
 
 Docker Swarm
 
 ```bash
-curl -L https://downloads.portainer.io/portainer-agent-stack.yml -o portainer-agent-stack.yml
+curl -L https://downloads.portainer.io/ee2-18/portainer-agent-stack.yml -o portainer-agent-stack.yml
 # 下载 https://downloads.portainer.io/portainer-agent-stack.yml
 docker stack deploy -c portainer-agent-stack.yml portainer
 ```
