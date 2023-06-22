@@ -301,7 +301,7 @@ docker run --name koa-demo-name --rm -d -p 9066:3000 koa-demo:latest
 docker run --name koa-demo-name --rm -d -p 9066:3000 koa-demo:0.0.1
 ```
 
-上面命令，将刚创建的 koa-demo 景象跑起来。
+上面命令，将刚创建的 `koa-demo` 景象跑起来，命令的 `--rm` 参数，在容器终止运行后自动删除容器文件。
 
 
 ### 发布自己的镜像
