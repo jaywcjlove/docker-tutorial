@@ -8,6 +8,7 @@ homepage: https://wangchujiang.com/docker-tutorial/
 
 menus:
   Home: index.html
+  Sponsor: https://jaywcjlove.github.io/#/sponsor
 
 editButton: 
   label: Edit this page on GitHub
