@@ -7,8 +7,8 @@ cacheFileStat: true
 homepage: https://wangchujiang.com/docker-tutorial/
 
 menus:
-  Home: index.html
-  Sponsor: 
+  首页: index.html
+  捐赠: 
     url: https://wangchujiang.com/#/sponsor
     target: __blank
 
