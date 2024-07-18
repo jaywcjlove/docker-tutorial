@@ -234,6 +234,31 @@ docker rmi $(docker images | grep none | awk '{print $3}' | sort -r)
 docker run -t -i nginx:latest /bin/bash
 ```
 
+## 下载镜像本地安装镜像
+
+由于国区已经无法访问，可以将镜像打包，直接安装镜像压缩文件
+
+```sh
+$ docker pull gitlab/gitlab-ce:17.0.1-ce.0 # 下载镜像
+# 保存 Docker 镜像到本地文件
+$ docker save -o [output-file.tar] [image-name]
+$ docker save -o gitlab-ce-17.0.1.tar gitlab/gitlab-ce
+```
+
+将镜像文件发送到服务器
+
+```sh
+$ scp [output-file.tar] [user]@[server-ip]:[path]
+$ scp gitlab-ce-17.0.1.tar root@110.55.8.163:/home/docker-images
+```
+
+服务器上加载 Docker 镜像
+
+```sh
+$ docker load -i /home/docker-images/gitlab-ce-17.0.1.tar # 加载 Docker 镜像
+$ docker images # 验证镜像是否加载成功
+```
+
 ### 通过容器创建镜像
 
 我们可以通过以下两种方式对镜像进行更改。
