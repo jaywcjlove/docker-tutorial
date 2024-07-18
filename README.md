@@ -234,7 +234,7 @@ docker rmi $(docker images | grep none | awk '{print $3}' | sort -r)
 docker run -t -i nginx:latest /bin/bash
 ```
 
-## 下载镜像本地安装镜像
+### 下载镜像本地安装镜像
 
 由于国区已经无法访问，可以将镜像打包，直接安装镜像压缩文件
 
