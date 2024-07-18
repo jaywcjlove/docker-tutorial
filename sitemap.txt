@@ -3,8 +3,8 @@ https://wangchujiang.com/docker-tutorial/elasticsearch.html
 https://wangchujiang.com/docker-tutorial/harbor.html
 https://wangchujiang.com/docker-tutorial/mattermost.html
 https://wangchujiang.com/docker-tutorial/mysql.html
-https://wangchujiang.com/docker-tutorial/nginx.html
 https://wangchujiang.com/docker-tutorial/navidrome.html
+https://wangchujiang.com/docker-tutorial/nginx.html
 https://wangchujiang.com/docker-tutorial/penpot.html
 https://wangchujiang.com/docker-tutorial/portainer.html
 https://wangchujiang.com/docker-tutorial/postgres.html
@@ -13,6 +13,6 @@ https://wangchujiang.com/docker-tutorial/redis.html
 https://wangchujiang.com/docker-tutorial/gitlab/index.html
 https://wangchujiang.com/docker-tutorial/nps/index.html
 https://wangchujiang.com/docker-tutorial/rocket.chat/index.html
-https://wangchujiang.com/docker-tutorial/sourcegraph/index.html
 https://wangchujiang.com/docker-tutorial/seaweedfs/index.html
+https://wangchujiang.com/docker-tutorial/sourcegraph/index.html
 https://wangchujiang.com/docker-tutorial/index.html
