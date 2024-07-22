@@ -14,6 +14,7 @@
 - navidrome.md: Navidrome 音乐服务器
 - rancher.md: Rancher 容器管理平台
 - redis.md: Redis 数据库
+- jenkins/README.md: Jenkins
 - rocket.chat/README.md: Rocket.Chat 聊天工具
 - seaweedfs/README.md: SeaweedFS 文件系统
 - sourcegraph/README.md: Sourcegraph 代码搜索引擎
