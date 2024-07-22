@@ -90,7 +90,15 @@ docker compose down  # 停止并删除与 Docker Compose 配置文件相关的�
 
 ## 1. 安装插件
 
-- [Git Parameter Plug-In](https://plugins.jenkins.io/git-parameter) 支持在 CI 上自动加载仓库分支
+[Git Parameter Plug-In](https://plugins.jenkins.io/git-parameter) 支持在 CI 上自动加载仓库分支
+
+<img src="./imgs/0-1.png" width="620" />
+
+<img src="./imgs/0-2.png" width="620" />
+
+在 `Manage Jenkins` -> `System` 中设置 `Git Parameter`
+
+<img src="./imgs/0-3.png" width="620" />
 
 ## 2. 添加凭证
 
@@ -117,7 +125,9 @@ docker compose down  # 停止并删除与 Docker Compose 配置文件相关的�
 
 <img src="./imgs/8.png" width="620" />
 
-## 3. 添加构建选项，可以在构建前选择 `生产` 还是 `开发` 模式，在脚本中判断
+## 3. 添加构建选项
+
+可以在构建前选择 `生产` 还是 `开发` 模式，在脚本中判断
 
 <img src="./imgs/9.png" width="620" />
 
