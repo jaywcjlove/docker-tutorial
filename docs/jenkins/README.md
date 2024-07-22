@@ -170,7 +170,7 @@ docker save -o node22.tar node:22
 scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
 ```
 
-Pipeline 脚本中使用 Docker nodejs 20 运行示例
+Pipeline 脚本中使用 Docker `nodejs 20` 运行示例
 
 ```groovy
 pipeline {
@@ -178,10 +178,11 @@ pipeline {
     // pipeline 放到 docker 中执行
     agent {
         docker {
-          // 使用 Node.js 18 的 Docker 镜像
-          image 'node:20'
-          // 可选：挂载 NPM 缓存目录，加速构建
-          args '-v /root/.npm:/root/.npm'
+            // 使用 Node.js 18 的 Docker 镜像
+            image 'node:20'
+            // 可选：挂载 NPM 缓存目录，加速构建
+            // 使用 Jenkins 工作空间中的 .npm 目录作为缓存目录，不会有权限写入问题
+            args '-v ${JENKINS_HOME}/.npm:/home/node/.npm'
         }
     }
     environment {
@@ -232,7 +233,7 @@ pipeline {
                             sh '''
                             ls -la
                             cd h5_vip
-                            npm install --registry=https://registry.npmmirror.com/
+                            npm install --cache /home/node/.npm --registry=https://registry.npmmirror.com/
                             ls -la
                             npm run build
                             ls -la
@@ -319,7 +320,7 @@ scp -P 2222 my-openjdk-maven.3.8.7.tar root@106.55.8.163:/home/docker-images
 docker load -i ./my-openjdk-maven.3.8.7.tar
 ```
 
-这事缓存下载的 maven 的包
+缓存下载的 `maven` 的包
 
 ```sh
 docker run -it --rm my-openjdk-maven:3.8.7 /bin/bash
