@@ -133,6 +133,17 @@ gitlab_rails['backup_keep_time'] = 604800
 docker exec 容器名或容器ID gitlab-ctl reconfigure  
 ```
 
+## 备份恢复
+
+```sh
+# 从xxxxx编号备份中恢复
+# 然后恢复数据，1406691018为备份文件的时间戳
+gitlab-rake gitlab:backup:restore BACKUP=1406691018
+
+# 新版本 1721392543_2024_07_19_17.0.1_gitlab_backup.tar
+gitlab-rake gitlab:backup:restore BACKUP=1721392543_2024_07_19_17.0.1
+```
+
 ## 容器管理
 
 ```bash

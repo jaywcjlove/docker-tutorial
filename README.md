@@ -36,7 +36,7 @@
 - [Docker私有仓库搭建](#docker私有仓库搭建)
   - [`registry`](#registry)
   - [`Harbor`](#harbor)
-- [使用 Docker 实战](#使用docker实战)
+- [使用 Docker 实战](#使用-docker-实战)
 - [Docker REST API](#docker-rest-api)
   - [`Nginx`](#nginx)
   - [`MySQL`](#mysql)
@@ -239,10 +239,15 @@ docker run -t -i nginx:latest /bin/bash
 由于国区已经无法访问，可以将镜像打包，直接安装镜像压缩文件
 
 ```sh
-$ docker pull gitlab/gitlab-ce:17.0.1-ce.0 # 下载镜像
+$ docker pull gitlab/gitlab-ce:17.2.0-ce.0 # 下载镜像
+$ docker pull --platform linux/amd64 gitlab/gitlab-ce:17.2.0-ce.0
+$ docker pull --platform linux/amd64 portainer/portainer-ce:2.20.3-alpine
+$ docker pull --platform linux/amd64 portainer/agent:2.20.3-alpine
 # 保存 Docker 镜像到本地文件
 $ docker save -o [output-file.tar] [image-name]
-$ docker save -o gitlab-ce-17.0.1.tar gitlab/gitlab-ce
+$ docker save -o gitlab-ce.0-17.2.0.tar gitlab/gitlab-ce:17.2.0-ce.0
+$ docker save -o portainer-agent-2.20.3-alpine.tar portainer/agent:2.20.3-alpine
+$ docker save -o portainer-ce-2.20.3-alpine.tar portainer/portainer-ce:2.20.3-alpine
 ```
 
 将镜像文件发送到服务器
@@ -622,7 +627,7 @@ curl -s --unix-socket /var/run/docker.sock http://dummy/containers/json
 docker info
 ```
 
-## 使用Docker实战
+## 使用 Docker 实战
 
 > ⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件
 
@@ -728,6 +733,10 @@ docker info
 
 [在 docker 中部署 Navidrome](docs/navidrome.md)
 
+### `Jenkins`
+
+[在 docker 中部署 Jenkins](docs/jenkins/README.md)
+
 ### `Humpback`
 
 首先创建放持久化数据文件夹，`mkdir -p /opt/app/humpback-web`，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。
@@ -759,9 +768,9 @@ docker run -d --name seafile \
 
 ```shell
 docker run -d --name seafile \
-  -e SEAFILE_SERVER_HOSTNAME=pan.showgold.com \
-  -e SEAFILE_ADMIN_EMAIL=wcj@nihaosi.com \
-  -e SEAFILE_ADMIN_PASSWORD=wcj@nihaosi.com \
+  -e SEAFILE_SERVER_HOSTNAME=pan.example.com \
+  -e SEAFILE_ADMIN_EMAIL=wcj@example.com \
+  -e SEAFILE_ADMIN_PASSWORD=wcj@example.com \
   -v $HOME/_docker/seafile-data:/shared \
   -p 80:80 \
   seafileltd/seafile:latest

@@ -30,7 +30,7 @@ curl -L https://downloads.portainer.io/ee2-18/portainer-agent-stack.yml -o porta
 docker stack deploy -c portainer-agent-stack.yml portainer
 ```
 
-## v1.22x
+## v2.20
 
 新建 `portainer-agent-stack.yml` 文件， 将下面内容复制到配置文件中，你可以从官方仓库拷贝 [`portainer/portainer-compose`](https://github.com/portainer/portainer-compose) 配置。
 
@@ -38,17 +38,11 @@ docker stack deploy -c portainer-agent-stack.yml portainer
 version: '3.2'
 services:
   agent:
-    image: portainer/agent
-    environment:
-      # REQUIRED: Should be equal to the service name prefixed by "tasks." when
-      # deployed inside an overlay network
-      AGENT_CLUSTER_ADDR: tasks.agent
-      # AGENT_PORT: 9001
-      # LOG_LEVEL: debug
+    image: portainer/agent:2.20.3-alpine
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      #- ${HOME}/.orbstack/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
-      - /etc/localtime:/etc/localtime:ro
     networks:
       - agent_network
     deploy:
@@ -57,10 +51,12 @@ services:
         constraints: [node.platform.os == linux]
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce:2.20.3-alpine
     command: -H tcp://tasks.agent:9001 --tlsskipverify
     ports:
+      - "9443:9443"
       - "9000:9000"
+      - "8000:8000"
     volumes:
       - portainer_data:/data
       - /etc/localtime:/etc/localtime:ro
