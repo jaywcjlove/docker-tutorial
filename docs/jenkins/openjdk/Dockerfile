@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 openjdk:11
+FROM --platform=linux/amd64 openjdk:11.0.16
 
 # 安装 Maven 3.8.7
 ENV MAVEN_VERSION=3.8.7
