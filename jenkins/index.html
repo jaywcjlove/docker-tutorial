@@ -195,11 +195,15 @@ docker compose down  # 停止并删除与 Docker Compose 配置文件相关的�
         <img src="imgs/0-2.png" width="620">
         <p>在 <code>Manage Jenkins</code> -> <code>System</code> 中设置 <code>Git Parameter</code></p>
         <img src="imgs/0-3.png" width="620">
-        <h2 id="2-添加凭证"><a aria-hidden="true" tabindex="-1" href="#2-添加凭证" class="anchor"><span class="icon icon-link"></span></a>2. 添加凭证</h2>
+        <h2 id="2-添加凭据"><a aria-hidden="true" tabindex="-1" href="#2-添加凭据" class="anchor"><span class="icon icon-link"></span></a>2. 添加凭据</h2>
         <img src="imgs/1.png" width="620">
         <img src="imgs/2.png" width="620">
         <img src="imgs/3.png" width="620">
         <img src="imgs/4.png" width="620">
+        <p>添加 <code>SSH</code> 和 <code>SCP</code> 需要的凭据</p>
+        <img src="imgs/4-1.png" width="620">
+        <p><code>ssh-keygen -t rsa</code> 生成 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 文件，将 <code>id_rsa</code> 私钥文本复制到 <code>jenkins</code> 中</p>
+        <img src="imgs/4-2.png" width="620">
         <h2 id="3-新建工作流"><a aria-hidden="true" tabindex="-1" href="#3-新建工作流" class="anchor"><span class="icon icon-link"></span></a>3. 新建工作流</h2>
         <img src="imgs/5.png" width="620">
         <p>修改配置</p>
@@ -252,7 +256,7 @@ scp -P 2222 node20.tar root@152.22.3.186:/home/docker-images
 docker save -o node22.tar node:22
 scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>Pipeline 脚本中使用 Docker nodejs 20 运行</p>
+        <p>Pipeline 脚本中使用 Docker nodejs 20 运行示例</p>
         <pre class="language-groovy"><code class="language-groovy code-highlight"><span class="code-line line-number" line="1">pipeline <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">    <span class="token comment">//agent any</span>
 </span><span class="code-line line-number" line="3">    <span class="token comment">// pipeline 放到 docker 中执行</span>
@@ -265,19 +269,19 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
 </span><span class="code-line line-number" line="10">        <span class="token punctuation">}</span>
 </span><span class="code-line line-number" line="11">    <span class="token punctuation">}</span>
 </span><span class="code-line line-number" line="12">    environment <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="13">      <span class="token keyword">def</span> git_url<span class="token operator">=</span><span class="token interpolation-string"><span class="token string">"http://152.22.3.186:8081/mall/h5.git"</span></span>
-</span><span class="code-line line-number" line="14">      <span class="token keyword">def</span> git_auth <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"12312312-f199-4b15-b087-123123"</span></span>
-</span><span class="code-line line-number" line="15">      <span class="token keyword">def</span> git_branch <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
-</span><span class="code-line line-number" line="16">      <span class="token keyword">def</span> project_env <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">project_env</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
-</span><span class="code-line line-number" line="17">      <span class="token keyword">def</span> data_dir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"/mnt/mall/h5/h5_vip"</span></span>
+</span><span class="code-line line-number" line="13">        <span class="token keyword">def</span> git_url<span class="token operator">=</span><span class="token interpolation-string"><span class="token string">"http://152.22.3.186:8081/mall/h5.git"</span></span>
+</span><span class="code-line line-number" line="14">        <span class="token keyword">def</span> git_auth <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"12312312-f199-4b15-b087-123123"</span></span>
+</span><span class="code-line line-number" line="15">        <span class="token keyword">def</span> git_branch <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="16">        <span class="token keyword">def</span> project_env <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">project_env</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="17">        <span class="token keyword">def</span> data_dir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"/mnt/mall/h5/h5_vip"</span></span>
 </span><span class="code-line line-number" line="18">
-</span><span class="code-line line-number" line="19">      <span class="token comment">// 本地需要上传的目录 以及远程服务器的目录</span>
-</span><span class="code-line line-number" line="20">      <span class="token keyword">def</span> localDir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">WORKSPACE</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/h5_vip/test_dir/"</span></span>
-</span><span class="code-line line-number" line="21">      <span class="token keyword">def</span> vip_host <span class="token operator">=</span> <span class="token string">'106.53.119.240'</span>
-</span><span class="code-line line-number" line="22">      <span class="token keyword">def</span> vip_remote_dir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"/mnt/mall/h5"</span></span>
+</span><span class="code-line line-number" line="19">        <span class="token comment">// 本地需要上传的目录 以及远程服务器的目录</span>
+</span><span class="code-line line-number" line="20">        <span class="token keyword">def</span> localDir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">WORKSPACE</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/h5_vip/test_dir/"</span></span>
+</span><span class="code-line line-number" line="21">        <span class="token keyword">def</span> vip_host <span class="token operator">=</span> <span class="token string">'152.22.3.186'</span>
+</span><span class="code-line line-number" line="22">        <span class="token keyword">def</span> vip_remote_dir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"/mnt/mall/h5"</span></span>
 </span><span class="code-line line-number" line="23">    <span class="token punctuation">}</span>
 </span><span class="code-line line-number" line="24">    stages <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="25">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Git Checkout'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="25">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Git Checkout'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="26">            steps <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="27">                echo <span class="token interpolation-string"><span class="token string">"🏆 WORKSPACE: 【</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">WORKSPACE</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">】"</span></span>
 </span><span class="code-line line-number" line="28">                echo <span class="token interpolation-string"><span class="token string">"🎯 branch: 【</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">】"</span></span>
@@ -298,59 +302,57 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
 </span><span class="code-line line-number" line="43">                sh <span class="token string">'ls -la'</span>
 </span><span class="code-line line-number" line="44">            <span class="token punctuation">}</span>    
 </span><span class="code-line line-number" line="45">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="46">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="47">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Send Files'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="48">            when <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="49">                expression <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="50">                    currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> null <span class="token operator">||</span> currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> <span class="token string">'SUCCESS'</span>
-</span><span class="code-line line-number" line="51">                <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="52">            <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="53">            steps <span class="token punctuation">{</span>    
-</span><span class="code-line line-number" line="54">                sh <span class="token string">'pwd'</span>
-</span><span class="code-line line-number" line="55">                script<span class="token punctuation">{</span>                    
-</span><span class="code-line line-number" line="56">                    <span class="token keyword">switch</span> <span class="token punctuation">(</span>project_env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="57">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"vip"</span></span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="58">                            sh <span class="token string">'''
-</span></span><span class="code-line line-number" line="59"><span class="token string">                            ls -la
-</span></span><span class="code-line line-number" line="60"><span class="token string">                            cd h5_vip
-</span></span><span class="code-line line-number" line="61"><span class="token string">                            npm install --registry=https://registry.npmmirror.com/
-</span></span><span class="code-line line-number" line="62"><span class="token string">                            ls -la
-</span></span><span class="code-line line-number" line="63"><span class="token string">                            npm run build
-</span></span><span class="code-line line-number" line="64"><span class="token string">                            ls -la
-</span></span><span class="code-line line-number" line="65"><span class="token string">                            rm -rf test_dir
-</span></span><span class="code-line line-number" line="66"><span class="token string">                            mv dist test_dir
-</span></span><span class="code-line line-number" line="67"><span class="token string">                            '''</span>
-</span><span class="code-line line-number" line="68">                            <span class="token function">withCredentials</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">sshUserPrivateKey</span><span class="token punctuation">(</span>credentialsId<span class="token punctuation">:</span> <span class="token string">'bd6f00e6-9dfd-4fd5-b94b-7559ca212e9a'</span><span class="token punctuation">,</span> keyFileVariable<span class="token punctuation">:</span> <span class="token string">'SSH_KEY'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="69">                                <span class="token comment">// 连接到远程服务器并删除 test_dir 目录 重新上传</span>
-</span><span class="code-line line-number" line="70">                                sh <span class="token string">'''
-</span></span><span class="code-line line-number" line="71"><span class="token string">                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@106.53.119.240 "rm -rf /mnt/mall/h5/test_dir"
-</span></span><span class="code-line line-number" line="72"><span class="token string">                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r "${localDir}" root@106.53.119.240:${vip_remote_dir}
-</span></span><span class="code-line line-number" line="73"><span class="token string">                                '''</span>
-</span><span class="code-line line-number" line="74">                            <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="75">                            <span class="token keyword">break</span>
-</span><span class="code-line line-number" line="76">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"dev"</span></span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="77">                            <span class="token comment">// for (i in ['152.22.3.186']) {</span>
-</span><span class="code-line line-number" line="78">                            <span class="token comment">//     data_dir = "/mnt/mall/h5/"</span>
-</span><span class="code-line line-number" line="79">                            <span class="token comment">//     //sh "ssh $i 'cp -rf ${data_dir}/* ${data_dir}/h5_vip_{uuid_no}'"</span>
-</span><span class="code-line line-number" line="80">                            <span class="token comment">//     sh "scp -r -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa -P 22 '${WORKSPACE}/h5_vip/' '$i:${data_dir}'"</span>
-</span><span class="code-line line-number" line="81">                            <span class="token comment">// }</span>
-</span><span class="code-line line-number" line="82">                            <span class="token keyword">break</span>
-</span><span class="code-line line-number" line="83">                
-</span><span class="code-line line-number" line="84">                    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="85">                <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="86">            <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="87">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="88">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="89">    post <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="90">        success <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="91">            sh <span class="token interpolation-string"><span class="token string">"echo 'Success success'"</span></span>
-</span><span class="code-line line-number" line="92">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="93">        
-</span><span class="code-line line-number" line="94">        failure <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="95">            sh <span class="token interpolation-string"><span class="token string">"echo 'Faild faild'"</span></span>
-</span><span class="code-line line-number" line="96">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="97">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="98"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="46">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Send Files'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="47">            when <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="48">                expression <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="49">                    currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> null <span class="token operator">||</span> currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> <span class="token string">'SUCCESS'</span>
+</span><span class="code-line line-number" line="50">                <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="51">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="52">            steps <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="53">                sh <span class="token string">'pwd'</span>
+</span><span class="code-line line-number" line="54">                script <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="55">                    <span class="token keyword">switch</span> <span class="token punctuation">(</span>project_env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="56">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"vip"</span></span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="57">                            sh <span class="token string">'''
+</span></span><span class="code-line line-number" line="58"><span class="token string">                            ls -la
+</span></span><span class="code-line line-number" line="59"><span class="token string">                            cd h5_vip
+</span></span><span class="code-line line-number" line="60"><span class="token string">                            npm install --registry=https://registry.npmmirror.com/
+</span></span><span class="code-line line-number" line="61"><span class="token string">                            ls -la
+</span></span><span class="code-line line-number" line="62"><span class="token string">                            npm run build
+</span></span><span class="code-line line-number" line="63"><span class="token string">                            ls -la
+</span></span><span class="code-line line-number" line="64"><span class="token string">                            rm -rf test_dir
+</span></span><span class="code-line line-number" line="65"><span class="token string">                            mv dist test_dir
+</span></span><span class="code-line line-number" line="66"><span class="token string">                            '''</span>
+</span><span class="code-line line-number" line="67">                            <span class="token function">withCredentials</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">sshUserPrivateKey</span><span class="token punctuation">(</span>credentialsId<span class="token punctuation">:</span> <span class="token string">'9dfd-4fd5-b94b-7559ca212e9a'</span><span class="token punctuation">,</span> keyFileVariable<span class="token punctuation">:</span> <span class="token string">'SSH_KEY'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="68">                                <span class="token comment">// 连接到远程服务器并删除 test_dir 目录 重新上传</span>
+</span><span class="code-line line-number" line="69">                                sh <span class="token string">'''
+</span></span><span class="code-line line-number" line="70"><span class="token string">                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@152.22.3.186 "rm -rf /mnt/mall/h5/test_dir"
+</span></span><span class="code-line line-number" line="71"><span class="token string">                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r "${localDir}" root@152.22.3.186:${vip_remote_dir}
+</span></span><span class="code-line line-number" line="72"><span class="token string">                                '''</span>
+</span><span class="code-line line-number" line="73">                            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="74">                            <span class="token keyword">break</span>
+</span><span class="code-line line-number" line="75">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"dev"</span></span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="76">                            <span class="token comment">// for (i in ['152.22.3.186']) {</span>
+</span><span class="code-line line-number" line="77">                            <span class="token comment">//     data_dir = "/mnt/mall/h5/"</span>
+</span><span class="code-line line-number" line="78">                            <span class="token comment">//     //sh "ssh $i 'cp -rf ${data_dir}/* ${data_dir}/h5_vip_{uuid_no}'"</span>
+</span><span class="code-line line-number" line="79">                            <span class="token comment">//     sh "scp -r -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa -P 22 '${WORKSPACE}/h5_vip/' '$i:${data_dir}'"</span>
+</span><span class="code-line line-number" line="80">                            <span class="token comment">// }</span>
+</span><span class="code-line line-number" line="81">                            <span class="token keyword">break</span>
+</span><span class="code-line line-number" line="82">                    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="83">                <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="84">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="85">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="86">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="87">    post <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="88">        success <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="89">            sh <span class="token interpolation-string"><span class="token string">"echo 'Success success'"</span></span>
+</span><span class="code-line line-number" line="90">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="91">        
+</span><span class="code-line line-number" line="92">        failure <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="93">            sh <span class="token interpolation-string"><span class="token string">"echo 'Faild faild'"</span></span>
+</span><span class="code-line line-number" line="94">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="95">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="96"><span class="token punctuation">}</span>
 </span></code><input type="hidden" value="pipeline {
     //agent any
     // pipeline 放到 docker 中执行
@@ -363,19 +365,19 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
         }
     }
     environment {
-      def git_url=&#x22;http://152.22.3.186:8081/mall/h5.git&#x22;
-      def git_auth = &#x22;12312312-f199-4b15-b087-123123&#x22;
-      def git_branch = &#x22;${branch}&#x22;
-      def project_env = &#x22;${project_env}&#x22;
-      def data_dir = &#x22;/mnt/mall/h5/h5_vip&#x22;
+        def git_url=&#x22;http://152.22.3.186:8081/mall/h5.git&#x22;
+        def git_auth = &#x22;12312312-f199-4b15-b087-123123&#x22;
+        def git_branch = &#x22;${branch}&#x22;
+        def project_env = &#x22;${project_env}&#x22;
+        def data_dir = &#x22;/mnt/mall/h5/h5_vip&#x22;
 
-      // 本地需要上传的目录 以及远程服务器的目录
-      def localDir = &#x22;${WORKSPACE}/h5_vip/test_dir/&#x22;
-      def vip_host = &#x27;106.53.119.240&#x27;
-      def vip_remote_dir = &#x22;/mnt/mall/h5&#x22;
+        // 本地需要上传的目录 以及远程服务器的目录
+        def localDir = &#x22;${WORKSPACE}/h5_vip/test_dir/&#x22;
+        def vip_host = &#x27;152.22.3.186&#x27;
+        def vip_remote_dir = &#x22;/mnt/mall/h5&#x22;
     }
     stages {
-        stage(&#x27;Git Checkout&#x27;){
+        stage(&#x27;Git Checkout&#x27;) {
             steps {
                 echo &#x22;🏆 WORKSPACE: 【${WORKSPACE}】&#x22;
                 echo &#x22;🎯 branch: 【${git_branch}】&#x22;
@@ -396,16 +398,15 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
                 sh &#x27;ls -la&#x27;
             }    
         }
-    }
         stage(&#x27;Send Files&#x27;) {
             when {
                 expression {
                     currentBuild.result == null || currentBuild.result == &#x27;SUCCESS&#x27;
                 }
             }
-            steps {    
+            steps {
                 sh &#x27;pwd&#x27;
-                script{                    
+                script {
                     switch (project_env) {
                         case &#x22;vip&#x22;:
                             sh &#x27;&#x27;&#x27;
@@ -418,11 +419,11 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
                             rm -rf test_dir
                             mv dist test_dir
                             &#x27;&#x27;&#x27;
-                            withCredentials([sshUserPrivateKey(credentialsId: &#x27;bd6f00e6-9dfd-4fd5-b94b-7559ca212e9a&#x27;, keyFileVariable: &#x27;SSH_KEY&#x27;)]) {
+                            withCredentials([sshUserPrivateKey(credentialsId: &#x27;9dfd-4fd5-b94b-7559ca212e9a&#x27;, keyFileVariable: &#x27;SSH_KEY&#x27;)]) {
                                 // 连接到远程服务器并删除 test_dir 目录 重新上传
                                 sh &#x27;&#x27;&#x27;
-                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@106.53.119.240 &#x22;rm -rf /mnt/mall/h5/test_dir&#x22;
-                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r &#x22;${localDir}&#x22; root@106.53.119.240:${vip_remote_dir}
+                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@152.22.3.186 &#x22;rm -rf /mnt/mall/h5/test_dir&#x22;
+                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r &#x22;${localDir}&#x22; root@152.22.3.186:${vip_remote_dir}
                                 &#x27;&#x27;&#x27;
                             }
                             break
@@ -433,7 +434,6 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
                             //     sh &#x22;scp -r -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa -P 22 &#x27;${WORKSPACE}/h5_vip/&#x27; &#x27;$i:${data_dir}&#x27;&#x22;
                             // }
                             break
-                
                     }
                 }
             }
@@ -444,6 +444,267 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
             sh &#x22;echo &#x27;Success success&#x27;&#x22;
         }
         
+        failure {
+            sh &#x22;echo &#x27;Faild faild&#x27;&#x22;
+        }
+    }
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="java-环境"><a aria-hidden="true" tabindex="-1" href="#java-环境" class="anchor"><span class="icon icon-link"></span></a>Java 环境</h2>
+        <p>基于 <code>openjdk:11</code> 创建一个包含 <code>Maven</code> 的自定义 Docker 镜像</p>
+        <pre class="language-dockerfile"><code class="language-dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> <span class="token options"><span class="token property">--platform</span><span class="token punctuation">=</span><span class="token string">linux/amd64</span></span> openjdk:11</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token comment"># 安装 Maven 3.8.7</span>
+</span><span class="code-line line-number" line="4"><span class="token instruction"><span class="token keyword">ENV</span> MAVEN_VERSION=3.8.7</span>
+</span><span class="code-line line-number" line="5"><span class="token instruction"><span class="token keyword">RUN</span> apt-get update &#x26;&#x26; apt-get install -y wget tar <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="6"><span class="token instruction">    &#x26;&#x26; wget https://archive.apache.org/dist/maven/maven-3/<span class="token variable">${MAVEN_VERSION}</span>/binaries/apache-maven-<span class="token variable">${MAVEN_VERSION}</span>-bin.tar.gz <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="7"><span class="token instruction">    &#x26;&#x26; tar xzf apache-maven-<span class="token variable">${MAVEN_VERSION}</span>-bin.tar.gz -C /opt <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="8"><span class="token instruction">    &#x26;&#x26; ln -s /opt/apache-maven-<span class="token variable">${MAVEN_VERSION}</span> /opt/maven <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="9"><span class="token instruction">    &#x26;&#x26; rm apache-maven-<span class="token variable">${MAVEN_VERSION}</span>-bin.tar.gz</span>
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11"><span class="token comment"># 设置 Maven 环境变量</span>
+</span><span class="code-line line-number" line="12"><span class="token instruction"><span class="token keyword">ENV</span> MAVEN_HOME=/opt/maven</span>
+</span><span class="code-line line-number" line="13"><span class="token instruction"><span class="token keyword">ENV</span> PATH=<span class="token string">"${MAVEN_HOME}/bin:${PATH}"</span></span>
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15"><span class="token comment"># 创建非 root 用户并设置权限</span>
+</span><span class="code-line line-number" line="16"><span class="token instruction"><span class="token keyword">RUN</span> useradd -u 1000 -ms /bin/bash jenkins <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="17"><span class="token instruction">    &#x26;&#x26; mkdir -p /home/jenkins/.m2/repository <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="18"><span class="token instruction">    &#x26;&#x26; chown -R jenkins:jenkins /home/jenkins/.m2</span>
+</span><span class="code-line line-number" line="19">
+</span><span class="code-line line-number" line="20"><span class="token comment"># 切换到非 root 用户</span>
+</span><span class="code-line line-number" line="21"><span class="token instruction"><span class="token keyword">USER</span> jenkins</span>
+</span><span class="code-line line-number" line="22">
+</span><span class="code-line line-number" line="23"><span class="token comment"># 验证 Maven 版本</span>
+</span><span class="code-line line-number" line="24"><span class="token instruction"><span class="token keyword">RUN</span> mvn -version</span>
+</span></code><input type="hidden" value="FROM --platform=linux/amd64 openjdk:11
+
+# 安装 Maven 3.8.7
+ENV MAVEN_VERSION=3.8.7
+RUN apt-get update &#x26;&#x26; apt-get install -y wget tar \
+    &#x26;&#x26; wget https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+    &#x26;&#x26; tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt \
+    &#x26;&#x26; ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven \
+    &#x26;&#x26; rm apache-maven-${MAVEN_VERSION}-bin.tar.gz
+
+# 设置 Maven 环境变量
+ENV MAVEN_HOME=/opt/maven
+ENV PATH=&#x22;${MAVEN_HOME}/bin:${PATH}&#x22;
+
+# 创建非 root 用户并设置权限
+RUN useradd -u 1000 -ms /bin/bash jenkins \
+    &#x26;&#x26; mkdir -p /home/jenkins/.m2/repository \
+    &#x26;&#x26; chown -R jenkins:jenkins /home/jenkins/.m2
+
+# 切换到非 root 用户
+USER jenkins
+
+# 验证 Maven 版本
+RUN mvn -version
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>构建 <code>openjdk</code> 新的镜像，命名为 <code>my-openjdk-maven</code></p>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> build <span class="token parameter variable">-t</span> my-openjdk-maven:3.8.7 <span class="token builtin class-name">.</span>
+</span><span class="code-line line-number" line="2"><span class="token comment"># 保存 Docker 镜像到本地文件</span>
+</span><span class="code-line line-number" line="3"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> my-openjdk-maven.3.8.7.tar my-openjdk-maven:3.8.7
+</span><span class="code-line line-number" line="4"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> my-openjdk-maven.3.8.8.tar my-openjdk-maven:3.8.8
+</span><span class="code-line line-number" line="5"><span class="token comment"># 上传到服务器</span>
+</span><span class="code-line line-number" line="6"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> my-openjdk-maven.3.8.7.tar root@106.55.8.163:/home/docker-images
+</span></code><input type="hidden" value="docker build -t my-openjdk-maven:3.8.7 .
+# 保存 Docker 镜像到本地文件
+docker save -o my-openjdk-maven.3.8.7.tar my-openjdk-maven:3.8.7
+docker save -o my-openjdk-maven.3.8.8.tar my-openjdk-maven:3.8.8
+# 上传到服务器
+scp -P 2222 my-openjdk-maven.3.8.7.tar root@106.55.8.163:/home/docker-images
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>加载 docker 自定义镜像</p>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> load <span class="token parameter variable">-i</span> ./my-openjdk-maven.3.8.7.tar
+</span></code><input type="hidden" value="docker load -i ./my-openjdk-maven.3.8.7.tar
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>这事缓存下载的 maven 的包</p>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> my-openjdk-maven:3.8.7 /bin/bash
+</span><span class="code-line line-number" line="2"><span class="token comment"># 在【容器】内运行</span>
+</span><span class="code-line line-number" line="3"><span class="token function">id</span> jenkins
+</span><span class="code-line line-number" line="4"><span class="token comment"># uid=1000(jenkins) gid=1000(jenkins) groups=1000(jenkins)</span>
+</span><span class="code-line line-number" line="5"><span class="token comment"># 在【宿主机】上使用这些 ID 来更改目录的拥有者</span>
+</span><span class="code-line line-number" line="6"><span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token number">1000</span>:1000 /root/.m2/
+</span><span class="code-line line-number" line="7"><span class="token comment"># 将目录权限设置为可读写</span>
+</span><span class="code-line line-number" line="8"><span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token parameter variable">-R</span> <span class="token number">777</span> /root/.m2/
+</span></code><input type="hidden" value="docker run -it --rm my-openjdk-maven:3.8.7 /bin/bash
+# 在【容器】内运行
+id jenkins
+# uid=1000(jenkins) gid=1000(jenkins) groups=1000(jenkins)
+# 在【宿主机】上使用这些 ID 来更改目录的拥有者
+sudo chown -R 1000:1000 /root/.m2/
+# 将目录权限设置为可读写
+sudo chmod -R 777 /root/.m2/
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>Pipeline 脚本中使用 Docker java <code>openjdk:11</code> &#x26; <code>maven.3.8.7</code> 运行示例</p>
+        <pre class="language-groovy"><code class="language-groovy code-highlight"><span class="code-line line-number" line="1">pipeline <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    agent <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">        docker <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4">            image <span class="token string">'my-openjdk-maven:3.8.7'</span>
+</span><span class="code-line line-number" line="5">            <span class="token comment">// 将 Maven 的本地仓库挂载到容器的 /root/.m2 路径，</span>
+</span><span class="code-line line-number" line="6">            <span class="token comment">// 确保你每次构建时都能重用之前下载的依赖</span>
+</span><span class="code-line line-number" line="7">            args <span class="token string">'-v /root/.m2:/home/jenkins/.m2:rw'</span>
+</span><span class="code-line line-number" line="8">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="9">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="10">    environment <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="11">        <span class="token keyword">def</span> git_url<span class="token operator">=</span><span class="token interpolation-string"><span class="token string">"http://106.55.8.163:8081/mall/springboot-mall.git"</span></span>
+</span><span class="code-line line-number" line="12">        <span class="token keyword">def</span> git_auth <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"211ca2-55c4f199-4b15-b087-238db80b102d"</span></span>
+</span><span class="code-line line-number" line="13">        <span class="token keyword">def</span> git_branch <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="14">        <span class="token keyword">def</span> project_env <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">project_env</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="15">        <span class="token keyword">def</span> vip_host <span class="token operator">=</span> <span class="token string">'152.22.3.186'</span>
+</span><span class="code-line line-number" line="16">        <span class="token keyword">def</span> vip_remote_dir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"/mnt/mall/admin"</span></span>
+</span><span class="code-line line-number" line="17">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="18">    stages <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="19">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Git Checkout'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="20">            steps <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="21">                echo <span class="token string">'check git'</span>
+</span><span class="code-line line-number" line="22">                <span class="token function">checkout</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="23">                    <span class="token punctuation">$</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'GitSCM'</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="24">                    branches<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>name<span class="token punctuation">:</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="25">                    doGenerateSubmoduleConfigurations<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="26">                    extensions<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="27">                    <span class="token comment">// 只拉取最新的提交</span>
+</span><span class="code-line line-number" line="28">                    <span class="token punctuation">[</span><span class="token punctuation">$</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'CloneOption'</span><span class="token punctuation">,</span> depth<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> shallow<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> noTags<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="29">                    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="30">                    submoduleCfg<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="31">                    userRemoteConfigs<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="32">                    credentialsId<span class="token punctuation">:</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_auth</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="33">                        url<span class="token punctuation">:</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_url</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="34">                    <span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="35">                <span class="token punctuation">]</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="36">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="37">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="38">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Manven Build'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="39">            steps <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="40">                <span class="token comment">/**
+</span></span><span class="code-line line-number" line="41"><span class="token comment">                * 执行maven打包
+</span></span><span class="code-line line-number" line="42"><span class="token comment">                * -B --batch-mode 在非交互（批处理）模式下运行(该模式下,当Mven需要输入时,它不会停下来接受用户的输入,而是使用合理的默认值)
+</span></span><span class="code-line line-number" line="43"><span class="token comment">                * 打包时跳过JUnit测试用例
+</span></span><span class="code-line line-number" line="44"><span class="token comment">                * -DskipTests 不执行测试用例，但编译测试用例类生成相应的class文件至target/test-classes下
+</span></span><span class="code-line line-number" line="45"><span class="token comment">                * -Dmaven.test.skip=true，不执行测试用例，也不编译测试用例类
+</span></span><span class="code-line line-number" line="46"><span class="token comment">                **/</span>
+</span><span class="code-line line-number" line="47">                sh <span class="token interpolation-string"><span class="token string">"cd </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">WORKSPACE</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> ; mvn clean package -Dmaven.test.skip=true -Dmaven.repo.local=/home/jenkins/.m2/repository -U"</span></span>
+</span><span class="code-line line-number" line="48">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="49">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="50">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Send Files'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="51">            when <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="52">                expression <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="53">                currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> null <span class="token operator">||</span> currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> <span class="token string">'SUCCESS'</span>
+</span><span class="code-line line-number" line="54">                <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="55">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="56">            steps <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="57">                script <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="58">                    <span class="token keyword">switch</span> <span class="token punctuation">(</span>project_env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="59">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"pro"</span></span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="60">                            <span class="token comment">// 部署服务器 SSH 凭据，验证登录用，才可以 ssh 和 scp 上传等功能</span>
+</span><span class="code-line line-number" line="61">                            <span class="token function">withCredentials</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">sshUserPrivateKey</span><span class="token punctuation">(</span>credentialsId<span class="token punctuation">:</span> <span class="token string">'bd6f00e69dfd-4fd5-b94b-7559ca212e9a'</span><span class="token punctuation">,</span> keyFileVariable<span class="token punctuation">:</span> <span class="token string">'SSH_KEY'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="62">                                <span class="token comment">// 连接到远程服务器并删除 admin 目录 重新上传</span>
+</span><span class="code-line line-number" line="63">                                sh <span class="token string">'''
+</span></span><span class="code-line line-number" line="64"><span class="token string">                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r -P 22 '${WORKSPACE}/admin/target/lib' 'root@${vip_host}:${vip_remote_dir}'
+</span></span><span class="code-line line-number" line="65"><span class="token string">                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r -P 22 '${WORKSPACE}/admin/target/admin-2.3.jar' 'root@${vip_host}:${vip_remote_dir}'
+</span></span><span class="code-line line-number" line="66"><span class="token string">                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@${vip_host} '/mnt/sh/admin-8000.sh restart;'
+</span></span><span class="code-line line-number" line="67"><span class="token string">                                '''</span>
+</span><span class="code-line line-number" line="68">                            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="69">                            <span class="token keyword">break</span>
+</span><span class="code-line line-number" line="70">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"dev"</span></span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="71">
+</span><span class="code-line line-number" line="72">                            <span class="token keyword">break</span>
+</span><span class="code-line line-number" line="73">                    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="74">                <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="75">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="76">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="77">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="78">    post <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="79">        success <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="80">            sh <span class="token interpolation-string"><span class="token string">"echo 'Success success'"</span></span>
+</span><span class="code-line line-number" line="81">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="82">        failure <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="83">            sh <span class="token interpolation-string"><span class="token string">"echo 'Faild faild'"</span></span>
+</span><span class="code-line line-number" line="84">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="85">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="86"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="pipeline {
+    agent {
+        docker {
+            image &#x27;my-openjdk-maven:3.8.7&#x27;
+            // 将 Maven 的本地仓库挂载到容器的 /root/.m2 路径，
+            // 确保你每次构建时都能重用之前下载的依赖
+            args &#x27;-v /root/.m2:/home/jenkins/.m2:rw&#x27;
+        }
+    }
+    environment {
+        def git_url=&#x22;http://106.55.8.163:8081/mall/springboot-mall.git&#x22;
+        def git_auth = &#x22;211ca2-55c4f199-4b15-b087-238db80b102d&#x22;
+        def git_branch = &#x22;${branch}&#x22;
+        def project_env = &#x22;${project_env}&#x22;
+        def vip_host = &#x27;152.22.3.186&#x27;
+        def vip_remote_dir = &#x22;/mnt/mall/admin&#x22;
+    }
+    stages {
+        stage(&#x27;Git Checkout&#x27;) {
+            steps {
+                echo &#x27;check git&#x27;
+                checkout([
+                    $class: &#x27;GitSCM&#x27;,
+                    branches: [[name: &#x22;${git_branch}&#x22; ]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [
+                    // 只拉取最新的提交
+                    [$class: &#x27;CloneOption&#x27;, depth: 1, shallow: true, noTags: true]
+                    ],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                    credentialsId: &#x22;${git_auth}&#x22;,
+                        url: &#x22;${git_url}&#x22;
+                    ]]
+                ])
+            }
+        }
+        stage(&#x27;Manven Build&#x27;) {
+            steps {
+                /**
+                * 执行maven打包
+                * -B --batch-mode 在非交互（批处理）模式下运行(该模式下,当Mven需要输入时,它不会停下来接受用户的输入,而是使用合理的默认值)
+                * 打包时跳过JUnit测试用例
+                * -DskipTests 不执行测试用例，但编译测试用例类生成相应的class文件至target/test-classes下
+                * -Dmaven.test.skip=true，不执行测试用例，也不编译测试用例类
+                **/
+                sh &#x22;cd ${WORKSPACE} ; mvn clean package -Dmaven.test.skip=true -Dmaven.repo.local=/home/jenkins/.m2/repository -U&#x22;
+            }
+        }
+        stage(&#x27;Send Files&#x27;) {
+            when {
+                expression {
+                currentBuild.result == null || currentBuild.result == &#x27;SUCCESS&#x27;
+                }
+            }
+            steps {
+                script {
+                    switch (project_env) {
+                        case &#x22;pro&#x22;:
+                            // 部署服务器 SSH 凭据，验证登录用，才可以 ssh 和 scp 上传等功能
+                            withCredentials([sshUserPrivateKey(credentialsId: &#x27;bd6f00e69dfd-4fd5-b94b-7559ca212e9a&#x27;, keyFileVariable: &#x27;SSH_KEY&#x27;)]) {
+                                // 连接到远程服务器并删除 admin 目录 重新上传
+                                sh &#x27;&#x27;&#x27;
+                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r -P 22 &#x27;${WORKSPACE}/admin/target/lib&#x27; &#x27;root@${vip_host}:${vip_remote_dir}&#x27;
+                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r -P 22 &#x27;${WORKSPACE}/admin/target/admin-2.3.jar&#x27; &#x27;root@${vip_host}:${vip_remote_dir}&#x27;
+                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@${vip_host} &#x27;/mnt/sh/admin-8000.sh restart;&#x27;
+                                &#x27;&#x27;&#x27;
+                            }
+                            break
+                        case &#x22;dev&#x22;:
+
+                            break
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            sh &#x22;echo &#x27;Success success&#x27;&#x22;
+        }
         failure {
             sh &#x22;echo &#x27;Faild faild&#x27;&#x22;
         }
@@ -471,11 +732,12 @@ scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
           <ol class="tocs-list">
             <li><a href="#部署-jenkins" class="tocs-link">部署 Jenkins</a></li>
             <li><a href="#1-安装插件" class="tocs-link">1. 安装插件</a></li>
-            <li><a href="#2-添加凭证" class="tocs-link">2. 添加凭证</a></li>
+            <li><a href="#2-添加凭据" class="tocs-link">2. 添加凭据</a></li>
             <li><a href="#3-新建工作流" class="tocs-link">3. 新建工作流</a></li>
             <li><a href="#3-添加构建选项" class="tocs-link">3. 添加构建选项</a></li>
             <li><a href="#4-选择-pipeline-script-from-scm-指定脚本位置" class="tocs-link">4. 选择 Pipeline script from SCM 指定脚本位置</a></li>
             <li><a href="#nodejs" class="tocs-link">Nodejs</a></li>
+            <li><a href="#java-环境" class="tocs-link">Java 环境</a></li>
           </ol>
         </aside>
       </nav>

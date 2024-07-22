@@ -6,8 +6,8 @@ https://wangchujiang.com/docker-tutorial/mysql.html
 https://wangchujiang.com/docker-tutorial/navidrome.html
 https://wangchujiang.com/docker-tutorial/nginx.html
 https://wangchujiang.com/docker-tutorial/penpot.html
-https://wangchujiang.com/docker-tutorial/postgres.html
 https://wangchujiang.com/docker-tutorial/portainer.html
+https://wangchujiang.com/docker-tutorial/postgres.html
 https://wangchujiang.com/docker-tutorial/rancher.html
 https://wangchujiang.com/docker-tutorial/redis.html
 https://wangchujiang.com/docker-tutorial/gitlab/index.html
@@ -16,4 +16,5 @@ https://wangchujiang.com/docker-tutorial/rocket.chat/index.html
 https://wangchujiang.com/docker-tutorial/seaweedfs/index.html
 https://wangchujiang.com/docker-tutorial/sourcegraph/index.html
 https://wangchujiang.com/docker-tutorial/jenkins/index.html
+https://wangchujiang.com/docker-tutorial/jenkins/openjdk/index.html
 https://wangchujiang.com/docker-tutorial/index.html

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenkins Docker 入门教程</title>
+    <meta name="description" content="本教程展示如何在 Linux(CentOS 7) 服务器上通过 Docker 部署 Jenkins，并在 Docker 容器中运行 Pipeline 脚本。这样可以方便地使用任何版本的 Node.js 或 Java 沙盒环境。">
+    <meta name="keywords" content="docker,containers,tutorial">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../../css/demo-preview.css?v=1.31.0">
+    <link rel="icon" href="../../img/logo.svg" type="image/x-icon">
+    <script src="../../js/copy.js?v=1.31.0"></script>
+    <script src="../../js/dark-mode.js?v=1.31.0"></script>
+    <script src="../../js/markdown-style.js?v=1.31.0"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../../index.html"><svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
+          </svg>
+<span class="title">Docker 入门教程</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../../index.html" target="" class="">首页</a></li>
+            <li><a href="https://wangchujiang.com/#/sponsor" target="__blank" class="">捐赠</a></li>
+          </ul><a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar notocs">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="../../index.html" class="">入门</a>
+            <label>实践</label>
+            <a href="../../docker-compose.html" class="">Docker Compose</a>
+            <a href="../../elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
+            <a href="../../gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
+            <a href="../../harbor.html" class="">Harbor</a>
+            <a href="../../mattermost.html" class="">Mattermost 聊天工具</a>
+            <a href="../../mysql.html" class="">MySQL 数据库</a>
+            <a href="../../nginx.html" class="">Nginx Web 服务器</a>
+            <a href="../../nps/index.html" class="">NPS 内网穿透</a>
+            <a href="../../portainer.html" class="">Portainer Docker 管理</a>
+            <a href="../../postgres.html" class="">PostgreSQL 数据库</a>
+            <a href="../../penpot.html" class="">Penpot 设计和原型</a>
+            <a href="../../navidrome.html" class="">Navidrome 音乐服务器</a>
+            <a href="../../rancher.html" class="">Rancher 容器管理平台</a>
+            <a href="../../redis.html" class="">Redis 数据库</a>
+            <a href="../index.html" class="">Jenkins</a>
+            <a href="../../rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
+            <a href="../../seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
+            <a href="../../sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style theme-auto-switch-disabled="">
+        <p><a href="../README.html#java-%E7%8E%AF%E5%A2%83">Java 环境镜像</a></p>
+        <div class="previous"><span></span><a class="next" href="../../index.html"><span>入门
+</span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
+              <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
+            </svg></a></div>
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/tree/master/docs/jenkins/openjdk/README.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+<span>Edit this page on GitHub</span>
+</a><span class="atime">2024/07/22</span></section>
+      </markdown-style>
+    </div>
+    <script src="../../js/demo-preview.js?v=1.31.0"></script>
+    <div class="footer warpper">
+      <a href="https://wangchujiang.com/#/app" target="_blank">App</a> •
+      <a href="https://wangchujiang.com/#/projects" target="_blank">Projects</a> •
+      <a href="https://wangchujiang.com/#/sponsor" target="_blank">Sponsor</a> •
+      <a href="https://wangchujiang.com/#/app" target="_blank">More Apps</a><br><br>Released under the MIT License. Copyright © 2024 <a href="https://wangchujiang.com/#/about" target="_blank">Kenny Wong</a><br>Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.31.0
+    </div>
+    <script src="../../js/tocbot.js?v=1.31.0"></script>
+  </body>
+</html>
