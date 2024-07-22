@@ -1,11 +1,11 @@
 Jenkins
 ===
 
-下面图文示例，是通过 Docker 部署 Jenkins 并将 `Pipeline` 脚本运行在 `Docker` 中的教程，这样可以方便的使用任何版本的 `nodejs` 或者 `java` 的沙盒环境
+本教程展示如何在 Linux(CentOS 7) 服务器上通过 Docker 部署 Jenkins，并在 Docker 容器中运行 Pipeline 脚本。这样可以方便地使用任何版本的 Node.js 或 Java 沙盒环境。
 
 ## 部署 Jenkins
 
-获取 Jenkins 和 Jenkins agent 镜像，上传到服务器
+由于国内服务器无法直接拉取 Docker 镜像，需要先通过本机 VPN 下载 Jenkins 和 Jenkins agent 镜像，然后上传到服务器。
 
 ```sh
 # 获取 Jenkins 镜像
@@ -21,7 +21,7 @@ docker save -o jenkins-ssh-agent-jdk21.tar jenkins/ssh-agent:jdk21
 scp -P 2222 jenkins-ssh-agent-jdk21.tar root@152.22.3.186:/home/docker-images
 ```
 
-创建一个 `Dockerfile`，基于 `jenkins/jenkins:2.468-jdk21` 镜像添加 Docker 支持：
+基于 `jenkins/jenkins:2.468-jdk21` 镜像添加 Docker 支持，创建一个新的 Jenkins 镜像。以下是 `Dockerfile` 配置内容：
 
 ```Dockerfile
 FROM --platform=linux/amd64 jenkins/jenkins:2.468-jdk21
@@ -48,7 +48,7 @@ RUN groupadd docker && usermod -aG docker jenkins
 USER jenkins
 ```
 
-构建 jenkins 新的镜像
+构建 Jenkins 新的镜像，命名为 `my-jenkins-docker-2468-jdk21`
 
 ```sh
 docker build --platform=linux/amd64 -t my-jenkins-docker-2468-jdk21 .
@@ -58,6 +58,8 @@ docker save -o my-jenkins-docker-2468-jdk21.tar my-jenkins-docker-2468-jdk21
 scp -P 2222 my-jenkins-docker-2468-jdk21.tar root@152.22.3.186:/home/docker-images
 ```
 
+在服务器上添加 Docker Compose 配置 `docker-compose.yml`。以下是 `docker-compose.yml` 配置内容：
+
 ```yml
 # https://github.com/jenkinsci/docker/blob/master/README.md#docker-compose-with-jenkins
 services:
@@ -65,18 +67,19 @@ services:
     image: my-jenkins-docker-2468-jdk21 # 自定义镜像
     #image: jenkins/jenkins:2.468-jdk21
     ports:
-      - "8086:8080"
+        - "8086:8080"
     volumes:
-      - jenkins_home:/var/jenkins_home
-      # 支持 docker
-      - /var/run/docker.sock:/var/run/docker.sock
+        # 将命名卷 jenkins_home 挂载到容器内的 /var/jenkins_home 目录，用于持久化 Jenkins 的数据。
+        - jenkins_home:/var/jenkins_home
+        # 将宿主机的 Docker 挂载到容器内，以便在 Jenkins 容器内直接访问 Docker 引擎，从而支持在 Jenkins 中运行 Docker 命令。
+        - /var/run/docker.sock:/var/run/docker.sock
   ssh-agent:
     image: jenkins/ssh-agent:jdk21
 volumes:
   jenkins_home:
 ```
 
-确保您与 `docker-compose.yml` 在同一个目录中。并启动 `Jenkins`:
+确保与 `docker-compose.yml` 在同一个目录中。并启动 `Jenkins`:
 
 ```sh
 docker compose up -d # 启动 Jenkins
