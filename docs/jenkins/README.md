@@ -100,7 +100,7 @@ docker compose down  # 停止并删除与 Docker Compose 配置文件相关的�
 
 <img src="./imgs/0-3.png" width="620" />
 
-## 2. 添加凭证
+## 2. 添加凭据
 
 <img src="./imgs/1.png" width="620" />
 
@@ -109,6 +109,14 @@ docker compose down  # 停止并删除与 Docker Compose 配置文件相关的�
 <img src="./imgs/3.png" width="620" />
 
 <img src="./imgs/4.png" width="620" />
+
+添加 `SSH` 和 `SCP` 需要的凭据
+
+<img src="./imgs/4-1.png" width="620" />
+
+`ssh-keygen -t rsa` 生成 `id_rsa` 和 `id_rsa.pub` 文件，将 `id_rsa` 私钥文本复制到 `jenkins` 中
+
+<img src="./imgs/4-2.png" width="620" />
 
 ## 3. 新建工作流
 
@@ -177,19 +185,19 @@ pipeline {
         }
     }
     environment {
-      def git_url="http://152.22.3.186:8081/mall/h5.git"
-      def git_auth = "12312312-f199-4b15-b087-123123"
-      def git_branch = "${branch}"
-      def project_env = "${project_env}"
-      def data_dir = "/mnt/mall/h5/h5_vip"
+        def git_url="http://152.22.3.186:8081/mall/h5.git"
+        def git_auth = "12312312-f199-4b15-b087-123123"
+        def git_branch = "${branch}"
+        def project_env = "${project_env}"
+        def data_dir = "/mnt/mall/h5/h5_vip"
 
-      // 本地需要上传的目录 以及远程服务器的目录
-      def localDir = "${WORKSPACE}/h5_vip/test_dir/"
-      def vip_host = '152.22.3.186'
-      def vip_remote_dir = "/mnt/mall/h5"
+        // 本地需要上传的目录 以及远程服务器的目录
+        def localDir = "${WORKSPACE}/h5_vip/test_dir/"
+        def vip_host = '152.22.3.186'
+        def vip_remote_dir = "/mnt/mall/h5"
     }
     stages {
-        stage('Git Checkout'){
+        stage('Git Checkout') {
             steps {
                 echo "🏆 WORKSPACE: 【${WORKSPACE}】"
                 echo "🎯 branch: 【${git_branch}】"
@@ -210,16 +218,15 @@ pipeline {
                 sh 'ls -la'
             }    
         }
-    }
         stage('Send Files') {
             when {
                 expression {
                     currentBuild.result == null || currentBuild.result == 'SUCCESS'
                 }
             }
-            steps {    
+            steps {
                 sh 'pwd'
-                script{                    
+                script {
                     switch (project_env) {
                         case "vip":
                             sh '''
@@ -247,7 +254,6 @@ pipeline {
                             //     sh "scp -r -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa -P 22 '${WORKSPACE}/h5_vip/' '$i:${data_dir}'"
                             // }
                             break
-                
                     }
                 }
             }
