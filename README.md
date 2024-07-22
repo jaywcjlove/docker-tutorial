@@ -44,6 +44,7 @@
   - [`Redis`](#redis)
   - [`Elasticsearch`](#elasticsearch)
   - [`Gitlab`](#gitlab)
+  - [`Jenkins`](#jenkins)
   - [`Rocket.Chat`](#rocketchat)
   - [`Rancher`](#rancher)
   - [`Portainer`](#portainer)
