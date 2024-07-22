@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jenkins Docker 入门教程</title>
-    <meta name="description" content="下面图文示例，是通过 Docker 部署 Jenkins 并将 Pipeline 脚本运行在 Docker 中的教程，这样可以方便的使用任何版本的 nodejs 或者 java 的沙盒环境">
+    <meta name="description" content="本教程展示如何在 Linux(CentOS 7) 服务器上通过 Docker 部署 Jenkins，并在 Docker 容器中运行 Pipeline 脚本。这样可以方便地使用任何版本的 Node.js 或 Java 沙盒环境。">
     <meta name="keywords" content="docker,containers,tutorial">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.31.0">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.31.0">
@@ -64,9 +64,9 @@
       </div>
       <markdown-style theme-auto-switch-disabled="">
         <h1 id="jenkins"><a aria-hidden="true" tabindex="-1" href="#jenkins" class="anchor"><span class="icon icon-link"></span></a>Jenkins</h1>
-        <p>下面图文示例，是通过 Docker 部署 Jenkins 并将 <code>Pipeline</code> 脚本运行在 <code>Docker</code> 中的教程，这样可以方便的使用任何版本的 <code>nodejs</code> 或者 <code>java</code> 的沙盒环境</p>
+        <p>本教程展示如何在 Linux(CentOS 7) 服务器上通过 Docker 部署 Jenkins，并在 Docker 容器中运行 Pipeline 脚本。这样可以方便地使用任何版本的 Node.js 或 Java 沙盒环境。</p>
         <h2 id="部署-jenkins"><a aria-hidden="true" tabindex="-1" href="#部署-jenkins" class="anchor"><span class="icon icon-link"></span></a>部署 Jenkins</h2>
-        <p>获取 Jenkins 和 Jenkins agent 镜像，上传到服务器</p>
+        <p>由于国内服务器无法直接拉取 Docker 镜像，需要先通过本机 VPN 下载 Jenkins 和 Jenkins agent 镜像，然后上传到服务器。</p>
         <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 获取 Jenkins 镜像</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 jenkins/jenkins:2.468-jdk21
 </span><span class="code-line line-number" line="3"><span class="token comment"># 保存 Docker 镜像到本地文件</span>
@@ -90,7 +90,7 @@ docker pull --platform linux/amd64 jenkins/ssh-agent:jdk21
 docker save -o jenkins-ssh-agent-jdk21.tar jenkins/ssh-agent:jdk21
 scp -P 2222 jenkins-ssh-agent-jdk21.tar root@152.22.3.186:/home/docker-images
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>创建一个 <code>Dockerfile</code>，基于 <code>jenkins/jenkins:2.468-jdk21</code> 镜像添加 Docker 支持：</p>
+        <p>基于 <code>jenkins/jenkins:2.468-jdk21</code> 镜像添加 Docker 支持，创建一个新的 Jenkins 镜像。以下是 <code>Dockerfile</code> 配置内容：</p>
         <pre class="language-dockerfile"><code class="language-Dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> <span class="token options"><span class="token property">--platform</span><span class="token punctuation">=</span><span class="token string">linux/amd64</span></span> jenkins/jenkins:2.468-jdk21</span>
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3"><span class="token comment"># 切换到 root 用户以安装 Docker CLI</span>
@@ -136,7 +136,7 @@ RUN groupadd docker &#x26;&#x26; usermod -aG docker jenkins
 # 切换回 jenkins 用户
 USER jenkins
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>构建 jenkins 新的镜像</p>
+        <p>构建 Jenkins 新的镜像，命名为 <code>my-jenkins-docker-2468-jdk21</code></p>
         <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> build <span class="token parameter variable">--platform</span><span class="token operator">=</span>linux/amd64 <span class="token parameter variable">-t</span> my-jenkins-docker-2468-jdk21 <span class="token builtin class-name">.</span>
 </span><span class="code-line line-number" line="2"><span class="token comment"># 保存 Docker 镜像为一个 tar 文件</span>
 </span><span class="code-line line-number" line="3"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> my-jenkins-docker-2468-jdk21.tar my-jenkins-docker-2468-jdk21
@@ -148,38 +148,41 @@ docker save -o my-jenkins-docker-2468-jdk21.tar my-jenkins-docker-2468-jdk21
 # 通过 SCP 传输 tar 文件到远程服务器
 scp -P 2222 my-jenkins-docker-2468-jdk21.tar root@152.22.3.186:/home/docker-images
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>在服务器上添加 Docker Compose 配置 <code>docker-compose.yml</code>。以下是 <code>docker-compose.yml</code> 配置内容：</p>
         <pre class="language-yml"><code class="language-yml code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># https://github.com/jenkinsci/docker/blob/master/README.md#docker-compose-with-jenkins</span>
 </span><span class="code-line line-number" line="2"><span class="token key atrule">services</span><span class="token punctuation">:</span>
 </span><span class="code-line line-number" line="3">  <span class="token key atrule">jenkins</span><span class="token punctuation">:</span>
 </span><span class="code-line line-number" line="4">    <span class="token key atrule">image</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>jenkins<span class="token punctuation">-</span>docker<span class="token punctuation">-</span>2468<span class="token punctuation">-</span>jdk21 <span class="token comment"># 自定义镜像</span>
 </span><span class="code-line line-number" line="5">    <span class="token comment">#image: jenkins/jenkins:2.468-jdk21</span>
 </span><span class="code-line line-number" line="6">    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="7">      <span class="token punctuation">-</span> <span class="token string">"8086:8080"</span>
+</span><span class="code-line line-number" line="7">        <span class="token punctuation">-</span> <span class="token string">"8086:8080"</span>
 </span><span class="code-line line-number" line="8">    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="9">      <span class="token punctuation">-</span> jenkins_home<span class="token punctuation">:</span>/var/jenkins_home
-</span><span class="code-line line-number" line="10">      <span class="token comment"># 支持 docker</span>
-</span><span class="code-line line-number" line="11">      <span class="token punctuation">-</span> /var/run/docker.sock<span class="token punctuation">:</span>/var/run/docker.sock
-</span><span class="code-line line-number" line="12">  <span class="token key atrule">ssh-agent</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="13">    <span class="token key atrule">image</span><span class="token punctuation">:</span> jenkins/ssh<span class="token punctuation">-</span>agent<span class="token punctuation">:</span>jdk21
-</span><span class="code-line line-number" line="14"><span class="token key atrule">volumes</span><span class="token punctuation">:</span>
-</span><span class="code-line line-number" line="15">  <span class="token key atrule">jenkins_home</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="9">        <span class="token comment"># 将命名卷 jenkins_home 挂载到容器内的 /var/jenkins_home 目录，用于持久化 Jenkins 的数据。</span>
+</span><span class="code-line line-number" line="10">        <span class="token punctuation">-</span> jenkins_home<span class="token punctuation">:</span>/var/jenkins_home
+</span><span class="code-line line-number" line="11">        <span class="token comment"># 将宿主机的 Docker 挂载到容器内，以便在 Jenkins 容器内直接访问 Docker 引擎，从而支持在 Jenkins 中运行 Docker 命令。</span>
+</span><span class="code-line line-number" line="12">        <span class="token punctuation">-</span> /var/run/docker.sock<span class="token punctuation">:</span>/var/run/docker.sock
+</span><span class="code-line line-number" line="13">  <span class="token key atrule">ssh-agent</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="14">    <span class="token key atrule">image</span><span class="token punctuation">:</span> jenkins/ssh<span class="token punctuation">-</span>agent<span class="token punctuation">:</span>jdk21
+</span><span class="code-line line-number" line="15"><span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="16">  <span class="token key atrule">jenkins_home</span><span class="token punctuation">:</span>
 </span></code><input type="hidden" value="# https://github.com/jenkinsci/docker/blob/master/README.md#docker-compose-with-jenkins
 services:
   jenkins:
     image: my-jenkins-docker-2468-jdk21 # 自定义镜像
     #image: jenkins/jenkins:2.468-jdk21
     ports:
-      - &#x22;8086:8080&#x22;
+        - &#x22;8086:8080&#x22;
     volumes:
-      - jenkins_home:/var/jenkins_home
-      # 支持 docker
-      - /var/run/docker.sock:/var/run/docker.sock
+        # 将命名卷 jenkins_home 挂载到容器内的 /var/jenkins_home 目录，用于持久化 Jenkins 的数据。
+        - jenkins_home:/var/jenkins_home
+        # 将宿主机的 Docker 挂载到容器内，以便在 Jenkins 容器内直接访问 Docker 引擎，从而支持在 Jenkins 中运行 Docker 命令。
+        - /var/run/docker.sock:/var/run/docker.sock
   ssh-agent:
     image: jenkins/ssh-agent:jdk21
 volumes:
   jenkins_home:
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>确保您与 <code>docker-compose.yml</code> 在同一个目录中。并启动 <code>Jenkins</code>:</p>
+        <p>确保与 <code>docker-compose.yml</code> 在同一个目录中。并启动 <code>Jenkins</code>:</p>
         <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> compose up <span class="token parameter variable">-d</span> <span class="token comment"># 启动 Jenkins</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> compose down  <span class="token comment"># 停止并删除与 Docker Compose 配置文件相关的所有容器、网络、卷和镜像</span>
 </span></code><input type="hidden" value="docker compose up -d # 启动 Jenkins
