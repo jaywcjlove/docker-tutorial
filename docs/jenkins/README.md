@@ -162,7 +162,7 @@ docker save -o node22.tar node:22
 scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
 ```
 
-Pipeline 脚本中使用 Docker nodejs 20 运行
+Pipeline 脚本中使用 Docker nodejs 20 运行示例
 
 ```groovy
 pipeline {
@@ -185,7 +185,7 @@ pipeline {
 
       // 本地需要上传的目录 以及远程服务器的目录
       def localDir = "${WORKSPACE}/h5_vip/test_dir/"
-      def vip_host = '106.53.119.240'
+      def vip_host = '152.22.3.186'
       def vip_remote_dir = "/mnt/mall/h5"
     }
     stages {
@@ -232,11 +232,11 @@ pipeline {
                             rm -rf test_dir
                             mv dist test_dir
                             '''
-                            withCredentials([sshUserPrivateKey(credentialsId: 'bd6f00e6-9dfd-4fd5-b94b-7559ca212e9a', keyFileVariable: 'SSH_KEY')]) {
+                            withCredentials([sshUserPrivateKey(credentialsId: '9dfd-4fd5-b94b-7559ca212e9a', keyFileVariable: 'SSH_KEY')]) {
                                 // 连接到远程服务器并删除 test_dir 目录 重新上传
                                 sh '''
-                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@106.53.119.240 "rm -rf /mnt/mall/h5/test_dir"
-                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r "${localDir}" root@106.53.119.240:${vip_remote_dir}
+                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@152.22.3.186 "rm -rf /mnt/mall/h5/test_dir"
+                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r "${localDir}" root@152.22.3.186:${vip_remote_dir}
                                 '''
                             }
                             break
@@ -258,6 +258,158 @@ pipeline {
             sh "echo 'Success success'"
         }
         
+        failure {
+            sh "echo 'Faild faild'"
+        }
+    }
+}
+```
+
+## Java 环境
+
+基于 `openjdk:11` 创建一个包含 `Maven` 的自定义 Docker 镜像
+
+```dockerfile
+FROM --platform=linux/amd64 openjdk:11
+
+# 安装 Maven 3.8.7
+ENV MAVEN_VERSION=3.8.7
+RUN apt-get update && apt-get install -y wget tar \
+    && wget https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+    && tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt \
+    && ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven \
+    && rm apache-maven-${MAVEN_VERSION}-bin.tar.gz
+
+# 设置 Maven 环境变量
+ENV MAVEN_HOME=/opt/maven
+ENV PATH="${MAVEN_HOME}/bin:${PATH}"
+
+# 创建非 root 用户并设置权限
+RUN useradd -u 1000 -ms /bin/bash jenkins \
+    && mkdir -p /home/jenkins/.m2/repository \
+    && chown -R jenkins:jenkins /home/jenkins/.m2
+
+# 切换到非 root 用户
+USER jenkins
+
+# 验证 Maven 版本
+RUN mvn -version
+```
+
+构建 `openjdk` 新的镜像，命名为 `my-openjdk-maven`
+
+```sh
+docker build -t my-openjdk-maven:3.8.7 .
+# 保存 Docker 镜像到本地文件
+docker save -o my-openjdk-maven.3.8.7.tar my-openjdk-maven:3.8.7
+docker save -o my-openjdk-maven.3.8.8.tar my-openjdk-maven:3.8.8
+# 上传到服务器
+scp -P 2222 my-openjdk-maven.3.8.7.tar root@106.55.8.163:/home/docker-images
+```
+
+加载 docker 自定义镜像
+
+```sh
+docker load -i ./my-openjdk-maven.3.8.7.tar
+```
+
+这事缓存下载的 maven 的包
+
+```sh
+docker run -it --rm my-openjdk-maven:3.8.7 /bin/bash
+# 在【容器】内运行
+id jenkins
+# uid=1000(jenkins) gid=1000(jenkins) groups=1000(jenkins)
+# 在【宿主机】上使用这些 ID 来更改目录的拥有者
+sudo chown -R 1000:1000 /root/.m2/
+# 将目录权限设置为可读写
+sudo chmod -R 777 /root/.m2/
+```
+
+Pipeline 脚本中使用 Docker java `openjdk:11` & `maven.3.8.7` 运行示例
+
+```groovy
+pipeline {
+    agent {
+        docker {
+            image 'my-openjdk-maven:3.8.7'
+            // 将 Maven 的本地仓库挂载到容器的 /root/.m2 路径，
+            // 确保你每次构建时都能重用之前下载的依赖
+            args '-v /root/.m2:/home/jenkins/.m2:rw'
+        }
+    }
+    environment {
+        def git_url="http://106.55.8.163:8081/mall/springboot-mall.git"
+        def git_auth = "211ca2-55c4f199-4b15-b087-238db80b102d"
+        def git_branch = "${branch}"
+        def project_env = "${project_env}"
+        def vip_host = '152.22.3.186'
+        def vip_remote_dir = "/mnt/mall/admin"
+    }
+    stages {
+        stage('Git Checkout') {
+            steps {
+                echo 'check git'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "${git_branch}" ]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [
+                    // 只拉取最新的提交
+                    [$class: 'CloneOption', depth: 1, shallow: true, noTags: true]
+                    ],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                    credentialsId: "${git_auth}",
+                        url: "${git_url}"
+                    ]]
+                ])
+            }
+        }
+        stage('Manven Build') {
+            steps {
+                /**
+                * 执行maven打包
+                * -B --batch-mode 在非交互（批处理）模式下运行(该模式下,当Mven需要输入时,它不会停下来接受用户的输入,而是使用合理的默认值)
+                * 打包时跳过JUnit测试用例
+                * -DskipTests 不执行测试用例，但编译测试用例类生成相应的class文件至target/test-classes下
+                * -Dmaven.test.skip=true，不执行测试用例，也不编译测试用例类
+                **/
+                sh "cd ${WORKSPACE} ; mvn clean package -Dmaven.test.skip=true -Dmaven.repo.local=/home/jenkins/.m2/repository -U"
+            }
+        }
+        stage('Send Files') {
+            when {
+                expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+            steps {
+                script {
+                    switch (project_env) {
+                        case "pro":
+                            // 部署服务器 SSH 凭据，验证登录用，才可以 ssh 和 scp 上传等功能
+                            withCredentials([sshUserPrivateKey(credentialsId: 'bd6f00e69dfd-4fd5-b94b-7559ca212e9a', keyFileVariable: 'SSH_KEY')]) {
+                                // 连接到远程服务器并删除 admin 目录 重新上传
+                                sh '''
+                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r -P 22 '${WORKSPACE}/admin/target/lib' 'root@${vip_host}:${vip_remote_dir}'
+                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r -P 22 '${WORKSPACE}/admin/target/admin-2.3.jar' 'root@${vip_host}:${vip_remote_dir}'
+                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@${vip_host} '/mnt/sh/admin-8000.sh restart;'
+                                '''
+                            }
+                            break
+                        case "dev":
+
+                            break
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            sh "echo 'Success success'"
+        }
         failure {
             sh "echo 'Faild faild'"
         }
