@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenkins Docker 入门教程</title>
+    <meta name="description" content="下面图文示例，是通过 Docker 部署 Jenkins 并将 Pipeline 脚本运行在 Docker 中的教程，这样可以方便的使用任何版本的 nodejs 或者 java 的沙盒环境">
+    <meta name="keywords" content="docker,containers,tutorial">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.31.0">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.31.0">
+    <link rel="icon" href="../img/logo.svg" type="image/x-icon">
+    <script src="../js/copy.js?v=1.31.0"></script>
+    <script src="../js/dark-mode.js?v=1.31.0"></script>
+    <script src="../js/markdown-style.js?v=1.31.0"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><svg viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M699.88718 472.6h-132.2v-118.8h132.2v118.8z m0-408.6h-132.2v121.4h132.2V64z m156.4 289.6H724.08718v118.8h132.2v-118.8z m-312.6-144.2h-132.2v120.2h132.2v-120.2z m156.2 0h-132.2v120.2h132.2v-120.2z m553.6 200c-28.8-19.4-95.2-26.4-146.2-16.8-6.6-48-33.4-89.8-82.2-127.4l-28-18.6-18.6 28c-36.8 55.6-46.8 147.2-7.4 207.6-17.4 9.4-51.6 22.2-96.8 21.4H4.88718c-17.4 101.6 11.6 233.6 88 324.2 74.2 87.8 185.4 132.4 330.8 132.4 314.8 0 547.8-145 656.8-408.4 42.8 0.8 135.2 0.2 182.6-90.4 3-5 13.2-26.4 17-34.2l-26.6-17.8z m-1022.2-55.8h-132v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m156.2 0h-132.2v118.8h132.2v-118.8z m-156.2-144.2h-132.2v120.2h132.2v-120.2z" fill="#0187D1"></path>
+          </svg>
+<span class="title">Docker 入门教程</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">首页</a></li>
+            <li><a href="https://wangchujiang.com/#/sponsor" target="__blank" class="">捐赠</a></li>
+          </ul><a href="https://github.com/jaywcjlove/docker-tutorial" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="../index.html" class="">入门</a>
+            <label>实践</label>
+            <a href="../docker-compose.html" class="">Docker Compose</a>
+            <a href="../elasticsearch.html" class="">ElasticSearch 搜索服务器</a>
+            <a href="../gitlab/index.html" class="">Gitlab 代码仓库管理系统</a>
+            <a href="../harbor.html" class="">Harbor</a>
+            <a href="../mattermost.html" class="">Mattermost 聊天工具</a>
+            <a href="../mysql.html" class="">MySQL 数据库</a>
+            <a href="../nginx.html" class="">Nginx Web 服务器</a>
+            <a href="../nps/index.html" class="">NPS 内网穿透</a>
+            <a href="../portainer.html" class="">Portainer Docker 管理</a>
+            <a href="../postgres.html" class="">PostgreSQL 数据库</a>
+            <a href="../penpot.html" class="">Penpot 设计和原型</a>
+            <a href="../navidrome.html" class="">Navidrome 音乐服务器</a>
+            <a href="../rancher.html" class="">Rancher 容器管理平台</a>
+            <a href="../redis.html" class="">Redis 数据库</a>
+            <a href="../rocket.chat/index.html" class="">Rocket.Chat 聊天工具</a>
+            <a href="../seaweedfs/index.html" class="">SeaweedFS 文件系统</a>
+            <a href="../sourcegraph/index.html" class="">Sourcegraph 代码搜索引擎</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style theme-auto-switch-disabled="">
+        <h1 id="jenkins"><a aria-hidden="true" tabindex="-1" href="#jenkins" class="anchor"><span class="icon icon-link"></span></a>Jenkins</h1>
+        <p>下面图文示例，是通过 Docker 部署 Jenkins 并将 <code>Pipeline</code> 脚本运行在 <code>Docker</code> 中的教程，这样可以方便的使用任何版本的 <code>nodejs</code> 或者 <code>java</code> 的沙盒环境</p>
+        <h2 id="部署-jenkins"><a aria-hidden="true" tabindex="-1" href="#部署-jenkins" class="anchor"><span class="icon icon-link"></span></a>部署 Jenkins</h2>
+        <p>获取 Jenkins 和 Jenkins agent 镜像，上传到服务器</p>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 获取 Jenkins 镜像</span>
+</span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 jenkins/jenkins:2.468-jdk21
+</span><span class="code-line line-number" line="3"><span class="token comment"># 保存 Docker 镜像到本地文件</span>
+</span><span class="code-line line-number" line="4"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> jenkins-2.468-jdk21.tar jenkins/jenkins:2.468-jdk21
+</span><span class="code-line line-number" line="5"><span class="token comment"># 上传到服务器</span>
+</span><span class="code-line line-number" line="6"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> jenkins-2.468-jdk21.tar root@152.22.3.186:/home/docker-images
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token comment"># 获取 Jenkins agent 镜像</span>
+</span><span class="code-line line-number" line="9"><span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 jenkins/ssh-agent:jdk21
+</span><span class="code-line line-number" line="10"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> jenkins-ssh-agent-jdk21.tar jenkins/ssh-agent:jdk21
+</span><span class="code-line line-number" line="11"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> jenkins-ssh-agent-jdk21.tar root@152.22.3.186:/home/docker-images
+</span></code><input type="hidden" value="# 获取 Jenkins 镜像
+docker pull --platform linux/amd64 jenkins/jenkins:2.468-jdk21
+# 保存 Docker 镜像到本地文件
+docker save -o jenkins-2.468-jdk21.tar jenkins/jenkins:2.468-jdk21
+# 上传到服务器
+scp -P 2222 jenkins-2.468-jdk21.tar root@152.22.3.186:/home/docker-images
+
+# 获取 Jenkins agent 镜像
+docker pull --platform linux/amd64 jenkins/ssh-agent:jdk21
+docker save -o jenkins-ssh-agent-jdk21.tar jenkins/ssh-agent:jdk21
+scp -P 2222 jenkins-ssh-agent-jdk21.tar root@152.22.3.186:/home/docker-images
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>创建一个 <code>Dockerfile</code>，基于 <code>jenkins/jenkins:2.468-jdk21</code> 镜像添加 Docker 支持：</p>
+        <pre class="language-dockerfile"><code class="language-Dockerfile code-highlight"><span class="code-line line-number" line="1"><span class="token instruction"><span class="token keyword">FROM</span> <span class="token options"><span class="token property">--platform</span><span class="token punctuation">=</span><span class="token string">linux/amd64</span></span> jenkins/jenkins:2.468-jdk21</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token comment"># 切换到 root 用户以安装 Docker CLI</span>
+</span><span class="code-line line-number" line="4"><span class="token instruction"><span class="token keyword">USER</span> root</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token comment"># 安装必要的软件包</span>
+</span><span class="code-line line-number" line="7"><span class="token instruction"><span class="token keyword">RUN</span> apt-get update &#x26;&#x26; apt-get install -y <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="8"><span class="token instruction">    curl <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="9"><span class="token instruction">    gnupg2 <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="10"><span class="token instruction">    lsb-release <span class="token operator">\</span>
+</span></span><span class="code-line line-number" line="11"><span class="token instruction">    software-properties-common</span>
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13"><span class="token comment"># 安装 Docker CLI</span>
+</span><span class="code-line line-number" line="14"><span class="token comment"># RUN curl -fsSL https://get.docker.com | sh</span>
+</span><span class="code-line line-number" line="15"><span class="token comment"># 安装特定版本的 Docker CLI</span>
+</span><span class="code-line line-number" line="16"><span class="token instruction"><span class="token keyword">RUN</span> curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-26.1.4.tgz | tar xzvf - --strip-components=1 -C /usr/local/bin</span>
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18"><span class="token comment"># 创建 docker 组并将 jenkins 用户添加到该组</span>
+</span><span class="code-line line-number" line="19"><span class="token instruction"><span class="token keyword">RUN</span> groupadd docker &#x26;&#x26; usermod -aG docker jenkins</span>
+</span><span class="code-line line-number" line="20">
+</span><span class="code-line line-number" line="21"><span class="token comment"># 切换回 jenkins 用户</span>
+</span><span class="code-line line-number" line="22"><span class="token instruction"><span class="token keyword">USER</span> jenkins</span>
+</span></code><input type="hidden" value="FROM --platform=linux/amd64 jenkins/jenkins:2.468-jdk21
+
+# 切换到 root 用户以安装 Docker CLI
+USER root
+
+# 安装必要的软件包
+RUN apt-get update &#x26;&#x26; apt-get install -y \
+    curl \
+    gnupg2 \
+    lsb-release \
+    software-properties-common
+
+# 安装 Docker CLI
+# RUN curl -fsSL https://get.docker.com | sh
+# 安装特定版本的 Docker CLI
+RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-26.1.4.tgz | tar xzvf - --strip-components=1 -C /usr/local/bin
+
+# 创建 docker 组并将 jenkins 用户添加到该组
+RUN groupadd docker &#x26;&#x26; usermod -aG docker jenkins
+
+# 切换回 jenkins 用户
+USER jenkins
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>构建 jenkins 新的镜像</p>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> build <span class="token parameter variable">--platform</span><span class="token operator">=</span>linux/amd64 <span class="token parameter variable">-t</span> my-jenkins-docker-2468-jdk21 <span class="token builtin class-name">.</span>
+</span><span class="code-line line-number" line="2"><span class="token comment"># 保存 Docker 镜像为一个 tar 文件</span>
+</span><span class="code-line line-number" line="3"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> my-jenkins-docker-2468-jdk21.tar my-jenkins-docker-2468-jdk21
+</span><span class="code-line line-number" line="4"><span class="token comment"># 通过 SCP 传输 tar 文件到远程服务器</span>
+</span><span class="code-line line-number" line="5"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> my-jenkins-docker-2468-jdk21.tar root@152.22.3.186:/home/docker-images
+</span></code><input type="hidden" value="docker build --platform=linux/amd64 -t my-jenkins-docker-2468-jdk21 .
+# 保存 Docker 镜像为一个 tar 文件
+docker save -o my-jenkins-docker-2468-jdk21.tar my-jenkins-docker-2468-jdk21
+# 通过 SCP 传输 tar 文件到远程服务器
+scp -P 2222 my-jenkins-docker-2468-jdk21.tar root@152.22.3.186:/home/docker-images
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <pre class="language-yml"><code class="language-yml code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># https://github.com/jenkinsci/docker/blob/master/README.md#docker-compose-with-jenkins</span>
+</span><span class="code-line line-number" line="2"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="3">  <span class="token key atrule">jenkins</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="4">    <span class="token key atrule">image</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>jenkins<span class="token punctuation">-</span>docker<span class="token punctuation">-</span>2468<span class="token punctuation">-</span>jdk21 <span class="token comment"># 自定义镜像</span>
+</span><span class="code-line line-number" line="5">    <span class="token comment">#image: jenkins/jenkins:2.468-jdk21</span>
+</span><span class="code-line line-number" line="6">    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="7">      <span class="token punctuation">-</span> <span class="token string">"8086:8080"</span>
+</span><span class="code-line line-number" line="8">    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="9">      <span class="token punctuation">-</span> jenkins_home<span class="token punctuation">:</span>/var/jenkins_home
+</span><span class="code-line line-number" line="10">      <span class="token comment"># 支持 docker</span>
+</span><span class="code-line line-number" line="11">      <span class="token punctuation">-</span> /var/run/docker.sock<span class="token punctuation">:</span>/var/run/docker.sock
+</span><span class="code-line line-number" line="12">  <span class="token key atrule">ssh-agent</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="13">    <span class="token key atrule">image</span><span class="token punctuation">:</span> jenkins/ssh<span class="token punctuation">-</span>agent<span class="token punctuation">:</span>jdk21
+</span><span class="code-line line-number" line="14"><span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="15">  <span class="token key atrule">jenkins_home</span><span class="token punctuation">:</span>
+</span></code><input type="hidden" value="# https://github.com/jenkinsci/docker/blob/master/README.md#docker-compose-with-jenkins
+services:
+  jenkins:
+    image: my-jenkins-docker-2468-jdk21 # 自定义镜像
+    #image: jenkins/jenkins:2.468-jdk21
+    ports:
+      - &#x22;8086:8080&#x22;
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      # 支持 docker
+      - /var/run/docker.sock:/var/run/docker.sock
+  ssh-agent:
+    image: jenkins/ssh-agent:jdk21
+volumes:
+  jenkins_home:
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>确保您与 <code>docker-compose.yml</code> 在同一个目录中。并启动 <code>Jenkins</code>:</p>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> compose up <span class="token parameter variable">-d</span> <span class="token comment"># 启动 Jenkins</span>
+</span><span class="code-line line-number" line="2"><span class="token function">docker</span> compose down  <span class="token comment"># 停止并删除与 Docker Compose 配置文件相关的所有容器、网络、卷和镜像</span>
+</span></code><input type="hidden" value="docker compose up -d # 启动 Jenkins
+docker compose down  # 停止并删除与 Docker Compose 配置文件相关的所有容器、网络、卷和镜像
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>访问 jenkins: <a href="http://152.22.3.186:8086/">http://152.22.3.186:8086/</a></p>
+        <h2 id="1-安装插件"><a aria-hidden="true" tabindex="-1" href="#1-安装插件" class="anchor"><span class="icon icon-link"></span></a>1. 安装插件</h2>
+        <ul>
+          <li><a href="https://plugins.jenkins.io/git-parameter">Git Parameter Plug-In</a> 支持在 CI 上自动加载仓库分支</li>
+        </ul>
+        <h2 id="2-添加凭证"><a aria-hidden="true" tabindex="-1" href="#2-添加凭证" class="anchor"><span class="icon icon-link"></span></a>2. 添加凭证</h2>
+        <img src="imgs/1.png" width="620">
+        <img src="imgs/2.png" width="620">
+        <img src="imgs/3.png" width="620">
+        <img src="imgs/4.png" width="620">
+        <h2 id="3-新建工作流"><a aria-hidden="true" tabindex="-1" href="#3-新建工作流" class="anchor"><span class="icon icon-link"></span></a>3. 新建工作流</h2>
+        <img src="imgs/5.png" width="620">
+        <p>修改配置</p>
+        <img src="imgs/6.png" width="620">
+        <p>设置 <a href="https://plugins.jenkins.io/git-parameter"><code>Git Parameter</code></a> 可以在构建的时候读取分支，选择分支</p>
+        <img src="imgs/7.png" width="620">
+        <img src="imgs/8.png" width="620">
+        <h2 id="3-添加构建选项可以在构建前选择-生产-还是-开发-模式在脚本中判断"><a aria-hidden="true" tabindex="-1" href="#3-添加构建选项可以在构建前选择-生产-还是-开发-模式在脚本中判断" class="anchor"><span class="icon icon-link"></span></a>3. 添加构建选项，可以在构建前选择 <code>生产</code> 还是 <code>开发</code> 模式，在脚本中判断</h2>
+        <img src="imgs/9.png" width="620">
+        <h2 id="4-选择-pipeline-script-from-scm-指定脚本位置"><a aria-hidden="true" tabindex="-1" href="#4-选择-pipeline-script-from-scm-指定脚本位置" class="anchor"><span class="icon icon-link"></span></a>4. 选择 <code>Pipeline script from SCM</code> 指定脚本位置</h2>
+        <img src="imgs/10.png" width="620">
+        <p>这方法是将 仓库 <code>config</code> 分支添加一个 <code>Jenkinsfile</code> 配置</p>
+        <h2 id="nodejs"><a aria-hidden="true" tabindex="-1" href="#nodejs" class="anchor"><span class="icon icon-link"></span></a>Nodejs</h2>
+        <p>安装 <a href="https://plugins.jenkins.io/git-parameter">Docker Pipeline</a> 插件，支持从管道中构建和使用 <code>Docker</code> 容器。</p>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 node:14.16.0
+</span><span class="code-line line-number" line="2"><span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 node:18
+</span><span class="code-line line-number" line="3"><span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 node:20
+</span><span class="code-line line-number" line="4"><span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 node:22
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token comment"># 保存 Docker 镜像到本地文件</span>
+</span><span class="code-line line-number" line="7"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> node14.16.tar node:14.16.0
+</span><span class="code-line line-number" line="8"><span class="token comment"># 上传到服务器</span>
+</span><span class="code-line line-number" line="9"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> node14.16.tar root@152.22.3.186:/home/docker-images
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> node18.tar node:18
+</span><span class="code-line line-number" line="12"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> node18.tar root@152.22.3.186:/home/docker-images
+</span><span class="code-line line-number" line="13">
+</span><span class="code-line line-number" line="14"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> node20.tar node:20
+</span><span class="code-line line-number" line="15"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> node20.tar root@152.22.3.186:/home/docker-images
+</span><span class="code-line line-number" line="16">
+</span><span class="code-line line-number" line="17"><span class="token function">docker</span> save <span class="token parameter variable">-o</span> node22.tar node:22
+</span><span class="code-line line-number" line="18"><span class="token function">scp</span> <span class="token parameter variable">-P</span> <span class="token number">2222</span> node22.tar root@152.22.3.186:/home/docker-images
+</span></code><input type="hidden" value="docker pull --platform linux/amd64 node:14.16.0
+docker pull --platform linux/amd64 node:18
+docker pull --platform linux/amd64 node:20
+docker pull --platform linux/amd64 node:22
+
+# 保存 Docker 镜像到本地文件
+docker save -o node14.16.tar node:14.16.0
+# 上传到服务器
+scp -P 2222 node14.16.tar root@152.22.3.186:/home/docker-images
+
+docker save -o node18.tar node:18
+scp -P 2222 node18.tar root@152.22.3.186:/home/docker-images
+
+docker save -o node20.tar node:20
+scp -P 2222 node20.tar root@152.22.3.186:/home/docker-images
+
+docker save -o node22.tar node:22
+scp -P 2222 node22.tar root@152.22.3.186:/home/docker-images
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>Pipeline 脚本中使用 Docker nodejs 20 运行</p>
+        <pre class="language-groovy"><code class="language-groovy code-highlight"><span class="code-line line-number" line="1">pipeline <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    <span class="token comment">//agent any</span>
+</span><span class="code-line line-number" line="3">    <span class="token comment">// pipeline 放到 docker 中执行</span>
+</span><span class="code-line line-number" line="4">    agent <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">        docker <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">          <span class="token comment">// 使用 Node.js 18 的 Docker 镜像</span>
+</span><span class="code-line line-number" line="7">          image <span class="token string">'node:20'</span>
+</span><span class="code-line line-number" line="8">          <span class="token comment">// 可选：挂载 NPM 缓存目录，加速构建</span>
+</span><span class="code-line line-number" line="9">          args <span class="token string">'-v /root/.npm:/root/.npm'</span>
+</span><span class="code-line line-number" line="10">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="11">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="12">    environment <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="13">      <span class="token keyword">def</span> git_url<span class="token operator">=</span><span class="token interpolation-string"><span class="token string">"http://152.22.3.186:8081/mall/h5.git"</span></span>
+</span><span class="code-line line-number" line="14">      <span class="token keyword">def</span> git_auth <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"12312312-f199-4b15-b087-123123"</span></span>
+</span><span class="code-line line-number" line="15">      <span class="token keyword">def</span> git_branch <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="16">      <span class="token keyword">def</span> project_env <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">project_env</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="17">      <span class="token keyword">def</span> data_dir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"/mnt/mall/h5/h5_vip"</span></span>
+</span><span class="code-line line-number" line="18">
+</span><span class="code-line line-number" line="19">      <span class="token comment">// 本地需要上传的目录 以及远程服务器的目录</span>
+</span><span class="code-line line-number" line="20">      <span class="token keyword">def</span> localDir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">WORKSPACE</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/h5_vip/test_dir/"</span></span>
+</span><span class="code-line line-number" line="21">      <span class="token keyword">def</span> vip_host <span class="token operator">=</span> <span class="token string">'106.53.119.240'</span>
+</span><span class="code-line line-number" line="22">      <span class="token keyword">def</span> vip_remote_dir <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">"/mnt/mall/h5"</span></span>
+</span><span class="code-line line-number" line="23">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="24">    stages <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="25">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Git Checkout'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="26">            steps <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="27">                echo <span class="token interpolation-string"><span class="token string">"🏆 WORKSPACE: 【</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">WORKSPACE</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">】"</span></span>
+</span><span class="code-line line-number" line="28">                echo <span class="token interpolation-string"><span class="token string">"🎯 branch: 【</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">】"</span></span>
+</span><span class="code-line line-number" line="29">                echo <span class="token interpolation-string"><span class="token string">"🏅 project_env: 【</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">project_env</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">】"</span></span>
+</span><span class="code-line line-number" line="30">                echo <span class="token string">'check git'</span>
+</span><span class="code-line line-number" line="31">                <span class="token function">checkout</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="32">                    <span class="token punctuation">$</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'GitSCM'</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="33">                    branches<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>name<span class="token punctuation">:</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_branch</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="34">                    doGenerateSubmoduleConfigurations<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="35">                    extensions<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="36">                    submoduleCfg<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="37">                    userRemoteConfigs<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="38">                    credentialsId<span class="token punctuation">:</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_auth</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="39">                        url<span class="token punctuation">:</span> <span class="token interpolation-string"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">git_url</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span>
+</span><span class="code-line line-number" line="40">                    <span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="41">                <span class="token punctuation">]</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="42">                sh <span class="token string">'pwd'</span>
+</span><span class="code-line line-number" line="43">                sh <span class="token string">'ls -la'</span>
+</span><span class="code-line line-number" line="44">            <span class="token punctuation">}</span>    
+</span><span class="code-line line-number" line="45">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="46">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="47">        <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Send Files'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="48">            when <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="49">                expression <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="50">                    currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> null <span class="token operator">||</span> currentBuild<span class="token punctuation">.</span>result <span class="token operator">==</span> <span class="token string">'SUCCESS'</span>
+</span><span class="code-line line-number" line="51">                <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="52">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="53">            steps <span class="token punctuation">{</span>    
+</span><span class="code-line line-number" line="54">                sh <span class="token string">'pwd'</span>
+</span><span class="code-line line-number" line="55">                script<span class="token punctuation">{</span>                    
+</span><span class="code-line line-number" line="56">                    <span class="token keyword">switch</span> <span class="token punctuation">(</span>project_env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="57">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"vip"</span></span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="58">                            sh <span class="token string">'''
+</span></span><span class="code-line line-number" line="59"><span class="token string">                            ls -la
+</span></span><span class="code-line line-number" line="60"><span class="token string">                            cd h5_vip
+</span></span><span class="code-line line-number" line="61"><span class="token string">                            npm install --registry=https://registry.npmmirror.com/
+</span></span><span class="code-line line-number" line="62"><span class="token string">                            ls -la
+</span></span><span class="code-line line-number" line="63"><span class="token string">                            npm run build
+</span></span><span class="code-line line-number" line="64"><span class="token string">                            ls -la
+</span></span><span class="code-line line-number" line="65"><span class="token string">                            rm -rf test_dir
+</span></span><span class="code-line line-number" line="66"><span class="token string">                            mv dist test_dir
+</span></span><span class="code-line line-number" line="67"><span class="token string">                            '''</span>
+</span><span class="code-line line-number" line="68">                            <span class="token function">withCredentials</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">sshUserPrivateKey</span><span class="token punctuation">(</span>credentialsId<span class="token punctuation">:</span> <span class="token string">'bd6f00e6-9dfd-4fd5-b94b-7559ca212e9a'</span><span class="token punctuation">,</span> keyFileVariable<span class="token punctuation">:</span> <span class="token string">'SSH_KEY'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="69">                                <span class="token comment">// 连接到远程服务器并删除 test_dir 目录 重新上传</span>
+</span><span class="code-line line-number" line="70">                                sh <span class="token string">'''
+</span></span><span class="code-line line-number" line="71"><span class="token string">                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@106.53.119.240 "rm -rf /mnt/mall/h5/test_dir"
+</span></span><span class="code-line line-number" line="72"><span class="token string">                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r "${localDir}" root@106.53.119.240:${vip_remote_dir}
+</span></span><span class="code-line line-number" line="73"><span class="token string">                                '''</span>
+</span><span class="code-line line-number" line="74">                            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="75">                            <span class="token keyword">break</span>
+</span><span class="code-line line-number" line="76">                        <span class="token keyword">case</span> <span class="token interpolation-string"><span class="token string">"dev"</span></span><span class="token punctuation">:</span>
+</span><span class="code-line line-number" line="77">                            <span class="token comment">// for (i in ['152.22.3.186']) {</span>
+</span><span class="code-line line-number" line="78">                            <span class="token comment">//     data_dir = "/mnt/mall/h5/"</span>
+</span><span class="code-line line-number" line="79">                            <span class="token comment">//     //sh "ssh $i 'cp -rf ${data_dir}/* ${data_dir}/h5_vip_{uuid_no}'"</span>
+</span><span class="code-line line-number" line="80">                            <span class="token comment">//     sh "scp -r -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa -P 22 '${WORKSPACE}/h5_vip/' '$i:${data_dir}'"</span>
+</span><span class="code-line line-number" line="81">                            <span class="token comment">// }</span>
+</span><span class="code-line line-number" line="82">                            <span class="token keyword">break</span>
+</span><span class="code-line line-number" line="83">                
+</span><span class="code-line line-number" line="84">                    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="85">                <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="86">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="87">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="88">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="89">    post <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="90">        success <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="91">            sh <span class="token interpolation-string"><span class="token string">"echo 'Success success'"</span></span>
+</span><span class="code-line line-number" line="92">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="93">        
+</span><span class="code-line line-number" line="94">        failure <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="95">            sh <span class="token interpolation-string"><span class="token string">"echo 'Faild faild'"</span></span>
+</span><span class="code-line line-number" line="96">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="97">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="98"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="pipeline {
+    //agent any
+    // pipeline 放到 docker 中执行
+    agent {
+        docker {
+          // 使用 Node.js 18 的 Docker 镜像
+          image &#x27;node:20&#x27;
+          // 可选：挂载 NPM 缓存目录，加速构建
+          args &#x27;-v /root/.npm:/root/.npm&#x27;
+        }
+    }
+    environment {
+      def git_url=&#x22;http://152.22.3.186:8081/mall/h5.git&#x22;
+      def git_auth = &#x22;12312312-f199-4b15-b087-123123&#x22;
+      def git_branch = &#x22;${branch}&#x22;
+      def project_env = &#x22;${project_env}&#x22;
+      def data_dir = &#x22;/mnt/mall/h5/h5_vip&#x22;
+
+      // 本地需要上传的目录 以及远程服务器的目录
+      def localDir = &#x22;${WORKSPACE}/h5_vip/test_dir/&#x22;
+      def vip_host = &#x27;106.53.119.240&#x27;
+      def vip_remote_dir = &#x22;/mnt/mall/h5&#x22;
+    }
+    stages {
+        stage(&#x27;Git Checkout&#x27;){
+            steps {
+                echo &#x22;🏆 WORKSPACE: 【${WORKSPACE}】&#x22;
+                echo &#x22;🎯 branch: 【${git_branch}】&#x22;
+                echo &#x22;🏅 project_env: 【${project_env}】&#x22;
+                echo &#x27;check git&#x27;
+                checkout([
+                    $class: &#x27;GitSCM&#x27;,
+                    branches: [[name: &#x22;${git_branch}&#x22; ]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                    credentialsId: &#x22;${git_auth}&#x22;,
+                        url: &#x22;${git_url}&#x22;
+                    ]]
+                ])
+                sh &#x27;pwd&#x27;
+                sh &#x27;ls -la&#x27;
+            }    
+        }
+    }
+        stage(&#x27;Send Files&#x27;) {
+            when {
+                expression {
+                    currentBuild.result == null || currentBuild.result == &#x27;SUCCESS&#x27;
+                }
+            }
+            steps {    
+                sh &#x27;pwd&#x27;
+                script{                    
+                    switch (project_env) {
+                        case &#x22;vip&#x22;:
+                            sh &#x27;&#x27;&#x27;
+                            ls -la
+                            cd h5_vip
+                            npm install --registry=https://registry.npmmirror.com/
+                            ls -la
+                            npm run build
+                            ls -la
+                            rm -rf test_dir
+                            mv dist test_dir
+                            &#x27;&#x27;&#x27;
+                            withCredentials([sshUserPrivateKey(credentialsId: &#x27;bd6f00e6-9dfd-4fd5-b94b-7559ca212e9a&#x27;, keyFileVariable: &#x27;SSH_KEY&#x27;)]) {
+                                // 连接到远程服务器并删除 test_dir 目录 重新上传
+                                sh &#x27;&#x27;&#x27;
+                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no root@106.53.119.240 &#x22;rm -rf /mnt/mall/h5/test_dir&#x22;
+                                scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -P 22 -r &#x22;${localDir}&#x22; root@106.53.119.240:${vip_remote_dir}
+                                &#x27;&#x27;&#x27;
+                            }
+                            break
+                        case &#x22;dev&#x22;:
+                            // for (i in [&#x27;152.22.3.186&#x27;]) {
+                            //     data_dir = &#x22;/mnt/mall/h5/&#x22;
+                            //     //sh &#x22;ssh $i &#x27;cp -rf ${data_dir}/* ${data_dir}/h5_vip_{uuid_no}&#x27;&#x22;
+                            //     sh &#x22;scp -r -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa -P 22 &#x27;${WORKSPACE}/h5_vip/&#x27; &#x27;$i:${data_dir}&#x27;&#x22;
+                            // }
+                            break
+                
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            sh &#x22;echo &#x27;Success success&#x27;&#x22;
+        }
+        
+        failure {
+            sh &#x22;echo &#x27;Faild faild&#x27;&#x22;
+        }
+    }
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <div class="previous"><span></span><a class="next" href="../index.html"><span>入门
+</span><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor">
+              <path d="M544 522.666667c0-8.533333-4.266667-17.066667-10.666667-23.466667L192 189.866667c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733334 285.866667L149.333333 808.533333c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466667 10.666667 8.533333 0 14.933333-2.133333 21.333333-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666z"></path>
+              <path d="M864 499.2l-341.333333-309.333333c-12.8-12.8-34.133333-10.666667-44.8 2.133333-12.8 12.8-10.666667 34.133333 2.133333 44.8l315.733333 285.866667-315.733333 285.866666c-12.8 12.8-14.933333 32-2.133333 44.8 6.4 6.4 14.933333 10.666667 23.466666 10.666667 8.533333 0 14.933333-2.133333 21.333334-8.533333l341.333333-309.333334c6.4-6.4 10.666667-14.933333 10.666667-23.466666 0-8.533333-4.266667-17.066667-10.666667-23.466667z"></path>
+            </svg></a></div>
+        <section class="article-footer"><a href="https://github.com/jaywcjlove/docker-tutorial/tree/master/docs/jenkins/README.md" class="edit-button" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+<span>Edit this page on GitHub</span>
+</a><span class="atime">2024/07/22</span></section>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#部署-jenkins" class="tocs-link">部署 Jenkins</a></li>
+            <li><a href="#1-安装插件" class="tocs-link">1. 安装插件</a></li>
+            <li><a href="#2-添加凭证" class="tocs-link">2. 添加凭证</a></li>
+            <li><a href="#3-新建工作流" class="tocs-link">3. 新建工作流</a></li>
+            <li><a href="#3-添加构建选项可以在构建前选择-生产-还是-开发-模式在脚本中判断" class="tocs-link">3. 添加构建选项，可以在构建前选择 生产 还是 开发 模式，在脚本中判断</a></li>
+            <li><a href="#4-选择-pipeline-script-from-scm-指定脚本位置" class="tocs-link">4. 选择 Pipeline script from SCM 指定脚本位置</a></li>
+            <li><a href="#nodejs" class="tocs-link">Nodejs</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.31.0"></script>
+    <div class="footer warpper">
+      <a href="https://wangchujiang.com/#/app" target="_blank">App</a> •
+      <a href="https://wangchujiang.com/#/projects" target="_blank">Projects</a> •
+      <a href="https://wangchujiang.com/#/sponsor" target="_blank">Sponsor</a> •
+      <a href="https://wangchujiang.com/#/app" target="_blank">More Apps</a><br><br>Released under the MIT License. Copyright © 2024 <a href="https://wangchujiang.com/#/about" target="_blank">Kenny Wong</a><br>Generated by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a> v1.31.0
+    </div>
+    <script src="../js/tocbot.js?v=1.31.0"></script>
+  </body>
+</html>

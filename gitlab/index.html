@@ -208,6 +208,20 @@ gitlab_rails[&#x27;backup_keep_time&#x27;] = 604800
         <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> 容器名或容器ID gitlab-ctl reconfigure  
 </span></code><input type="hidden" value="docker exec 容器名或容器ID gitlab-ctl reconfigure  
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="备份恢复"><a aria-hidden="true" tabindex="-1" href="#备份恢复" class="anchor"><span class="icon icon-link"></span></a>备份恢复</h2>
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 从xxxxx编号备份中恢复</span>
+</span><span class="code-line line-number" line="2"><span class="token comment"># 然后恢复数据，1406691018为备份文件的时间戳</span>
+</span><span class="code-line line-number" line="3">gitlab-rake gitlab:backup:restore <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span><span class="token number">1406691018</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token comment"># 新版本 1721392543_2024_07_19_17.0.1_gitlab_backup.tar</span>
+</span><span class="code-line line-number" line="6">gitlab-rake gitlab:backup:restore <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>1721392543_2024_07_19_17.0.1
+</span></code><input type="hidden" value="# 从xxxxx编号备份中恢复
+# 然后恢复数据，1406691018为备份文件的时间戳
+gitlab-rake gitlab:backup:restore BACKUP=1406691018
+
+# 新版本 1721392543_2024_07_19_17.0.1_gitlab_backup.tar
+gitlab-rake gitlab:backup:restore BACKUP=1721392543_2024_07_19_17.0.1
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="容器管理"><a aria-hidden="true" tabindex="-1" href="#容器管理" class="anchor"><span class="icon icon-link"></span></a>容器管理</h2>
         <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> stop gitlab <span class="token comment"># 停止容器</span>
 </span><span class="code-line line-number" line="2"><span class="token function">docker</span> <span class="token function">rm</span> gitlab <span class="token comment"># 删除容器</span>
@@ -688,6 +702,7 @@ Chef Infra Client failed. 0 resources updated in 12 seconds
                 <li><a href="#备份保留七天" class="tocs-link">备份保留七天</a></li>
               </ol>
             </li>
+            <li><a href="#备份恢复" class="tocs-link">备份恢复</a></li>
             <li><a href="#容器管理" class="tocs-link">容器管理</a></li>
             <li><a href="#通过-docker-compose-安装" class="tocs-link">通过 Docker Compose 安装</a></li>
             <li><a href="#使用-docker-swarm" class="tocs-link">使用 Docker Swarm</a></li>

@@ -296,14 +296,24 @@ docker run -t -i nginx:latest /bin/bash
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h3 id="下载镜像本地安装镜像"><a aria-hidden="true" tabindex="-1" href="#下载镜像本地安装镜像" class="anchor"><span class="icon icon-link"></span></a>下载镜像本地安装镜像</h3>
         <p>由于国区已经无法访问，可以将镜像打包，直接安装镜像压缩文件</p>
-        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> pull gitlab/gitlab-ce:17.0.1-ce.0 <span class="token comment"># 下载镜像</span>
-</span><span class="code-line line-number" line="2"><span class="token comment"># 保存 Docker 镜像到本地文件</span>
-</span><span class="code-line line-number" line="3">$ <span class="token function">docker</span> save <span class="token parameter variable">-o</span> <span class="token punctuation">[</span>output-file.tar<span class="token punctuation">]</span> <span class="token punctuation">[</span>image-name<span class="token punctuation">]</span>
-</span><span class="code-line line-number" line="4">$ <span class="token function">docker</span> save <span class="token parameter variable">-o</span> gitlab-ce-17.0.1.tar gitlab/gitlab-ce
-</span></code><input type="hidden" value="$ docker pull gitlab/gitlab-ce:17.0.1-ce.0 # 下载镜像
+        <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">docker</span> pull gitlab/gitlab-ce:17.2.0-ce.0 <span class="token comment"># 下载镜像</span>
+</span><span class="code-line line-number" line="2">$ <span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 gitlab/gitlab-ce:17.2.0-ce.0
+</span><span class="code-line line-number" line="3">$ <span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 portainer/portainer-ce:2.20.3-alpine
+</span><span class="code-line line-number" line="4">$ <span class="token function">docker</span> pull <span class="token parameter variable">--platform</span> linux/amd64 portainer/agent:2.20.3-alpine
+</span><span class="code-line line-number" line="5"><span class="token comment"># 保存 Docker 镜像到本地文件</span>
+</span><span class="code-line line-number" line="6">$ <span class="token function">docker</span> save <span class="token parameter variable">-o</span> <span class="token punctuation">[</span>output-file.tar<span class="token punctuation">]</span> <span class="token punctuation">[</span>image-name<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="7">$ <span class="token function">docker</span> save <span class="token parameter variable">-o</span> gitlab-ce.0-17.2.0.tar gitlab/gitlab-ce:17.2.0-ce.0
+</span><span class="code-line line-number" line="8">$ <span class="token function">docker</span> save <span class="token parameter variable">-o</span> portainer-agent-2.20.3-alpine.tar portainer/agent:2.20.3-alpine
+</span><span class="code-line line-number" line="9">$ <span class="token function">docker</span> save <span class="token parameter variable">-o</span> portainer-ce-2.20.3-alpine.tar portainer/portainer-ce:2.20.3-alpine
+</span></code><input type="hidden" value="$ docker pull gitlab/gitlab-ce:17.2.0-ce.0 # 下载镜像
+$ docker pull --platform linux/amd64 gitlab/gitlab-ce:17.2.0-ce.0
+$ docker pull --platform linux/amd64 portainer/portainer-ce:2.20.3-alpine
+$ docker pull --platform linux/amd64 portainer/agent:2.20.3-alpine
 # 保存 Docker 镜像到本地文件
 $ docker save -o [output-file.tar] [image-name]
-$ docker save -o gitlab-ce-17.0.1.tar gitlab/gitlab-ce
+$ docker save -o gitlab-ce.0-17.2.0.tar gitlab/gitlab-ce:17.2.0-ce.0
+$ docker save -o portainer-agent-2.20.3-alpine.tar portainer/agent:2.20.3-alpine
+$ docker save -o portainer-ce-2.20.3-alpine.tar portainer/portainer-ce:2.20.3-alpine
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>将镜像文件发送到服务器</p>
         <pre class="language-sh"><code class="language-sh code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">scp</span> <span class="token punctuation">[</span>output-file.tar<span class="token punctuation">]</span> <span class="token punctuation">[</span>user<span class="token punctuation">]</span>@<span class="token punctuation">[</span>server-ip<span class="token punctuation">]</span>:<span class="token punctuation">[</span>path<span class="token punctuation">]</span>
@@ -720,7 +730,7 @@ http://127.0.0.1:2375/version
 ## 或者使用下面命令
 docker info
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="使用docker实战"><a aria-hidden="true" tabindex="-1" href="#使用docker实战" class="anchor"><span class="icon icon-link"></span></a>使用Docker实战</h2>
+        <h2 id="使用-docker-实战"><a aria-hidden="true" tabindex="-1" href="#使用-docker-实战" class="anchor"><span class="icon icon-link"></span></a>使用 Docker 实战</h2>
         <blockquote>
           <p>⚠文件挂载注意：docker 禁止用主机上不存在的文件挂载到 container 中已经存在的文件</p>
         </blockquote>
@@ -833,6 +843,8 @@ docker info
         <p><a href="penpot.html">在 docker 中部署 Penpot</a></p>
         <h3 id="navidrome"><a aria-hidden="true" tabindex="-1" href="#navidrome" class="anchor"><span class="icon icon-link"></span></a><code>Navidrome</code></h3>
         <p><a href="navidrome.html">在 docker 中部署 Navidrome</a></p>
+        <h3 id="jenkins"><a aria-hidden="true" tabindex="-1" href="#jenkins" class="anchor"><span class="icon icon-link"></span></a><code>Jenkins</code></h3>
+        <p><a href="jenkins/index.html">在 docker 中部署 Jenkins</a></p>
         <h3 id="humpback"><a aria-hidden="true" tabindex="-1" href="#humpback" class="anchor"><span class="icon icon-link"></span></a><code>Humpback</code></h3>
         <p>首先创建放持久化数据文件夹，<code>mkdir -p /opt/app/humpback-web</code>，里面存放持久化数据文件，会存储站点管理和分组信息，启动后请妥善保存。</p>
         <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 创建放持久化数据文件夹</span>
@@ -870,16 +882,16 @@ docker run -d --net=host --restart=always \
   seafileltd/seafile:latest
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> seafile <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="2">  <span class="token parameter variable">-e</span> <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>pan.showgold.com <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="3">  <span class="token parameter variable">-e</span> <span class="token assign-left variable">SEAFILE_ADMIN_EMAIL</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
-</span><span class="code-line line-number" line="4">  <span class="token parameter variable">-e</span> <span class="token assign-left variable">SEAFILE_ADMIN_PASSWORD</span><span class="token operator">=</span>wcj@nihaosi.com <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="2">  <span class="token parameter variable">-e</span> <span class="token assign-left variable">SEAFILE_SERVER_HOSTNAME</span><span class="token operator">=</span>pan.example.com <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="3">  <span class="token parameter variable">-e</span> <span class="token assign-left variable">SEAFILE_ADMIN_EMAIL</span><span class="token operator">=</span>wcj@example.com <span class="token punctuation">\</span>
+</span><span class="code-line line-number" line="4">  <span class="token parameter variable">-e</span> <span class="token assign-left variable">SEAFILE_ADMIN_PASSWORD</span><span class="token operator">=</span>wcj@example.com <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="5">  <span class="token parameter variable">-v</span> <span class="token environment constant">$HOME</span>/_docker/seafile-data:/shared <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="6">  <span class="token parameter variable">-p</span> <span class="token number">80</span>:80 <span class="token punctuation">\</span>
 </span><span class="code-line line-number" line="7">  seafileltd/seafile:latest
 </span></code><input type="hidden" value="docker run -d --name seafile \
-  -e SEAFILE_SERVER_HOSTNAME=pan.showgold.com \
-  -e SEAFILE_ADMIN_EMAIL=wcj@nihaosi.com \
-  -e SEAFILE_ADMIN_PASSWORD=wcj@nihaosi.com \
+  -e SEAFILE_SERVER_HOSTNAME=pan.example.com \
+  -e SEAFILE_ADMIN_EMAIL=wcj@example.com \
+  -e SEAFILE_ADMIN_PASSWORD=wcj@example.com \
   -v $HOME/_docker/seafile-data:/shared \
   -p 80:80 \
   seafileltd/seafile:latest
@@ -1024,7 +1036,7 @@ docker run -d --net=host --restart=always \
                 <li><a href="#测试" class="tocs-link">测试</a></li>
               </ol>
             </li>
-            <li><a href="#使用docker实战" class="tocs-link">使用Docker实战</a>
+            <li><a href="#使用-docker-实战" class="tocs-link">使用 Docker 实战</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#nginx" class="tocs-link">Nginx</a></li>
                 <li><a href="#mysql" class="tocs-link">MySQL</a></li>
@@ -1041,6 +1053,7 @@ docker run -d --net=host --restart=always \
                 <li><a href="#nps" class="tocs-link">NPS</a></li>
                 <li><a href="#penpot" class="tocs-link">Penpot</a></li>
                 <li><a href="#navidrome" class="tocs-link">Navidrome</a></li>
+                <li><a href="#jenkins" class="tocs-link">Jenkins</a></li>
                 <li><a href="#humpback" class="tocs-link">Humpback</a></li>
                 <li><a href="#seafile" class="tocs-link">Seafile</a></li>
                 <li><a href="#更多" class="tocs-link">更多</a></li>
