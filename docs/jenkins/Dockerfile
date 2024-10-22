@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 jenkins/jenkins:2.468-jdk21
+FROM --platform=linux/amd64 jenkins/jenkins:2.482-jdk21
 
 # 切换到 root 用户以安装 Docker CLI
 USER root
